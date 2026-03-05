@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /app.html
 
-Sitemap: https://keiyaku-maker.jp/sitemap.xml
+Sitemap: https://muryo-tool.com/sitemap.xml

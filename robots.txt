@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://muryo-tool.com/sitemap.xml
+Sitemap: https://muryo-tool.com/calc/sitemap.xml
+Sitemap: https://muryo-tool.com/bunrei/sitemap.xml
+Sitemap: https://muryo-tool.com/template/sitemap.xml
+Sitemap: https://muryo-tool.com/check/sitemap.xml
+Sitemap: https://muryo-tool.com/icon/sitemap.xml
+Sitemap: https://muryo-tool.com/keiyaku/sitemap.xml
