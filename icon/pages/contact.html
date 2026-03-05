@@ -156,7 +156,7 @@
     <h1>お問い合わせ</h1>
     <p class="subtitle">ご質問、アイコンリクエスト、バグ報告など</p>
 
-    <form id="contactForm" onsubmit="handleSubmit(event)">
+    <form id="contactForm" action="https://formspree.io/f/2525nxrei@gmail.com" method="POST">
       <div class="form-group">
         <label for="name">お名前</label>
         <input type="text" id="name" name="name" required placeholder="山田 太郎">
@@ -190,11 +190,7 @@
   </footer>
 
   <script>
-    function handleSubmit(e) {
-      e.preventDefault();
-      alert('お問い合わせありがとうございます。内容を確認の上、ご連絡いたします。');
-      e.target.reset();
-    }
+    
   </script>
 </body>
 </html>

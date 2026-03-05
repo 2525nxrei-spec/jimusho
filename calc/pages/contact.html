@@ -37,7 +37,7 @@ textarea{min-height:160px;resize:vertical}
   <p class="sub">計算ツールに関するご質問・ご要望・不具合報告などお気軽にご連絡ください。</p>
 
   <div class="content-card reveal">
-    <form id="contactForm" onsubmit="submitForm(event)">
+    <form id="contactForm" action="https://formspree.io/f/2525nxrei@gmail.com" method="POST">
       <div class="form-group">
         <label for="name">お名前</label>
         <input type="text" id="name" required placeholder="山田 太郎">
@@ -73,11 +73,7 @@ textarea{min-height:160px;resize:vertical}
 <footer class="footer"><p>&copy; 2026 CalcBox. All rights reserved. | <a href="privacy.html" style="color:var(--gray-400)">プライバシーポリシー</a> | <a href="terms.html" style="color:var(--gray-400)">利用規約</a></p></footer>
 
 <script>
-function submitForm(e){
-  e.preventDefault();
-  document.getElementById('contactForm').style.display='none';
-  document.getElementById('successMsg').classList.add('active');
-}
+
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
