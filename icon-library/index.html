@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IconJP - 日本語UIに最適な無料SVGアイコン集</title>
+  <meta name="description" content="日本語UIに最適化された無料SVGアイコンライブラリ。ビジネス、UI、日常、食べ物、季節・行事など60以上のアイコンをダウンロード。商用利用可。">
+  <meta name="keywords" content="無料 アイコン, フリー素材 アイコン, SVG アイコン, 日本語 アイコン, アイコン フリー">
+  <meta property="og:title" content="IconJP - 日本語UIに最適な無料SVGアイコン集">
+  <meta property="og:description" content="60以上の無料SVGアイコン。日本語UIに最適化。商用利用可。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://iconjp.com/">
+  <link rel="canonical" href="https://iconjp.com/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --black: #1d1d1f;
+      --accent: #0071e3;
+      --accent-hover: #0060c0;
+      --gray-100: #f2f2f7;
+      --gray-200: #e5e5ea;
+      --gray-300: #d1d1d6;
+      --gray-400: #aeaeb2;
+      --gray-600: #636366;
+      --white: #ffffff;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+    body {
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--gray-100);
+      color: var(--black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--black);
+      text-decoration: none;
+      opacity: 0.72;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ---- HERO ---- */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 48px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 17px;
+      color: var(--gray-600);
+      margin-bottom: 24px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(0, 113, 227, 0.08);
+      border-radius: 100px;
+    }
+
+    /* ---- TOOLBAR ---- */
+    .toolbar {
+      max-width: 1120px;
+      margin: 0 auto 8px;
+      padding: 0 24px;
+    }
+    .search-wrap {
+      position: relative;
+      margin-bottom: 20px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .search-wrap svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--gray-400);
+    }
+    .search-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px 0 48px;
+      font-size: 15px;
+      font-family: inherit;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+    }
+    .search-input::placeholder { color: var(--gray-400); }
+
+    .categories {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .cat-pill {
+      padding: 7px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      border: 1px solid var(--gray-200);
+      border-radius: 100px;
+      background: var(--white);
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .cat-pill:hover {
+      border-color: var(--gray-300);
+      color: var(--black);
+    }
+    .cat-pill.active {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    /* ---- ICON GRID ---- */
+    .icon-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+    .icon-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid transparent;
+    }
+    .icon-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border-color: var(--gray-200);
+    }
+    .icon-card svg {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+    .icon-card span {
+      font-size: 11px;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 1.3;
+      word-break: keep-all;
+    }
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--gray-400);
+      font-size: 15px;
+    }
+
+    /* ---- MODAL ---- */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 200;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white);
+      border-radius: 20px;
+      max-width: 420px;
+      width: 100%;
+      padding: 40px 32px 32px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: var(--gray-100);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: var(--gray-200); }
+    .modal-close svg { width: 16px; height: 16px; color: var(--gray-600); }
+    .modal-preview {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      margin-bottom: 20px;
+      background: var(--gray-100);
+      border-radius: var(--radius);
+    }
+    .modal-preview svg { transition: all 0.15s; }
+    .modal-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .modal-name-en {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-bottom: 12px;
+    }
+    .modal-cat-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      background: rgba(0, 113, 227, 0.08);
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .modal-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .control-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+      min-width: 48px;
+    }
+    .color-picker {
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 2px;
+      cursor: pointer;
+      background: none;
+    }
+    .size-slider {
+      flex: 1;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--gray-200);
+      border-radius: 2px;
+      outline: none;
+    }
+    .size-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .size-slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+    .size-value {
+      font-size: 13px;
+      color: var(--gray-400);
+      min-width: 36px;
+      text-align: right;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      flex: 1;
+      height: 44px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary {
+      background: var(--gray-100);
+      color: var(--black);
+    }
+    .btn-secondary:hover { background: var(--gray-200); }
+    .btn svg { width: 16px; height: 16px; }
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--black);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 300;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 56px 24px 40px;
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+    }
+    .footer-brand {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .footer-desc {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+    .footer-heading {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--black);
+    }
+    .footer-list {
+      list-style: none;
+    }
+    .footer-list li { margin-bottom: 10px; }
+    .footer-list a {
+      font-size: 13px;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-list a:hover { color: var(--black); }
+    .footer-bottom {
+      max-width: 1120px;
+      margin: 40px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-200);
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 30px; }
+      .hero p { font-size: 15px; }
+      .icon-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+      .icon-card { padding: 20px 8px 12px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-inner > div:first-child { grid-column: 1 / -1; }
+      .modal { padding: 32px 24px 24px; }
+    }
+    @media (max-width: 420px) {
+      .hero { padding: 48px 20px 32px; }
+      .hero h1 { font-size: 26px; }
+      .icon-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 0 16px 60px;
+      }
+      .icon-card { padding: 16px 6px 10px; }
+      .icon-card svg { width: 24px; height: 24px; }
+      .icon-card span { font-size: 10px; }
+      .nav-links { display: none; }
+      .toolbar { padding: 0 16px; }
+      .categories { gap: 6px; }
+      .cat-pill { padding: 6px 14px; font-size: 12px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+      .modal-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">IconJP</a>
+      <ul class="nav-links">
+        <li><a href="index.html">アイコン</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="pages/contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>日本語UIに最適な、<br>無料SVGアイコン集。</h1>
+    <p>商用利用可。カスタマイズ自在。コピー&amp;ダウンロードですぐに使える。</p>
+    <span class="badge">60+ アイコン</span>
+  </section>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="アイコンを検索 (例: ビル, search, 桜)">
+    </div>
+    <div class="categories" id="categories"></div>
+  </div>
+
+  <!-- ICON GRID -->
+  <div class="icon-grid" id="iconGrid"></div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-preview" id="modalPreview"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-name-en" id="modalNameEn"></div>
+      <div class="modal-cat-badge" id="modalCat"></div>
+      <div class="modal-controls">
+        <div class="control-row">
+          <span class="control-label">色</span>
+          <input type="color" class="color-picker" id="colorPicker" value="#1d1d1f">
+        </div>
+        <div class="control-row">
+          <span class="control-label">サイズ</span>
+          <input type="range" class="size-slider" id="sizeSlider" min="16" max="96" value="48">
+          <span class="size-value" id="sizeValue">48px</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="btnCopy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          SVGをコピー
+        </button>
+        <button class="btn btn-secondary" id="btnDownload">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          SVGダウンロード
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">IconJP</div>
+        <p class="footer-desc">日本語UIに最適化された無料SVGアイコンライブラリ。<br>商用利用可。MITライセンスで提供。</p>
+      </div>
+      <div>
+        <div class="footer-heading">カテゴリ</div>
+        <ul class="footer-list">
+          <li><a href="#" onclick="filterCat('ビジネス');return false;">ビジネス</a></li>
+          <li><a href="#" onclick="filterCat('UI/Web');return false;">UI/Web</a></li>
+          <li><a href="#" onclick="filterCat('日常');return false;">日常</a></li>
+          <li><a href="#" onclick="filterCat('食べ物');return false;">食べ物</a></li>
+          <li><a href="#" onclick="filterCat('季節・行事');return false;">季節・行事</a></li>
+          <li><a href="#" onclick="filterCat('矢印・記号');return false;">矢印・記号</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">サイト情報</div>
+        <ul class="footer-list">
+          <li><a href="pages/about.html">About</a></li>
+          <li><a href="pages/contact.html">お問い合わせ</a></li>
+          <li><a href="pages/privacy.html">プライバシーポリシー</a></li>
+          <li><a href="pages/terms.html">利用規約</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 IconJP. All rights reserved.
+    </div>
+  </footer>
+
+<script>
+// ============================================================
+// ICON DATA - 60 SVG icons
+// ============================================================
+const icons = [
+  // ---- ビジネス (10) ----
+  { name: 'ブリーフケース', nameEn: 'briefcase', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="2" y1="13" x2="22" y2="13"/></svg>' },
+  { name: 'ビル', nameEn: 'building', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><path d="M10 22v-4h4v4"/></svg>' },
+  { name: '棒グラフ', nameEn: 'chart-bar', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>' },
+  { name: '折れ線グラフ', nameEn: 'chart-line', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 8 13 13 9 9 2 16"/><line x1="2" y1="20" x2="22" y2="20"/><line x1="2" y1="4" x2="2" y2="20"/></svg>' },
+  { name: 'プレゼン', nameEn: 'presentation', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="7 10 10 7 13 10 17 6"/></svg>' },
+  { name: '握手', nameEn: 'handshake', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17l-1.5 1.5a2.12 2.12 0 01-3 0 2.12 2.12 0 010-3L8 14"/><path d="M13 7l1.5-1.5a2.12 2.12 0 013 0 2.12 2.12 0 010 3L16 10"/><path d="M2 11l4-4"/><path d="M18 13l4 4"/><path d="M6 7l4 4 4-4 4 4"/></svg>' },
+  { name: '印鑑', nameEn: 'stamp', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="18" width="14" height="3" rx="1"/><path d="M7 18v-2a1 1 0 011-1h8a1 1 0 011 1v2"/><path d="M10 15V6"/><path d="M14 15V6"/><circle cx="12" cy="4.5" r="1.5"/></svg>' },
+  { name: '名刺', nameEn: 'name-card', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="14" y1="10" x2="19" y2="10"/><line x1="14" y1="14" x2="18" y2="14"/><circle cx="8" cy="10" r="2"/><path d="M5 16c0-1.1.9-2 2-2h2a2 2 0 012 2"/></svg>' },
+  { name: '会議', nameEn: 'meeting', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="2.5"/><circle cx="17" cy="7" r="2"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M19 15c1.7 0 3 1.3 3 3v3"/></svg>' },
+  { name: '電卓', nameEn: 'calculator', category: 'ビジネス',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><rect x="7" y="5" width="10" height="5" rx="1"/><line x1="7.5" y1="14" x2="7.5" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="16.5" y1="14" x2="16.5" y2="14.01"/><line x1="7.5" y1="18" x2="7.5" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/><line x1="16.5" y1="18" x2="16.5" y2="18.01"/></svg>' },
+
+  // ---- UI/Web (10) ----
+  { name: 'ホーム', nameEn: 'home', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' },
+  { name: '検索', nameEn: 'search', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' },
+  { name: '設定', nameEn: 'settings', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1.08 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9c.26.6.77 1.05 1.39 1.08H21a2 2 0 010 4h-.09c-.62.03-1.13.48-1.39 1.08z"/></svg>' },
+  { name: 'ユーザー', nameEn: 'user', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' },
+  { name: '通知', nameEn: 'bell', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>' },
+  { name: 'メニュー', nameEn: 'menu', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>' },
+  { name: '閉じる', nameEn: 'close', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' },
+  { name: 'チェック', nameEn: 'check', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' },
+  { name: '編集', nameEn: 'edit', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>' },
+  { name: '削除', nameEn: 'trash', category: 'UI/Web',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>' },
+
+  // ---- 日常 (10) ----
+  { name: '電車', nameEn: 'train', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="16" rx="3"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="2" x2="12" y2="12"/><circle cx="8.5" cy="15.5" r="1"/><circle cx="15.5" cy="15.5" r="1"/><path d="M7 18l-2 4"/><path d="M17 18l2 4"/></svg>' },
+  { name: '車', nameEn: 'car', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v-5l-2-5H7L5 12z"/><path d="M3 17h18v2H3z"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>' },
+  { name: '自転車', nameEn: 'bicycle', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="3.5"/><circle cx="18" cy="17" r="3.5"/><polyline points="12 5 9 11 6 17"/><polyline points="12 5 15 11 18 17"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="11" y1="5" x2="13" y2="5"/></svg>' },
+  { name: '家', nameEn: 'house', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><rect x="9" y="14" width="6" height="7"/></svg>' },
+  { name: '電話', nameEn: 'phone', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.81.36 1.6.68 2.35a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.75.32 1.54.55 2.35.68a2 2 0 011.72 2.05z"/></svg>' },
+  { name: 'メール', nameEn: 'mail', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6 12 13 2 6"/></svg>' },
+  { name: '時計', nameEn: 'clock', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+  { name: 'カメラ', nameEn: 'camera', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>' },
+  { name: '本', nameEn: 'book', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>' },
+  { name: '傘', nameEn: 'umbrella', category: '日常',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v1"/><path d="M2 12h20S20 5 12 5 2 12 2 12z"/><path d="M12 12v7a2 2 0 004 0"/></svg>' },
+
+  // ---- 食べ物 (10) ----
+  { name: 'ご飯', nameEn: 'rice-bowl', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 12c0 4.97 4.03 9 9 9s9-4.03 9-9"/><path d="M8 8c0-1.5.5-3 2-4"/><path d="M12 8c0-1.5.5-3 2-4"/><path d="M16 8c0-1.5.5-3 2-4"/></svg>' },
+  { name: '寿司', nameEn: 'sushi', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="16" rx="9" ry="4"/><ellipse cx="12" cy="12" rx="9" ry="4"/><path d="M8 10c0-2 1.8-4 4-4s4 2 4 4"/></svg>' },
+  { name: 'ラーメン', nameEn: 'ramen', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18"/><path d="M4 10c.5 5 3.5 9 8 9s7.5-4 8-9"/><path d="M7 6c1-1 1-3 0-4"/><path d="M12 6c1-1 1-3 0-4"/><path d="M17 6c1-1 1-3 0-4"/><line x1="12" y1="19" x2="12" y2="22"/></svg>' },
+  { name: 'お茶', nameEn: 'tea', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13a3 3 0 010 6h-1"/><path d="M4 9v8a3 3 0 003 3h6a3 3 0 003-3V9"/><path d="M7 5c0-1 .5-2 1.5-3"/><path d="M11 5c0-1 .5-2 1.5-3"/></svg>' },
+  { name: '弁当', nameEn: 'bento', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="3" y1="12" x2="12" y2="12"/><circle cx="7.5" cy="9" r="1.5"/><line x1="15" y1="10" x2="18" y2="10"/><line x1="15" y1="13" x2="18" y2="13"/><line x1="15" y1="16" x2="18" y2="16"/></svg>' },
+  { name: '箸', nameEn: 'chopsticks', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="2" x2="6" y2="22"/><line x1="16" y1="2" x2="18" y2="22"/></svg>' },
+  { name: '日本酒', nameEn: 'sake', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v6a4 4 0 004 4h0a4 4 0 004-4V2"/><line x1="6" y1="6" x2="14" y2="6"/><rect x="16" y="14" width="6" height="7" rx="1"/><path d="M16 17h6"/></svg>' },
+  { name: 'おにぎり', nameEn: 'onigiri', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L4 17a2 2 0 002 2h12a2 2 0 002-2L12 3z"/><rect x="7" y="14" width="10" height="5" rx="1"/></svg>' },
+  { name: '魚', nameEn: 'fish', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12c3-6 10-6 14-2-4 4-11 4-14 2z"/><path d="M6.5 12c3 6 10 6 14 2"/><path d="M2 10l4.5 2L2 14"/><circle cx="16" cy="11" r="0.75" fill="currentColor"/></svg>' },
+  { name: 'りんご', nameEn: 'apple', category: '食べ物',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-3.5 0-7 3-7 8s3 8 7 8 7-3 7-8-3.5-8-7-8z"/><path d="M12 2c1 1 2 2 2 3"/><path d="M10 5c-1-2 0-4 2-5"/></svg>' },
+
+  // ---- 季節・行事 (10) ----
+  { name: '桜', nameEn: 'sakura', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-.5 2.5-1 4-3 5.5C11 10 12 12 12 12s1-2 2.5-3.5C12.5 7 12.5 5.5 12 3z"/><path d="M5 9c2.5.5 4 1 5.5 3C9 10 7.5 9 5 9z"/><path d="M19 9c-2.5.5-4 1-5.5 3 1.5-1.5 3-2.5 5.5-3z"/><path d="M7 19c1.5-2 2.5-3.5 2.5-6-.5 2.5-1.5 4.5-2.5 6z"/><path d="M17 19c-1.5-2-2.5-3.5-2.5-6 .5 2.5 1.5 4.5 2.5 6z"/><circle cx="12" cy="12" r="1.5"/></svg>' },
+  { name: '太陽', nameEn: 'sun', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>' },
+  { name: '月', nameEn: 'moon', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>' },
+  { name: '雪', nameEn: 'snowflake', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"/><line x1="12" y1="2" x2="9" y2="5"/><line x1="12" y1="2" x2="15" y2="5"/><line x1="22" y1="12" x2="19" y2="9"/><line x1="22" y1="12" x2="19" y2="15"/><line x1="12" y1="22" x2="15" y2="19"/><line x1="12" y1="22" x2="9" y2="19"/><line x1="2" y1="12" x2="5" y2="15"/><line x1="2" y1="12" x2="5" y2="9"/></svg>' },
+  { name: 'プレゼント', nameEn: 'gift', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><rect x="5" y="12" width="14" height="9" rx="1"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M12 8c-2-3-6-3-6 0"/><path d="M12 8c2-3 6-3 6 0"/></svg>' },
+  { name: 'ハート', nameEn: 'heart', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>' },
+  { name: '星', nameEn: 'star', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+  { name: '旗', nameEn: 'flag', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>' },
+  { name: '提灯', nameEn: 'lantern', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="4"/><ellipse cx="12" cy="12" rx="6" ry="8"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="6.5" y1="9" x2="17.5" y2="9"/><line x1="6.5" y1="15" x2="17.5" y2="15"/><line x1="10" y1="20" x2="14" y2="20"/></svg>' },
+  { name: '扇子', nameEn: 'fan', category: '季節・行事',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20C6 20 2 14 2 8c4-2 7-1 10 2 3-3 6-4 10-2 0 6-4 12-10 12z"/><line x1="12" y1="10" x2="12" y2="22"/><path d="M8 12c1.5-1 3-1.5 4-2"/><path d="M16 12c-1.5-1-3-1.5-4-2"/></svg>' },
+
+  // ---- 矢印・記号 (10) ----
+  { name: '上矢印', nameEn: 'arrow-up', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>' },
+  { name: '下矢印', nameEn: 'arrow-down', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>' },
+  { name: '左矢印', nameEn: 'arrow-left', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>' },
+  { name: '右矢印', nameEn: 'arrow-right', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' },
+  { name: '上シェブロン', nameEn: 'chevron-up', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>' },
+  { name: '下シェブロン', nameEn: 'chevron-down', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' },
+  { name: 'プラス', nameEn: 'plus', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' },
+  { name: 'マイナス', nameEn: 'minus', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>' },
+  { name: '外部リンク', nameEn: 'external-link', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>' },
+  { name: 'ダウンロード', nameEn: 'download', category: '矢印・記号',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' },
+];
+
+// ============================================================
+// APP STATE
+// ============================================================
+const categoryList = ['すべて', 'ビジネス', 'UI/Web', '日常', '食べ物', '季節・行事', '矢印・記号'];
+let activeCategory = 'すべて';
+let searchQuery = '';
+let currentIcon = null;
+
+// ============================================================
+// RENDER
+// ============================================================
+function renderCategories() {
+  const el = document.getElementById('categories');
+  el.innerHTML = categoryList.map(c =>
+    `<button class="cat-pill${c === activeCategory ? ' active' : ''}" data-cat="${c}">${c}</button>`
+  ).join('');
+  el.querySelectorAll('.cat-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeCategory = btn.dataset.cat;
+      renderCategories();
+      renderGrid();
+    });
+  });
+}
+
+function getFiltered() {
+  return icons.filter(icon => {
+    const catMatch = activeCategory === 'すべて' || icon.category === activeCategory;
+    if (!catMatch) return false;
+    if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
+    return icon.name.toLowerCase().includes(q) ||
+           icon.nameEn.toLowerCase().includes(q) ||
+           icon.category.toLowerCase().includes(q);
+  });
+}
+
+function renderGrid() {
+  const grid = document.getElementById('iconGrid');
+  const filtered = getFiltered();
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="no-results">該当するアイコンが見つかりませんでした</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map((icon, i) =>
+    `<div class="icon-card" data-index="${icons.indexOf(icon)}">${icon.svg}<span>${icon.name}</span></div>`
+  ).join('');
+  grid.querySelectorAll('.icon-card').forEach(card => {
+    card.addEventListener('click', () => openModal(parseInt(card.dataset.index)));
+  });
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function openModal(index) {
+  currentIcon = icons[index];
+  const overlay = document.getElementById('modalOverlay');
+  document.getElementById('modalName').textContent = currentIcon.name;
+  document.getElementById('modalNameEn').textContent = currentIcon.nameEn;
+  document.getElementById('modalCat').textContent = currentIcon.category;
+  document.getElementById('colorPicker').value = '#1d1d1f';
+  document.getElementById('sizeSlider').value = 48;
+  document.getElementById('sizeValue').textContent = '48px';
+  updatePreview();
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentIcon = null;
+}
+
+function updatePreview() {
+  if (!currentIcon) return;
+  const color = document.getElementById('colorPicker').value;
+  const size = document.getElementById('sizeSlider').value;
+  const preview = document.getElementById('modalPreview');
+  let svg = currentIcon.svg
+    .replace(/width="24"/, `width="${size}"`)
+    .replace(/height="24"/, `height="${size}"`)
+    .replace(/stroke="currentColor"/g, `stroke="${color}"`)
+    .replace(/fill="currentColor"/g, `fill="${color}"`);
+  preview.innerHTML = svg;
+}
+
+function getExportSvg() {
+  const color = document.getElementById('colorPicker').value;
+  const size = document.getElementById('sizeSlider').value;
+  return currentIcon.svg
+    .replace(/width="24"/, `width="${size}"`)
+    .replace(/height="24"/, `height="${size}"`)
+    .replace(/stroke="currentColor"/g, `stroke="${color}"`)
+    .replace(/fill="currentColor"/g, `fill="${color}"`);
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// ============================================================
+// EVENTS
+// ============================================================
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchQuery = e.target.value.trim();
+  renderGrid();
+});
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+document.getElementById('colorPicker').addEventListener('input', updatePreview);
+document.getElementById('sizeSlider').addEventListener('input', (e) => {
+  document.getElementById('sizeValue').textContent = e.target.value + 'px';
+  updatePreview();
+});
+
+document.getElementById('btnCopy').addEventListener('click', () => {
+  if (!currentIcon) return;
+  const svg = getExportSvg();
+  navigator.clipboard.writeText(svg).then(() => {
+    showToast('SVGをコピーしました');
+  }).catch(() => {
+    showToast('コピーに失敗しました');
+  });
+});
+
+document.getElementById('btnDownload').addEventListener('click', () => {
+  if (!currentIcon) return;
+  const svg = getExportSvg();
+  const blob = new Blob([svg], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = currentIcon.nameEn + '.svg';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('ダウンロードしました');
+});
+
+// Footer category filter helper
+function filterCat(cat) {
+  activeCategory = cat;
+  searchQuery = '';
+  document.getElementById('searchInput').value = '';
+  renderCategories();
+  renderGrid();
+  window.scrollTo({ top: document.getElementById('categories').offsetTop - 70, behavior: 'smooth' });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderCategories();
+renderGrid();
+</script>
+</body>
+</html>

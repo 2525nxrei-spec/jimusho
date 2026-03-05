@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お詫びメール作成ツール｜文例メーカー</title>
+<meta name="description" content="遅刻、納期遅延、ミス、品質問題など、ビジネスシーンに応じたお詫びメールを簡単に作成。テンプレートを選んで入力するだけで、適切な謝罪文が完成します。">
+<meta name="keywords" content="お詫びメール,謝罪メール,例文,テンプレート,ビジネスメール,遅刻,納期遅延">
+<link rel="canonical" href="https://example.com/generators/apology-email/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--gray-600:#636366;--white:#ffffff;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 30px rgba(0,0,0,0.12);--font-sans:'Inter','Noto Sans JP',sans-serif;--nav-h:64px}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);color:var(--black);background:var(--gray-100);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);background:rgba(255,255,255,0.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--gray-200)}
+.nav-logo{font-size:18px;font-weight:700;letter-spacing:-0.02em}
+.nav-logo span{color:var(--accent)}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--gray-600);transition:color .2s}
+.nav-back:hover{color:var(--accent)}
+.nav-back svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none}
+
+.page-header{text-align:center;padding:56px 24px 32px;max-width:640px;margin:0 auto}
+.page-header h1{font-size:clamp(26px,5vw,40px);font-weight:700;letter-spacing:-0.02em;margin-bottom:8px}
+.page-header p{color:var(--gray-600);font-size:15px}
+
+.container{max-width:960px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+
+.form-card,.preview-card{background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.form-card h2,.preview-card h2{font-size:18px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.form-card h2 svg,.preview-card h2 svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none}
+
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--gray-600)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:8px;font-size:15px;font-family:var(--font-sans);background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.12)}
+.form-group textarea{resize:vertical;min-height:80px}
+
+.template-select{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.template-select button{padding:8px 16px;border:1px solid var(--gray-200);border-radius:8px;background:var(--white);font-size:13px;font-family:var(--font-sans);font-weight:500;cursor:pointer;transition:all .2s}
+.template-select button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.template-select button:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+
+.preview-text{white-space:pre-wrap;font-size:14px;line-height:1.9;background:var(--gray-100);border-radius:8px;padding:20px;min-height:200px;border:1px solid var(--gray-200)}
+
+.copy-btn{margin-top:16px;width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;font-family:var(--font-sans);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s}
+.copy-btn:hover{background:var(--accent-hover)}
+.copy-btn svg{width:18px;height:18px;stroke:#fff;stroke-width:2;fill:none}
+.copy-btn.copied{background:#34c759}
+
+.seo-section{max-width:960px;margin:0 auto;padding:32px clamp(16px,4vw,48px) 48px}
+.seo-section .seo-card{background:var(--white);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow)}
+.seo-section h2{font-size:22px;font-weight:700;margin-bottom:16px}
+.seo-section h3{font-size:17px;font-weight:600;margin:20px 0 8px}
+.seo-section p,.seo-section li{font-size:14px;color:var(--gray-600);line-height:1.8}
+.seo-section ul{padding-left:20px;margin-bottom:12px}
+
+.footer{padding:40px clamp(16px,4vw,48px) 24px;max-width:960px;margin:0 auto;border-top:1px solid var(--gray-200)}
+.footer-copy{font-size:12px;color:var(--gray-500);text-align:center}
+.footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:12px;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:var(--gray-500);transition:color .2s}
+.footer-links a:hover{color:var(--accent)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  .container{grid-template-columns:1fr}
+}
+@media(max-width:420px){
+  .page-header{padding:40px 16px 24px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav-logo">文例<span>メーカー</span></a>
+  <a href="../../index.html" class="nav-back">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    一覧に戻る
+  </a>
+</nav>
+
+<div class="page-header">
+  <h1>お詫びメール作成ツール</h1>
+  <p>遅刻、納期遅延、ミス、品質問題など、状況に応じた適切なお詫びメールを作成できます。</p>
+</div>
+
+<div class="container">
+  <div class="form-card reveal">
+    <h2><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>入力項目</h2>
+
+    <div class="template-select" id="templateSelect">
+      <button class="active" data-tmpl="0">テンプレート1</button>
+      <button data-tmpl="1">テンプレート2</button>
+      <button data-tmpl="2">テンプレート3</button>
+    </div>
+
+    <div class="form-group">
+      <label>相手の名前</label>
+      <input type="text" id="recipientName" placeholder="例：田中太郎">
+    </div>
+    <div class="form-group">
+      <label>相手の会社名</label>
+      <input type="text" id="recipientCompany" placeholder="例：株式会社ABC">
+    </div>
+    <div class="form-group">
+      <label>自分の名前</label>
+      <input type="text" id="senderName" placeholder="例：山田花子">
+    </div>
+    <div class="form-group">
+      <label>自分の会社名</label>
+      <input type="text" id="senderCompany" placeholder="例：株式会社XYZ">
+    </div>
+    <div class="form-group">
+      <label>お詫びの内容</label>
+      <select id="situation">
+        <option value="遅刻">遅刻</option>
+        <option value="納期遅延">納期遅延</option>
+        <option value="ミス">業務上のミス</option>
+        <option value="品質問題">品質問題</option>
+        <option value="対応遅れ">対応の遅れ</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>詳細（任意）</label>
+      <textarea id="details" placeholder="具体的な内容があれば入力してください"></textarea>
+    </div>
+    <div class="form-group">
+      <label>トーン</label>
+      <select id="tone">
+        <option value="フォーマル">フォーマル</option>
+        <option value="ややフォーマル">ややフォーマル</option>
+        <option value="カジュアル">カジュアル</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="preview-card reveal">
+    <h2><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>プレビュー</h2>
+    <div class="preview-text" id="previewText"></div>
+    <button class="copy-btn" id="copyBtn">
+      <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      コピーする
+    </button>
+  </div>
+</div>
+
+<div class="seo-section reveal">
+  <div class="seo-card">
+    <h2>お詫びメールの書き方ガイド</h2>
+    <p>ビジネスシーンにおいて、お詫びメールは避けて通れないコミュニケーションの一つです。適切な謝罪文を送ることで、信頼関係の回復につなげることができます。</p>
+
+    <h3>お詫びメールの基本構成</h3>
+    <ul>
+      <li>件名に「お詫び」であることを明記する</li>
+      <li>冒頭で事実を認め、率直に謝罪する</li>
+      <li>原因を簡潔に説明する（言い訳にならないよう注意）</li>
+      <li>再発防止策や今後の対応を示す</li>
+      <li>改めてお詫びの言葉で締める</li>
+    </ul>
+
+    <h3>シーン別のポイント</h3>
+    <p><strong>遅刻の場合：</strong>到着予定時刻を明記し、相手の時間を無駄にしたことへの反省を伝えます。</p>
+    <p><strong>納期遅延の場合：</strong>新しい納期を明確に提示し、遅延による影響への対処方法も合わせて伝えます。</p>
+    <p><strong>ミスの場合：</strong>ミスの内容を正確に伝え、修正対応のスケジュールを示します。</p>
+    <p><strong>品質問題の場合：</strong>問題の範囲を特定し、交換・修理などの具体的な対応策を提示します。</p>
+
+    <h3>避けるべき表現</h3>
+    <ul>
+      <li>「～のせいで」など他者に責任を転嫁する表現</li>
+      <li>「仕方がなかった」など開き直りと受け取られる表現</li>
+      <li>曖昧な謝罪（「ご不快に思われたなら」など）</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="../../index.html">トップ</a>
+    <a href="../../pages/about.html">このサイトについて</a>
+    <a href="../../pages/privacy.html">プライバシーポリシー</a>
+    <a href="../../pages/terms.html">利用規約</a>
+    <a href="../../pages/contact.html">お問い合わせ</a>
+  </div>
+  <p class="footer-copy">&copy; 2025 文例メーカー（BunreiMaker）. All rights reserved.</p>
+</footer>
+
+<script>
+const templates = [
+  {
+    name: "テンプレート1（標準）",
+    generate(d) {
+      const formal = d.tone === 'フォーマル';
+      const casual = d.tone === 'カジュアル';
+      const situationText = {
+        '遅刻': 'このたびはお約束のお時間に遅れてしまい',
+        '納期遅延': 'このたびは納期に遅延が生じてしまい',
+        'ミス': 'このたびは弊社の不手際により、ご迷惑をおかけし',
+        '品質問題': 'このたびは弊社製品の品質に問題があり',
+        '対応遅れ': 'このたびはご対応が遅れてしまい'
+      }[d.situation] || 'このたびはご迷惑をおかけし';
+
+      return `${d.recipientCompany ? d.recipientCompany + '\n' : ''}${d.recipientName ? d.recipientName + '様' : '○○様'}\n\n${casual ? 'お疲れ様です。' : 'いつもお世話になっております。'}${d.senderCompany ? d.senderCompany + 'の' : ''}${d.senderName || '○○'}${casual ? 'です。' : 'でございます。'}\n\n${situationText}、${formal ? '誠に申し訳ございません。' : casual ? '大変申し訳ありません。' : '大変申し訳ございません。'}${d.details ? '\n\n' + d.details : ''}\n\n${formal ? '今後このようなことがないよう、細心の注意を払ってまいります。' : casual ? '今後は十分気をつけます。' : '今後は再発防止に努めてまいります。'}\n\n${formal ? '何卒ご容赦くださいますよう、お願い申し上げます。' : casual ? 'ご迷惑をおかけして本当にすみません。' : '重ねてお詫び申し上げます。'}\n\n${formal ? '何かご不明な点がございましたら、お気軽にお申し付けください。' : ''}\n${casual ? '' : '今後とも何卒よろしくお願いいたします。'}`;
+    }
+  },
+  {
+    name: "テンプレート2（丁寧）",
+    generate(d) {
+      const situationDetail = {
+        '遅刻': '約束のお時間に遅参いたしましたこと',
+        '納期遅延': 'お約束しておりました納期を過ぎてしまいましたこと',
+        'ミス': '弊社の確認不足によりミスが発生いたしましたこと',
+        '品質問題': '弊社製品の品質においてご満足いただけなかったこと',
+        '対応遅れ': 'ご連絡への対応が遅くなりましたこと'
+      }[d.situation] || 'ご迷惑をおかけいたしましたこと';
+
+      return `${d.recipientCompany ? d.recipientCompany + '\n' : ''}${d.recipientName ? d.recipientName + '様' : '○○様'}\n\n平素より格別のお引き立てを賜り、厚く御礼申し上げます。\n${d.senderCompany ? d.senderCompany + 'の' : ''}${d.senderName || '○○'}でございます。\n\nこのたびは、${situationDetail}、心よりお詫び申し上げます。${d.details ? '\n\n' + d.details : ''}\n\n本件につきましては、原因を究明のうえ、再発防止策を講じてまいる所存でございます。\n\nご多忙のところ、多大なるご迷惑をおかけいたしましたこと、重ねて深くお詫び申し上げます。\n\n今後とも変わらぬお引き立てを賜りますよう、何卒よろしくお願い申し上げます。`;
+    }
+  },
+  {
+    name: "テンプレート3（簡潔）",
+    generate(d) {
+      const casual = d.tone === 'カジュアル';
+      return `${d.recipientName ? d.recipientName + '様' : '○○様'}\n\n${casual ? 'お疲れ様です。' : 'お世話になっております。'}${d.senderName || '○○'}です。\n\n${d.situation}の件でご連絡いたしました。\nこのたびはご迷惑をおかけし、${casual ? '申し訳ありません。' : '誠に申し訳ございません。'}${d.details ? '\n' + d.details : ''}\n\n今後このようなことがないよう努めてまいります。\n${casual ? 'よろしくお願いします。' : '引き続きよろしくお願いいたします。'}`;
+    }
+  }
+];
+
+let currentTemplate = 0;
+
+function getData() {
+  return {
+    recipientName: document.getElementById('recipientName').value,
+    recipientCompany: document.getElementById('recipientCompany').value,
+    senderName: document.getElementById('senderName').value,
+    senderCompany: document.getElementById('senderCompany').value,
+    situation: document.getElementById('situation').value,
+    details: document.getElementById('details').value,
+    tone: document.getElementById('tone').value
+  };
+}
+
+function updatePreview() {
+  document.getElementById('previewText').textContent = templates[currentTemplate].generate(getData());
+}
+
+// Template select
+document.querySelectorAll('#templateSelect button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#templateSelect button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTemplate = parseInt(btn.dataset.tmpl);
+    updatePreview();
+  });
+});
+
+// Real-time preview
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', updatePreview);
+  el.addEventListener('change', updatePreview);
+});
+
+// Copy
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const text = document.getElementById('previewText').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg>コピーしました';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>コピーする';
+    }, 2000);
+  });
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+updatePreview();
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】請求書・見積書作成ツール。フリーランス・個人事業主向け。フォームに入力するだけで請求書を作成、PDFダウンロード。登録不要。">
+  <meta name="keywords" content="請求書 作成, 請求書 テンプレート, 見積書 作成, 無料 請求書, フリーランス 請求書, インボイス">
+  <title>請求書作成 — 無料オンラインツール | ToolBox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}.nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}.nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}.tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}.tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}.tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+
+    .form-panel{background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .form-panel__section{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--gray-200)}
+    .form-panel__section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .form-panel__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .field{margin-bottom:12px}
+    .field label{display:block;font-size:0.75rem;font-weight:600;color:var(--gray-700);margin-bottom:4px}
+    .field input,.field textarea,.field select{width:100%;font-family:var(--font);font-size:0.88rem;padding:10px 12px;border:1.5px solid var(--gray-300);border-radius:10px;outline:none;transition:border-color 0.2s}
+    .field input:focus,.field textarea:focus{border-color:var(--accent)}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+    .items-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-bottom:12px}
+    .items-table th{text-align:left;font-weight:600;padding:8px 6px;border-bottom:2px solid var(--gray-200);font-size:0.72rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.06em}
+    .items-table td{padding:6px;border-bottom:1px solid var(--gray-200)}
+    .items-table input{width:100%;font-family:var(--font);font-size:0.82rem;padding:8px;border:1px solid var(--gray-300);border-radius:8px;outline:none}
+    .items-table input[type="number"]{text-align:right}
+    .items-table .item-total{text-align:right;font-weight:600;padding-right:8px;min-width:80px}
+    .items-table .remove-btn{background:none;border:none;color:var(--gray-300);cursor:pointer;font-size:1rem;padding:4px}.remove-btn:hover{color:#ff3b30}
+    .add-btn{font-family:var(--font);font-size:0.78rem;font-weight:600;background:var(--gray-100);color:var(--gray-700);border:1px dashed var(--gray-300);padding:8px 18px;border-radius:980px;cursor:pointer;transition:all 0.2s}
+    .add-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+    .actions-bar{display:flex;gap:10px;margin-top:20px}
+    .action-btn{font-family:var(--font);font-size:0.85rem;font-weight:600;padding:12px 28px;border-radius:980px;border:none;cursor:pointer;flex:1;transition:all 0.2s}
+    .action-btn--primary{background:var(--accent);color:var(--white)}.action-btn--primary:hover{background:#0077ed}
+    .action-btn--outline{background:var(--white);color:var(--black);border:1.5px solid var(--gray-300)}.action-btn--outline:hover{border-color:var(--black)}
+
+    /* Invoice Preview */
+    .invoice-preview{background:var(--white);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:48px;min-height:700px;position:sticky;top:70px}
+    .inv-header{display:flex;justify-content:space-between;margin-bottom:40px}
+    .inv-type{font-size:1.6rem;font-weight:800;letter-spacing:0.05em}
+    .inv-number{font-size:0.82rem;color:var(--gray-500);margin-top:4px}
+    .inv-from{text-align:right;font-size:0.82rem;color:var(--gray-700);line-height:1.7}
+    .inv-from strong{display:block;font-size:1rem;color:var(--black)}
+    .inv-to{margin-bottom:32px}
+    .inv-to__label{font-size:0.7rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+    .inv-to__name{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+    .inv-to__name::after{content:' 御中';font-weight:400;font-size:0.9rem;color:var(--gray-500)}
+    .inv-dates{display:flex;gap:24px;margin-bottom:32px;font-size:0.82rem;color:var(--gray-700)}
+    .inv-dates span strong{color:var(--black)}
+    .inv-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-bottom:24px}
+    .inv-table th{text-align:left;font-weight:600;padding:10px 8px;border-bottom:2px solid var(--black);font-size:0.72rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.06em}
+    .inv-table td{padding:10px 8px;border-bottom:1px solid var(--gray-200)}
+    .inv-table .text-right{text-align:right}
+    .inv-summary{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:0.88rem}
+    .inv-summary__row{display:flex;gap:40px;padding:6px 0}
+    .inv-summary__label{color:var(--gray-700);min-width:100px}
+    .inv-summary__value{font-weight:600;min-width:100px;text-align:right}
+    .inv-summary__total{font-size:1.2rem;border-top:2px solid var(--black);padding-top:10px;margin-top:6px}
+    .inv-summary__total .inv-summary__value{font-size:1.2rem;font-weight:800}
+    .inv-notes{margin-top:32px;padding-top:20px;border-top:1px solid var(--gray-200);font-size:0.78rem;color:var(--gray-500);line-height:1.7}
+    .inv-notes strong{color:var(--gray-700);display:block;margin-bottom:4px}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}.seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}.seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}.seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}.seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:1024px){.layout{grid-template-columns:1fr}.invoice-preview{position:static}}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+    @media print{.nav,.form-panel,.tool-header,.seo-section,.footer,.actions-bar{display:none!important}.layout{grid-template-columns:1fr}.invoice-preview{box-shadow:none;padding:24px;border-radius:0}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../index.html" class="nav__logo">Tool<span>Box</span></a><a href="../../index.html" class="nav__back">← ツール一覧</a></div></nav>
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 10h8"/><path d="M8 14h4"/></svg></div>
+      <h1 class="tool-header__title">請求書作成</h1>
+      <p class="tool-header__desc">フォームに入力するだけで請求書を作成。印刷・PDF保存対応。登録不要・完全無料。</p>
+    </div>
+
+    <div class="layout">
+      <div class="form-panel">
+        <div class="form-panel__section">
+          <div class="form-panel__title">書類種別</div>
+          <div class="field"><select id="doc-type" onchange="update()"><option value="請求書">請求書</option><option value="見積書">見積書</option><option value="納品書">納品書</option></select></div>
+          <div class="field-row">
+            <div class="field"><label>書類番号</label><input type="text" id="doc-number" value="INV-2026-001" oninput="update()"></div>
+            <div class="field"><label>発行日</label><input type="date" id="doc-date" oninput="update()"></div>
+          </div>
+          <div class="field"><label>支払期限</label><input type="date" id="doc-due" oninput="update()"></div>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title">請求先</div>
+          <div class="field"><label>会社名・氏名</label><input type="text" id="to-name" placeholder="株式会社〇〇" oninput="update()"></div>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title">自社情報</div>
+          <div class="field"><label>会社名・氏名</label><input type="text" id="from-name" placeholder="あなたの名前 / 屋号" oninput="update()"></div>
+          <div class="field"><label>住所</label><input type="text" id="from-address" placeholder="東京都渋谷区..." oninput="update()"></div>
+          <div class="field-row">
+            <div class="field"><label>電話番号</label><input type="tel" id="from-tel" placeholder="03-1234-5678" oninput="update()"></div>
+            <div class="field"><label>メール</label><input type="email" id="from-email" placeholder="info@example.com" oninput="update()"></div>
+          </div>
+          <div class="field"><label>インボイス登録番号</label><input type="text" id="from-invoice" placeholder="T1234567890123" oninput="update()"></div>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title">明細</div>
+          <table class="items-table">
+            <thead><tr><th>品目</th><th style="width:70px">数量</th><th style="width:100px">単価</th><th style="width:90px">金額</th><th style="width:30px"></th></tr></thead>
+            <tbody id="items-body"></tbody>
+          </table>
+          <button class="add-btn" onclick="addItem()">+ 行を追加</button>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title">備考</div>
+          <div class="field"><textarea id="notes" rows="3" placeholder="振込先口座など" oninput="update()"></textarea></div>
+        </div>
+
+        <div class="actions-bar">
+          <button class="action-btn action-btn--primary" onclick="window.print()">印刷 / PDF保存</button>
+          <button class="action-btn action-btn--outline" onclick="saveData()">データ保存</button>
+        </div>
+      </div>
+
+      <div class="invoice-preview" id="preview">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <div class="seo-section">
+      <h2>請求書作成ツールの使い方</h2>
+      <p>左側のフォームに情報を入力すると、右側にリアルタイムで請求書プレビューが表示されます。完成したら「印刷 / PDF保存」ボタンでダウンロードできます。</p>
+      <h3>インボイス制度（適格請求書）対応</h3>
+      <p>2023年10月から開始されたインボイス制度に対応しています。適格請求書発行事業者の登録番号を入力すれば、適格請求書の要件を満たす請求書を作成できます。</p>
+      <h3>請求書に必要な項目</h3>
+      <ul>
+        <li>発行者の氏名・名称</li>
+        <li>取引年月日</li>
+        <li>取引の内容</li>
+        <li>税率ごとに区分した合計額</li>
+        <li>書類の交付を受ける事業者の氏名・名称</li>
+        <li>適格請求書発行事業者の登録番号（インボイス制度対応時）</li>
+      </ul>
+    </div>
+  </main>
+  <footer class="footer"><p>&copy; 2026 <a href="../../index.html">ToolBox</a></p></footer>
+
+  <script>
+    let items=[{name:'',qty:1,price:0}];
+
+    // Set today's date
+    document.getElementById('doc-date').value=new Date().toISOString().split('T')[0];
+    const due=new Date();due.setMonth(due.getMonth()+1);due.setDate(0);
+    document.getElementById('doc-due').value=due.toISOString().split('T')[0];
+
+    function addItem(){items.push({name:'',qty:1,price:0});renderItems();}
+    function removeItem(i){if(items.length>1){items.splice(i,1);renderItems();}}
+
+    function renderItems(){
+      const tbody=document.getElementById('items-body');
+      tbody.innerHTML='';
+      items.forEach((item,i)=>{
+        const total=item.qty*item.price;
+        const tr=document.createElement('tr');
+        tr.innerHTML=`
+          <td><input type="text" value="${item.name}" onchange="items[${i}].name=this.value;update()"></td>
+          <td><input type="number" value="${item.qty}" min="1" onchange="items[${i}].qty=Number(this.value);update()"></td>
+          <td><input type="number" value="${item.price}" min="0" onchange="items[${i}].price=Number(this.value);update()"></td>
+          <td class="item-total">¥${total.toLocaleString()}</td>
+          <td><button class="remove-btn" onclick="removeItem(${i})">✕</button></td>`;
+        tbody.appendChild(tr);
+      });
+      update();
+    }
+
+    function update(){
+      const type=document.getElementById('doc-type').value;
+      const number=document.getElementById('doc-number').value;
+      const date=document.getElementById('doc-date').value;
+      const dueDate=document.getElementById('doc-due').value;
+      const toName=document.getElementById('to-name').value||'（請求先）';
+      const fromName=document.getElementById('from-name').value||'（自社名）';
+      const fromAddress=document.getElementById('from-address').value;
+      const fromTel=document.getElementById('from-tel').value;
+      const fromEmail=document.getElementById('from-email').value;
+      const fromInvoice=document.getElementById('from-invoice').value;
+      const notes=document.getElementById('notes').value;
+
+      const subtotal=items.reduce((s,item)=>s+item.qty*item.price,0);
+      const tax=Math.floor(subtotal*0.1);
+      const total=subtotal+tax;
+
+      const preview=document.getElementById('preview');
+      preview.innerHTML=`
+        <div class="inv-header">
+          <div>
+            <div class="inv-type">${type}</div>
+            <div class="inv-number">No. ${number}</div>
+          </div>
+          <div class="inv-from">
+            <strong>${escH(fromName)}</strong>
+            ${fromAddress?escH(fromAddress)+'<br>':''}
+            ${fromTel?'TEL: '+escH(fromTel)+'<br>':''}
+            ${fromEmail?escH(fromEmail)+'<br>':''}
+            ${fromInvoice?'登録番号: '+escH(fromInvoice):''}
+          </div>
+        </div>
+        <div class="inv-to">
+          <div class="inv-to__label">請求先</div>
+          <div class="inv-to__name">${escH(toName)}</div>
+        </div>
+        <div class="inv-dates">
+          <span><strong>発行日:</strong> ${formatDate(date)}</span>
+          <span><strong>${type==='見積書'?'有効期限':'支払期限'}:</strong> ${formatDate(dueDate)}</span>
+        </div>
+        <table class="inv-table">
+          <thead><tr><th>品目</th><th class="text-right" style="width:60px">数量</th><th class="text-right" style="width:90px">単価</th><th class="text-right" style="width:100px">金額</th></tr></thead>
+          <tbody>
+            ${items.map(item=>`<tr><td>${escH(item.name)||'—'}</td><td class="text-right">${item.qty}</td><td class="text-right">¥${item.price.toLocaleString()}</td><td class="text-right">¥${(item.qty*item.price).toLocaleString()}</td></tr>`).join('')}
+          </tbody>
+        </table>
+        <div class="inv-summary">
+          <div class="inv-summary__row"><span class="inv-summary__label">小計</span><span class="inv-summary__value">¥${subtotal.toLocaleString()}</span></div>
+          <div class="inv-summary__row"><span class="inv-summary__label">消費税 (10%)</span><span class="inv-summary__value">¥${tax.toLocaleString()}</span></div>
+          <div class="inv-summary__row inv-summary__total"><span class="inv-summary__label">合計金額</span><span class="inv-summary__value">¥${total.toLocaleString()}</span></div>
+        </div>
+        ${notes?`<div class="inv-notes"><strong>備考</strong>${escH(notes).replace(/\n/g,'<br>')}</div>`:''}
+      `;
+    }
+
+    function formatDate(d){if(!d)return '—';const[y,m,day]=d.split('-');return `${y}年${parseInt(m)}月${parseInt(day)}日`;}
+    function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+    function saveData(){
+      const data={items,type:document.getElementById('doc-type').value,number:document.getElementById('doc-number').value,toName:document.getElementById('to-name').value,fromName:document.getElementById('from-name').value,fromAddress:document.getElementById('from-address').value,fromTel:document.getElementById('from-tel').value,fromEmail:document.getElementById('from-email').value,fromInvoice:document.getElementById('from-invoice').value,notes:document.getElementById('notes').value};
+      localStorage.setItem('toolbox-invoice',JSON.stringify(data));
+      alert('データを保存しました。次回アクセス時に自動復元されます。');
+    }
+
+    // Load saved data
+    const saved=localStorage.getItem('toolbox-invoice');
+    if(saved){
+      try{
+        const d=JSON.parse(saved);
+        items=d.items||items;
+        if(d.toName)document.getElementById('to-name').value=d.toName;
+        if(d.fromName)document.getElementById('from-name').value=d.fromName;
+        if(d.fromAddress)document.getElementById('from-address').value=d.fromAddress;
+        if(d.fromTel)document.getElementById('from-tel').value=d.fromTel;
+        if(d.fromEmail)document.getElementById('from-email').value=d.fromEmail;
+        if(d.fromInvoice)document.getElementById('from-invoice').value=d.fromInvoice;
+        if(d.notes)document.getElementById('notes').value=d.notes;
+      }catch(e){}
+    }
+
+    renderItems();
+  </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お悔やみ文作成ツール｜文例メーカー</title>
+<meta name="description" content="メール・手紙・弔電など、シーンに応じたお悔やみの文例を作成。故人との関係に合わせた適切な弔意を表現できます。">
+<meta name="keywords" content="お悔やみ,弔電,お悔やみメール,例文,テンプレート,弔意,葬儀">
+<link rel="canonical" href="https://example.com/generators/condolence/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-400:#aeaeb2;--gray-500:#8e8e93;--gray-600:#636366;--white:#fff;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--font-sans:'Inter','Noto Sans JP',sans-serif;--nav-h:64px}
+html{scroll-behavior:smooth}body{font-family:var(--font-sans);color:var(--black);background:var(--gray-100);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--gray-200)}
+.nav-logo{font-size:18px;font-weight:700;letter-spacing:-.02em}.nav-logo span{color:var(--accent)}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--gray-600);transition:color .2s}.nav-back:hover{color:var(--accent)}.nav-back svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none}
+.page-header{text-align:center;padding:56px 24px 32px;max-width:640px;margin:0 auto}.page-header h1{font-size:clamp(26px,5vw,40px);font-weight:700;margin-bottom:8px}.page-header p{color:var(--gray-600);font-size:15px}
+.container{max-width:960px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.form-card,.preview-card{background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.form-card h2,.preview-card h2{font-size:18px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.form-card h2 svg,.preview-card h2 svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none}
+.form-group{margin-bottom:16px}.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--gray-600)}
+.form-group input,.form-group select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:8px;font-size:15px;font-family:var(--font-sans);background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s}
+.form-group input:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,.12)}
+.template-select{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.template-select button{padding:8px 16px;border:1px solid var(--gray-200);border-radius:8px;background:var(--white);font-size:13px;font-family:var(--font-sans);font-weight:500;cursor:pointer;transition:all .2s}
+.template-select button.active{background:var(--accent);color:#fff;border-color:var(--accent)}.template-select button:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.preview-text{white-space:pre-wrap;font-size:14px;line-height:1.9;background:var(--gray-100);border-radius:8px;padding:20px;min-height:200px;border:1px solid var(--gray-200)}
+.copy-btn{margin-top:16px;width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;font-family:var(--font-sans);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s}.copy-btn:hover{background:var(--accent-hover)}.copy-btn.copied{background:#34c759}
+.seo-section{max-width:960px;margin:0 auto;padding:32px clamp(16px,4vw,48px) 48px}.seo-section .seo-card{background:var(--white);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow)}
+.seo-section h2{font-size:22px;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:17px;font-weight:600;margin:20px 0 8px}.seo-section p,.seo-section li{font-size:14px;color:var(--gray-600);line-height:1.8}.seo-section ul{padding-left:20px;margin-bottom:12px}
+.footer{padding:40px clamp(16px,4vw,48px) 24px;max-width:960px;margin:0 auto;border-top:1px solid var(--gray-200)}.footer-copy{font-size:12px;color:var(--gray-500);text-align:center}.footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:12px;flex-wrap:wrap}.footer-links a{font-size:13px;color:var(--gray-500);transition:color .2s}.footer-links a:hover{color:var(--accent)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.container{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="../../index.html" class="nav-logo">文例<span>メーカー</span></a>
+  <a href="../../index.html" class="nav-back"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>一覧に戻る</a>
+</nav>
+<div class="page-header"><h1>お悔やみ文作成ツール</h1><p>メール・手紙・弔電など、シーンに応じた適切なお悔やみの文例を作成できます。</p></div>
+
+<div class="container">
+  <div class="form-card reveal">
+    <h2><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>入力項目</h2>
+    <div class="template-select" id="templateSelect">
+      <button class="active" data-tmpl="0">テンプレート1</button>
+      <button data-tmpl="1">テンプレート2</button>
+      <button data-tmpl="2">テンプレート3</button>
+    </div>
+    <div class="form-group"><label>相手の名前</label><input type="text" id="recipientName" placeholder="例：田中太郎"></div>
+    <div class="form-group"><label>故人との関係</label>
+      <select id="relation"><option value="ご尊父">お父様（ご尊父）</option><option value="ご母堂">お母様（ご母堂）</option><option value="ご主人">ご主人</option><option value="奥様">奥様</option><option value="故人">その他</option></select>
+    </div>
+    <div class="form-group"><label>シーン</label>
+      <select id="scene"><option value="メール">メール</option><option value="手紙">手紙</option><option value="弔電">弔電</option></select>
+    </div>
+    <div class="form-group"><label>自分の名前</label><input type="text" id="senderName" placeholder="例：山田花子"></div>
+  </div>
+  <div class="preview-card reveal">
+    <h2><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>プレビュー</h2>
+    <div class="preview-text" id="previewText"></div>
+    <button class="copy-btn" id="copyBtn"><svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>コピーする</button>
+  </div>
+</div>
+
+<div class="seo-section reveal">
+  <div class="seo-card">
+    <h2>お悔やみの言葉の書き方ガイド</h2>
+    <p>お悔やみの文章は、故人を偲び遺族への弔意を表す大切なものです。忌み言葉を避け、簡潔で心のこもった表現を心がけましょう。</p>
+    <h3>避けるべき忌み言葉</h3>
+    <ul>
+      <li>「重ね重ね」「たびたび」「再び」「また」など繰り返しを連想させる言葉</li>
+      <li>「死ぬ」「生きる」などの直接的な表現（「ご逝去」「ご生前」と言い換える）</li>
+      <li>「頑張って」など安易な励ましの言葉</li>
+    </ul>
+    <h3>敬称の使い分け</h3>
+    <ul>
+      <li>相手の父：ご尊父様、お父上様</li>
+      <li>相手の母：ご母堂様、お母上様</li>
+      <li>相手の夫：ご主人様、ご夫君様</li>
+      <li>相手の妻：ご令室様、奥様</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="footer"><div class="footer-links"><a href="../../index.html">トップ</a><a href="../../pages/about.html">このサイトについて</a><a href="../../pages/privacy.html">プライバシーポリシー</a><a href="../../pages/terms.html">利用規約</a><a href="../../pages/contact.html">お問い合わせ</a></div><p class="footer-copy">&copy; 2025 文例メーカー（BunreiMaker）. All rights reserved.</p></footer>
+
+<script>
+const templates=[
+  {generate(d){
+    const rel=d.relation||'故人';const name=d.recipientName||'○○';const sender=d.senderName||'○○';
+    if(d.scene==='弔電'){
+      return `${name}様\n\n${rel}様のご逝去の報に接し、謹んでお悔やみ申し上げます。\n\nご生前のご厚情に深く感謝するとともに、心よりご冥福をお祈りいたします。\n\n${sender}`
+    }
+    if(d.scene==='手紙'){
+      return `${name}様\n\n${rel}様のご逝去を知り、驚きと悲しみでいっぱいです。\n\n謹んでお悔やみ申し上げますとともに、${rel}様のご冥福を心よりお祈りいたします。\n\nご生前は大変お世話になりました。お人柄を偲び、感謝の念に堪えません。\n\nご遺族の皆様におかれましては、さぞかしお力落としのことと存じますが、どうかお体をお大事になさってください。\n\n略儀ながら書中をもちましてお悔やみ申し上げます。\n\n合掌\n\n${sender}`
+    }
+    return `${name}様\n\nこのたびは${rel}様のご逝去に際し、心よりお悔やみ申し上げます。\n\n突然のことで、さぞお力落としのことと存じます。\n\n何かお手伝いできることがありましたら、遠慮なくお申し付けください。\n\n${rel}様のご冥福を心よりお祈りいたします。\n\n${sender}`
+  }},
+  {generate(d){
+    const rel=d.relation||'故人';const name=d.recipientName||'○○';const sender=d.senderName||'○○';
+    if(d.scene==='弔電'){
+      return `${name}様\n\n${rel}様の突然のご逝去、誠に痛惜の極みでございます。\n\nご生前の温かいお人柄が偲ばれます。\n\n安らかにご永眠されますよう、衷心よりお祈り申し上げます。\n\n${sender}`
+    }
+    if(d.scene==='手紙'){
+      return `${name}様\n\nこのたびは${rel}様のご逝去の報に接し、誠に驚いております。\n\n謹んで哀悼の意を表しますとともに、心よりご冥福をお祈り申し上げます。\n\nご生前には格別のご厚誼を賜り、深く感謝しております。\n\nご家族の皆様のお悲しみはいかばかりかと拝察いたしますが、どうかご自愛くださいますようお願い申し上げます。\n\n略儀ながら書中にてお悔やみ申し上げます。\n\n合掌\n\n${sender}`
+    }
+    return `${name}様\n\n${rel}様のご逝去を伺い、大変驚いております。\n\n謹んでお悔やみ申し上げます。\n\nご家族の皆様のご心痛はいかばかりかとお察しいたします。お気を落とされませんよう、どうかご自愛ください。\n\n心よりご冥福をお祈り申し上げます。\n\n${sender}`
+  }},
+  {generate(d){
+    const rel=d.relation||'故人';const name=d.recipientName||'○○';const sender=d.senderName||'○○';
+    if(d.scene==='弔電'){
+      return `${name}様\n\n${rel}様のご訃報に接し、悲しみに堪えません。\n\n在りし日のお姿を偲びつつ、謹んで哀悼の誠を捧げます。\n\n${sender}`
+    }
+    if(d.scene==='手紙'){
+      return `${name}様\n\n${rel}様のご逝去を知り、言葉もございません。\n\n在りし日の${rel}様のお姿が目に浮かび、寂しさが込み上げてまいります。\n\nどうか安らかにお眠りくださいますよう、心よりお祈り申し上げます。\n\n${name}様をはじめ、ご家族の皆様のお体が心配です。どうかご無理をなさいませんよう。\n\n合掌\n\n${sender}`
+    }
+    return `${name}様\n\nこのたびの${rel}様のご逝去、謹んでお悔やみ申し上げます。\n\n急なことで、お気持ちの整理もつかないことと存じます。\n\nどうかお体に気をつけてお過ごしください。\n\n心よりご冥福をお祈りいたします。\n\n${sender}`
+  }}
+];
+let cur=0;
+function getData(){return{recipientName:document.getElementById('recipientName').value,relation:document.getElementById('relation').value,scene:document.getElementById('scene').value,senderName:document.getElementById('senderName').value}}
+function updatePreview(){document.getElementById('previewText').textContent=templates[cur].generate(getData())}
+document.querySelectorAll('#templateSelect button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('#templateSelect button').forEach(x=>x.classList.remove('active'));b.classList.add('active');cur=parseInt(b.dataset.tmpl);updatePreview()})});
+document.querySelectorAll('input,select').forEach(el=>{el.addEventListener('input',updatePreview);el.addEventListener('change',updatePreview)});
+document.getElementById('copyBtn').addEventListener('click',()=>{const t=document.getElementById('previewText').textContent;navigator.clipboard.writeText(t).then(()=>{const b=document.getElementById('copyBtn');b.classList.add('copied');b.innerHTML='<svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg>コピーしました';setTimeout(()=>{b.classList.remove('copied');b.innerHTML='<svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>コピーする'},2000)})});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+updatePreview();
+</script>
+</body>
+</html>

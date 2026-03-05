@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>年賀状文面作成ツール｜文例メーカー</title>
+<meta name="description" content="上司・取引先・友人・親戚向けの年賀状文面を簡単作成。5種類以上のテンプレートから選べます。">
+<meta name="keywords" content="年賀状,文面,例文,テンプレート,賀詞,新年挨拶,ビジネス年賀状">
+<link rel="canonical" href="https://example.com/generators/new-year/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-400:#aeaeb2;--gray-500:#8e8e93;--gray-600:#636366;--white:#fff;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--font-sans:'Inter','Noto Sans JP',sans-serif;--nav-h:64px}
+html{scroll-behavior:smooth}body{font-family:var(--font-sans);color:var(--black);background:var(--gray-100);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--gray-200)}
+.nav-logo{font-size:18px;font-weight:700;letter-spacing:-.02em}.nav-logo span{color:var(--accent)}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--gray-600);transition:color .2s}.nav-back:hover{color:var(--accent)}.nav-back svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none}
+.page-header{text-align:center;padding:56px 24px 32px;max-width:640px;margin:0 auto}.page-header h1{font-size:clamp(26px,5vw,40px);font-weight:700;margin-bottom:8px}.page-header p{color:var(--gray-600);font-size:15px}
+.container{max-width:960px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.form-card,.preview-card{background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.form-card h2,.preview-card h2{font-size:18px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.form-card h2 svg,.preview-card h2 svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none}
+.form-group{margin-bottom:16px}.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--gray-600)}
+.form-group input,.form-group select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:8px;font-size:15px;font-family:var(--font-sans);background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s}
+.form-group input:focus,.form-group select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,.12)}
+.template-select{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.template-select button{padding:8px 16px;border:1px solid var(--gray-200);border-radius:8px;background:var(--white);font-size:13px;font-family:var(--font-sans);font-weight:500;cursor:pointer;transition:all .2s}
+.template-select button.active{background:var(--accent);color:#fff;border-color:var(--accent)}.template-select button:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.preview-text{white-space:pre-wrap;font-size:14px;line-height:1.9;background:var(--gray-100);border-radius:8px;padding:20px;min-height:200px;border:1px solid var(--gray-200)}
+.copy-btn{margin-top:16px;width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;font-family:var(--font-sans);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s}.copy-btn:hover{background:var(--accent-hover)}.copy-btn.copied{background:#34c759}
+.seo-section{max-width:960px;margin:0 auto;padding:32px clamp(16px,4vw,48px) 48px}.seo-section .seo-card{background:var(--white);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow)}
+.seo-section h2{font-size:22px;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:17px;font-weight:600;margin:20px 0 8px}.seo-section p,.seo-section li{font-size:14px;color:var(--gray-600);line-height:1.8}.seo-section ul{padding-left:20px;margin-bottom:12px}
+.footer{padding:40px clamp(16px,4vw,48px) 24px;max-width:960px;margin:0 auto;border-top:1px solid var(--gray-200)}.footer-copy{font-size:12px;color:var(--gray-500);text-align:center}.footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:12px;flex-wrap:wrap}.footer-links a{font-size:13px;color:var(--gray-500);transition:color .2s}.footer-links a:hover{color:var(--accent)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.container{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="../../index.html" class="nav-logo">文例<span>メーカー</span></a>
+  <a href="../../index.html" class="nav-back"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>一覧に戻る</a>
+</nav>
+<div class="page-header"><h1>年賀状文面作成ツール</h1><p>上司・取引先・友人・親戚向けの年賀状文面を5種類以上のテンプレートから選べます。</p></div>
+
+<div class="container">
+  <div class="form-card reveal">
+    <h2><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>入力項目</h2>
+    <div class="template-select" id="templateSelect">
+      <button class="active" data-tmpl="0">パターン1</button>
+      <button data-tmpl="1">パターン2</button>
+      <button data-tmpl="2">パターン3</button>
+      <button data-tmpl="3">パターン4</button>
+      <button data-tmpl="4">パターン5</button>
+    </div>
+    <div class="form-group"><label>送り先</label>
+      <select id="target"><option value="上司">上司</option><option value="取引先">取引先</option><option value="友人">友人</option><option value="親戚">親戚</option></select>
+    </div>
+    <div class="form-group"><label>相手の名前</label><input type="text" id="recipientName" placeholder="例：田中太郎"></div>
+    <div class="form-group"><label>自分の名前</label><input type="text" id="senderName" placeholder="例：山田花子"></div>
+  </div>
+  <div class="preview-card reveal">
+    <h2><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>プレビュー</h2>
+    <div class="preview-text" id="previewText"></div>
+    <button class="copy-btn" id="copyBtn"><svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>コピーする</button>
+  </div>
+</div>
+
+<div class="seo-section reveal">
+  <div class="seo-card">
+    <h2>年賀状の書き方ガイド</h2>
+    <p>年賀状はお世話になった方への感謝と新年の挨拶を伝える日本の大切な慣習です。送り先に合わせた適切な文面を選びましょう。</p>
+    <h3>賀詞の使い分け</h3>
+    <ul>
+      <li><strong>目上の方：</strong>「謹賀新年」「恭賀新年」「謹んで新年のお慶びを申し上げます」</li>
+      <li><strong>同僚・友人：</strong>「あけましておめでとうございます」「賀正」「迎春」</li>
+      <li><strong>注意：</strong>「賀正」「迎春」は目上の方には失礼にあたります</li>
+    </ul>
+    <h3>年賀状のマナー</h3>
+    <ul>
+      <li>元旦に届くよう、12月25日までに投函する</li>
+      <li>「去年」は忌み言葉。「昨年」「旧年」を使う</li>
+      <li>句読点は使わないのが正式</li>
+      <li>喪中の方には送らない（喪中はがきが届いた場合）</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="footer"><div class="footer-links"><a href="../../index.html">トップ</a><a href="../../pages/about.html">このサイトについて</a><a href="../../pages/privacy.html">プライバシーポリシー</a><a href="../../pages/terms.html">利用規約</a><a href="../../pages/contact.html">お問い合わせ</a></div><p class="footer-copy">&copy; 2025 文例メーカー（BunreiMaker）. All rights reserved.</p></footer>
+
+<script>
+const templates=[
+  {generate(d){
+    const t=d.target;const formal=t==='上司'||t==='取引先';
+    return `${formal?'謹賀新年':'あけましておめでとうございます'}\n\n${formal?'旧年中は格別のご厚情を賜り 厚く御礼申し上げます':'昨年は大変お世話になりました'}\n${formal?'本年も変わらぬご指導ご鞭撻のほど 何卒よろしくお願い申し上げます':'本年もどうぞよろしくお願いいたします'}\n\n${formal?'皆様のご健勝とご多幸を心よりお祈り申し上げます':'皆様にとって素晴らしい一年になりますように'}\n\n元旦`
+  }},
+  {generate(d){
+    const t=d.target;
+    if(t==='上司')return `謹んで新年のお慶びを申し上げます\n\n旧年中はひとかたならぬご厚誼にあずかり\n心より御礼申し上げます\n\n本年も一層のご指導を賜りますよう\nお願い申し上げます\n\n皆様のご健康とご多幸をお祈りいたします\n\n元旦`;
+    if(t==='取引先')return `謹賀新年\n\n旧年中は格別のお引き立てを賜り\n誠にありがとうございました\n\n本年も社員一同 皆様にご満足いただけるよう\n精一杯努めてまいります\n\n変わらぬご愛顧のほど よろしくお願い申し上げます\n\n元旦`;
+    if(t==='友人')return `あけましておめでとうございます\n\n昨年はたくさんの楽しい時間をありがとう\n今年もぜひ一緒に遊びに行きましょう\n\nお互いにとって良い年になりますように\n\n元旦`;
+    return `あけましておめでとうございます\n\n皆様お変わりなくお過ごしでしょうか\n昨年は大変お世話になりました\n\n本年もどうぞよろしくお願いいたします\n皆様のご健康とご多幸をお祈り申し上げます\n\n元旦`
+  }},
+  {generate(d){
+    const t=d.target;const formal=t==='上司'||t==='取引先';
+    return `${formal?'恭賀新年':'あけましておめでとうございます'}\n\n${formal?'旧年中は大変お世話になりました':'昨年はありがとうございました'}\n\n${t==='友人'?'今年も楽しい一年にしましょう':t==='親戚'?'お近くにお越しの際はぜひお立ち寄りください':'本年も何卒よろしくお願い申し上げます'}\n\n${formal?'貴社の益々のご発展をお祈り申し上げます':'ご家族の皆様のご健康をお祈りしております'}\n\n元旦`
+  }},
+  {generate(d){
+    const t=d.target;
+    if(t==='上司')return `謹んで年頭のご挨拶を申し上げます\n\n旧年中は公私にわたり大変お世話になりました\n\nおかげさまで実り多い一年を過ごすことができました\n本年はさらに成長できるよう努力してまいります\n\nご指導のほど よろしくお願い申し上げます\n\n元旦`;
+    if(t==='取引先')return `謹賀新年\n\n旧年中はひとかたならぬお力添えを賜り\n厚く御礼申し上げます\n\n本年もお客様にご満足いただけるサービスを\n提供できるよう努めてまいります\n\n末永いお付き合いのほど よろしくお願い申し上げます\n\n元旦`;
+    if(t==='友人')return `あけましておめでとう\n\n昨年は会えて嬉しかったです\n今年もたくさん会えるといいな\n\nお互い良い一年にしましょう\n\n元旦`;
+    return `あけましておめでとうございます\n\nご無沙汰しておりますがお元気ですか\n\n昨年はなかなかお会いできませんでしたが\n今年はぜひお会いできればと思っております\n\n皆様にとって幸多き一年となりますように\n\n元旦`
+  }},
+  {generate(d){
+    const t=d.target;const formal=t==='上司'||t==='取引先';
+    return `${formal?'謹賀新年':'あけましておめでとうございます'}\n\n${formal?'昨年は公私にわたり格別のご高配を賜り':'昨年中は大変お世話になり'}\n${formal?'心より御礼申し上げます':'ありがとうございました'}\n\n新しい年が${formal?'皆様にとりまして':'皆様にとって'}幸多き年となりますよう\n${formal?'心よりお祈り申し上げます':'お祈りしております'}\n\n${formal?'本年も変わらぬご交誼のほど':'本年も変わらず'}\nよろしくお願い${formal?'申し上げます':'いたします'}\n\n元旦`
+  }}
+];
+let cur=0;
+function getData(){return{target:document.getElementById('target').value,recipientName:document.getElementById('recipientName').value,senderName:document.getElementById('senderName').value}}
+function updatePreview(){document.getElementById('previewText').textContent=templates[cur].generate(getData())}
+document.querySelectorAll('#templateSelect button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('#templateSelect button').forEach(x=>x.classList.remove('active'));b.classList.add('active');cur=parseInt(b.dataset.tmpl);updatePreview()})});
+document.querySelectorAll('input,select').forEach(el=>{el.addEventListener('input',updatePreview);el.addEventListener('change',updatePreview)});
+document.getElementById('copyBtn').addEventListener('click',()=>{const t=document.getElementById('previewText').textContent;navigator.clipboard.writeText(t).then(()=>{const b=document.getElementById('copyBtn');b.classList.add('copied');b.innerHTML='<svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg>コピーしました';setTimeout(()=>{b.classList.remove('copied');b.innerHTML='<svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>コピーする'},2000)})});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+updatePreview();
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IconJPについて - アイコンJP</title>
+  <meta name="description" content="IconJP（アイコンJP）は日本語UIに最適化された無料SVGアイコンライブラリです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --black: #1d1d1f;
+      --accent: #0071e3;
+      --gray-100: #f2f2f7;
+      --gray-200: #e5e5ea;
+      --gray-400: #aeaeb2;
+      --gray-600: #636366;
+      --white: #ffffff;
+    }
+    body {
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, sans-serif;
+      background: var(--gray-100);
+      color: var(--black);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--black);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 15px;
+      color: var(--gray-600);
+      margin-bottom: 48px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-top: 48px;
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 15px;
+      color: var(--gray-600);
+      margin-bottom: 16px;
+    }
+    ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    li {
+      font-size: 15px;
+      color: var(--gray-600);
+      margin-bottom: 8px;
+    }
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 40px 24px;
+      margin-top: 80px;
+    }
+    .footer-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 28px; }
+      .nav-links { gap: 16px; }
+    }
+    @media (max-width: 420px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">IconJP</a>
+      <ul class="nav-links">
+        <li><a href="../index.html">アイコン</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>IconJPについて</h1>
+    <p class="subtitle">日本語UIに最適な、無料SVGアイコン集</p>
+
+    <h2>IconJPとは</h2>
+    <p>IconJP（アイコンJP）は、日本のWebサイトやアプリケーション向けに設計された、オープンソースのSVGアイコンライブラリです。ビジネスシーンから日常生活、日本の文化まで、幅広いカテゴリのアイコンを無料で提供しています。</p>
+
+    <h2>特徴</h2>
+    <ul>
+      <li>日本語UIに最適化されたデザイン</li>
+      <li>日本文化・ビジネスに特化したアイコン（印鑑、名刺、おにぎり、桜など）</li>
+      <li>すべてSVG形式で軽量・高品質</li>
+      <li>ブラウザ上でカスタマイズ可能（色・サイズ変更）</li>
+      <li>商用利用可能（MITライセンス）</li>
+      <li>日本語・英語の両方で検索可能</li>
+    </ul>
+
+    <h2>ライセンス</h2>
+    <p>IconJPのアイコンはMITライセンスの下で公開されています。個人利用・商用利用を問わず、自由にお使いいただけます。帰属表示は必須ではありませんが、IconJPへのリンクを記載していただけると嬉しいです。</p>
+
+    <h2>技術仕様</h2>
+    <ul>
+      <li>viewBox: 24x24</li>
+      <li>スタイル: ストロークベース（stroke-width: 1.5 - 2）</li>
+      <li>linecap / linejoin: round</li>
+      <li>塗りなし（fill: none）</li>
+    </ul>
+
+    <h2>お問い合わせ</h2>
+    <p>ご質問、アイコンのリクエスト、バグ報告は<a href="contact.html" style="color:var(--accent);">お問い合わせページ</a>からお寄せください。</p>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <p>&copy; 2026 IconJP. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

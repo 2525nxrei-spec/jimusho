@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国民健康保険料計算シミュレーター - CalcBox</title>
+<meta name="description" content="所得・年齢・世帯人数から国民健康保険料を計算。東京23区を基準に医療分・支援金分・介護分の内訳もわかります。">
+<link rel="canonical" href="https://example.com/calcs/health-insurance/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--white:#fff;--radius:16px;--radius-sm:12px;--transition:0.3s cubic-bezier(0.25,0.1,0.25,1)}html{scroll-behavior:smooth}body{font-family:'Inter','Noto Sans JP',sans-serif;background:var(--gray-100);color:var(--black);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,0.06)}.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}.nav-logo{font-weight:700;font-size:18px;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}.nav-logo svg{width:24px;height:24px;color:var(--accent)}.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--gray-500)}.nav-links a:hover{color:var(--black)}
+.page-header{text-align:center;padding:48px 24px 32px;max-width:640px;margin:0 auto}.page-header .breadcrumb{font-size:13px;color:var(--gray-500);margin-bottom:12px}.page-header .breadcrumb a{color:var(--accent)}.page-header h1{font-size:32px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}.page-header p{font-size:15px;color:var(--gray-500)}
+.calc-container{max-width:800px;margin:0 auto;padding:0 24px 60px}.calc-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-bottom:24px}.calc-card h2{font-size:18px;font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:8px}.calc-card h2 svg{width:20px;height:20px;color:var(--accent)}
+.form-group{margin-bottom:20px}.form-group label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}.form-group .hint{font-size:12px;color:var(--gray-500);margin-top:4px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+input[type="number"],select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:inherit;background:var(--white);outline:none;transition:var(--transition)}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.1)}
+.input-unit{position:relative}.input-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gray-400);pointer-events:none}.input-unit input{padding-right:40px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--white);padding:12px 32px;border:none;border-radius:980px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:var(--transition);width:100%}.btn:hover{background:var(--accent-hover)}
+.result-section{display:none}.result-section.active{display:block}
+.result-main{background:linear-gradient(135deg,#30d158,#34c759);border-radius:var(--radius);padding:32px;text-align:center;color:var(--white);margin-bottom:20px}.result-main .label{font-size:14px;opacity:0.85;margin-bottom:4px}.result-main .value{font-size:40px;font-weight:700;letter-spacing:-1px}.result-main .sub{font-size:15px;opacity:0.8;margin-top:8px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}.result-item{background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--gray-200);padding:20px;text-align:center}.result-item .label{font-size:12px;color:var(--gray-500);margin-bottom:4px}.result-item .value{font-size:20px;font-weight:700}
+.chart-bar{margin-bottom:12px}.chart-bar .bar-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}.chart-bar .bar-label span:last-child{font-weight:600}.chart-bar .bar-track{height:8px;background:var(--gray-200);border-radius:4px;overflow:hidden}.chart-bar .bar-fill{height:100%;border-radius:4px;transition:width 0.6s ease}
+.note-box{background:var(--gray-100);border-radius:var(--radius-sm);padding:16px 20px;font-size:13px;color:var(--gray-500);line-height:1.7;margin-top:16px}
+.seo-content{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-top:40px}.seo-content h2{font-size:20px;font-weight:700;margin-bottom:16px}.seo-content h3{font-size:16px;font-weight:600;margin:20px 0 8px}.seo-content p{font-size:14px;color:#444;line-height:1.8;margin-bottom:12px}.seo-content ul{font-size:14px;color:#444;line-height:1.8;margin-left:20px;margin-bottom:12px}
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:32px 24px;text-align:center;margin-top:60px}.footer p{font-size:12px;color:var(--gray-400)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{display:none}.page-header h1{font-size:26px}.form-row{grid-template-columns:1fr}.result-main .value{font-size:30px}.result-grid{grid-template-columns:1fr}.calc-card{padding:24px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="../../index.html" class="nav-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>CalcBox</a><div class="nav-links"><a href="../../index.html#calcs">計算ツール</a><a href="../../pages/about.html">CalcBoxとは</a></div></div></nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="../../index.html">CalcBox</a> / 国民健康保険料計算</div>
+  <h1>国民健康保険料計算シミュレーター</h1>
+  <p>所得と世帯情報から国保の年間保険料を計算します</p>
+</div>
+
+<div class="calc-container">
+  <div class="calc-card reveal">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>世帯情報を入力</h2>
+    <div class="form-group">
+      <label for="income">前年の総所得金額（給与所得控除後）</label>
+      <div class="input-unit"><input type="number" id="income" value="3500000" min="0" step="10000"><span>円</span></div>
+      <div class="hint">給与収入ではなく所得金額（源泉徴収票の「給与所得控除後の金額」）を入力してください</div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="age">年齢</label>
+        <select id="age">
+          <option value="under40">40歳未満</option>
+          <option value="40to64">40歳以上65歳未満</option>
+          <option value="over65">65歳以上</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="members">加入者数</label>
+        <select id="members">
+          <option value="1">1人</option>
+          <option value="2">2人</option>
+          <option value="3">3人</option>
+          <option value="4">4人</option>
+          <option value="5">5人</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="city">計算基準</label>
+      <select id="city">
+        <option value="tokyo23">東京23区（2026年度概算）</option>
+      </select>
+    </div>
+    <button class="btn" onclick="calculate()">保険料を計算する</button>
+  </div>
+
+  <div class="result-section" id="results">
+    <div class="result-main reveal">
+      <div class="label">国民健康保険料（年額）</div>
+      <div class="value" id="totalAnnual">--</div>
+      <div class="sub">月額: <strong id="totalMonthly">--</strong></div>
+    </div>
+    <div class="result-grid">
+      <div class="result-item reveal"><div class="label">医療分</div><div class="value" id="medical">--</div></div>
+      <div class="result-item reveal"><div class="label">支援金分</div><div class="value" id="support">--</div></div>
+      <div class="result-item reveal"><div class="label">介護分</div><div class="value" id="nursing">--</div></div>
+    </div>
+
+    <div class="calc-card reveal">
+      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>内訳</h2>
+      <div id="chartArea"></div>
+    </div>
+
+    <div class="note-box">
+      ※ 東京23区の2026年度概算料率で計算しています。実際の保険料は市区町村によって大きく異なります。正確な金額は各市区町村の窓口にお問い合わせください。
+    </div>
+  </div>
+
+  <div class="seo-content reveal">
+    <h2>国民健康保険料の仕組み</h2>
+    <p>国民健康保険（国保）は、自営業者、フリーランス、無職の方などが加入する公的医療保険です。保険料は「医療分」「支援金分」「介護分」の3つで構成されます。</p>
+    <h3>保険料の計算方法</h3>
+    <p>各区分は「所得割」と「均等割」の合計で計算されます。所得割は前年の所得に料率を掛けて算出し、均等割は加入者1人あたりの定額です。市区町村によって料率や均等割額が異なります。</p>
+    <h3>上限額</h3>
+    <ul>
+      <li>医療分の上限：年間65万円</li>
+      <li>支援金分の上限：年間24万円</li>
+      <li>介護分の上限：年間17万円</li>
+      <li>合計上限：年間106万円</li>
+    </ul>
+    <h3>軽減制度</h3>
+    <p>世帯の所得が一定以下の場合、均等割が7割・5割・2割軽減される制度があります。また、会社を退職した方は、任意継続被保険者制度を利用した方が保険料が安くなる場合もあります。</p>
+  </div>
+</div>
+
+<footer class="footer"><p>&copy; 2026 CalcBox. All rights reserved. | <a href="../../pages/privacy.html" style="color:var(--gray-400)">プライバシーポリシー</a></p></footer>
+
+<script>
+function fmt(n){return Math.round(n).toLocaleString('ja-JP');}
+
+function calculate(){
+  const income=Number(document.getElementById('income').value);
+  const age=document.getElementById('age').value;
+  const members=Number(document.getElementById('members').value);
+
+  // 基礎控除43万円を引いた算定基礎所得
+  const baseIncome=Math.max(0, income-430000);
+
+  // 東京23区 2026年度概算料率
+  // 医療分: 所得割 7.89%, 均等割 42,100円/人, 上限65万円
+  const medicalIncome=baseIncome*0.0789;
+  const medicalEqual=42100*members;
+  const medical=Math.min(650000, medicalIncome+medicalEqual);
+
+  // 支援金分: 所得割 2.80%, 均等割 14,800円/人, 上限24万円
+  const supportIncome=baseIncome*0.0280;
+  const supportEqual=14800*members;
+  const support=Math.min(240000, supportIncome+supportEqual);
+
+  // 介護分(40-64歳のみ): 所得割 2.40%, 均等割 16,500円/人, 上限17万円
+  let nursing=0;
+  if(age==='40to64'){
+    const nursingIncome=baseIncome*0.0240;
+    const nursingEqual=16500*members;
+    nursing=Math.min(170000, nursingIncome+nursingEqual);
+  }
+
+  const total=medical+support+nursing;
+
+  document.getElementById('totalAnnual').textContent=fmt(total)+'円';
+  document.getElementById('totalMonthly').textContent=fmt(Math.round(total/12))+'円';
+  document.getElementById('medical').textContent=fmt(medical)+'円';
+  document.getElementById('support').textContent=fmt(support)+'円';
+  document.getElementById('nursing').textContent=age==='40to64'?fmt(nursing)+'円':'対象外';
+
+  // Chart
+  const items=[
+    {label:'医療分（所得割）',val:Math.min(medicalIncome,650000),color:'#007aff'},
+    {label:'医療分（均等割）',val:Math.min(medicalEqual,Math.max(0,650000-medicalIncome)),color:'#5ac8fa'},
+    {label:'支援金分（所得割）',val:Math.min(supportIncome,240000),color:'#34c759'},
+    {label:'支援金分（均等割）',val:Math.min(supportEqual,Math.max(0,240000-supportIncome)),color:'#a8e06c'},
+  ];
+  if(age==='40to64'){
+    items.push({label:'介護分（所得割）',val:Math.min(baseIncome*0.0240,170000),color:'#ff9500'});
+    items.push({label:'介護分（均等割）',val:Math.min(16500*members,Math.max(0,170000-baseIncome*0.0240)),color:'#ffcc02'});
+  }
+  const maxVal=total;
+  document.getElementById('chartArea').innerHTML=items.filter(i=>i.val>0).map(i=>`
+    <div class="chart-bar">
+      <div class="bar-label"><span>${i.label}</span><span>${fmt(i.val)}円</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(i.val/maxVal*100).toFixed(1)}%;background:${i.color}"></div></div>
+    </div>
+  `).join('');
+
+  document.getElementById('results').classList.add('active');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  localStorage.setItem('calcbox_healthins',JSON.stringify({income,age,members}));
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const s=localStorage.getItem('calcbox_healthins');
+  if(s){const d=JSON.parse(s);document.getElementById('income').value=d.income;document.getElementById('age').value=d.age;document.getElementById('members').value=d.members;}
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>

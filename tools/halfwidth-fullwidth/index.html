@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】半角全角変換ツール。テキストの半角⇔全角、ひらがな⇔カタカナ、大文字⇔小文字を一括変換。データ入力・文書作成の効率化に。">
+  <meta name="keywords" content="半角全角変換, 半角 全角, ひらがな カタカナ 変換, 大文字 小文字 変換, テキスト変換">
+  <title>半角全角変換 — 無料テキスト変換ツール | ToolBox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}.nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}.nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}.tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}.tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}.tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .converter{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden}
+    .converter__buttons{display:flex;flex-wrap:wrap;gap:8px;padding:20px 24px;border-bottom:1px solid var(--gray-200);background:var(--gray-100)}
+    .conv-btn{font-family:var(--font);font-size:0.78rem;font-weight:600;padding:8px 16px;border-radius:980px;border:1.5px solid var(--gray-300);background:var(--white);cursor:pointer;transition:all 0.2s;white-space:nowrap}
+    .conv-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .conv-btn:active{background:var(--accent);color:var(--white);border-color:var(--accent)}
+    .converter__area{display:grid;grid-template-columns:1fr 1fr;min-height:350px}
+    .converter__input,.converter__output{position:relative}
+    .converter__input{border-right:1px solid var(--gray-200)}
+    .converter__label{position:absolute;top:12px;left:20px;font-size:0.7rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em}
+    .converter textarea{width:100%;height:100%;min-height:350px;font-family:var(--font);font-size:0.95rem;line-height:1.85;padding:40px 20px 20px;border:none;outline:none;resize:none;background:transparent;color:var(--black)}
+    .converter textarea::placeholder{color:var(--gray-300)}
+    #output{background:var(--gray-100);color:var(--gray-700)}
+    .converter__actions{display:flex;justify-content:space-between;padding:14px 20px;border-top:1px solid var(--gray-200);background:var(--gray-100)}
+    .action-btn{font-family:var(--font);font-size:0.78rem;font-weight:600;padding:8px 18px;border-radius:980px;border:none;cursor:pointer;transition:all 0.2s}
+    .action-btn--copy{background:var(--accent);color:var(--white)}.action-btn--copy:hover{background:#0077ed}
+    .action-btn--clear{background:var(--white);color:var(--gray-700);border:1px solid var(--gray-300)}.action-btn--clear:hover{border-color:var(--black)}
+    .action-btn--swap{background:var(--black);color:var(--white)}.action-btn--swap:hover{background:#2c2c2e}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}.seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}.seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}.seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .converter__area{grid-template-columns:1fr}
+      .converter__input{border-right:none;border-bottom:1px solid var(--gray-200)}
+      .converter textarea{min-height:200px}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../index.html" class="nav__logo">Tool<span>Box</span></a><a href="../../index.html" class="nav__back">← ツール一覧</a></div></nav>
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg></div>
+      <h1 class="tool-header__title">半角全角変換ツール</h1>
+      <p class="tool-header__desc">テキストの半角⇔全角、ひらがな⇔カタカナ、大文字⇔小文字を一括変換。</p>
+    </div>
+    <div class="converter">
+      <div class="converter__buttons">
+        <button class="conv-btn" onclick="convert('toFull')">半角→全角</button>
+        <button class="conv-btn" onclick="convert('toHalf')">全角→半角</button>
+        <button class="conv-btn" onclick="convert('hiraToKata')">ひらがな→カタカナ</button>
+        <button class="conv-btn" onclick="convert('kataToHira')">カタカナ→ひらがな</button>
+        <button class="conv-btn" onclick="convert('toUpper')">小文字→大文字</button>
+        <button class="conv-btn" onclick="convert('toLower')">大文字→小文字</button>
+        <button class="conv-btn" onclick="convert('numToFull')">数字→全角</button>
+        <button class="conv-btn" onclick="convert('numToHalf')">数字→半角</button>
+        <button class="conv-btn" onclick="convert('spaceToFull')">スペース→全角</button>
+        <button class="conv-btn" onclick="convert('spaceToHalf')">スペース→半角</button>
+        <button class="conv-btn" onclick="convert('trimLines')">行頭末の空白除去</button>
+        <button class="conv-btn" onclick="convert('removeEmpty')">空行除去</button>
+      </div>
+      <div class="converter__area">
+        <div class="converter__input">
+          <span class="converter__label">入力</span>
+          <textarea id="input" placeholder="変換したいテキストを入力..."></textarea>
+        </div>
+        <div class="converter__output">
+          <span class="converter__label">変換結果</span>
+          <textarea id="output" readonly placeholder="変換結果がここに表示されます"></textarea>
+        </div>
+      </div>
+      <div class="converter__actions">
+        <div style="display:flex;gap:8px">
+          <button class="action-btn action-btn--clear" onclick="document.getElementById('input').value='';document.getElementById('output').value=''">クリア</button>
+          <button class="action-btn action-btn--swap" onclick="swapText()">↔ 入れ替え</button>
+        </div>
+        <button class="action-btn action-btn--copy" onclick="copyOutput()">結果をコピー</button>
+      </div>
+    </div>
+
+    <div class="seo-section">
+      <h2>半角全角変換ツールの使い方</h2>
+      <p>左側にテキストを入力し、変換ボタンをクリックするだけ。変換結果は右側にリアルタイムで表示されます。複数の変換を連続で行うこともできます。</p>
+      <h3>よく使われるシーン</h3>
+      <ul>
+        <li><strong>データ入力の統一</strong> — 全角・半角が混在するデータを一括統一</li>
+        <li><strong>名前のフリガナ変換</strong> — ひらがな⇔カタカナを素早く変換</li>
+        <li><strong>CSVデータの整形</strong> — 全角数字を半角に統一してから処理</li>
+        <li><strong>文書の表記統一</strong> — 英数字を半角、カタカナを全角に統一</li>
+        <li><strong>プログラミング</strong> — 全角スペースの検出・除去</li>
+      </ul>
+      <h3>日本語テキスト処理の基本</h3>
+      <p>日本語のビジネス文書では、一般的に「英数字は半角、カタカナは全角」が標準とされています。このツールを使えば、文書全体の表記を素早く統一できます。</p>
+    </div>
+  </main>
+  <footer class="footer"><p>&copy; 2026 <a href="../../index.html">ToolBox</a></p></footer>
+
+  <script>
+    function convert(type){
+      const input=document.getElementById('input').value;
+      let result=input;
+      switch(type){
+        case 'toFull':
+          result=input.replace(/[!-~]/g,c=>String.fromCharCode(c.charCodeAt(0)+0xFEE0)).replace(/ /g,'　');break;
+        case 'toHalf':
+          result=input.replace(/[！-～]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/　/g,' ');break;
+        case 'hiraToKata':
+          result=input.replace(/[\u3041-\u3096]/g,c=>String.fromCharCode(c.charCodeAt(0)+96));break;
+        case 'kataToHira':
+          result=input.replace(/[\u30A1-\u30F6]/g,c=>String.fromCharCode(c.charCodeAt(0)-96));break;
+        case 'toUpper':result=input.toUpperCase();break;
+        case 'toLower':result=input.toLowerCase();break;
+        case 'numToFull':
+          result=input.replace(/[0-9]/g,c=>String.fromCharCode(c.charCodeAt(0)+0xFEE0));break;
+        case 'numToHalf':
+          result=input.replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0));break;
+        case 'spaceToFull':result=input.replace(/ /g,'　');break;
+        case 'spaceToHalf':result=input.replace(/　/g,' ');break;
+        case 'trimLines':result=input.split('\n').map(l=>l.trim()).join('\n');break;
+        case 'removeEmpty':result=input.split('\n').filter(l=>l.trim()).join('\n');break;
+      }
+      document.getElementById('output').value=result;
+    }
+    function swapText(){
+      const inp=document.getElementById('input');
+      const out=document.getElementById('output');
+      const tmp=inp.value;inp.value=out.value;out.value=tmp;
+    }
+    function copyOutput(){
+      const out=document.getElementById('output');
+      navigator.clipboard.writeText(out.value).then(()=>{
+        const btn=document.querySelector('.action-btn--copy');
+        btn.textContent='コピーしました ✓';setTimeout(()=>btn.textContent='結果をコピー',1500);
+      });
+    }
+  </script>
+</body>
+</html>

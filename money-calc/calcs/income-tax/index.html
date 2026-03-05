@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>所得税・住民税計算シミュレーター - CalcBox</title>
+<meta name="description" content="年収と各種控除から所得税・住民税を自動計算。2026年度の累進課税税率に対応。課税所得、実効税率もわかります。">
+<link rel="canonical" href="https://example.com/calcs/income-tax/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--white:#fff;--radius:16px;--radius-sm:12px;--transition:0.3s cubic-bezier(0.25,0.1,0.25,1)}html{scroll-behavior:smooth}body{font-family:'Inter','Noto Sans JP',sans-serif;background:var(--gray-100);color:var(--black);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,0.06)}.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}.nav-logo{font-weight:700;font-size:18px;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}.nav-logo svg{width:24px;height:24px;color:var(--accent)}.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--gray-500)}.nav-links a:hover{color:var(--black)}
+.page-header{text-align:center;padding:48px 24px 32px;max-width:640px;margin:0 auto}.page-header .breadcrumb{font-size:13px;color:var(--gray-500);margin-bottom:12px}.page-header .breadcrumb a{color:var(--accent)}.page-header h1{font-size:32px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}.page-header p{font-size:15px;color:var(--gray-500)}
+.calc-container{max-width:800px;margin:0 auto;padding:0 24px 60px}.calc-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-bottom:24px}.calc-card h2{font-size:18px;font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:8px}.calc-card h2 svg{width:20px;height:20px;color:var(--accent)}
+.form-group{margin-bottom:20px}.form-group label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}.form-group .hint{font-size:12px;color:var(--gray-500);margin-top:4px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+input[type="number"],select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:inherit;background:var(--white);outline:none;transition:var(--transition)}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.1)}
+.input-unit{position:relative}.input-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gray-400);pointer-events:none}.input-unit input{padding-right:40px}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:12px}.checkbox-group label{display:flex;align-items:center;gap:6px;font-size:14px;cursor:pointer;padding:8px 14px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);transition:var(--transition)}.checkbox-group label:has(input:checked){background:rgba(0,113,227,0.06);border-color:var(--accent)}.checkbox-group input{accent-color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--white);padding:12px 32px;border:none;border-radius:980px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:var(--transition);width:100%}.btn:hover{background:var(--accent-hover)}
+.result-section{display:none}.result-section.active{display:block}
+.result-main{background:linear-gradient(135deg,#5856d6,#af52de);border-radius:var(--radius);padding:32px;text-align:center;color:var(--white);margin-bottom:20px}.result-main .label{font-size:14px;opacity:0.85;margin-bottom:4px}.result-main .value{font-size:36px;font-weight:700;letter-spacing:-1px}.result-main .sub{font-size:15px;opacity:0.8;margin-top:8px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}.result-item{background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--gray-200);padding:20px;text-align:center}.result-item .label{font-size:12px;color:var(--gray-500);margin-bottom:4px}.result-item .value{font-size:22px;font-weight:700}
+.tax-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px}.tax-table th{background:var(--gray-100);padding:10px 12px;text-align:left;font-weight:600;border-bottom:1px solid var(--gray-200)}.tax-table td{padding:10px 12px;border-bottom:1px solid var(--gray-100)}.tax-table tr.active{background:rgba(0,113,227,0.04);font-weight:600}
+.seo-content{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-top:40px}.seo-content h2{font-size:20px;font-weight:700;margin-bottom:16px}.seo-content h3{font-size:16px;font-weight:600;margin:20px 0 8px}.seo-content p{font-size:14px;color:#444;line-height:1.8;margin-bottom:12px}
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:32px 24px;text-align:center;margin-top:60px}.footer p{font-size:12px;color:var(--gray-400)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{display:none}.page-header h1{font-size:26px}.form-row{grid-template-columns:1fr}.result-main .value{font-size:28px}.calc-card{padding:24px}.result-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="../../index.html" class="nav-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>CalcBox</a><div class="nav-links"><a href="../../index.html#calcs">計算ツール</a><a href="../../pages/about.html">CalcBoxとは</a></div></div></nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="../../index.html">CalcBox</a> / 所得税・住民税計算</div>
+  <h1>所得税・住民税計算シミュレーター</h1>
+  <p>年収と各種控除から所得税・住民税・実効税率を計算します</p>
+</div>
+
+<div class="calc-container">
+  <div class="calc-card reveal">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>収入・控除情報を入力</h2>
+    <div class="form-group">
+      <label for="salary">年収（額面）</label>
+      <div class="input-unit"><input type="number" id="salary" value="5000000" min="0" step="10000"><span>円</span></div>
+    </div>
+    <div class="form-group">
+      <label for="socialIns">社会保険料控除（年額）</label>
+      <div class="input-unit"><input type="number" id="socialIns" value="750000" min="0" step="10000"><span>円</span></div>
+      <div class="hint">源泉徴収票の「社会保険料等の金額」欄を参照。不明な場合は年収の15%程度。</div>
+    </div>
+    <div class="form-group">
+      <label>各種所得控除</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" id="spouseDed"> 配偶者控除（38万円）</label>
+        <label><input type="checkbox" id="dep1"> 扶養控除・一般（38万円）</label>
+        <label><input type="checkbox" id="dep2"> 扶養控除・特定（63万円）</label>
+        <label><input type="checkbox" id="lifeIns"> 生命保険料控除（最大12万円）</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="lifeInsAmt">生命保険料控除額</label>
+        <div class="input-unit"><input type="number" id="lifeInsAmt" value="0" min="0" max="120000" step="1000"><span>円</span></div>
+      </div>
+      <div class="form-group">
+        <label for="ideco">iDeCo掛金（年額）</label>
+        <div class="input-unit"><input type="number" id="ideco" value="0" min="0" step="1000"><span>円</span></div>
+      </div>
+    </div>
+    <button class="btn" onclick="calculate()">税額を計算する</button>
+  </div>
+
+  <div class="result-section" id="results">
+    <div class="result-main reveal">
+      <div class="label">所得税 + 住民税（年額合計）</div>
+      <div class="value" id="totalTax">--</div>
+      <div class="sub">実効税率: <strong id="effectiveRate">--%</strong></div>
+    </div>
+    <div class="result-grid">
+      <div class="result-item reveal"><div class="label">所得税</div><div class="value" id="incomeTax">--</div></div>
+      <div class="result-item reveal"><div class="label">住民税</div><div class="value" id="residentTax">--</div></div>
+      <div class="result-item reveal"><div class="label">課税所得（所得税）</div><div class="value" id="taxableIncome" style="font-size:18px">--</div></div>
+      <div class="result-item reveal"><div class="label">給与所得控除</div><div class="value" id="empDed" style="font-size:18px">--</div></div>
+    </div>
+
+    <div class="calc-card reveal">
+      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>所得税の税率表（累進課税）</h2>
+      <div style="overflow-x:auto">
+        <table class="tax-table" id="taxTable">
+          <thead><tr><th>課税所得</th><th>税率</th><th>控除額</th></tr></thead>
+          <tbody>
+            <tr data-max="1950000"><td>195万円以下</td><td>5%</td><td>0円</td></tr>
+            <tr data-max="3300000"><td>195万円超〜330万円以下</td><td>10%</td><td>97,500円</td></tr>
+            <tr data-max="6950000"><td>330万円超〜695万円以下</td><td>20%</td><td>427,500円</td></tr>
+            <tr data-max="9000000"><td>695万円超〜900万円以下</td><td>23%</td><td>636,000円</td></tr>
+            <tr data-max="18000000"><td>900万円超〜1,800万円以下</td><td>33%</td><td>1,536,000円</td></tr>
+            <tr data-max="40000000"><td>1,800万円超〜4,000万円以下</td><td>40%</td><td>2,796,000円</td></tr>
+            <tr data-max="999999999"><td>4,000万円超</td><td>45%</td><td>4,796,000円</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content reveal">
+    <h2>所得税・住民税の仕組み</h2>
+    <p>日本の所得税は累進課税制度を採用しており、課税所得が増えるほど高い税率が適用されます。住民税は一律10%（都道府県民税4%＋市区町村民税6%）に均等割（約5,000円）が加算されます。</p>
+    <h3>給与所得控除</h3>
+    <p>給与所得者（会社員・公務員等）は、収入金額に応じて一定額が「給与所得控除」として差し引かれます。これはサラリーマンの「必要経費」に相当するものです。2026年度は最低55万円、上限195万円です。</p>
+    <h3>基礎控除</h3>
+    <p>すべての納税者に適用される控除で、所得税では48万円、住民税では43万円です（合計所得金額2,400万円以下の場合）。</p>
+    <h3>節税のポイント</h3>
+    <p>iDeCo（個人型確定拠出年金）の掛金は全額所得控除の対象となります。また、ふるさと納税や医療費控除、生命保険料控除なども活用することで、課税所得を減らし税負担を軽減できます。</p>
+  </div>
+</div>
+
+<footer class="footer"><p>&copy; 2026 CalcBox. All rights reserved. | <a href="../../pages/privacy.html" style="color:var(--gray-400)">プライバシーポリシー</a></p></footer>
+
+<script>
+function fmt(n){return Math.round(n).toLocaleString('ja-JP');}
+
+function calcEmpDed(s){
+  if(s<=1625000)return 550000;if(s<=1800000)return s*0.4-100000;if(s<=3600000)return s*0.3+80000;if(s<=6600000)return s*0.2+440000;if(s<=8500000)return s*0.1+1100000;return 1950000;
+}
+function calcIncomeTax(t){
+  if(t<=1950000)return t*0.05;if(t<=3300000)return t*0.10-97500;if(t<=6950000)return t*0.20-427500;if(t<=9000000)return t*0.23-636000;if(t<=18000000)return t*0.33-1536000;if(t<=40000000)return t*0.40-2796000;return t*0.45-4796000;
+}
+
+function calculate(){
+  const salary=Number(document.getElementById('salary').value);
+  const socialIns=Number(document.getElementById('socialIns').value);
+  const spouseDed=document.getElementById('spouseDed').checked?380000:0;
+  const dep1=document.getElementById('dep1').checked?380000:0;
+  const dep2=document.getElementById('dep2').checked?630000:0;
+  const lifeIns=document.getElementById('lifeIns').checked?Number(document.getElementById('lifeInsAmt').value):0;
+  const ideco=Number(document.getElementById('ideco').value);
+
+  const empDed=calcEmpDed(salary);
+  const totalDeductions=empDed+480000+socialIns+spouseDed+dep1+dep2+lifeIns+ideco;
+  const taxableIncome=Math.max(0,Math.floor((salary-totalDeductions)/1000)*1000);
+  const incomeTax=Math.max(0,Math.floor(calcIncomeTax(taxableIncome)*1.021)); // 復興特別所得税
+
+  // 住民税
+  const totalDeductionsR=empDed+430000+socialIns+spouseDed+(dep1>0?330000:0)+(dep2>0?450000:0)+lifeIns*0.583+ideco; // 住民税の控除額は異なる
+  const taxableIncomeR=Math.max(0,Math.floor((salary-totalDeductionsR)/1000)*1000);
+  const residentTax=Math.max(0,Math.floor(taxableIncomeR*0.10)+5000);
+
+  const totalTax=incomeTax+residentTax;
+  const effectiveRate=salary>0?(totalTax/salary*100).toFixed(1):0;
+
+  document.getElementById('totalTax').textContent=fmt(totalTax)+'円';
+  document.getElementById('effectiveRate').textContent=effectiveRate+'%';
+  document.getElementById('incomeTax').textContent=fmt(incomeTax)+'円';
+  document.getElementById('residentTax').textContent=fmt(residentTax)+'円';
+  document.getElementById('taxableIncome').textContent=fmt(taxableIncome)+'円';
+  document.getElementById('empDed').textContent=fmt(empDed)+'円';
+
+  // Highlight active tax bracket
+  document.querySelectorAll('.tax-table tbody tr').forEach(tr=>{
+    tr.classList.remove('active');
+    if(taxableIncome<=Number(tr.dataset.max)&&!document.querySelector('.tax-table tbody tr.active')){
+      tr.classList.add('active');
+    }
+  });
+
+  document.getElementById('results').classList.add('active');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  localStorage.setItem('calcbox_incometax',JSON.stringify({salary,socialIns,spouseDed:document.getElementById('spouseDed').checked,dep1:document.getElementById('dep1').checked,dep2:document.getElementById('dep2').checked,lifeIns:document.getElementById('lifeIns').checked,lifeInsAmt:lifeIns,ideco}));
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const s=localStorage.getItem('calcbox_incometax');
+  if(s){const d=JSON.parse(s);document.getElementById('salary').value=d.salary;document.getElementById('socialIns').value=d.socialIns;document.getElementById('spouseDed').checked=d.spouseDed;document.getElementById('dep1').checked=d.dep1;document.getElementById('dep2').checked=d.dep2;document.getElementById('lifeIns').checked=d.lifeIns;document.getElementById('lifeInsAmt').value=d.lifeInsAmt;document.getElementById('ideco').value=d.ideco;}
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>

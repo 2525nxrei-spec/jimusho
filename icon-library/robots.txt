@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://iconjp.com/sitemap.xml

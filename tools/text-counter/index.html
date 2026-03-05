@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】文字数カウントツール。リアルタイムで文字数・単語数・行数・段落数・読了時間を表示。SEOライティングやレポート作成に。ブラウザで完結、インストール不要。">
+  <meta name="keywords" content="文字数カウント, 文字数, ワードカウント, 文字数カウンター, 単語数, 行数, SEO">
+  <title>文字数カウント — 無料オンラインツール | ToolBox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-900:#3a3a3c;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:500px;margin:0 auto}
+
+    .tool-main{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden}
+
+    .textarea-wrap{position:relative}
+    #text-input{width:100%;min-height:300px;font-family:var(--font);font-size:1rem;line-height:1.9;padding:28px;border:none;outline:none;resize:vertical;color:var(--black);background:transparent}
+    #text-input::placeholder{color:var(--gray-300)}
+    .textarea-wrap__clear{position:absolute;top:16px;right:16px;background:var(--gray-100);border:none;padding:6px 14px;border-radius:980px;font-size:0.75rem;font-weight:600;color:var(--gray-500);cursor:pointer;font-family:var(--font);transition:background 0.2s}
+    .textarea-wrap__clear:hover{background:var(--gray-200)}
+
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border-top:1px solid var(--gray-200)}
+    .stat{padding:20px 24px;text-align:center;border-right:1px solid var(--gray-200)}
+    .stat:last-child{border-right:none}
+    .stat__value{font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;color:var(--black)}
+    .stat__label{font-size:0.72rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+
+    .details{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+    .detail-card{background:var(--white);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .detail-card__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:0.88rem}
+    .detail-row:last-child{border-bottom:none}
+    .detail-row__label{color:var(--gray-700)}
+    .detail-row__value{font-weight:600}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .stats{grid-template-columns:repeat(3,1fr)}
+      .stat{border-bottom:1px solid var(--gray-200);padding:16px}
+      .details{grid-template-columns:1fr}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../index.html" class="nav__back">← ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
+      <h1 class="tool-header__title">文字数カウント</h1>
+      <p class="tool-header__desc">リアルタイムで文字数・単語数・行数をカウント。ブラウザで完結、データは一切送信されません。</p>
+    </div>
+
+    <div class="tool-main">
+      <div class="textarea-wrap">
+        <textarea id="text-input" placeholder="ここにテキストを入力、またはペーストしてください..."></textarea>
+        <button class="textarea-wrap__clear" onclick="document.getElementById('text-input').value='';countText()">クリア</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat__value" id="chars">0</div><div class="stat__label">文字数</div></div>
+        <div class="stat"><div class="stat__value" id="chars-no-space">0</div><div class="stat__label">文字数(空白なし)</div></div>
+        <div class="stat"><div class="stat__value" id="words">0</div><div class="stat__label">単語数</div></div>
+        <div class="stat"><div class="stat__value" id="lines">0</div><div class="stat__label">行数</div></div>
+        <div class="stat"><div class="stat__value" id="paragraphs">0</div><div class="stat__label">段落数</div></div>
+        <div class="stat"><div class="stat__value" id="read-time">0分</div><div class="stat__label">読了時間</div></div>
+      </div>
+    </div>
+
+    <div class="details">
+      <div class="detail-card">
+        <div class="detail-card__title">文字種別</div>
+        <div class="detail-row"><span class="detail-row__label">ひらがな</span><span class="detail-row__value" id="hiragana">0</span></div>
+        <div class="detail-row"><span class="detail-row__label">カタカナ</span><span class="detail-row__value" id="katakana">0</span></div>
+        <div class="detail-row"><span class="detail-row__label">漢字</span><span class="detail-row__value" id="kanji">0</span></div>
+        <div class="detail-row"><span class="detail-row__label">英字</span><span class="detail-row__value" id="alpha">0</span></div>
+        <div class="detail-row"><span class="detail-row__label">数字</span><span class="detail-row__value" id="num">0</span></div>
+        <div class="detail-row"><span class="detail-row__label">記号・その他</span><span class="detail-row__value" id="symbol">0</span></div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card__title">追加情報</div>
+        <div class="detail-row"><span class="detail-row__label">バイト数 (UTF-8)</span><span class="detail-row__value" id="bytes">0</span></div>
+        <div class="detail-row"><span class="detail-row__label">半角文字数</span><span class="detail-row__value" id="halfwidth">0</span></div>
+        <div class="detail-row"><span class="detail-row__label">全角文字数</span><span class="detail-row__value" id="fullwidth">0</span></div>
+        <div class="detail-row"><span class="detail-row__label">文の数</span><span class="detail-row__value" id="sentences">0</span></div>
+        <div class="detail-row"><span class="detail-row__label">Twitter残り</span><span class="detail-row__value" id="twitter">140</span></div>
+        <div class="detail-row"><span class="detail-row__label">メタディスクリプション残り</span><span class="detail-row__value" id="meta">120</span></div>
+      </div>
+    </div>
+
+    <!-- SEO Content -->
+    <div class="seo-section">
+      <h2>文字数カウントツールの使い方</h2>
+      <p>テキストエリアに文章を入力またはペーストするだけで、リアルタイムに文字数をカウントします。スペースを含む文字数、スペースを除いた文字数、単語数、行数、段落数、推定読了時間を同時に表示します。</p>
+
+      <h3>こんな場面で便利</h3>
+      <ul>
+        <li><strong>ブログ記事の執筆</strong> — SEO記事の文字数管理に。3,000〜5,000文字が目安。</li>
+        <li><strong>SNS投稿</strong> — Twitter（X）の140文字制限の確認に。</li>
+        <li><strong>メタディスクリプション</strong> — 120文字以内に収めるための文字数チェック。</li>
+        <li><strong>レポート・論文</strong> — 指定文字数に合わせた執筆に。</li>
+        <li><strong>メール作成</strong> — 長すぎないか、簡潔さのチェックに。</li>
+      </ul>
+
+      <h3>特徴</h3>
+      <ul>
+        <li><strong>完全無料</strong> — 登録不要、制限なし。何度でも使えます。</li>
+        <li><strong>プライバシー安全</strong> — テキストはブラウザ内で処理され、サーバーには送信されません。</li>
+        <li><strong>日本語対応</strong> — ひらがな・カタカナ・漢字の種別カウントにも対応。</li>
+        <li><strong>リアルタイム</strong> — 入力と同時にカウントが更新されます。</li>
+      </ul>
+
+      <h3>SEOライティングの文字数目安</h3>
+      <p>SEO記事の適切な文字数は、狙うキーワードの競合度によって異なります。一般的な目安は以下の通りです。</p>
+      <ul>
+        <li><strong>ロングテールKW（競合低）</strong>: 1,500〜3,000文字</li>
+        <li><strong>ミドルKW（競合中）</strong>: 3,000〜5,000文字</li>
+        <li><strong>ビッグKW（競合高）</strong>: 5,000〜10,000文字以上</li>
+      </ul>
+      <p>ただし、文字数だけでなく、コンテンツの質と検索意図への合致度がSEOでは最も重要です。</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../index.html">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const input = document.getElementById('text-input');
+    input.addEventListener('input', countText);
+
+    function countText() {
+      const text = input.value;
+
+      // Basic counts
+      document.getElementById('chars').textContent = text.length.toLocaleString();
+      document.getElementById('chars-no-space').textContent = text.replace(/\s/g, '').length.toLocaleString();
+
+      // Words (handle Japanese: each kanji/kana = ~1 word, plus English words)
+      const englishWords = text.match(/[a-zA-Z]+/g) || [];
+      const japaneseChars = text.match(/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]/g) || [];
+      const wordCount = englishWords.length + japaneseChars.length;
+      document.getElementById('words').textContent = wordCount.toLocaleString();
+
+      // Lines
+      const lines = text === '' ? 0 : text.split('\n').length;
+      document.getElementById('lines').textContent = lines.toLocaleString();
+
+      // Paragraphs
+      const paragraphs = text === '' ? 0 : text.split(/\n\s*\n/).filter(p => p.trim()).length || (text.trim() ? 1 : 0);
+      document.getElementById('paragraphs').textContent = paragraphs.toLocaleString();
+
+      // Read time (~500 chars/min for Japanese, ~200 words/min for English)
+      const readMinutes = Math.max(1, Math.ceil(text.length / 500));
+      document.getElementById('read-time').textContent = text.length === 0 ? '0分' : readMinutes + '分';
+
+      // Character types
+      const hiragana = (text.match(/[\u3040-\u309F]/g) || []).length;
+      const katakana = (text.match(/[\u30A0-\u30FF]/g) || []).length;
+      const kanji = (text.match(/[\u4E00-\u9FFF]/g) || []).length;
+      const alpha = (text.match(/[a-zA-Z]/g) || []).length;
+      const num = (text.match(/[0-9０-９]/g) || []).length;
+      const symbolCount = text.replace(/[\s\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFFa-zA-Z0-9０-９]/g, '').length;
+
+      document.getElementById('hiragana').textContent = hiragana.toLocaleString();
+      document.getElementById('katakana').textContent = katakana.toLocaleString();
+      document.getElementById('kanji').textContent = kanji.toLocaleString();
+      document.getElementById('alpha').textContent = alpha.toLocaleString();
+      document.getElementById('num').textContent = num.toLocaleString();
+      document.getElementById('symbol').textContent = symbolCount.toLocaleString();
+
+      // Additional info
+      const bytes = new Blob([text]).size;
+      document.getElementById('bytes').textContent = bytes.toLocaleString();
+
+      // Half/full width
+      const halfwidth = (text.match(/[\x20-\x7E\xA1-\xDF]/g) || []).length;
+      const fullwidth = text.length - halfwidth - (text.match(/[\n\r\t]/g) || []).length;
+      document.getElementById('halfwidth').textContent = halfwidth.toLocaleString();
+      document.getElementById('fullwidth').textContent = Math.max(0, fullwidth).toLocaleString();
+
+      // Sentences
+      const sentences = text === '' ? 0 : (text.match(/[。！？!?.]+/g) || []).length || (text.trim() ? 1 : 0);
+      document.getElementById('sentences').textContent = sentences.toLocaleString();
+
+      // Twitter / Meta remaining
+      document.getElementById('twitter').textContent = (140 - text.length).toLocaleString();
+      document.getElementById('meta').textContent = (120 - text.length).toLocaleString();
+    }
+  </script>
+</body>
+</html>

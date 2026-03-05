@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>テンプレBOX｜ビジネス文書テンプレート無料ダウンロード</title>
+<meta name="description" content="履歴書・職務経歴書・請求書・見積書など、ビジネスに必要な文書テンプレートを無料でダウンロード。すぐに使えるHTML形式で印刷・PDF保存にも対応。">
+<meta name="keywords" content="テンプレート,無料,ビジネス文書,履歴書,職務経歴書,請求書,見積書,契約書">
+<link rel="canonical" href="https://templatebox.jp/">
+<meta property="og:title" content="テンプレBOX｜ビジネス文書テンプレート無料ダウンロード">
+<meta property="og:description" content="ビジネスに必要な文書テンプレートを無料でダウンロード。すぐに使える高品質なテンプレート集。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--gray-600:#636366;--white:#ffffff;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 32px rgba(0,0,0,0.1);--radius:12px;--radius-lg:20px;--nav-height:64px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter','Noto Sans JP',sans-serif;color:var(--black);background:var(--gray-100);line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(242,242,247,0.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--gray-200);height:var(--nav-height)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:100%}
+.nav-logo{font-size:20px;font-weight:700;letter-spacing:-0.02em;color:var(--black)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:14px;font-weight:500;color:var(--gray-600);transition:color .2s}
+.nav-links a:hover{color:var(--black)}
+.nav-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.nav-menu-btn svg{width:24px;height:24px;stroke:var(--black);fill:none;stroke-width:2}
+/* Hero */
+.hero{text-align:center;padding:100px 24px 80px;max-width:800px;margin:0 auto}
+.hero-tag{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);background:rgba(0,113,227,0.08);padding:6px 16px;border-radius:20px;margin-bottom:24px}
+.hero h1{font-size:48px;font-weight:700;letter-spacing:-0.03em;line-height:1.3;margin-bottom:20px}
+.hero p{font-size:18px;color:var(--gray-600);max-width:560px;margin:0 auto 36px}
+.hero-search{max-width:480px;margin:0 auto;position:relative}
+.hero-search input{width:100%;padding:16px 20px 16px 48px;border:1px solid var(--gray-200);border-radius:12px;font-size:16px;font-family:inherit;background:var(--white);transition:border-color .2s,box-shadow .2s;outline:none}
+.hero-search input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,113,227,0.12)}
+.hero-search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:20px;height:20px;stroke:var(--gray-400);fill:none;stroke-width:2}
+/* Sections */
+.section{max-width:1080px;margin:0 auto;padding:60px 24px}
+.section-header{text-align:center;margin-bottom:48px}
+.section-header h2{font-size:32px;font-weight:700;letter-spacing:-0.02em;margin-bottom:12px}
+.section-header p{font-size:16px;color:var(--gray-600)}
+/* Categories */
+.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.category-card{background:var(--white);border-radius:var(--radius);padding:28px 24px;text-align:center;transition:transform .2s,box-shadow .2s;cursor:pointer;border:1px solid transparent}
+.category-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:var(--gray-200)}
+.category-icon{width:48px;height:48px;margin:0 auto 16px;background:var(--gray-100);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.category-icon svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.category-card h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.category-card p{font-size:13px;color:var(--gray-500)}
+/* Popular */
+.popular-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.template-card{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;transition:transform .2s,box-shadow .2s;border:1px solid var(--gray-200)}
+.template-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.template-card-preview{aspect-ratio:4/3;background:var(--gray-100);display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden}
+.template-card-preview .mini-doc{width:100%;max-width:200px;background:var(--white);border-radius:4px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-size:7px;line-height:1.6;color:var(--gray-600);transform:scale(1);transition:transform .3s}
+.template-card:hover .mini-doc{transform:scale(1.02)}
+.mini-doc-title{font-size:10px;font-weight:700;color:var(--black);text-align:center;margin-bottom:8px}
+.mini-doc-line{height:3px;background:var(--gray-200);border-radius:2px;margin-bottom:4px}
+.mini-doc-line.short{width:60%}
+.mini-doc-line.medium{width:80%}
+.template-card-body{padding:20px}
+.template-card-body .badge{font-size:11px;font-weight:600;color:var(--accent);background:rgba(0,113,227,0.08);padding:3px 10px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.template-card-body h3{font-size:17px;font-weight:600;margin-bottom:6px}
+.template-card-body p{font-size:13px;color:var(--gray-500);line-height:1.6}
+.template-card-footer{padding:0 20px 20px;display:flex;justify-content:space-between;align-items:center}
+.template-card-footer .dl-count{font-size:12px;color:var(--gray-400);display:flex;align-items:center;gap:4px}
+.template-card-footer .dl-count svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;font-family:inherit;border:none;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--accent);color:var(--white)}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn-outline:hover{background:rgba(0,113,227,0.06)}
+.btn-sm{padding:8px 14px;font-size:13px}
+/* Features */
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.feature-item{text-align:center;padding:32px 20px}
+.feature-icon{width:56px;height:56px;margin:0 auto 20px;background:linear-gradient(135deg,rgba(0,113,227,0.1),rgba(0,113,227,0.04));border-radius:16px;display:flex;align-items:center;justify-content:center}
+.feature-icon svg{width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.feature-item h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.feature-item p{font-size:14px;color:var(--gray-500);line-height:1.7}
+/* All Templates */
+.all-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.all-template-item{display:flex;align-items:center;gap:16px;background:var(--white);padding:20px;border-radius:var(--radius);border:1px solid var(--gray-200);transition:all .2s}
+.all-template-item:hover{border-color:var(--accent);box-shadow:var(--shadow)}
+.all-template-icon{width:48px;height:48px;flex-shrink:0;background:var(--gray-100);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.all-template-icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.all-template-info h3{font-size:15px;font-weight:600;margin-bottom:2px}
+.all-template-info p{font-size:13px;color:var(--gray-500)}
+.all-template-item .arrow{margin-left:auto;flex-shrink:0}
+.all-template-item .arrow svg{width:16px;height:16px;stroke:var(--gray-400);fill:none;stroke-width:2;transition:transform .2s}
+.all-template-item:hover .arrow svg{transform:translateX(2px);stroke:var(--accent)}
+/* CTA */
+.cta-section{text-align:center;background:var(--white);border-radius:var(--radius-lg);padding:64px 24px;margin:60px auto;max-width:1080px;border:1px solid var(--gray-200)}
+.cta-section h2{font-size:28px;font-weight:700;margin-bottom:12px}
+.cta-section p{font-size:16px;color:var(--gray-600);margin-bottom:28px}
+/* Footer */
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:60px 24px 32px}
+.footer-inner{max-width:1080px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-brand p{font-size:14px;color:var(--gray-500);margin-top:12px;line-height:1.7}
+.footer-col h4{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:16px;color:var(--gray-400)}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:14px;color:var(--gray-600);transition:color .2s}
+.footer-col a:hover{color:var(--black)}
+.footer-bottom{border-top:1px solid var(--gray-200);padding-top:24px;text-align:center;font-size:13px;color:var(--gray-400)}
+/* Ad slots */
+.ad-slot{background:var(--white);border:1px dashed var(--gray-300);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--gray-400);font-size:13px;margin:32px auto;max-width:728px;height:90px}
+/* Mobile nav overlay */
+.nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:99}
+.nav-drawer{display:none;position:fixed;top:0;right:0;width:280px;height:100%;background:var(--white);z-index:101;padding:80px 24px 24px;flex-direction:column;gap:8px}
+.nav-drawer a{font-size:16px;padding:12px 0;border-bottom:1px solid var(--gray-100);display:block;color:var(--black)}
+.nav-drawer .close-btn{position:absolute;top:20px;right:20px;background:none;border:none;cursor:pointer}
+.nav-drawer .close-btn svg{width:24px;height:24px;stroke:var(--black);fill:none;stroke-width:2}
+/* Responsive */
+@media(max-width:768px){
+.nav-links{display:none}
+.nav-menu-btn{display:block}
+.hero h1{font-size:32px}
+.hero p{font-size:16px}
+.categories{grid-template-columns:repeat(2,1fr)}
+.popular-grid{grid-template-columns:1fr}
+.features{grid-template-columns:repeat(2,1fr)}
+.all-grid{grid-template-columns:1fr}
+.footer-grid{grid-template-columns:1fr 1fr;gap:24px}
+}
+@media(max-width:420px){
+.hero{padding:60px 16px 48px}
+.hero h1{font-size:26px}
+.categories{grid-template-columns:1fr 1fr;gap:10px}
+.category-card{padding:20px 16px}
+.features{grid-template-columns:1fr}
+.section{padding:40px 16px}
+.footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+<div class="nav-inner">
+<a href="index.html" class="nav-logo">テンプレ<span>BOX</span></a>
+<div class="nav-links">
+<a href="#categories">カテゴリ</a>
+<a href="#templates">テンプレート一覧</a>
+<a href="pages/about.html">このサイトについて</a>
+<a href="pages/contact.html">お問い合わせ</a>
+</div>
+<button class="nav-menu-btn" onclick="toggleMenu()" aria-label="メニュー">
+<svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+</div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
+<div class="nav-drawer" id="navDrawer">
+<button class="close-btn" onclick="toggleMenu()">
+<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+</button>
+<a href="#categories" onclick="toggleMenu()">カテゴリ</a>
+<a href="#templates" onclick="toggleMenu()">テンプレート一覧</a>
+<a href="pages/about.html">このサイトについて</a>
+<a href="pages/contact.html">お問い合わせ</a>
+<a href="pages/privacy.html">プライバシーポリシー</a>
+<a href="pages/terms.html">利用規約</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+<div class="hero-tag">すべて無料・登録不要</div>
+<h1>ビジネス文書テンプレートを、<br>無料で。</h1>
+<p>履歴書から契約書まで、日本のビジネスシーンで必要な文書テンプレートを厳選。ダウンロードしてすぐにお使いいただけます。</p>
+<div class="hero-search">
+<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+<input type="text" id="searchInput" placeholder="テンプレートを検索..." oninput="filterTemplates()">
+</div>
+</section>
+
+<!-- Ad slot -->
+<div class="ad-slot">広告スペース（728x90）</div>
+
+<!-- Categories -->
+<section class="section" id="categories">
+<div class="section-header">
+<h2>カテゴリから探す</h2>
+<p>用途に合わせたテンプレートをご用意しています</p>
+</div>
+<div class="categories">
+<div class="category-card" onclick="scrollToSection('templates')">
+<div class="category-icon">
+<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+</div>
+<h3>ビジネス文書</h3>
+<p>企画書・報告書・議事録</p>
+</div>
+<div class="category-card" onclick="scrollToSection('templates')">
+<div class="category-icon">
+<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+</div>
+<h3>人事・労務</h3>
+<p>履歴書・職務経歴書・退職届</p>
+</div>
+<div class="category-card" onclick="scrollToSection('templates')">
+<div class="category-icon">
+<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+</div>
+<h3>契約書</h3>
+<p>業務委託契約書・NDA</p>
+</div>
+<div class="category-card" onclick="scrollToSection('templates')">
+<div class="category-icon">
+<svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+</div>
+<h3>経理</h3>
+<p>請求書・見積書</p>
+</div>
+</div>
+</section>
+
+<!-- Popular Templates -->
+<section class="section">
+<div class="section-header">
+<h2>人気のテンプレート</h2>
+<p>多くの方にご利用いただいているテンプレートです</p>
+</div>
+<div class="popular-grid">
+<a href="templates/resume/index.html" class="template-card">
+<div class="template-card-preview">
+<div class="mini-doc">
+<div class="mini-doc-title">履 歴 書</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:6px">
+<div class="mini-doc-line"></div><div class="mini-doc-line"></div>
+<div class="mini-doc-line"></div><div class="mini-doc-line"></div>
+</div>
+<div class="mini-doc-line"></div>
+<div class="mini-doc-line medium"></div>
+<div class="mini-doc-line short"></div>
+<div class="mini-doc-line"></div>
+<div class="mini-doc-line medium"></div>
+</div>
+</div>
+<div class="template-card-body">
+<span class="badge">人事・労務</span>
+<h3>履歴書</h3>
+<p>JIS規格準拠の標準的な履歴書テンプレート。写真欄・学歴・職歴・資格欄を完備。</p>
+</div>
+<div class="template-card-footer">
+<span class="dl-count"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>12,840件</span>
+<span class="btn btn-sm btn-primary">詳細を見る</span>
+</div>
+</a>
+<a href="templates/work-history/index.html" class="template-card">
+<div class="template-card-preview">
+<div class="mini-doc">
+<div class="mini-doc-title">職務経歴書</div>
+<div class="mini-doc-line short"></div>
+<div class="mini-doc-line"></div>
+<div class="mini-doc-line medium"></div>
+<div class="mini-doc-line"></div>
+<div style="margin-top:8px">
+<div class="mini-doc-line short"></div>
+<div class="mini-doc-line"></div>
+<div class="mini-doc-line medium"></div>
+</div>
+</div>
+</div>
+<div class="template-card-body">
+<span class="badge">人事・労務</span>
+<h3>職務経歴書</h3>
+<p>編年体形式の職務経歴書。会社名・在籍期間・役職・業務内容を時系列で記載。</p>
+</div>
+<div class="template-card-footer">
+<span class="dl-count"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>9,320件</span>
+<span class="btn btn-sm btn-primary">詳細を見る</span>
+</div>
+</a>
+<a href="templates/invoice/index.html" class="template-card">
+<div class="template-card-preview">
+<div class="mini-doc">
+<div class="mini-doc-title">請 求 書</div>
+<div class="mini-doc-line short"></div>
+<div style="margin:6px 0;border:1px solid var(--gray-200);border-radius:2px;padding:4px">
+<div class="mini-doc-line"></div>
+<div class="mini-doc-line"></div>
+<div class="mini-doc-line"></div>
+</div>
+<div style="text-align:right">
+<div class="mini-doc-line short" style="margin-left:auto"></div>
+</div>
+</div>
+</div>
+<div class="template-card-body">
+<span class="badge">経理</span>
+<h3>請求書</h3>
+<p>インボイス制度対応の請求書テンプレート。明細・小計・消費税・合計額を自動表示。</p>
+</div>
+<div class="template-card-footer">
+<span class="dl-count"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>8,150件</span>
+<span class="btn btn-sm btn-primary">詳細を見る</span>
+</div>
+</a>
+</div>
+</section>
+
+<!-- Ad slot -->
+<div class="ad-slot">広告スペース（728x90）</div>
+
+<!-- Features -->
+<section class="section">
+<div class="section-header">
+<h2>テンプレBOXの特長</h2>
+<p>使いやすさにこだわったテンプレートサービスです</p>
+</div>
+<div class="features">
+<div class="feature-item">
+<div class="feature-icon">
+<svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+</div>
+<h3>無料ダウンロード</h3>
+<p>すべてのテンプレートを無料でご利用いただけます。会員登録も不要です。</p>
+</div>
+<div class="feature-item">
+<div class="feature-icon">
+<svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+</div>
+<h3>すぐ使える</h3>
+<p>ブラウザで直接編集・印刷が可能。特別なソフトウェアは必要ありません。</p>
+</div>
+<div class="feature-item">
+<div class="feature-icon">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+</div>
+<h3>日本のビジネス規格</h3>
+<p>JIS規格やビジネスマナーに準拠した、日本の商習慣に合ったフォーマットです。</p>
+</div>
+<div class="feature-item">
+<div class="feature-icon">
+<svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+</div>
+<h3>スマホ対応</h3>
+<p>スマートフォンからでも快適にご利用いただけるレスポンシブ対応です。</p>
+</div>
+</div>
+</section>
+
+<!-- All Templates -->
+<section class="section" id="templates">
+<div class="section-header">
+<h2>テンプレート一覧</h2>
+<p>全10種類のビジネス文書テンプレート</p>
+</div>
+<div class="all-grid" id="allTemplatesGrid">
+<a href="templates/resume/index.html" class="all-template-item" data-name="履歴書 りれきしょ resume">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+<div class="all-template-info"><h3>履歴書</h3><p>JIS規格準拠・写真欄付き</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+<a href="templates/work-history/index.html" class="all-template-item" data-name="職務経歴書 しょくむけいれきしょ work history">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+<div class="all-template-info"><h3>職務経歴書</h3><p>編年体形式・職務要約付き</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+<a href="templates/proposal/index.html" class="all-template-item" data-name="企画書 きかくしょ proposal">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+<div class="all-template-info"><h3>企画書</h3><p>背景・目的・スケジュール付き</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+<a href="templates/report/index.html" class="all-template-item" data-name="報告書 ほうこくしょ report">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+<div class="all-template-info"><h3>報告書</h3><p>概要・詳細・結論・次のアクション</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+<a href="templates/contract/index.html" class="all-template-item" data-name="業務委託契約書 ぎょうむいたくけいやくしょ contract">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+<div class="all-template-info"><h3>業務委託契約書</h3><p>全10条・フリーランス対応</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+<a href="templates/invoice/index.html" class="all-template-item" data-name="請求書 せいきゅうしょ invoice">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+<div class="all-template-info"><h3>請求書</h3><p>インボイス制度対応・明細付き</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+<a href="templates/estimate/index.html" class="all-template-item" data-name="見積書 みつもりしょ estimate">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+<div class="all-template-info"><h3>見積書</h3><p>有効期限付き・明細テーブル</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+<a href="templates/minutes/index.html" class="all-template-item" data-name="議事録 ぎじろく minutes">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+<div class="all-template-info"><h3>議事録</h3><p>議題・決定事項・アクションアイテム</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+<a href="templates/nda/index.html" class="all-template-item" data-name="秘密保持契約書 ひみつほじけいやくしょ NDA">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+<div class="all-template-info"><h3>秘密保持契約書（NDA）</h3><p>定義・義務・例外・期間・救済</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+<a href="templates/resignation-letter/index.html" class="all-template-item" data-name="退職届 たいしょくとどけ resignation">
+<div class="all-template-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+<div class="all-template-info"><h3>退職届</h3><p>正式な退職届フォーマット</p></div>
+<div class="arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+</a>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+<h2>必要なテンプレートが見つかりましたか？</h2>
+<p>すべてのテンプレートは無料でダウンロード・ご利用いただけます。<br>会員登録やメールアドレスの入力は一切不要です。</p>
+<a href="#templates" class="btn btn-primary">テンプレート一覧を見る</a>
+</section>
+
+<!-- Ad slot -->
+<div class="ad-slot" style="margin-bottom:0">広告スペース（728x90）</div>
+
+<!-- Footer -->
+<footer class="footer">
+<div class="footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<div class="nav-logo" style="font-size:20px;font-weight:700">テンプレ<span style="color:var(--accent)">BOX</span></div>
+<p>ビジネスに必要な文書テンプレートを無料で提供。日本のビジネスシーンに最適化された高品質なテンプレートをお届けします。</p>
+</div>
+<div class="footer-col">
+<h4>テンプレート</h4>
+<ul>
+<li><a href="templates/resume/index.html">履歴書</a></li>
+<li><a href="templates/work-history/index.html">職務経歴書</a></li>
+<li><a href="templates/invoice/index.html">請求書</a></li>
+<li><a href="templates/estimate/index.html">見積書</a></li>
+<li><a href="templates/contract/index.html">業務委託契約書</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>テンプレート</h4>
+<ul>
+<li><a href="templates/proposal/index.html">企画書</a></li>
+<li><a href="templates/report/index.html">報告書</a></li>
+<li><a href="templates/minutes/index.html">議事録</a></li>
+<li><a href="templates/nda/index.html">秘密保持契約書</a></li>
+<li><a href="templates/resignation-letter/index.html">退職届</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>サイト情報</h4>
+<ul>
+<li><a href="pages/about.html">このサイトについて</a></li>
+<li><a href="pages/contact.html">お問い合わせ</a></li>
+<li><a href="pages/privacy.html">プライバシーポリシー</a></li>
+<li><a href="pages/terms.html">利用規約</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+&copy; 2025 テンプレBOX. All rights reserved.
+</div>
+</div>
+</footer>
+
+<script>
+function toggleMenu(){
+var o=document.getElementById('navOverlay'),d=document.getElementById('navDrawer');
+var open=d.style.display==='flex';
+d.style.display=open?'none':'flex';
+o.style.display=open?'none':'block';
+document.body.style.overflow=open?'':'hidden';
+}
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function filterTemplates(){
+var q=document.getElementById('searchInput').value.toLowerCase();
+document.querySelectorAll('.all-template-item').forEach(function(el){
+el.style.display=el.getAttribute('data-name').toLowerCase().includes(q)?'flex':'none';
+});
+}
+</script>
+</body>
+</html>

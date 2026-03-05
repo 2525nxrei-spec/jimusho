@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>複利計算シミュレーター｜積立投資の将来額を計算 - CalcBox</title>
+<meta name="description" content="元本・年利率・運用期間・毎月積立額から複利運用の最終金額を計算。つみたてNISA・iDeCoなどの資産運用シミュレーションに最適。">
+<link rel="canonical" href="https://example.com/calcs/compound-interest/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--white:#fff;--radius:16px;--radius-sm:12px;--transition:0.3s cubic-bezier(0.25,0.1,0.25,1)}html{scroll-behavior:smooth}body{font-family:'Inter','Noto Sans JP',sans-serif;background:var(--gray-100);color:var(--black);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,0.06)}.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}.nav-logo{font-weight:700;font-size:18px;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}.nav-logo svg{width:24px;height:24px;color:var(--accent)}.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--gray-500)}.nav-links a:hover{color:var(--black)}
+.page-header{text-align:center;padding:48px 24px 32px;max-width:640px;margin:0 auto}.page-header .breadcrumb{font-size:13px;color:var(--gray-500);margin-bottom:12px}.page-header .breadcrumb a{color:var(--accent)}.page-header h1{font-size:32px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}.page-header p{font-size:15px;color:var(--gray-500)}
+.calc-container{max-width:800px;margin:0 auto;padding:0 24px 60px}.calc-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-bottom:24px}.calc-card h2{font-size:18px;font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:8px}.calc-card h2 svg{width:20px;height:20px;color:var(--accent)}
+.form-group{margin-bottom:20px}.form-group label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}.form-group .hint{font-size:12px;color:var(--gray-500);margin-top:4px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+input[type="number"],select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:inherit;background:var(--white);outline:none;transition:var(--transition)}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.1)}
+.input-unit{position:relative}.input-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gray-400);pointer-events:none}.input-unit input{padding-right:50px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--white);padding:12px 32px;border:none;border-radius:980px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:var(--transition);width:100%}.btn:hover{background:var(--accent-hover)}
+.result-section{display:none}.result-section.active{display:block}
+.result-main{background:linear-gradient(135deg,#007aff,#5856d6);border-radius:var(--radius);padding:32px;text-align:center;color:var(--white);margin-bottom:20px}.result-main .label{font-size:14px;opacity:0.85;margin-bottom:4px}.result-main .value{font-size:40px;font-weight:700;letter-spacing:-1px}.result-main .sub{font-size:15px;opacity:0.8;margin-top:8px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}.result-item{background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--gray-200);padding:20px;text-align:center}.result-item .label{font-size:12px;color:var(--gray-500);margin-bottom:4px}.result-item .value{font-size:20px;font-weight:700}
+.chart-container{position:relative;height:240px;margin-top:16px;display:flex;align-items:flex-end;gap:2px;padding-bottom:24px;border-bottom:1px solid var(--gray-200)}
+.chart-bar-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}.chart-bar-item .bar{width:100%;border-radius:4px 4px 0 0;transition:height 0.5s ease;position:relative;min-height:2px}.chart-bar-item .bar .interest-part{position:absolute;top:0;left:0;right:0;background:var(--accent);border-radius:4px 4px 0 0;opacity:0.5}.chart-bar-item .bar .principal-part{position:absolute;bottom:0;left:0;right:0;background:var(--accent);border-radius:0}.chart-bar-item .year-label{font-size:10px;color:var(--gray-500);position:absolute;bottom:-20px}
+.chart-legend{display:flex;gap:20px;justify-content:center;margin-top:32px;font-size:13px}.chart-legend span{display:flex;align-items:center;gap:6px}.chart-legend .dot{width:12px;height:12px;border-radius:3px}
+.seo-content{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-top:40px}.seo-content h2{font-size:20px;font-weight:700;margin-bottom:16px}.seo-content h3{font-size:16px;font-weight:600;margin:20px 0 8px}.seo-content p{font-size:14px;color:#444;line-height:1.8;margin-bottom:12px}
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:32px 24px;text-align:center;margin-top:60px}.footer p{font-size:12px;color:var(--gray-400)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{display:none}.page-header h1{font-size:26px}.form-row{grid-template-columns:1fr}.result-main .value{font-size:30px}.result-grid{grid-template-columns:1fr}.calc-card{padding:24px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="../../index.html" class="nav-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>CalcBox</a><div class="nav-links"><a href="../../index.html#calcs">計算ツール</a><a href="../../pages/about.html">CalcBoxとは</a></div></div></nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="../../index.html">CalcBox</a> / 複利計算</div>
+  <h1>複利計算シミュレーター</h1>
+  <p>元本と積立額の複利運用で将来いくらになるか計算します</p>
+</div>
+
+<div class="calc-container">
+  <div class="calc-card reveal">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>運用条件を入力</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="principal">初期投資額（元本）</label>
+        <div class="input-unit"><input type="number" id="principal" value="1000000" min="0" step="10000"><span>円</span></div>
+      </div>
+      <div class="form-group">
+        <label for="monthly">毎月積立額</label>
+        <div class="input-unit"><input type="number" id="monthly" value="30000" min="0" step="1000"><span>円</span></div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="rate">年利率（想定リターン）</label>
+        <div class="input-unit"><input type="number" id="rate" value="5" min="0" step="0.1" max="30"><span>%</span></div>
+      </div>
+      <div class="form-group">
+        <label for="years">運用期間</label>
+        <div class="input-unit"><input type="number" id="years" value="20" min="1" max="50"><span>年</span></div>
+      </div>
+    </div>
+    <button class="btn" onclick="calculate()">複利計算する</button>
+  </div>
+
+  <div class="result-section" id="results">
+    <div class="result-main reveal">
+      <div class="label">最終金額</div>
+      <div class="value" id="finalAmount">--</div>
+      <div class="sub">運用益: <strong id="totalGain">--</strong></div>
+    </div>
+    <div class="result-grid">
+      <div class="result-item reveal"><div class="label">元本合計</div><div class="value" id="totalPrincipal">--</div></div>
+      <div class="result-item reveal"><div class="label">運用益</div><div class="value" id="gain" style="color:#34c759">--</div></div>
+      <div class="result-item reveal"><div class="label">運用益率</div><div class="value" id="gainRate" style="color:#34c759">--</div></div>
+    </div>
+
+    <div class="calc-card reveal">
+      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>資産推移チャート</h2>
+      <div class="chart-container" id="chart"></div>
+      <div class="chart-legend">
+        <span><span class="dot" style="background:var(--accent)"></span>元本</span>
+        <span><span class="dot" style="background:var(--accent);opacity:0.4"></span>運用益</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-content reveal">
+    <h2>複利の力とは</h2>
+    <p>複利とは、運用で得た利益を元本に組み入れて再投資することで、利益が利益を生む仕組みです。アインシュタインが「人類最大の発明」と称したとも言われ、長期投資において大きな効果を発揮します。</p>
+    <h3>72の法則</h3>
+    <p>「72 ÷ 年利率 = 資産が2倍になるまでの年数」という簡易計算法です。例えば年利5%なら約14.4年で資産が2倍になります。</p>
+    <h3>つみたてNISAでの活用</h3>
+    <p>つみたてNISA（新NISA つみたて投資枠）では年間120万円まで非課税で投資できます。運用益に通常かかる約20%の税金が非課税になるため、複利効果をさらに高められます。</p>
+    <h3>注意点</h3>
+    <p>このシミュレーションは一定の利率で運用できた場合の理論値です。実際の投資では市場変動があり、元本割れのリスクがあります。投資は余裕資金で行い、分散投資を心がけましょう。</p>
+  </div>
+</div>
+
+<footer class="footer"><p>&copy; 2026 CalcBox. All rights reserved. | <a href="../../pages/privacy.html" style="color:var(--gray-400)">プライバシーポリシー</a></p></footer>
+
+<script>
+function fmt(n){return Math.round(n).toLocaleString('ja-JP');}
+
+function calculate(){
+  const principal=Number(document.getElementById('principal').value);
+  const monthly=Number(document.getElementById('monthly').value);
+  const rate=Number(document.getElementById('rate').value)/100;
+  const years=Number(document.getElementById('years').value);
+  const monthlyRate=rate/12;
+  const months=years*12;
+
+  // Compound interest: FV of lump sum + FV of annuity
+  let finalAmount;
+  if(rate===0){
+    finalAmount=principal+monthly*months;
+  } else {
+    const fvPrincipal=principal*Math.pow(1+monthlyRate,months);
+    const fvAnnuity=monthly*(Math.pow(1+monthlyRate,months)-1)/monthlyRate;
+    finalAmount=fvPrincipal+fvAnnuity;
+  }
+
+  const totalPrincipal=principal+monthly*months;
+  const gain=finalAmount-totalPrincipal;
+  const gainRate=totalPrincipal>0?(gain/totalPrincipal*100).toFixed(1):0;
+
+  document.getElementById('finalAmount').textContent=fmt(finalAmount)+'円';
+  document.getElementById('totalGain').textContent='+'+fmt(gain)+'円';
+  document.getElementById('totalPrincipal').textContent=fmt(totalPrincipal)+'円';
+  document.getElementById('gain').textContent='+'+fmt(gain)+'円';
+  document.getElementById('gainRate').textContent='+'+gainRate+'%';
+
+  // Chart
+  const chart=document.getElementById('chart');
+  const yearData=[];
+  for(let y=0;y<=years;y++){
+    const m=y*12;
+    let fv;
+    if(rate===0){fv=principal+monthly*m;}
+    else{fv=principal*Math.pow(1+monthlyRate,m)+monthly*(Math.pow(1+monthlyRate,m)-1)/monthlyRate;}
+    const princ=principal+monthly*m;
+    yearData.push({year:y,total:fv,principal:princ,interest:fv-princ});
+  }
+  const maxVal=yearData[yearData.length-1].total;
+
+  chart.innerHTML=yearData.map((d,i)=>{
+    const totalH=maxVal>0?(d.total/maxVal*200):0;
+    const princH=maxVal>0?(d.principal/maxVal*200):0;
+    const intH=totalH-princH;
+    const showLabel=years<=10||i%(Math.ceil(years/10))===0||i===years;
+    return `<div class="chart-bar-item">
+      <div class="bar" style="height:${totalH}px;background:rgba(0,113,227,0.15)">
+        <div class="interest-part" style="height:${intH}px"></div>
+        <div class="principal-part" style="height:${princH}px"></div>
+      </div>
+      ${showLabel?`<span class="year-label">${d.year}年</span>`:''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('results').classList.add('active');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  localStorage.setItem('calcbox_compound',JSON.stringify({principal,monthly,rate:Number(document.getElementById('rate').value),years}));
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const s=localStorage.getItem('calcbox_compound');
+  if(s){const d=JSON.parse(s);document.getElementById('principal').value=d.principal;document.getElementById('monthly').value=d.monthly;document.getElementById('rate').value=d.rate;document.getElementById('years').value=d.years;}
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>

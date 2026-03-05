@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalcBox（カルクボックス）- お金の計算を、もっとカンタンに。</title>
+<meta name="description" content="手取り計算、住宅ローン、ふるさと納税、所得税、退職金、年金、複利計算など、お金に関する計算ツールを無料で提供。正確な税率に基づいた信頼性の高いシミュレーター。">
+<meta name="keywords" content="手取り計算,住宅ローン計算,ふるさと納税上限額,所得税計算,退職金計算,年金シミュレーション,複利計算">
+<link rel="canonical" href="https://example.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--white:#ffffff;--card-shadow:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);--card-shadow-hover:0 8px 25px rgba(0,0,0,0.08);--radius:16px;--radius-sm:12px;--transition:0.3s cubic-bezier(0.25,0.1,0.25,1)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter','Noto Sans JP',sans-serif;background:var(--gray-100);color:var(--black);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,0.06)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-weight:700;font-size:18px;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}
+.nav-logo svg{width:24px;height:24px;color:var(--accent)}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--gray-500)}
+.nav-links a:hover{color:var(--black)}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.nav-mobile-btn svg{width:24px;height:24px;color:var(--black)}
+
+/* Hero */
+.hero{text-align:center;padding:80px 24px 60px;max-width:720px;margin:0 auto}
+.hero-badge{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);background:rgba(0,113,227,0.08);padding:6px 16px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:42px;font-weight:700;line-height:1.25;letter-spacing:-1px;margin-bottom:16px}
+.hero p{font-size:18px;color:var(--gray-500);margin-bottom:36px;line-height:1.6}
+.search-wrap{max-width:480px;margin:0 auto;position:relative}
+.search-wrap svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--gray-400)}
+.search-wrap input{width:100%;padding:14px 16px 14px 48px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:inherit;background:var(--white);outline:none;transition:var(--transition)}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.1)}
+.search-results{position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--gray-200);box-shadow:var(--card-shadow-hover);display:none;overflow:hidden;z-index:10}
+.search-results.active{display:block}
+.search-results a{display:flex;align-items:center;gap:12px;padding:12px 16px;font-size:14px;transition:background 0.15s}
+.search-results a:hover{background:var(--gray-100)}
+.search-results a svg{width:18px;height:18px;color:var(--accent);flex-shrink:0}
+
+/* Section */
+.section{max-width:1080px;margin:0 auto;padding:60px 24px}
+.section-label{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+.section-title{font-size:28px;font-weight:700;letter-spacing:-0.5px;margin-bottom:40px}
+
+/* Popular */
+.popular-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.popular-card{background:var(--white);border-radius:var(--radius);padding:32px 28px;border:1px solid var(--gray-200);transition:var(--transition);position:relative;overflow:hidden}
+.popular-card:hover{box-shadow:var(--card-shadow-hover);transform:translateY(-2px);border-color:var(--gray-300)}
+.popular-card .icon-wrap{width:48px;height:48px;border-radius:12px;background:rgba(0,113,227,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.popular-card .icon-wrap svg{width:24px;height:24px;color:var(--accent)}
+.popular-card h3{font-size:18px;font-weight:600;margin-bottom:8px}
+.popular-card p{font-size:14px;color:var(--gray-500);line-height:1.6;margin-bottom:16px}
+.popular-card .card-link{font-size:14px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:4px}
+.popular-card .card-link svg{width:16px;height:16px;transition:transform 0.2s}
+.popular-card:hover .card-link svg{transform:translateX(3px)}
+
+/* Features */
+.features-section{background:var(--white);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.feature-item{text-align:center}
+.feature-item .icon-wrap{width:56px;height:56px;border-radius:14px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.feature-item .icon-wrap svg{width:28px;height:28px;color:var(--accent)}
+.feature-item h3{font-size:16px;font-weight:600;margin-bottom:6px}
+.feature-item p{font-size:13px;color:var(--gray-500);line-height:1.6}
+
+/* All Calcs Grid */
+.calcs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.calc-card{background:var(--white);border-radius:var(--radius-sm);padding:24px;border:1px solid var(--gray-200);transition:var(--transition);display:flex;align-items:flex-start;gap:16px}
+.calc-card:hover{box-shadow:var(--card-shadow-hover);transform:translateY(-1px);border-color:var(--gray-300)}
+.calc-card .icon-wrap{width:44px;height:44px;border-radius:11px;background:rgba(0,113,227,0.06);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.calc-card .icon-wrap svg{width:22px;height:22px;color:var(--accent)}
+.calc-card h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.calc-card p{font-size:13px;color:var(--gray-500);line-height:1.5}
+
+/* CTA */
+.cta-section{text-align:center;padding:60px 24px}
+.cta-box{max-width:640px;margin:0 auto;background:var(--black);border-radius:var(--radius);padding:48px 40px;color:var(--white)}
+.cta-box h2{font-size:24px;font-weight:700;margin-bottom:12px}
+.cta-box p{font-size:15px;color:var(--gray-400);margin-bottom:28px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--white);padding:12px 28px;border-radius:980px;font-size:15px;font-weight:600;transition:var(--transition)}
+.cta-btn:hover{background:var(--accent-hover)}
+.cta-btn svg{width:18px;height:18px}
+
+/* Footer */
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:48px 24px 32px}
+.footer-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:48px}
+.footer-brand h3{font-size:18px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.footer-brand h3 svg{width:22px;height:22px;color:var(--accent)}
+.footer-brand p{font-size:13px;color:var(--gray-500);line-height:1.6}
+.footer-col h4{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--gray-400);margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:14px;color:var(--gray-500);transition:color 0.15s}
+.footer-col a:hover{color:var(--black)}
+.footer-bottom{max-width:1080px;margin:24px auto 0;padding-top:24px;border-top:1px solid var(--gray-200);font-size:12px;color:var(--gray-400);text-align:center}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Mobile menu */
+.mobile-menu{display:none;position:fixed;top:52px;left:0;right:0;bottom:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);z-index:99;padding:24px;flex-direction:column;gap:8px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:18px;font-weight:500;padding:14px 0;border-bottom:1px solid var(--gray-200)}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-mobile-btn{display:block}
+  .hero h1{font-size:30px}
+  .hero p{font-size:16px}
+  .popular-grid{grid-template-columns:repeat(2,1fr)}
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .calcs-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-inner{grid-template-columns:1fr;gap:32px}
+}
+@media(max-width:420px){
+  .popular-grid{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr}
+  .calcs-grid{grid-template-columns:1fr}
+  .hero h1{font-size:26px}
+  .cta-box{padding:32px 24px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>
+      CalcBox
+    </a>
+    <div class="nav-links">
+      <a href="#calcs">計算ツール</a>
+      <a href="pages/about.html">CalcBoxとは</a>
+      <a href="pages/contact.html">お問い合わせ</a>
+    </div>
+    <button class="nav-mobile-btn" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="メニュー">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="#calcs" onclick="this.parentElement.classList.remove('open')">計算ツール</a>
+  <a href="pages/about.html">CalcBoxとは</a>
+  <a href="pages/contact.html">お問い合わせ</a>
+</div>
+
+<section class="hero">
+  <div class="hero-badge">無料で使える計算ツール</div>
+  <h1>お金の計算を、<br>もっとカンタンに。</h1>
+  <p>手取り額、住宅ローン、税金、年金 ── 暮らしに関わるお金の計算を、正確にわかりやすく。</p>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="searchInput" placeholder="計算ツールを検索..." autocomplete="off">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label reveal">Popular</div>
+  <h2 class="section-title reveal">よく使われている計算ツール</h2>
+  <div class="popular-grid">
+    <a href="calcs/take-home-pay/index.html" class="popular-card reveal">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <h3>手取り計算</h3>
+      <p>年収から社会保険料・税金を差し引いた手取り額を簡単にシミュレーション。</p>
+      <span class="card-link">計算する <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="calcs/mortgage/index.html" class="popular-card reveal">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h3>住宅ローンシミュレーション</h3>
+      <p>借入額・金利・返済期間から月々の返済額と総返済額を計算。</p>
+      <span class="card-link">計算する <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="calcs/furusato-nozei/index.html" class="popular-card reveal">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <h3>ふるさと納税上限額計算</h3>
+      <p>年収と家族構成からふるさと納税の控除上限額を算出。</p>
+      <span class="card-link">計算する <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
+  </div>
+</section>
+
+<section class="features-section">
+  <div class="section" style="padding-top:60px;padding-bottom:60px">
+    <div class="section-label reveal" style="text-align:center">Why CalcBox</div>
+    <h2 class="section-title reveal" style="text-align:center">選ばれる4つの理由</h2>
+    <div class="features-grid">
+      <div class="feature-item reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>正確な計算</h3>
+        <p>最新の税制・料率に基づいた信頼性の高い計算結果を提供します。</p>
+      </div>
+      <div class="feature-item reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>最新の税制対応</h3>
+        <p>2026年度の税率・控除額に対応。制度変更にも迅速に更新。</p>
+      </div>
+      <div class="feature-item reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>完全無料</h3>
+        <p>すべての計算ツールを登録不要・完全無料でご利用いただけます。</p>
+      </div>
+      <div class="feature-item reveal">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h3>スマホ対応</h3>
+        <p>PC・タブレット・スマホ、どのデバイスでも快適に使えます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="calcs">
+  <div class="section-label reveal">All Tools</div>
+  <h2 class="section-title reveal">すべての計算ツール</h2>
+  <div class="calcs-grid">
+    <a href="calcs/take-home-pay/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div><h3>手取り計算</h3><p>年収から手取り額を計算</p></div>
+    </a>
+    <a href="calcs/mortgage/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div><h3>住宅ローンシミュレーション</h3><p>月々の返済額・総額を計算</p></div>
+    </a>
+    <a href="calcs/furusato-nozei/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <div><h3>ふるさと納税上限額計算</h3><p>控除上限額を年収から算出</p></div>
+    </a>
+    <a href="calcs/income-tax/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+      <div><h3>所得税・住民税計算</h3><p>課税所得から税額を計算</p></div>
+    </a>
+    <a href="calcs/retirement/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div>
+      <div><h3>退職金計算</h3><p>退職金の手取り額を計算</p></div>
+    </a>
+    <a href="calcs/pension/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div><h3>年金受給額シミュレーション</h3><p>将来の年金受給額を試算</p></div>
+    </a>
+    <a href="calcs/compound-interest/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div><h3>複利計算</h3><p>複利運用の最終金額を計算</p></div>
+    </a>
+    <a href="calcs/rent-vs-buy/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+      <div><h3>賃貸vs持ち家比較</h3><p>50年間の総コストを比較</p></div>
+    </a>
+    <a href="calcs/health-insurance/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/></svg></div>
+      <div><h3>国民健康保険料計算</h3><p>国保の年間保険料を計算</p></div>
+    </a>
+    <a href="calcs/bmi/index.html" class="calc-card reveal">
+      <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div><h3>BMI計算</h3><p>BMI値と適正体重を判定</p></div>
+    </a>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-box reveal">
+    <h2>お金の不安、計算で解消しよう。</h2>
+    <p>すべて無料。登録不要。今すぐ使える計算ツール。</p>
+    <a href="#calcs" class="cta-btn">
+      計算ツールを見る
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>
+        CalcBox
+      </h3>
+      <p>お金の計算を、もっとカンタンに。暮らしに関わるお金の計算を正確にわかりやすく提供する無料計算ツールサイトです。</p>
+    </div>
+    <div class="footer-col">
+      <h4>計算ツール</h4>
+      <ul>
+        <li><a href="calcs/take-home-pay/index.html">手取り計算</a></li>
+        <li><a href="calcs/mortgage/index.html">住宅ローン</a></li>
+        <li><a href="calcs/furusato-nozei/index.html">ふるさと納税</a></li>
+        <li><a href="calcs/income-tax/index.html">所得税・住民税</a></li>
+        <li><a href="calcs/retirement/index.html">退職金計算</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>サイト情報</h4>
+      <ul>
+        <li><a href="pages/about.html">CalcBoxとは</a></li>
+        <li><a href="pages/contact.html">お問い合わせ</a></li>
+        <li><a href="pages/privacy.html">プライバシーポリシー</a></li>
+        <li><a href="pages/terms.html">利用規約</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 CalcBox. All rights reserved.</div>
+</footer>
+
+<script>
+// Search
+const calcs=[
+  {name:'手取り計算',desc:'年収から手取り額を計算',url:'calcs/take-home-pay/index.html',icon:'<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>'},
+  {name:'住宅ローンシミュレーション',desc:'月々の返済額を計算',url:'calcs/mortgage/index.html',icon:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'},
+  {name:'ふるさと納税上限額計算',desc:'控除上限額を算出',url:'calcs/furusato-nozei/index.html',icon:'<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>'},
+  {name:'所得税・住民税計算',desc:'課税所得から税額を計算',url:'calcs/income-tax/index.html',icon:'<rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>'},
+  {name:'退職金計算',desc:'退職金の手取り額を計算',url:'calcs/retirement/index.html',icon:'<circle cx="8.5" cy="7" r="4"/>'},
+  {name:'年金受給額シミュレーション',desc:'将来の年金受給額を試算',url:'calcs/pension/index.html',icon:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'},
+  {name:'複利計算',desc:'複利運用の最終金額を計算',url:'calcs/compound-interest/index.html',icon:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>'},
+  {name:'賃貸vs持ち家比較',desc:'50年間の総コストを比較',url:'calcs/rent-vs-buy/index.html',icon:'<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'},
+  {name:'国民健康保険料計算',desc:'国保の年間保険料を計算',url:'calcs/health-insurance/index.html',icon:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>'},
+  {name:'BMI計算',desc:'BMI値と適正体重を判定',url:'calcs/bmi/index.html',icon:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>'}
+];
+const si=document.getElementById('searchInput'),sr=document.getElementById('searchResults');
+si.addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  if(!q){sr.classList.remove('active');return;}
+  const f=calcs.filter(c=>c.name.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q));
+  if(!f.length){sr.classList.remove('active');return;}
+  sr.innerHTML=f.map(c=>`<a href="${c.url}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${c.icon}</svg>${c.name}</a>`).join('');
+  sr.classList.add('active');
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))sr.classList.remove('active')});
+
+// Scroll reveal
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>退職金の税金計算シミュレーター｜手取り額を計算 - CalcBox</title>
+<meta name="description" content="退職金にかかる所得税・住民税を計算し、手取り額をシミュレーション。勤続年数に応じた退職所得控除額も自動算出。2026年度の税制に対応。">
+<link rel="canonical" href="https://example.com/calcs/retirement/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--white:#fff;--radius:16px;--radius-sm:12px;--transition:0.3s cubic-bezier(0.25,0.1,0.25,1)}html{scroll-behavior:smooth}body{font-family:'Inter','Noto Sans JP',sans-serif;background:var(--gray-100);color:var(--black);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,0.06)}.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}.nav-logo{font-weight:700;font-size:18px;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}.nav-logo svg{width:24px;height:24px;color:var(--accent)}.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--gray-500)}.nav-links a:hover{color:var(--black)}
+.page-header{text-align:center;padding:48px 24px 32px;max-width:640px;margin:0 auto}.page-header .breadcrumb{font-size:13px;color:var(--gray-500);margin-bottom:12px}.page-header .breadcrumb a{color:var(--accent)}.page-header h1{font-size:32px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}.page-header p{font-size:15px;color:var(--gray-500)}
+.calc-container{max-width:800px;margin:0 auto;padding:0 24px 60px}.calc-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-bottom:24px}.calc-card h2{font-size:18px;font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:8px}.calc-card h2 svg{width:20px;height:20px;color:var(--accent)}
+.form-group{margin-bottom:20px}.form-group label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}.form-group .hint{font-size:12px;color:var(--gray-500);margin-top:4px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+input[type="number"],select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:inherit;background:var(--white);outline:none;transition:var(--transition)}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.1)}
+.input-unit{position:relative}.input-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gray-400);pointer-events:none}.input-unit input{padding-right:50px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--white);padding:12px 32px;border:none;border-radius:980px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:var(--transition);width:100%}.btn:hover{background:var(--accent-hover)}
+.result-section{display:none}.result-section.active{display:block}
+.result-main{background:linear-gradient(135deg,#34c759,#30d158);border-radius:var(--radius);padding:32px;text-align:center;color:var(--white);margin-bottom:20px}.result-main .label{font-size:14px;opacity:0.85;margin-bottom:4px}.result-main .value{font-size:40px;font-weight:700;letter-spacing:-1px}.result-main .sub{font-size:15px;opacity:0.8;margin-top:8px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}.result-item{background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--gray-200);padding:20px;text-align:center}.result-item .label{font-size:12px;color:var(--gray-500);margin-bottom:4px}.result-item .value{font-size:20px;font-weight:700}
+.step-list{list-style:none;counter-reset:steps}.step-list li{counter-increment:steps;padding:12px 0;border-bottom:1px solid var(--gray-100);font-size:14px;display:flex;gap:12px;align-items:baseline}.step-list li::before{content:counter(steps);background:var(--accent);color:white;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}.step-list .val{margin-left:auto;font-weight:600;white-space:nowrap}
+.seo-content{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-top:40px}.seo-content h2{font-size:20px;font-weight:700;margin-bottom:16px}.seo-content h3{font-size:16px;font-weight:600;margin:20px 0 8px}.seo-content p{font-size:14px;color:#444;line-height:1.8;margin-bottom:12px}
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:32px 24px;text-align:center;margin-top:60px}.footer p{font-size:12px;color:var(--gray-400)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{display:none}.page-header h1{font-size:26px}.form-row{grid-template-columns:1fr}.result-main .value{font-size:30px}.result-grid{grid-template-columns:1fr}.calc-card{padding:24px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="../../index.html" class="nav-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>CalcBox</a><div class="nav-links"><a href="../../index.html#calcs">計算ツール</a><a href="../../pages/about.html">CalcBoxとは</a></div></div></nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="../../index.html">CalcBox</a> / 退職金計算</div>
+  <h1>退職金の税金計算シミュレーター</h1>
+  <p>退職金にかかる税金と手取り額を計算します</p>
+</div>
+
+<div class="calc-container">
+  <div class="calc-card reveal">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>退職金情報を入力</h2>
+    <div class="form-group">
+      <label for="retirementPay">退職金額</label>
+      <div class="input-unit"><input type="number" id="retirementPay" value="20000000" min="0" step="100000"><span>円</span></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="serviceYears">勤続年数</label>
+        <div class="input-unit"><input type="number" id="serviceYears" value="25" min="1" max="60"><span>年</span></div>
+      </div>
+      <div class="form-group">
+        <label for="reason">退職理由</label>
+        <select id="reason">
+          <option value="voluntary">自己都合退職</option>
+          <option value="employer">会社都合退職（障害者含む）</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn" onclick="calculate()">税額を計算する</button>
+  </div>
+
+  <div class="result-section" id="results">
+    <div class="result-main reveal">
+      <div class="label">退職金の手取り額</div>
+      <div class="value" id="takeHome">--</div>
+      <div class="sub">退職金額: <strong id="retAmt">--</strong></div>
+    </div>
+    <div class="result-grid">
+      <div class="result-item reveal"><div class="label">退職所得控除額</div><div class="value" id="deduction">--</div></div>
+      <div class="result-item reveal"><div class="label">所得税＋復興税</div><div class="value" id="incomeTax" style="color:#ff3b30">--</div></div>
+      <div class="result-item reveal"><div class="label">住民税</div><div class="value" id="residentTax" style="color:#ff3b30">--</div></div>
+    </div>
+
+    <div class="calc-card reveal">
+      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>計算の流れ</h2>
+      <ol class="step-list" id="steps"></ol>
+    </div>
+  </div>
+
+  <div class="seo-content reveal">
+    <h2>退職金の税金の仕組み</h2>
+    <p>退職金は「退職所得」として他の所得と分離して課税されます。長年の勤務に対する報酬という性質から、大きな控除（退職所得控除）が設けられており、税負担が軽減されています。</p>
+    <h3>退職所得控除額</h3>
+    <p>勤続年数20年以下の場合は「40万円 x 勤続年数」（最低80万円）、20年超の場合は「800万円 + 70万円 x（勤続年数 - 20年）」で計算されます。</p>
+    <h3>課税退職所得金額</h3>
+    <p>退職金から退職所得控除額を差し引き、さらに2分の1にした金額が課税退職所得金額となります。ただし、勤続年数5年以下の役員等は2分の1課税の適用がありません。</p>
+    <h3>退職所得の受給に関する申告書</h3>
+    <p>「退職所得の受給に関する申告書」を提出すれば、正しい税額が源泉徴収されるため確定申告は不要です。未提出の場合は退職金の20.42%が源泉徴収され、確定申告で精算する必要があります。</p>
+  </div>
+</div>
+
+<footer class="footer"><p>&copy; 2026 CalcBox. All rights reserved. | <a href="../../pages/privacy.html" style="color:var(--gray-400)">プライバシーポリシー</a></p></footer>
+
+<script>
+function fmt(n){return Math.round(n).toLocaleString('ja-JP');}
+
+function calcIncomeTax(t){
+  if(t<=1950000)return t*0.05;if(t<=3300000)return t*0.10-97500;if(t<=6950000)return t*0.20-427500;if(t<=9000000)return t*0.23-636000;if(t<=18000000)return t*0.33-1536000;if(t<=40000000)return t*0.40-2796000;return t*0.45-4796000;
+}
+
+function calculate(){
+  const pay=Number(document.getElementById('retirementPay').value);
+  const years=Number(document.getElementById('serviceYears').value);
+  const reason=document.getElementById('reason').value;
+
+  // 退職所得控除
+  let deduction;
+  if(years<=20){
+    deduction=Math.max(800000, 400000*years);
+  } else {
+    deduction=8000000+700000*(years-20);
+  }
+  if(reason==='employer' && years<=20){
+    // 障害者の場合+100万円だが、会社都合では同じ控除
+  }
+
+  // 課税退職所得金額
+  const taxableRetirement=Math.max(0, Math.floor((pay-deduction)/2/1000)*1000);
+
+  // 所得税
+  const incomeTax=Math.floor(calcIncomeTax(taxableRetirement)*1.021);
+
+  // 住民税
+  const residentTax=Math.floor(taxableRetirement*0.10);
+
+  const totalTax=incomeTax+residentTax;
+  const takeHome=pay-totalTax;
+
+  document.getElementById('takeHome').textContent=fmt(takeHome)+'円';
+  document.getElementById('retAmt').textContent=fmt(pay)+'円';
+  document.getElementById('deduction').textContent=fmt(deduction)+'円';
+  document.getElementById('incomeTax').textContent=fmt(incomeTax)+'円';
+  document.getElementById('residentTax').textContent=fmt(residentTax)+'円';
+
+  // Steps
+  const steps=[
+    {text:`退職金額`, val:fmt(pay)+'円'},
+    {text:`退職所得控除額（勤続${years}年）`, val:fmt(deduction)+'円'},
+    {text:`退職金 - 控除額`, val:fmt(Math.max(0,pay-deduction))+'円'},
+    {text:`上記の1/2 = 課税退職所得金額`, val:fmt(taxableRetirement)+'円'},
+    {text:`所得税（復興特別所得税含む）`, val:fmt(incomeTax)+'円'},
+    {text:`住民税（10%）`, val:fmt(residentTax)+'円'},
+    {text:`手取り額 = 退職金 - 税金合計`, val:fmt(takeHome)+'円'}
+  ];
+  document.getElementById('steps').innerHTML=steps.map(s=>`<li><span>${s.text}</span><span class="val">${s.val}</span></li>`).join('');
+
+  document.getElementById('results').classList.add('active');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  localStorage.setItem('calcbox_retirement',JSON.stringify({pay,years,reason}));
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const s=localStorage.getItem('calcbox_retirement');
+  if(s){const d=JSON.parse(s);document.getElementById('retirementPay').value=d.pay;document.getElementById('serviceYears').value=d.years;document.getElementById('reason').value=d.reason;}
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>

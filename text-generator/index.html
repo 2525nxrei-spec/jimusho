@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文例メーカー｜ビジネス文章テンプレート自動生成ツール</title>
+<meta name="description" content="お詫びメール、お礼メール、退職届など、ビジネスで使える文例をすぐに作成。テンプレートを選んで必要事項を入力するだけで、プロフェッショナルな文章が完成します。">
+<meta name="keywords" content="ビジネスメール,文例,テンプレート,お詫びメール,お礼メール,退職届,挨拶文,例文">
+<link rel="canonical" href="https://example.com/">
+<meta property="og:title" content="文例メーカー｜ビジネス文章テンプレート自動生成ツール">
+<meta property="og:description" content="ビジネス文章を、すぐに。お詫び・お礼・退職届など10種類以上のテンプレートを無料で利用できます。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--gray-600:#636366;--white:#ffffff;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 30px rgba(0,0,0,0.12);--font-sans:'Inter','Noto Sans JP',sans-serif;--nav-h:64px}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);color:var(--black);background:var(--gray-100);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);background:rgba(255,255,255,0.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--gray-200)}
+.nav-logo{font-size:18px;font-weight:700;letter-spacing:-0.02em}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:24px;font-size:14px;font-weight:500;color:var(--gray-600)}
+.nav-links a:hover{color:var(--accent)}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.nav-hamburger svg{width:24px;height:24px;stroke:var(--black);stroke-width:2;fill:none}
+
+/* Hero */
+.hero{text-align:center;padding:80px 24px 64px;max-width:720px;margin:0 auto}
+.hero h1{font-size:clamp(32px,6vw,56px);font-weight:700;letter-spacing:-0.03em;line-height:1.2;margin-bottom:12px}
+.hero .tagline{font-size:clamp(18px,3vw,24px);color:var(--gray-600);margin-bottom:40px;font-weight:400}
+.search-wrap{position:relative;max-width:480px;margin:0 auto}
+.search-wrap svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:20px;height:20px;stroke:var(--gray-400);stroke-width:2;fill:none}
+.search-wrap input{width:100%;padding:14px 16px 14px 48px;border:1px solid var(--gray-200);border-radius:10px;font-size:16px;font-family:var(--font-sans);background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.15)}
+
+/* Section */
+.section{padding:48px clamp(16px,4vw,48px);max-width:1080px;margin:0 auto}
+.section-title{font-size:clamp(22px,3.5vw,32px);font-weight:700;letter-spacing:-0.02em;margin-bottom:8px}
+.section-sub{color:var(--gray-600);margin-bottom:32px;font-size:15px}
+
+/* Popular Cards */
+.popular-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.popular-card{background:var(--white);border-radius:var(--radius);padding:32px 28px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;cursor:pointer;text-decoration:none;display:block}
+.popular-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.popular-card .card-icon{width:48px;height:48px;background:var(--gray-100);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.popular-card .card-icon svg{width:24px;height:24px;stroke:var(--accent);stroke-width:2;fill:none}
+.popular-card h3{font-size:18px;font-weight:600;margin-bottom:6px}
+.popular-card p{font-size:14px;color:var(--gray-600);line-height:1.6}
+.popular-card .badge{display:inline-block;font-size:11px;font-weight:600;color:var(--accent);background:rgba(0,113,227,0.08);padding:3px 10px;border-radius:20px;margin-bottom:12px}
+
+/* Features */
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.feature-item{text-align:center;padding:32px 20px}
+.feature-item .fi-icon{width:56px;height:56px;margin:0 auto 16px;background:var(--white);border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.feature-item .fi-icon svg{width:28px;height:28px;stroke:var(--accent);stroke-width:1.8;fill:none}
+.feature-item h4{font-size:16px;font-weight:600;margin-bottom:6px}
+.feature-item p{font-size:13px;color:var(--gray-600);line-height:1.6}
+
+/* All Generators Grid */
+.gen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.gen-card{display:flex;align-items:center;gap:14px;background:var(--white);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;text-decoration:none}
+.gen-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.gen-card .gc-icon{width:40px;height:40px;flex-shrink:0;background:var(--gray-100);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.gen-card .gc-icon svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none}
+.gen-card span{font-size:15px;font-weight:600}
+
+/* CTA */
+.cta{text-align:center;padding:64px 24px;margin:32px clamp(16px,4vw,48px);background:var(--white);border-radius:20px;box-shadow:var(--shadow)}
+.cta h2{font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:8px}
+.cta p{color:var(--gray-600);margin-bottom:28px;font-size:15px}
+.cta a{display:inline-block;background:var(--accent);color:#fff;font-size:16px;font-weight:600;padding:14px 36px;border-radius:10px;transition:background .2s}
+.cta a:hover{background:var(--accent-hover)}
+
+/* Footer */
+.footer{padding:40px clamp(16px,4vw,48px) 24px;max-width:1080px;margin:0 auto;border-top:1px solid var(--gray-200)}
+.footer-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:24px}
+.footer-col h5{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--gray-600);text-transform:uppercase;letter-spacing:.04em}
+.footer-col a{display:block;font-size:14px;color:var(--gray-600);margin-bottom:6px;transition:color .2s}
+.footer-col a:hover{color:var(--accent)}
+.footer-copy{font-size:12px;color:var(--gray-500);text-align:center}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Responsive */
+@media(max-width:768px){
+  .popular-grid{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .nav-links{display:none;position:absolute;top:var(--nav-h);left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);flex-direction:column;padding:16px 24px;gap:16px;border-bottom:1px solid var(--gray-200)}
+  .nav-links.open{display:flex}
+  .nav-hamburger{display:block}
+}
+@media(max-width:420px){
+  .features-grid{grid-template-columns:1fr}
+  .gen-grid{grid-template-columns:1fr}
+  .hero{padding:56px 16px 40px}
+  .footer-inner{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">文例<span>メーカー</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="generators/apology-email/">お詫びメール</a>
+    <a href="generators/thank-you-email/">お礼メール</a>
+    <a href="generators/resignation/">退職届</a>
+    <a href="pages/about.html">このサイトについて</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="メニュー">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>ビジネス文章を、すぐに。</h1>
+  <p class="tagline">テンプレートを選んで入力するだけ。<br>お詫び・お礼・退職届など、あらゆるビジネス文例を瞬時に作成。</p>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="searchInput" placeholder="作成したい文例を検索...">
+  </div>
+</section>
+
+<!-- Popular -->
+<section class="section reveal">
+  <h2 class="section-title">人気の文例ジェネレーター</h2>
+  <p class="section-sub">多くのユーザーに利用されているテンプレートです</p>
+  <div class="popular-grid">
+    <a href="generators/apology-email/" class="popular-card">
+      <span class="badge">人気 No.1</span>
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <h3>お詫びメール</h3>
+      <p>遅刻、納期遅延、ミスなど、さまざまなシーンに対応したお詫びメールを作成できます。</p>
+    </a>
+    <a href="generators/thank-you-email/" class="popular-card">
+      <span class="badge">人気 No.2</span>
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <h3>お礼メール</h3>
+      <p>面接後、商談後、贈り物のお礼など、感謝の気持ちを伝えるメールを作成できます。</p>
+    </a>
+    <a href="generators/resignation/" class="popular-card">
+      <span class="badge">人気 No.3</span>
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <h3>退職届</h3>
+      <p>正しいフォーマットで退職届・退職願を作成。理由の書き方もサポートします。</p>
+    </a>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section reveal">
+  <h2 class="section-title">特長</h2>
+  <p class="section-sub">文例メーカーが選ばれる理由</p>
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="fi-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <h4>テンプレート豊富</h4>
+      <p>10カテゴリ、30種類以上のテンプレートを収録</p>
+    </div>
+    <div class="feature-item">
+      <div class="fi-icon"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+      <h4>コピー一発</h4>
+      <p>生成された文章をワンクリックでコピー可能</p>
+    </div>
+    <div class="feature-item">
+      <div class="fi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+      <h4>カスタマイズ可能</h4>
+      <p>名前や内容を入力してオリジナル文章に</p>
+    </div>
+    <div class="feature-item">
+      <div class="fi-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+      <h4>スマホ対応</h4>
+      <p>外出先でもスマートフォンから即座に利用可能</p>
+    </div>
+  </div>
+</section>
+
+<!-- All Generators -->
+<section class="section reveal">
+  <h2 class="section-title">すべての文例ジェネレーター</h2>
+  <p class="section-sub">用途に合わせて最適なテンプレートをお選びください</p>
+  <div class="gen-grid" id="genGrid">
+    <a href="generators/apology-email/" class="gen-card" data-keywords="お詫び メール 謝罪 遅刻 ミス">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+      <span>お詫びメール</span>
+    </a>
+    <a href="generators/thank-you-email/" class="gen-card" data-keywords="お礼 感謝 メール ありがとう">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <span>お礼メール</span>
+    </a>
+    <a href="generators/resignation/" class="gen-card" data-keywords="退職届 退職願 辞表 退職">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+      <span>退職届</span>
+    </a>
+    <a href="generators/greeting/" class="gen-card" data-keywords="挨拶 スピーチ 就任 退任 歓迎">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <span>挨拶文・スピーチ</span>
+    </a>
+    <a href="generators/decline-email/" class="gen-card" data-keywords="お断り 断り メール 辞退">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+      <span>お断りメール</span>
+    </a>
+    <a href="generators/reminder-email/" class="gen-card" data-keywords="催促 督促 リマインド メール">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <span>催促メール</span>
+    </a>
+    <a href="generators/condolence/" class="gen-card" data-keywords="お悔やみ 弔電 お悔み 葬儀">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="#fff" fill="none"/><line x1="9" y1="9" x2="9.01" y2="9" stroke="#fff" stroke-width="2"/><line x1="15" y1="9" x2="15.01" y2="9" stroke="#fff" stroke-width="2"/></svg></div>
+      <span>お悔やみ文</span>
+    </a>
+    <a href="generators/new-year/" class="gen-card" data-keywords="年賀状 新年 賀詞 年始">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <span>年賀状文面</span>
+    </a>
+    <a href="generators/transfer-notice/" class="gen-card" data-keywords="異動 転勤 挨拶 部署 移動">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><line x1="21" y1="3" x2="14" y2="10"/><polyline points="9 21 3 21 3 15"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+      <span>異動挨拶メール</span>
+    </a>
+    <a href="generators/inquiry-email/" class="gen-card" data-keywords="問い合わせ 質問 見積もり 採用">
+      <div class="gc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span>問い合わせメール</span>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta reveal">
+  <h2>さっそく文例を作成しましょう</h2>
+  <p>テンプレートを選ぶだけで、プロフェッショナルなビジネス文章が完成します。</p>
+  <a href="#genGrid">ジェネレーター一覧へ</a>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h5>文例メーカー</h5>
+      <a href="generators/apology-email/">お詫びメール</a>
+      <a href="generators/thank-you-email/">お礼メール</a>
+      <a href="generators/resignation/">退職届</a>
+      <a href="generators/greeting/">挨拶文・スピーチ</a>
+      <a href="generators/decline-email/">お断りメール</a>
+    </div>
+    <div class="footer-col">
+      <h5>その他のツール</h5>
+      <a href="generators/reminder-email/">催促メール</a>
+      <a href="generators/condolence/">お悔やみ文</a>
+      <a href="generators/new-year/">年賀状文面</a>
+      <a href="generators/transfer-notice/">異動挨拶メール</a>
+      <a href="generators/inquiry-email/">問い合わせメール</a>
+    </div>
+    <div class="footer-col">
+      <h5>サイト情報</h5>
+      <a href="pages/about.html">このサイトについて</a>
+      <a href="pages/contact.html">お問い合わせ</a>
+      <a href="pages/privacy.html">プライバシーポリシー</a>
+      <a href="pages/terms.html">利用規約</a>
+    </div>
+  </div>
+  <p class="footer-copy">&copy; 2025 文例メーカー（BunreiMaker）. All rights reserved.</p>
+</footer>
+
+<script>
+// Hamburger
+document.getElementById('hamburger').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// Search filter
+document.getElementById('searchInput').addEventListener('input',e=>{
+  const q=e.target.value.toLowerCase();
+  document.querySelectorAll('.gen-card').forEach(c=>{
+    const kw=(c.dataset.keywords+' '+c.textContent).toLowerCase();
+    c.style.display=kw.includes(q)?'':'none';
+  });
+});
+
+// Scroll reveal
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

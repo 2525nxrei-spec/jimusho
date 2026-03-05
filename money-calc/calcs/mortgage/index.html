@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>住宅ローンシミュレーション｜月々の返済額を計算 - CalcBox</title>
+<meta name="description" content="住宅ローンの月々返済額・総返済額・利息総額を簡単シミュレーション。借入額・金利・返済期間・ボーナス返済に対応。元利均等返済方式で計算。">
+<link rel="canonical" href="https://example.com/calcs/mortgage/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--white:#fff;--radius:16px;--radius-sm:12px;--transition:0.3s cubic-bezier(0.25,0.1,0.25,1)}
+html{scroll-behavior:smooth}body{font-family:'Inter','Noto Sans JP',sans-serif;background:var(--gray-100);color:var(--black);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,0.06)}.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}.nav-logo{font-weight:700;font-size:18px;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}.nav-logo svg{width:24px;height:24px;color:var(--accent)}.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--gray-500)}.nav-links a:hover{color:var(--black)}
+.page-header{text-align:center;padding:48px 24px 32px;max-width:640px;margin:0 auto}.page-header .breadcrumb{font-size:13px;color:var(--gray-500);margin-bottom:12px}.page-header .breadcrumb a{color:var(--accent)}.page-header h1{font-size:32px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}.page-header p{font-size:15px;color:var(--gray-500)}
+.calc-container{max-width:800px;margin:0 auto;padding:0 24px 60px}.calc-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-bottom:24px}.calc-card h2{font-size:18px;font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:8px}.calc-card h2 svg{width:20px;height:20px;color:var(--accent)}
+.form-group{margin-bottom:20px}.form-group label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+input[type="number"],select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:inherit;background:var(--white);outline:none;transition:var(--transition)}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.1)}
+.input-unit{position:relative}.input-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gray-400);pointer-events:none}.input-unit input{padding-right:50px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--white);padding:12px 32px;border:none;border-radius:980px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:var(--transition);width:100%}.btn:hover{background:var(--accent-hover)}
+.result-section{display:none}.result-section.active{display:block}
+.result-main{background:linear-gradient(135deg,var(--accent),#34a0f5);border-radius:var(--radius);padding:32px;text-align:center;color:var(--white);margin-bottom:20px}.result-main .label{font-size:14px;opacity:0.85;margin-bottom:4px}.result-main .value{font-size:40px;font-weight:700;letter-spacing:-1px}.result-main .sub{font-size:15px;opacity:0.8;margin-top:8px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}.result-item{background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--gray-200);padding:20px;text-align:center}.result-item .label{font-size:12px;color:var(--gray-500);margin-bottom:4px}.result-item .value{font-size:20px;font-weight:700}
+.amort-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px}.amort-table th{background:var(--gray-100);padding:8px 12px;text-align:right;font-weight:600;border-bottom:1px solid var(--gray-200)}.amort-table td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--gray-100)}.amort-table th:first-child,.amort-table td:first-child{text-align:center}
+.seo-content{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-top:40px}.seo-content h2{font-size:20px;font-weight:700;margin-bottom:16px}.seo-content h3{font-size:16px;font-weight:600;margin:20px 0 8px}.seo-content p{font-size:14px;color:#444;line-height:1.8;margin-bottom:12px}
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:32px 24px;text-align:center;margin-top:60px}.footer p{font-size:12px;color:var(--gray-400)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{display:none}.page-header h1{font-size:26px}.form-row{grid-template-columns:1fr}.result-grid{grid-template-columns:1fr}.result-main .value{font-size:30px}.calc-card{padding:24px}.amort-table{font-size:11px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="../../index.html" class="nav-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>CalcBox</a><div class="nav-links"><a href="../../index.html#calcs">計算ツール</a><a href="../../pages/about.html">CalcBoxとは</a></div></div></nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="../../index.html">CalcBox</a> / 住宅ローンシミュレーション</div>
+  <h1>住宅ローンシミュレーション</h1>
+  <p>借入額・金利・返済期間から月々の返済額と総返済額を計算します</p>
+</div>
+
+<div class="calc-container">
+  <div class="calc-card reveal">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>ローン条件を入力</h2>
+    <div class="form-group">
+      <label for="amount">借入額</label>
+      <div class="input-unit"><input type="number" id="amount" value="35000000" min="0" step="100000"><span>円</span></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="rate">金利（年利）</label>
+        <div class="input-unit"><input type="number" id="rate" value="0.5" min="0" step="0.01" max="20"><span>%</span></div>
+      </div>
+      <div class="form-group">
+        <label for="years">返済期間</label>
+        <div class="input-unit"><input type="number" id="years" value="35" min="1" max="50"><span>年</span></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bonus">ボーナス返済（年2回の合計額）</label>
+      <div class="input-unit"><input type="number" id="bonus" value="0" min="0" step="10000"><span>円</span></div>
+    </div>
+    <button class="btn" onclick="calculate()">計算する</button>
+  </div>
+
+  <div class="result-section" id="results">
+    <div class="result-main reveal">
+      <div class="label">毎月の返済額</div>
+      <div class="value" id="monthly">--</div>
+      <div class="sub">ボーナス月の加算額: <strong id="bonusMonthly">--</strong></div>
+    </div>
+    <div class="result-grid">
+      <div class="result-item reveal"><div class="label">借入額</div><div class="value" id="rBorrow">--</div></div>
+      <div class="result-item reveal"><div class="label">総返済額</div><div class="value" id="rTotal">--</div></div>
+      <div class="result-item reveal"><div class="label">利息総額</div><div class="value" id="rInterest" style="color:#ff3b30">--</div></div>
+    </div>
+    <div class="calc-card reveal">
+      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>返済サマリー（5年ごと）</h2>
+      <div style="overflow-x:auto" id="tableWrap"></div>
+    </div>
+  </div>
+
+  <div class="seo-content reveal">
+    <h2>住宅ローンの基礎知識</h2>
+    <p>住宅ローンは、住宅の購入や建築のために金融機関から借り入れるローンです。一般的に長期（最大35〜50年）で返済し、元利均等返済と元金均等返済の2種類の返済方式があります。</p>
+    <h3>元利均等返済とは</h3>
+    <p>毎月の返済額（元金＋利息）が一定となる返済方式です。返済計画が立てやすいメリットがありますが、返済初期は利息の割合が大きく、元金均等返済と比べて総支払利息が多くなります。</p>
+    <h3>金利タイプの選び方</h3>
+    <p>固定金利は返済額が変わらない安心感がありますが、変動金利と比べて金利が高めです。変動金利は低金利のメリットがありますが、金利上昇リスクがあります。フラット35は全期間固定金利で、住宅金融支援機構と民間金融機関が提携して提供する住宅ローンです。</p>
+    <h3>住宅ローン控除</h3>
+    <p>住宅ローン控除（住宅借入金等特別控除）を利用すると、年末のローン残高の0.7%が最長13年間、所得税（一部住民税）から控除されます。2026年入居の場合の控除限度額は、新築住宅で最大3,000万円〜5,000万円（住宅の省エネ性能により異なる）です。</p>
+  </div>
+</div>
+
+<footer class="footer"><p>&copy; 2026 CalcBox. All rights reserved. | <a href="../../pages/privacy.html" style="color:var(--gray-400)">プライバシーポリシー</a></p></footer>
+
+<script>
+function fmt(n){return Math.round(n).toLocaleString('ja-JP');}
+function fmtMan(n){return (n/10000).toFixed(1)+'万円';}
+
+function calculate(){
+  const P=Number(document.getElementById('amount').value);
+  const r=Number(document.getElementById('rate').value)/100/12;
+  const n=Number(document.getElementById('years').value)*12;
+  const bonusTotal=Number(document.getElementById('bonus').value);
+
+  const bonusPrincipal=bonusTotal; // annual bonus toward principal
+  const regularP=P-bonusPrincipal*(n/12)/2*0; // simplified: bonus just adds
+
+  let monthly,totalPayment;
+  if(r===0){
+    monthly=(P-bonusPrincipal/2*(n/12))/n;
+    totalPayment=P;
+  } else {
+    // Split: regular portion and bonus portion
+    const bonusP=bonusPrincipal/2*(n/12); // rough: total bonus principal contribution
+    const regP=P; // all principal in monthly for simplicity with bonus as extra
+    monthly=regP*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+    totalPayment=monthly*n;
+  }
+
+  // More accurate: if bonus exists, reduce principal for monthly calc
+  let monthlyPay,bonusPay=0,totalPay;
+  if(bonusTotal>0){
+    // Bonus is applied twice per year
+    // Split principal: bonusPortion = bonusTotal * years (total bonus payments)
+    const bonusPayments=Number(document.getElementById('years').value)*2;
+    const bonusPortion=Math.min(P*0.5, bonusTotal/2*bonusPayments); // cap at 50%
+    const regularPortion=P-bonusPortion;
+
+    if(r===0){
+      monthlyPay=regularPortion/n;
+      bonusPay=bonusPortion/bonusPayments;
+      totalPay=P;
+    } else {
+      monthlyPay=regularPortion*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+      const rSemi=Number(document.getElementById('rate').value)/100/2;
+      const nSemi=bonusPayments;
+      bonusPay=bonusPortion*rSemi*Math.pow(1+rSemi,nSemi)/(Math.pow(1+rSemi,nSemi)-1);
+      totalPay=monthlyPay*n+bonusPay*nSemi;
+    }
+  } else {
+    if(r===0){monthlyPay=P/n;totalPay=P;}
+    else{monthlyPay=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);totalPay=monthlyPay*n;}
+  }
+
+  const interest=totalPay-P;
+
+  document.getElementById('monthly').textContent=fmt(monthlyPay)+'円';
+  document.getElementById('bonusMonthly').textContent=bonusPay>0?fmt(bonusPay)+'円':'なし';
+  document.getElementById('rBorrow').textContent=fmtMan(P);
+  document.getElementById('rTotal').textContent=fmtMan(totalPay);
+  document.getElementById('rInterest').textContent=fmtMan(interest);
+
+  // Amortization summary (every 5 years)
+  let balance=P;
+  let html='<table class="amort-table"><thead><tr><th>年数</th><th>残高</th><th>元金返済累計</th><th>利息返済累計</th></tr></thead><tbody>';
+  let totalIntPaid=0,totalPrinPaid=0;
+  const monthlyR=Number(document.getElementById('rate').value)/100/12;
+  for(let m=1;m<=n;m++){
+    const intPay=balance*monthlyR;
+    const prinPay=monthlyPay-intPay;
+    balance-=prinPay;
+    totalIntPaid+=intPay;
+    totalPrinPaid+=prinPay;
+    if(m%(12*5)===0||m===n){
+      html+=`<tr><td>${Math.ceil(m/12)}年目</td><td>${fmt(Math.max(0,balance))}円</td><td>${fmt(totalPrinPaid)}円</td><td>${fmt(totalIntPaid)}円</td></tr>`;
+    }
+  }
+  html+='</tbody></table>';
+  document.getElementById('tableWrap').innerHTML=html;
+
+  document.getElementById('results').classList.add('active');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  localStorage.setItem('calcbox_mortgage',JSON.stringify({amount:P,rate:Number(document.getElementById('rate').value),years:Number(document.getElementById('years').value),bonus:bonusTotal}));
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const s=localStorage.getItem('calcbox_mortgage');
+  if(s){const d=JSON.parse(s);document.getElementById('amount').value=d.amount;document.getElementById('rate').value=d.rate;document.getElementById('years').value=d.years;document.getElementById('bonus').value=d.bonus;}
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手取り計算シミュレーター｜年収から手取り額を計算 - CalcBox</title>
+<meta name="description" content="年収から社会保険料（健康保険・厚生年金・雇用保険）と税金（所得税・住民税）を差し引いた手取り額を自動計算。2026年度の最新税率に対応。">
+<meta name="keywords" content="手取り計算,年収 手取り,手取り額 計算,給料 手取り,社会保険料 計算">
+<link rel="canonical" href="https://example.com/calcs/take-home-pay/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--white:#fff;--card-shadow:0 1px 3px rgba(0,0,0,0.06);--card-shadow-hover:0 8px 25px rgba(0,0,0,0.08);--radius:16px;--radius-sm:12px;--transition:0.3s cubic-bezier(0.25,0.1,0.25,1)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter','Noto Sans JP',sans-serif;background:var(--gray-100);color:var(--black);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,0.06)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-weight:700;font-size:18px;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}
+.nav-logo svg{width:24px;height:24px;color:var(--accent)}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--gray-500)}
+.nav-links a:hover{color:var(--black)}
+
+.page-header{text-align:center;padding:48px 24px 32px;max-width:640px;margin:0 auto}
+.page-header .breadcrumb{font-size:13px;color:var(--gray-500);margin-bottom:12px}
+.page-header .breadcrumb a{color:var(--accent)}
+.page-header h1{font-size:32px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}
+.page-header p{font-size:15px;color:var(--gray-500)}
+
+.calc-container{max-width:800px;margin:0 auto;padding:0 24px 60px}
+.calc-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-bottom:24px}
+.calc-card h2{font-size:18px;font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:8px}
+.calc-card h2 svg{width:20px;height:20px;color:var(--accent)}
+
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
+.form-group .hint{font-size:12px;color:var(--gray-500);margin-top:4px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+input[type="number"],input[type="text"],select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:inherit;background:var(--white);outline:none;transition:var(--transition)}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.1)}
+.input-unit{position:relative}
+.input-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gray-400);pointer-events:none}
+.input-unit input{padding-right:40px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--white);padding:12px 32px;border:none;border-radius:980px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:var(--transition);width:100%}
+.btn:hover{background:var(--accent-hover)}
+
+.result-section{display:none}
+.result-section.active{display:block}
+.result-main{background:linear-gradient(135deg,var(--accent),#34a0f5);border-radius:var(--radius);padding:32px;text-align:center;color:var(--white);margin-bottom:20px}
+.result-main .label{font-size:14px;opacity:0.85;margin-bottom:4px}
+.result-main .value{font-size:40px;font-weight:700;letter-spacing:-1px}
+.result-main .sub{font-size:15px;opacity:0.8;margin-top:8px}
+
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.result-item{background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--gray-200);padding:20px;text-align:center}
+.result-item .label{font-size:12px;color:var(--gray-500);margin-bottom:4px}
+.result-item .value{font-size:22px;font-weight:700;color:var(--black)}
+.result-item .value.negative{color:#ff3b30}
+
+.chart-bar{margin-bottom:12px}
+.chart-bar .bar-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.chart-bar .bar-label span:last-child{font-weight:600}
+.chart-bar .bar-track{height:8px;background:var(--gray-200);border-radius:4px;overflow:hidden}
+.chart-bar .bar-fill{height:100%;border-radius:4px;transition:width 0.6s ease}
+
+.seo-content{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-top:40px}
+.seo-content h2{font-size:20px;font-weight:700;margin-bottom:16px}
+.seo-content h3{font-size:16px;font-weight:600;margin:20px 0 8px}
+.seo-content p{font-size:14px;color:#444;line-height:1.8;margin-bottom:12px}
+.seo-content ul{font-size:14px;color:#444;line-height:1.8;margin-left:20px;margin-bottom:12px}
+
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:32px 24px;text-align:center;margin-top:60px}
+.footer p{font-size:12px;color:var(--gray-400)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .page-header h1{font-size:26px}
+  .form-row{grid-template-columns:1fr}
+  .result-main .value{font-size:30px}
+  .result-grid{grid-template-columns:1fr 1fr}
+  .calc-card{padding:24px}
+}
+@media(max-width:420px){
+  .result-grid{grid-template-columns:1fr}
+  .calc-card{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>
+      CalcBox
+    </a>
+    <div class="nav-links">
+      <a href="../../index.html#calcs">計算ツール</a>
+      <a href="../../pages/about.html">CalcBoxとは</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="../../index.html">CalcBox</a> / 手取り計算</div>
+  <h1>手取り計算シミュレーター</h1>
+  <p>年収から社会保険料・税金を差し引いた実際の手取り額を計算します</p>
+</div>
+
+<div class="calc-container">
+  <div class="calc-card reveal">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      収入情報を入力
+    </h2>
+    <div class="form-group">
+      <label for="salary">年収（額面）</label>
+      <div class="input-unit">
+        <input type="number" id="salary" value="5000000" min="0" step="10000">
+        <span>円</span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="age">年齢</label>
+        <select id="age">
+          <option value="under40">40歳未満</option>
+          <option value="over40">40歳以上65歳未満</option>
+          <option value="over65">65歳以上</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="dependents">扶養人数</label>
+        <select id="dependents">
+          <option value="0">0人</option>
+          <option value="1">1人</option>
+          <option value="2">2人</option>
+          <option value="3">3人以上</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="insurance">社会保険の種類</label>
+      <select id="insurance">
+        <option value="shakai">社会保険（会社員）</option>
+        <option value="kokuho">国民健康保険（自営業）</option>
+      </select>
+    </div>
+    <button class="btn" onclick="calculate()">計算する</button>
+  </div>
+
+  <div class="result-section" id="results">
+    <div class="result-main reveal">
+      <div class="label">年間手取り額</div>
+      <div class="value" id="takeHome">--</div>
+      <div class="sub">月額手取り: <strong id="takeHomeMonthly">--</strong></div>
+    </div>
+
+    <div class="result-grid">
+      <div class="result-item reveal">
+        <div class="label">所得税</div>
+        <div class="value negative" id="incomeTax">--</div>
+      </div>
+      <div class="result-item reveal">
+        <div class="label">住民税</div>
+        <div class="value negative" id="residentTax">--</div>
+      </div>
+      <div class="result-item reveal">
+        <div class="label">健康保険料</div>
+        <div class="value negative" id="healthIns">--</div>
+      </div>
+      <div class="result-item reveal">
+        <div class="label">厚生年金保険料</div>
+        <div class="value negative" id="pensionIns">--</div>
+      </div>
+      <div class="result-item reveal">
+        <div class="label">雇用保険料</div>
+        <div class="value negative" id="empIns">--</div>
+      </div>
+      <div class="result-item reveal">
+        <div class="label">社会保険料合計</div>
+        <div class="value negative" id="totalSocial">--</div>
+      </div>
+    </div>
+
+    <div class="calc-card reveal">
+      <h2>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        内訳チャート
+      </h2>
+      <div id="chartArea"></div>
+    </div>
+  </div>
+
+  <div class="seo-content reveal">
+    <h2>手取り額の計算方法</h2>
+    <p>手取り額とは、額面の年収（総支給額）から社会保険料と税金を差し引いた、実際に受け取れる金額のことです。一般的に、手取り額は額面の75%〜85%程度になります。</p>
+    <h3>差し引かれるもの</h3>
+    <ul>
+      <li><strong>健康保険料</strong>：標準報酬月額の約10%（労使折半で約5%）</li>
+      <li><strong>厚生年金保険料</strong>：標準報酬月額の18.3%（労使折半で9.15%）</li>
+      <li><strong>雇用保険料</strong>：賃金の0.6%（2026年度）</li>
+      <li><strong>所得税</strong>：課税所得に応じて5%〜45%の累進課税</li>
+      <li><strong>住民税</strong>：課税所得の約10%</li>
+    </ul>
+    <h3>年収別の手取り目安</h3>
+    <p>年収300万円の場合、手取りは約240万円（約80%）。年収500万円では約390万円（約78%）。年収800万円では約590万円（約74%）が目安です。年収が高くなるほど税率が上がるため、手取り率は下がる傾向にあります。</p>
+    <h3>手取りを増やすには</h3>
+    <p>iDeCo（個人型確定拠出年金）やふるさと納税、生命保険料控除などの各種控除を活用することで、課税所得を減らし手取り額を増やすことができます。</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2026 CalcBox. All rights reserved. | <a href="../../pages/privacy.html" style="color:var(--gray-400)">プライバシーポリシー</a></p>
+</footer>
+
+<script>
+function fmt(n){return Math.round(n).toLocaleString('ja-JP');}
+
+function calculate(){
+  const salary=Number(document.getElementById('salary').value);
+  const age=document.getElementById('age').value;
+  const dep=Number(document.getElementById('dependents').value);
+  const insType=document.getElementById('insurance').value;
+
+  // Social insurance
+  let healthRate=0.04985; // employee half ~10% (Tokyo 2026 approx)
+  if(age==='over40') healthRate=0.05785; // +kaigo
+  let pensionRate=0.0915; // employee half of 18.3%
+  let empInsRate=0.006;
+
+  let healthIns, pensionIns, empIns;
+  if(insType==='shakai'){
+    healthIns=salary*healthRate;
+    pensionIns=Math.min(salary, 8820000)*pensionRate; // cap at grade 32
+    empIns=salary*empInsRate;
+  } else {
+    // National health insurance rough estimate
+    const inc=Math.max(0, salary-430000);
+    healthIns=inc*0.0789 + 42100; // approx Tokyo 23-ku
+    if(age==='over40') healthIns+=inc*0.0240 + 16500;
+    pensionIns=16980*12; // 国民年金 fixed
+    empIns=0;
+  }
+
+  const totalSocial=healthIns+pensionIns+empIns;
+
+  // Income tax
+  const basicDeduction=480000;
+  const employmentDeduction=calcEmploymentDeduction(salary);
+  const dependentDeduction=dep*380000;
+  const socialInsDeduction=totalSocial;
+
+  let taxableIncome=salary-employmentDeduction-basicDeduction-dependentDeduction-socialInsDeduction;
+  taxableIncome=Math.max(0, Math.floor(taxableIncome/1000)*1000);
+
+  const incomeTax=calcIncomeTax(taxableIncome);
+
+  // Resident tax
+  const basicDeductionR=430000;
+  let taxableIncomeR=salary-employmentDeduction-basicDeductionR-dependentDeduction-socialInsDeduction;
+  taxableIncomeR=Math.max(0, Math.floor(taxableIncomeR/1000)*1000);
+  const residentTax=Math.max(0, taxableIncomeR*0.10+5000); // 均等割5000
+
+  const takeHome=salary-totalSocial-incomeTax-residentTax;
+
+  // Display
+  document.getElementById('takeHome').textContent=fmt(takeHome)+'円';
+  document.getElementById('takeHomeMonthly').textContent=fmt(takeHome/12)+'円';
+  document.getElementById('incomeTax').textContent='-'+fmt(incomeTax)+'円';
+  document.getElementById('residentTax').textContent='-'+fmt(residentTax)+'円';
+  document.getElementById('healthIns').textContent='-'+fmt(healthIns)+'円';
+  document.getElementById('pensionIns').textContent='-'+fmt(pensionIns)+'円';
+  document.getElementById('empIns').textContent='-'+fmt(empIns)+'円';
+  document.getElementById('totalSocial').textContent='-'+fmt(totalSocial)+'円';
+
+  // Chart
+  const items=[
+    {label:'手取り',val:takeHome,color:'#34c759'},
+    {label:'所得税',val:incomeTax,color:'#ff9500'},
+    {label:'住民税',val:residentTax,color:'#ff3b30'},
+    {label:'健康保険',val:healthIns,color:'#5856d6'},
+    {label:'厚生年金',val:pensionIns,color:'#007aff'},
+    {label:'雇用保険',val:empIns,color:'#af52de'}
+  ];
+  const chartArea=document.getElementById('chartArea');
+  chartArea.innerHTML=items.map(i=>`
+    <div class="chart-bar">
+      <div class="bar-label"><span>${i.label}</span><span>${fmt(i.val)}円</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(i.val/salary*100).toFixed(1)}%;background:${i.color}"></div></div>
+    </div>
+  `).join('');
+
+  document.getElementById('results').classList.add('active');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  // Save
+  localStorage.setItem('calcbox_takehome',JSON.stringify({salary,age,dep:dep,insType}));
+}
+
+function calcEmploymentDeduction(salary){
+  if(salary<=1625000) return 550000;
+  if(salary<=1800000) return salary*0.4-100000;
+  if(salary<=3600000) return salary*0.3+80000;
+  if(salary<=6600000) return salary*0.2+440000;
+  if(salary<=8500000) return salary*0.1+1100000;
+  return 1950000;
+}
+
+function calcIncomeTax(taxable){
+  if(taxable<=1950000) return taxable*0.05;
+  if(taxable<=3300000) return taxable*0.10-97500;
+  if(taxable<=6950000) return taxable*0.20-427500;
+  if(taxable<=9000000) return taxable*0.23-636000;
+  if(taxable<=18000000) return taxable*0.33-1536000;
+  if(taxable<=40000000) return taxable*0.40-2796000;
+  return taxable*0.45-4796000;
+}
+
+// Load saved
+window.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('calcbox_takehome');
+  if(saved){
+    const d=JSON.parse(saved);
+    document.getElementById('salary').value=d.salary;
+    document.getElementById('age').value=d.age;
+    document.getElementById('dependents').value=d.dep;
+    document.getElementById('insurance').value=d.insType;
+  }
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>

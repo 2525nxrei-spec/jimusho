@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>催促メール作成ツール｜文例メーカー</title>
+<meta name="description" content="支払い、返信、納品、書類の催促メールを簡単作成。やんわりから強めまで、トーンを選べるテンプレートで適切な催促文を生成。">
+<meta name="keywords" content="催促メール,督促,リマインド,例文,テンプレート,支払い催促,ビジネスメール">
+<link rel="canonical" href="https://example.com/generators/reminder-email/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-400:#aeaeb2;--gray-500:#8e8e93;--gray-600:#636366;--white:#fff;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--font-sans:'Inter','Noto Sans JP',sans-serif;--nav-h:64px}
+html{scroll-behavior:smooth}body{font-family:var(--font-sans);color:var(--black);background:var(--gray-100);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,48px);background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--gray-200)}
+.nav-logo{font-size:18px;font-weight:700;letter-spacing:-.02em}.nav-logo span{color:var(--accent)}
+.nav-back{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--gray-600);transition:color .2s}.nav-back:hover{color:var(--accent)}.nav-back svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none}
+.page-header{text-align:center;padding:56px 24px 32px;max-width:640px;margin:0 auto}.page-header h1{font-size:clamp(26px,5vw,40px);font-weight:700;margin-bottom:8px}.page-header p{color:var(--gray-600);font-size:15px}
+.container{max-width:960px;margin:0 auto;padding:0 clamp(16px,4vw,48px) 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.form-card,.preview-card{background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+.form-card h2,.preview-card h2{font-size:18px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.form-card h2 svg,.preview-card h2 svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;fill:none}
+.form-group{margin-bottom:16px}.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--gray-600)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:8px;font-size:15px;font-family:var(--font-sans);background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,.12)}
+.form-group textarea{resize:vertical;min-height:60px}
+.template-select{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.template-select button{padding:8px 16px;border:1px solid var(--gray-200);border-radius:8px;background:var(--white);font-size:13px;font-family:var(--font-sans);font-weight:500;cursor:pointer;transition:all .2s}
+.template-select button.active{background:var(--accent);color:#fff;border-color:var(--accent)}.template-select button:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.preview-text{white-space:pre-wrap;font-size:14px;line-height:1.9;background:var(--gray-100);border-radius:8px;padding:20px;min-height:200px;border:1px solid var(--gray-200)}
+.copy-btn{margin-top:16px;width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;font-family:var(--font-sans);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s}.copy-btn:hover{background:var(--accent-hover)}.copy-btn.copied{background:#34c759}
+.seo-section{max-width:960px;margin:0 auto;padding:32px clamp(16px,4vw,48px) 48px}.seo-section .seo-card{background:var(--white);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow)}
+.seo-section h2{font-size:22px;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:17px;font-weight:600;margin:20px 0 8px}.seo-section p,.seo-section li{font-size:14px;color:var(--gray-600);line-height:1.8}.seo-section ul{padding-left:20px;margin-bottom:12px}
+.footer{padding:40px clamp(16px,4vw,48px) 24px;max-width:960px;margin:0 auto;border-top:1px solid var(--gray-200)}.footer-copy{font-size:12px;color:var(--gray-500);text-align:center}.footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:12px;flex-wrap:wrap}.footer-links a{font-size:13px;color:var(--gray-500);transition:color .2s}.footer-links a:hover{color:var(--accent)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.container{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="../../index.html" class="nav-logo">文例<span>メーカー</span></a>
+  <a href="../../index.html" class="nav-back"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>一覧に戻る</a>
+</nav>
+<div class="page-header"><h1>催促メール作成ツール</h1><p>支払い・返信・納品・書類の催促メールを、トーンを選んで作成できます。</p></div>
+
+<div class="container">
+  <div class="form-card reveal">
+    <h2><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>入力項目</h2>
+    <div class="template-select" id="templateSelect">
+      <button class="active" data-tmpl="0">テンプレート1</button>
+      <button data-tmpl="1">テンプレート2</button>
+      <button data-tmpl="2">テンプレート3</button>
+    </div>
+    <div class="form-group"><label>相手の名前</label><input type="text" id="recipientName" placeholder="例：田中太郎"></div>
+    <div class="form-group"><label>相手の会社名</label><input type="text" id="recipientCompany" placeholder="例：株式会社ABC"></div>
+    <div class="form-group"><label>自分の名前</label><input type="text" id="senderName" placeholder="例：山田花子"></div>
+    <div class="form-group"><label>催促内容</label>
+      <select id="subject"><option value="支払い">支払いの催促</option><option value="返信">返信の催促</option><option value="納品">納品の催促</option><option value="書類">書類提出の催促</option></select>
+    </div>
+    <div class="form-group"><label>期限</label><input type="text" id="deadline" placeholder="例：3月15日"></div>
+    <div class="form-group"><label>トーン</label>
+      <select id="tone"><option value="やんわり">やんわり</option><option value="普通">普通</option><option value="強め">強め</option></select>
+    </div>
+  </div>
+  <div class="preview-card reveal">
+    <h2><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>プレビュー</h2>
+    <div class="preview-text" id="previewText"></div>
+    <button class="copy-btn" id="copyBtn"><svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>コピーする</button>
+  </div>
+</div>
+
+<div class="seo-section reveal">
+  <div class="seo-card">
+    <h2>催促メールの書き方ガイド</h2>
+    <p>催促メールは相手との関係を損なわないよう配慮しつつ、こちらの要望を明確に伝える必要があります。段階的にトーンを上げていくのが一般的です。</p>
+    <h3>催促メールのポイント</h3>
+    <ul>
+      <li>まずは確認・リマインドとして送る（1回目）</li>
+      <li>行き違いの可能性に言及する</li>
+      <li>具体的な期限を明記する</li>
+      <li>2回目以降は徐々にトーンを上げる</li>
+    </ul>
+    <h3>送信のタイミング</h3>
+    <ul>
+      <li>支払い催促：期限から3〜5営業日後</li>
+      <li>返信催促：送信から3〜5営業日後</li>
+      <li>納品催促：納期の翌営業日</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="footer"><div class="footer-links"><a href="../../index.html">トップ</a><a href="../../pages/about.html">このサイトについて</a><a href="../../pages/privacy.html">プライバシーポリシー</a><a href="../../pages/terms.html">利用規約</a><a href="../../pages/contact.html">お問い合わせ</a></div><p class="footer-copy">&copy; 2025 文例メーカー（BunreiMaker）. All rights reserved.</p></footer>
+
+<script>
+const templates=[
+  {generate(d){
+    const dl=d.deadline||'○月○日';
+    const subjText={'支払い':'お支払い','返信':'ご返信','納品':'ご納品','書類':'書類のご提出'}[d.subject];
+    const openers={'やんわり':'お忙しいところ恐れ入りますが、確認のためご連絡いたしました。','普通':'下記の件につきまして、確認のご連絡を差し上げました。','強め':'下記の件につきまして、早急にご対応いただきたくご連絡申し上げます。'}[d.tone];
+    const closers={'やんわり':'行き違いでしたら申し訳ございません。ご確認いただけますと幸いです。','普通':'お忙しいところ恐縮ですが、ご確認のほどよろしくお願いいたします。','強め':'至急ご対応いただけますよう、重ねてお願い申し上げます。'}[d.tone];
+    return `${d.recipientCompany?d.recipientCompany+'\n':''}${d.recipientName?d.recipientName+'様':'○○様'}\n\nいつもお世話になっております。${d.senderName||'○○'}でございます。\n\n${openers}\n\n${subjText}の期限が${dl}となっておりましたが、弊社にてまだ確認が取れておりません。\n\n${closers}\n\n何かご不明な点がございましたら、お気軽にお問い合わせください。\nよろしくお願いいたします。`
+  }},
+  {generate(d){
+    const dl=d.deadline||'○月○日';
+    const subjText={'支払い':'ご請求金額のお支払い','返信':'先日お送りしたメールへのご返信','納品':'ご発注品のご納品','書類':'必要書類のご提出'}[d.subject];
+    const toneText={'やんわり':'ご多忙のことと存じますが、念のため確認させていただきたく存じます。','普通':'恐れ入りますが、ご確認いただけますでしょうか。','強め':'重ねてのご連絡となり恐縮ですが、至急ご対応をお願いいたします。'}[d.tone];
+    return `${d.recipientCompany?d.recipientCompany+'\n':''}${d.recipientName?d.recipientName+'様':'○○様'}\n\n平素よりお世話になっております。${d.senderName||'○○'}でございます。\n\n${subjText}につきまして、${dl}を期限としてお願いしておりましたが、現時点で確認が取れておりません。\n\n${toneText}\n\nなお、本メールと行き違いになっている場合は、何卒ご容赦ください。\n\n引き続きよろしくお願いいたします。`
+  }},
+  {generate(d){
+    const dl=d.deadline||'○月○日';
+    const strong=d.tone==='強め';
+    const soft=d.tone==='やんわり';
+    return `${d.recipientName?d.recipientName+'様':'○○様'}\n\nお世話になっております。${d.senderName||'○○'}です。\n\n${d.subject}の件（期限：${dl}）について${soft?'確認させてください。':strong?'再度ご連絡いたします。':'ご確認をお願いいたします。'}\n\n${strong?'度重なるお願いとなり恐縮ですが、早急にご対応いただけますようお願い申し上げます。':soft?'行き違いでしたらすみません。':'ご対応のほど、よろしくお願いいたします。'}`
+  }}
+];
+let cur=0;
+function getData(){return{recipientName:document.getElementById('recipientName').value,recipientCompany:document.getElementById('recipientCompany').value,senderName:document.getElementById('senderName').value,subject:document.getElementById('subject').value,deadline:document.getElementById('deadline').value,tone:document.getElementById('tone').value}}
+function updatePreview(){document.getElementById('previewText').textContent=templates[cur].generate(getData())}
+document.querySelectorAll('#templateSelect button').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('#templateSelect button').forEach(x=>x.classList.remove('active'));b.classList.add('active');cur=parseInt(b.dataset.tmpl);updatePreview()})});
+document.querySelectorAll('input,select,textarea').forEach(el=>{el.addEventListener('input',updatePreview);el.addEventListener('change',updatePreview)});
+document.getElementById('copyBtn').addEventListener('click',()=>{const t=document.getElementById('previewText').textContent;navigator.clipboard.writeText(t).then(()=>{const b=document.getElementById('copyBtn');b.classList.add('copied');b.innerHTML='<svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg>コピーしました';setTimeout(()=>{b.classList.remove('copied');b.innerHTML='<svg viewBox="0 0 24 24" style="stroke:#fff;stroke-width:2;fill:none;width:18px;height:18px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>コピーする'},2000)})});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+updatePreview();
+</script>
+</body>
+</html>

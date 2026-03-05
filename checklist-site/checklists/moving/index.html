@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>引越しやることリスト | チェックノート</title>
+<meta name="description" content="引越しに必要な手続き・準備を時系列で完全網羅。物件探しから転入届まで30項目以上をチェックリストで管理。進捗を保存できます。">
+<meta name="keywords" content="引越し やることリスト,引越し 手続き,引越し チェックリスト,転居届,転出届,引越し準備">
+<link rel="canonical" href="https://checknote.jp/checklists/moving/">
+<meta property="og:title" content="引越しやることリスト | チェックノート">
+<meta property="og:description" content="引越しに必要な手続き・準備を時系列で完全網羅。30項目以上をチェックリストで管理。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--white:#fff;--radius:12px;--radius-lg:20px;--shadow:0 2px 12px rgba(0,0,0,0.06);--shadow-lg:0 8px 30px rgba(0,0,0,0.08);--transition:0.25s cubic-bezier(0.4,0,0.2,1);--green:#34c759;--icon-color:#0071e3}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter','Noto Sans JP',sans-serif;color:var(--black);background:var(--gray-100);line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(242,242,247,0.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--gray-200)}
+.nav-inner{max-width:800px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:18px;font-weight:700;letter-spacing:-0.02em}
+.nav-logo span{color:var(--accent)}
+.nav-back{font-size:14px;font-weight:500;color:var(--accent);display:inline-flex;align-items:center;gap:4px}
+.nav-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.page-header{max-width:800px;margin:0 auto;padding:48px 24px 0}
+.page-header h1{font-size:32px;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px}
+.page-header p{font-size:15px;color:var(--gray-500);margin-bottom:24px}
+
+.progress-wrap{max-width:800px;margin:0 auto;padding:0 24px 32px}
+.progress-bar-outer{background:var(--gray-200);border-radius:100px;height:8px;overflow:hidden;margin-bottom:8px}
+.progress-bar-inner{height:100%;background:var(--accent);border-radius:100px;transition:width 0.4s ease;width:0%}
+.progress-text{font-size:13px;color:var(--gray-500);display:flex;justify-content:space-between;align-items:center}
+.progress-text strong{color:var(--black)}
+.reset-btn{font-size:12px;font-weight:600;color:var(--accent);background:none;border:1px solid var(--accent);padding:4px 14px;border-radius:100px;cursor:pointer;transition:all var(--transition)}
+.reset-btn:hover{background:var(--accent);color:var(--white)}
+
+.checklist-section{max-width:800px;margin:0 auto;padding:0 24px 24px}
+.phase-title{font-size:14px;font-weight:600;color:var(--accent);padding:12px 0 8px;border-bottom:1px solid var(--gray-200);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.phase-title svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.cl-item{background:var(--white);border-radius:var(--radius);margin-bottom:8px;box-shadow:var(--shadow);overflow:hidden}
+.cl-item.checked .cl-main{opacity:0.55}
+.cl-item.checked .cl-checkbox{background:var(--green);border-color:var(--green)}
+.cl-item.checked .cl-checkbox svg{opacity:1}
+.cl-main{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;user-select:none}
+.cl-checkbox{width:22px;height:22px;min-width:22px;border:2px solid var(--gray-300);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all var(--transition)}
+.cl-checkbox svg{width:13px;height:13px;stroke:var(--white);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity var(--transition)}
+.cl-title{font-size:14px;font-weight:500;flex:1}
+.cl-toggle{background:none;border:none;cursor:pointer;padding:4px;transition:transform var(--transition)}
+.cl-toggle svg{width:18px;height:18px;stroke:var(--gray-400);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cl-toggle.open{transform:rotate(180deg)}
+.cl-detail{display:none;padding:0 18px 14px 54px;font-size:13px;color:var(--gray-500);line-height:1.7}
+.cl-detail.open{display:block}
+
+.seo-section{max-width:800px;margin:0 auto;padding:40px 24px 60px}
+.seo-section h2{font-size:22px;font-weight:700;margin-bottom:16px}
+.seo-section h3{font-size:17px;font-weight:600;margin:24px 0 8px}
+.seo-section p{font-size:14px;color:var(--gray-500);line-height:1.8;margin-bottom:12px}
+.seo-section ul{font-size:14px;color:var(--gray-500);line-height:1.8;padding-left:20px;margin-bottom:12px}
+
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:24px;text-align:center;font-size:12px;color:var(--gray-400)}
+.footer a{color:var(--gray-500);margin:0 12px}
+
+@media(max-width:768px){
+  .page-header h1{font-size:24px}
+  .page-header{padding:32px 20px 0}
+  .progress-wrap,.checklist-section,.seo-section{padding-left:20px;padding-right:20px}
+}
+@media(max-width:420px){
+  .page-header h1{font-size:22px}
+  .cl-main{padding:12px 14px;gap:10px}
+  .cl-detail{padding:0 14px 12px 46px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-logo">Check<span>Note</span></a>
+    <a href="../../index.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      一覧に戻る
+    </a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>引越しやることリスト</h1>
+  <p>物件探しから転入届まで、引越しに必要な手続き・準備を時系列で網羅しました。チェックを入れて進捗を管理しましょう。</p>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar"></div></div>
+  <div class="progress-text">
+    <span><strong id="progressCount">0</strong> / <strong id="progressTotal">0</strong> 完了 (<strong id="progressPct">0</strong>%)</span>
+    <button class="reset-btn" onclick="resetAll()">すべてリセット</button>
+  </div>
+</div>
+
+<div class="checklist-section" id="checklistArea">
+
+  <div class="phase-title">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    2ヶ月前
+  </div>
+
+  <div class="cl-item" data-id="m01">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">新居の物件探し・内見</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">希望エリア・家賃・間取りの条件を整理してから探し始めましょう。SUUMOやHOME'Sなどのポータルサイトのほか、地元の不動産会社にも相談すると掘り出し物件に出会えることがあります。内見は最低3件は比較するのがおすすめです。</div>
+  </div>
+
+  <div class="cl-item" data-id="m02">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">不動産会社と賃貸契約・売買契約</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">契約書は重要事項説明をしっかり確認しましょう。敷金・礼金・仲介手数料・保証料など初期費用の内訳を把握し、退去時の原状回復条件も事前にチェック。契約日に必要な書類（住民票・印鑑証明・収入証明等）は早めに準備を。</div>
+  </div>
+
+  <div class="cl-item" data-id="m03">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">引越し業者の見積もり・予約</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">最低3社から見積もりを取り比較しましょう。訪問見積もりが最も正確です。繁忙期（3〜4月）は料金が高くなるため、早めの予約が重要。平日や午後便は割安になることがあります。ダンボールの無料サービスの有無も確認を。</div>
+  </div>
+
+  <div class="cl-item" data-id="m04">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">引越し日の決定</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">入居可能日と退去日を確認し、引越し日を決定します。二重家賃を避けるため、退去日と入居日をできるだけ近づけましょう。引越し業者の空き状況も踏まえて調整してください。</div>
+  </div>
+
+  <div class="phase-title">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    1ヶ月前
+  </div>
+
+  <div class="cl-item" data-id="m05">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">現住居の管理会社・大家へ退去通知</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">賃貸契約書に記載された退去予告期間（通常1〜2ヶ月前）を確認し、管理会社または大家さんに書面で通知します。退去日と退去立会いの日程も調整しましょう。</div>
+  </div>
+
+  <div class="cl-item" data-id="m06">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">転出届の提出（市区町村役場）</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">異なる市区町村への引越しの場合、引越し日の14日前から届出可能です。転出届を提出すると「転出証明書」が発行されます。これは転入届の際に必要なので大切に保管してください。同一市区町村内の場合は転居届のみでOK。</div>
+  </div>
+
+  <div class="cl-item" data-id="m07">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">電気の解約・新居での契約</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">現住居の電力会社に連絡して解約日を伝えます。新居の電力会社にも開始日を連絡。Webや電話で手続き可能です。スマートメーターの場合は立会い不要なことがほとんどです。</div>
+  </div>
+
+  <div class="cl-item" data-id="m08">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">ガスの解約・新居での契約</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">ガス会社に連絡して閉栓（解約）と開栓（新規）の手続きをします。ガスの開栓は立会いが必要なので、引越し当日に合わせて予約しましょう。早めに予約しないと希望日に取れないことがあります。</div>
+  </div>
+
+  <div class="cl-item" data-id="m09">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">水道の解約・新居での契約</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">水道局に電話またはWebで手続き。使用中止日と新居での使用開始日を伝えます。通常、立会いは不要です。</div>
+  </div>
+
+  <div class="cl-item" data-id="m10">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">インターネット回線の解約・移転手続き</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">光回線の場合、移転工事に2〜4週間かかることがあるため早めに連絡を。解約の場合は違約金の有無を確認。新居で新規契約する場合はキャンペーンを比較検討しましょう。引越し直後にネットが使えないと不便なので優先度高めです。</div>
+  </div>
+
+  <div class="cl-item" data-id="m11">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">郵便局で転居届（転送手続き）</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">郵便局の窓口またはe転居（Webサービス）で転居届を提出。届出日から1年間、旧住所宛の郵便物を新住所に無料転送してくれます。届出後、反映まで数日かかるため早めの手続きがおすすめ。</div>
+  </div>
+
+  <div class="cl-item" data-id="m12">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">NHKの住所変更届</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">NHKの公式サイトまたは電話で住所変更の届出ができます。受信契約は世帯単位なので、同居していた家族と別々になる場合は新規契約が必要です。</div>
+  </div>
+
+  <div class="cl-item" data-id="m13">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">固定電話・携帯電話の住所変更</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">携帯電話の住所変更は各キャリアのマイページやショップで手続きできます。固定電話（NTT等）は移転手続きが必要で、番号が変わる場合もあるので早めに確認しましょう。</div>
+  </div>
+
+  <div class="cl-item" data-id="m14">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">火災保険・地震保険の手続き</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">現住居の火災保険を解約し、新居の火災保険に加入します。賃貸の場合は不動産会社から指定されることが多いです。解約時に保険料が日割りで返金される場合があります。</div>
+  </div>
+
+  <div class="phase-title">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    2週間前
+  </div>
+
+  <div class="cl-item" data-id="m15">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">荷造り開始（使用頻度の低いものから）</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">オフシーズンの衣類、本、使っていない食器など使用頻度の低いものから梱包を始めましょう。ダンボールには中身と搬入先の部屋名を書くと荷解きがスムーズ。割れ物は新聞紙やプチプチで丁寧に包んでください。</div>
+  </div>
+
+  <div class="cl-item" data-id="m16">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">不用品の処分・リサイクル</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">粗大ごみの回収は申し込みから1〜2週間かかることがあるため早めに。フリマアプリやリサイクルショップも活用しましょう。家電4品目（テレビ・冷蔵庫・洗濯機・エアコン）はリサイクル法に基づいた処分が必要です。</div>
+  </div>
+
+  <div class="cl-item" data-id="m17">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">住所変更が必要なサービスのリスト作成</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">銀行、クレジットカード、保険、サブスクリプション、通販サイト、各種会員サービスなど、住所変更が必要なサービスを洗い出してリストにしましょう。漏れを防ぐために、届く郵便物やメールを確認するのが効果的です。</div>
+  </div>
+
+  <div class="cl-item" data-id="m18">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">新聞・牛乳配達・生協などの解約・移転</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">定期配達サービスを利用している場合は、配達停止または住所変更の手続きをしましょう。</div>
+  </div>
+
+  <div class="phase-title">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    1週間前
+  </div>
+
+  <div class="cl-item" data-id="m19">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">冷蔵庫の中身を整理・使い切り</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">引越し前日までに冷蔵庫の中身を使い切りましょう。冷蔵庫は運搬の前日に電源を抜き、水抜きをする必要があります。計画的に食材を消費してください。</div>
+  </div>
+
+  <div class="cl-item" data-id="m20">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">洗濯機の水抜き準備</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">引越し前日に洗濯機の水抜きをします。給水ホースを外し、脱水運転をして排水ホースの水も抜きます。取扱説明書を確認するか、引越し業者に相談しましょう。</div>
+  </div>
+
+  <div class="cl-item" data-id="m21">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">ご近所への挨拶品の準備</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">旧居・新居の両方でご近所挨拶をするのがマナー。500〜1,000円程度のタオルやお菓子が定番です。のし紙は旧居は「御礼」、新居は「御挨拶」。マンションの場合は両隣と上下階が目安です。</div>
+  </div>
+
+  <div class="cl-item" data-id="m22">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">貴重品・重要書類の自分で運ぶ荷物をまとめる</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">現金、通帳、印鑑、パスポート、保険証、貴金属など貴重品は引越し業者に任せず自分で運びましょう。引越し当日に必要なもの（着替え、タオル、トイレットペーパー、充電器等）も別にしておくと便利。</div>
+  </div>
+
+  <div class="cl-item" data-id="m23">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">残りの荷造り完了</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">引越し前日までに全ての荷造りを完了させましょう。当日は業者の搬出作業と旧居の掃除に時間を使います。ダンボールの最終個数を把握し、業者に伝えてください。</div>
+  </div>
+
+  <div class="phase-title">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    引越し当日
+  </div>
+
+  <div class="cl-item" data-id="m24">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">旧居の鍵の返却・退去立会い</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">管理会社や大家さんと退去立会い。部屋の傷や汚れを一緒に確認し、原状回復費用の見積もりを受けます。入居時の写真があれば持参を。合鍵も含めてすべての鍵を返却します。</div>
+  </div>
+
+  <div class="cl-item" data-id="m25">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">新居の鍵の受け取り</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">不動産会社から新居の鍵を受け取ります。入居前に部屋の状態（傷・汚れ）を写真に撮っておくと、退去時のトラブル防止になります。</div>
+  </div>
+
+  <div class="cl-item" data-id="m26">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">ガス開栓の立会い</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">ガスの開栓は必ず立会いが必要です。ガスコンロや給湯器の動作確認も行われます。予約した時間に在宅しましょう。</div>
+  </div>
+
+  <div class="cl-item" data-id="m27">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">電気・水道の使用開始確認</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">ブレーカーを上げて電気が使えるか確認。水道も蛇口をひねって水が出るか確認します。事前に手続きしていれば当日から使えるはずです。</div>
+  </div>
+
+  <div class="cl-item" data-id="m28">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">搬入荷物の個数・破損チェック</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">引越し業者が荷物を搬入したら、ダンボールの個数が合っているか、家具や家電に破損がないかをその場で確認しましょう。問題があれば当日中に業者に連絡してください。</div>
+  </div>
+
+  <div class="cl-item" data-id="m29">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">近隣への引越し挨拶</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">引越し当日か翌日には近隣への挨拶を済ませましょう。不在の場合は挨拶品と手紙をドアノブに掛けておくのが一般的です。</div>
+  </div>
+
+  <div class="phase-title">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    引越し後（14日以内）
+  </div>
+
+  <div class="cl-item" data-id="m30">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">転入届の提出（14日以内）</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">引越し後14日以内に新住所の市区町村役場で転入届を提出します。転出証明書、本人確認書類、マイナンバーカード（持っている場合）が必要です。同一市区町村内の場合は転居届を提出します。</div>
+  </div>
+
+  <div class="cl-item" data-id="m31">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">マイナンバーカードの住所変更</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">転入届と同時にマイナンバーカードの住所変更も行えます。カードの裏面に新住所が追記されます。暗証番号が必要なので忘れずに。</div>
+  </div>
+
+  <div class="cl-item" data-id="m32">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">国民健康保険の住所変更</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">国民健康保険に加入している場合は、転入届と合わせて手続きしましょう。会社の健康保険に加入している場合は勤務先での手続きとなります。</div>
+  </div>
+
+  <div class="cl-item" data-id="m33">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">国民年金の住所変更</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">国民年金第1号被保険者の場合、転入届と合わせて住所変更の届出が必要です。会社員の場合は勤務先が手続きを行います。</div>
+  </div>
+
+  <div class="cl-item" data-id="m34">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">運転免許証の住所変更</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">警察署または運転免許更新センターで手続き。新住所が記載された住民票（コピー不可）が必要です。免許証の裏面に新住所が記載されます。身分証明書として使うためにも早めに変更しましょう。</div>
+  </div>
+
+  <div class="cl-item" data-id="m35">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">自動車の登録住所変更（車庫証明）</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">自動車をお持ちの場合、引越し後15日以内に管轄の運輸支局で住所変更手続きが必要です。事前に新住所の警察署で車庫証明を取得してください。ナンバープレートが変わる場合もあります。</div>
+  </div>
+
+  <div class="cl-item" data-id="m36">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">銀行口座の住所変更</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">各銀行の窓口、ATM、ネットバンキング、郵送で住所変更ができます。届出印が必要な場合があるので確認を。ゆうちょ銀行はゆうちょダイレクトでも変更可能です。</div>
+  </div>
+
+  <div class="cl-item" data-id="m37">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">クレジットカードの住所変更</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">各カード会社のWebサイトまたは電話で住所変更。請求書や新しいカードの送付先が旧住所のままだと届かなくなります。複数枚持っている場合はすべて変更を。</div>
+  </div>
+
+  <div class="cl-item" data-id="m38">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">各種保険の住所変更</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">生命保険、医療保険、自動車保険など、加入しているすべての保険会社に住所変更を届け出ましょう。契約者の住所が変わると保険金受取時に問題が生じることがあります。</div>
+  </div>
+
+  <div class="cl-item" data-id="m39">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">勤務先への届出（住所変更届）</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">会社の総務・人事部門に住所変更届を提出します。通勤手当の変更や住宅手当の申請にも関わるため、早めに届け出ましょう。</div>
+  </div>
+
+  <div class="cl-item" data-id="m40">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">子どもの転校手続き（該当者のみ）</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">在学中の学校から在学証明書・教科書給与証明書をもらい、転入先の教育委員会または学校に提出します。転校手続きのタイミングは学校に相談しましょう。</div>
+  </div>
+
+  <div class="cl-item" data-id="m41">
+    <div class="cl-main">
+      <div class="cl-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="cl-title">ペットの登録住所変更（該当者のみ）</span>
+      <button class="cl-toggle" aria-label="詳細"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    </div>
+    <div class="cl-detail">犬を飼っている場合は、新住所の市区町村で犬の登録住所変更（鑑札の届出変更）が必要です。旧住所で交付された鑑札を持参しましょう。引越し後30日以内に届出が必要です。</div>
+  </div>
+
+</div>
+
+<div class="seo-section">
+  <h2>引越しの手続き・準備ガイド</h2>
+  <p>引越しは人生の中でも大きなイベントのひとつ。手続きの数が多く、何から始めればよいか戸惑う方も少なくありません。ここでは、引越しをスムーズに進めるためのポイントを解説します。</p>
+
+  <h3>引越し準備はいつから始める？</h3>
+  <p>理想的には引越しの2ヶ月前から準備を始めましょう。物件探しや引越し業者の選定には時間がかかります。特に3月〜4月の繁忙期は、業者の予約が取りにくく料金も高くなるため、早めの行動が重要です。</p>
+
+  <h3>忘れがちな手続きベスト5</h3>
+  <ul>
+    <li>郵便局の転居届（転送手続き） - 届出後、反映まで数日かかるため早めに</li>
+    <li>NHKの住所変更 - つい後回しにしがちですが、忘れずに</li>
+    <li>運転免許証の住所変更 - 身分証明書として使うため早めに</li>
+    <li>各種保険の住所変更 - 生命保険・医療保険も忘れずに</li>
+    <li>クレジットカードの住所変更 - 複数枚ある場合は全て変更を</li>
+  </ul>
+
+  <h3>引越し費用を抑えるコツ</h3>
+  <p>引越し費用を抑えるには、複数の業者から見積もりを取って比較するのが基本。また、平日や午後便（時間指定なし）を選ぶと割安になることがあります。荷物を減らすことも費用削減に直結するので、不用品は引越し前に処分しましょう。</p>
+
+  <h3>転出届・転入届のタイミング</h3>
+  <p>転出届は引越しの14日前から届出可能。転入届は引越し後14日以内に提出する必要があります。届出が遅れると5万円以下の過料が科される場合があるので注意しましょう。マイナンバーカードをお持ちの方は、転入届と同時に住所変更手続きができます。</p>
+</div>
+
+<footer class="footer">
+  <div>
+    <a href="../../index.html">トップ</a>
+    <a href="../../pages/about.html">このサイトについて</a>
+    <a href="../../pages/privacy.html">プライバシーポリシー</a>
+    <a href="../../pages/terms.html">利用規約</a>
+  </div>
+  <p style="margin-top:12px">&copy; 2025 CheckNote</p>
+</footer>
+
+<script>
+const STORAGE_KEY='checknote-moving';
+const items=document.querySelectorAll('.cl-item');
+const progressBar=document.getElementById('progressBar');
+const progressCount=document.getElementById('progressCount');
+const progressTotal=document.getElementById('progressTotal');
+const progressPct=document.getElementById('progressPct');
+
+function loadState(){
+  try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}}catch(e){return{}}
+}
+function saveState(s){localStorage.setItem(STORAGE_KEY,JSON.stringify(s))}
+
+function updateProgress(){
+  const state=loadState();
+  const total=items.length;
+  const checked=Object.values(state).filter(v=>v).length;
+  const pct=total?Math.round(checked/total*100):0;
+  progressBar.style.width=pct+'%';
+  progressCount.textContent=checked;
+  progressTotal.textContent=total;
+  progressPct.textContent=pct;
+}
+
+function initChecklist(){
+  const state=loadState();
+  items.forEach(item=>{
+    const id=item.dataset.id;
+    if(state[id])item.classList.add('checked');
+    const main=item.querySelector('.cl-main');
+    const checkbox=item.querySelector('.cl-checkbox');
+    const toggle=item.querySelector('.cl-toggle');
+    const detail=item.querySelector('.cl-detail');
+
+    checkbox.addEventListener('click',e=>{
+      e.stopPropagation();
+      const s=loadState();
+      s[id]=!s[id];
+      saveState(s);
+      item.classList.toggle('checked',s[id]);
+      updateProgress();
+    });
+
+    toggle.addEventListener('click',e=>{
+      e.stopPropagation();
+      toggle.classList.toggle('open');
+      detail.classList.toggle('open');
+    });
+
+    main.addEventListener('click',e=>{
+      if(e.target.closest('.cl-checkbox'))return;
+      toggle.classList.toggle('open');
+      detail.classList.toggle('open');
+    });
+  });
+  updateProgress();
+}
+
+function resetAll(){
+  if(confirm('すべてのチェックをリセットしますか？')){
+    localStorage.removeItem(STORAGE_KEY);
+    items.forEach(i=>i.classList.remove('checked'));
+    updateProgress();
+  }
+}
+
+initChecklist();
+</script>
+</body>
+</html>

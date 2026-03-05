@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ToolBox — 無料で使えるオンラインツール集。画像圧縮、QRコード作成、文字数カウント、請求書作成、半角全角変換など。ブラウザだけで完結する便利ツール。インストール不要・データ送信なし。">
+  <meta name="keywords" content="画像圧縮, QRコード作成, 文字数カウント, 請求書作成, 半角全角変換, JSON整形, OGPプレビュー, 和暦西暦変換, 無料ツール, オンラインツール">
+  <meta property="og:title" content="ToolBox — 無料オンラインツール集">
+  <meta property="og:description" content="画像圧縮、QRコード、文字数カウント、請求書作成など。ブラウザで完結する便利ツール。">
+  <title>ToolBox — 無料で使えるオンラインツール集</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --black: #1d1d1f;
+      --gray-900: #3a3a3c;
+      --gray-700: #636366;
+      --gray-500: #8e8e93;
+      --gray-300: #d1d1d6;
+      --gray-200: #e5e5ea;
+      --gray-100: #f2f2f7;
+      --gray-50: #f9f9fb;
+      --white: #fff;
+      --accent: #0071e3;
+      --accent-light: #e8f2fc;
+      --font: "Inter", "Noto Sans JP", -apple-system, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    html { font-size:16px; scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+    body { font-family:var(--font); color:var(--black); background:var(--gray-100); line-height:1.7; }
+    a { color:inherit; text-decoration:none; }
+    .container { max-width:1080px; margin:0 auto; padding:0 24px; }
+
+    /* ── Nav ── */
+    .nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.72); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid rgba(0,0,0,0.06); }
+    .nav__inner { display:flex; align-items:center; justify-content:space-between; height:48px; }
+    .nav__logo { font-size:1.15rem; font-weight:800; letter-spacing:-0.04em; }
+    .nav__logo span { color:var(--accent); }
+    .nav__links { display:flex; gap:24px; align-items:center; }
+    .nav__link { font-size:0.8rem; font-weight:500; color:var(--gray-700); transition:color 0.2s; }
+    .nav__link:hover { color:var(--black); }
+
+    /* ── Hero ── */
+    .hero { background:var(--white); border-bottom:1px solid var(--gray-200); }
+    .hero__inner { text-align:center; padding:72px 24px 56px; max-width:640px; margin:0 auto; }
+    .hero__label { display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.06em; color:var(--accent); background:var(--accent-light); padding:5px 14px; border-radius:980px; margin-bottom:24px; }
+    .hero__title { font-size:clamp(1.8rem, 4.5vw, 3rem); font-weight:800; letter-spacing:-0.04em; line-height:1.2; margin-bottom:16px; }
+    .hero__title em { font-style:normal; color:var(--accent); }
+    .hero__sub { font-size:0.95rem; color:var(--gray-700); line-height:1.85; margin-bottom:36px; }
+    .hero__search { max-width:440px; margin:0 auto; position:relative; }
+    .hero__search input { width:100%; font-family:var(--font); font-size:0.92rem; padding:14px 20px 14px 46px; border:1.5px solid var(--gray-200); border-radius:14px; outline:none; background:var(--gray-50); transition:border-color 0.2s, box-shadow 0.2s, background 0.2s; }
+    .hero__search input:focus { border-color:var(--accent); box-shadow:0 0 0 4px rgba(0,113,227,0.08); background:var(--white); }
+    .hero__search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--gray-500); display:flex; }
+
+    /* ── Section ── */
+    .section { padding:56px 0; }
+    .section__header { display:flex; align-items:center; gap:12px; margin-bottom:28px; }
+    .section__title { font-size:1.2rem; font-weight:700; letter-spacing:-0.02em; }
+    .section__badge { font-size:0.65rem; font-weight:700; background:var(--accent); color:var(--white); padding:3px 10px; border-radius:980px; }
+
+    /* ── Tool Grid ── */
+    .tools-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+    .tool-card { background:var(--white); border:1px solid var(--gray-200); border-radius:16px; padding:28px 24px; transition:transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s; display:flex; flex-direction:column; }
+    .tool-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.08); border-color:transparent; }
+    .tool-card__top { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+    .tool-card__icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .tool-card__icon svg { width:22px; height:22px; }
+    .tool-card__icon--blue { background:#dbeafe; color:#2563eb; }
+    .tool-card__icon--green { background:#dcfce7; color:#16a34a; }
+    .tool-card__icon--purple { background:#ede9fe; color:#7c3aed; }
+    .tool-card__icon--orange { background:#ffedd5; color:#ea580c; }
+    .tool-card__icon--pink { background:#fce7f3; color:#db2777; }
+    .tool-card__icon--teal { background:#ccfbf1; color:#0d9488; }
+    .tool-card__icon--red { background:#fee2e2; color:#dc2626; }
+    .tool-card__icon--yellow { background:#fef3c7; color:#d97706; }
+    .tool-card__icon--indigo { background:#e0e7ff; color:#4f46e5; }
+    .tool-card__icon--slate { background:#e2e8f0; color:#475569; }
+    .tool-card__title { font-size:1rem; font-weight:700; letter-spacing:-0.01em; }
+    .tool-card__desc { font-size:0.82rem; color:var(--gray-700); line-height:1.65; margin-bottom:18px; flex:1; }
+    .tool-card__link { font-size:0.8rem; font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:4px; transition:gap 0.2s; }
+    .tool-card:hover .tool-card__link { gap:8px; }
+    .tool-card__tags { display:flex; gap:6px; flex-wrap:wrap; }
+    .tool-card__tag { font-size:0.62rem; font-weight:600; background:var(--gray-100); color:var(--gray-500); padding:2px 8px; border-radius:980px; }
+    .tool-card__tag--pop { background:#dbeafe; color:#2563eb; }
+
+    /* ── Features ── */
+    .features { background:var(--white); border-radius:20px; padding:44px 40px; margin-bottom:8px; }
+    .features__grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:32px; text-align:center; }
+    .features__item-icon { width:48px; height:48px; border-radius:14px; background:var(--gray-100); display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+    .features__item-icon svg { width:22px; height:22px; color:var(--black); }
+    .features__item-title { font-size:0.88rem; font-weight:700; margin-bottom:6px; }
+    .features__item-desc { font-size:0.78rem; color:var(--gray-500); line-height:1.65; }
+
+    /* ── CTA ── */
+    .cta { padding:16px 0 64px; }
+    .cta__card { background:var(--black); color:var(--white); border-radius:20px; padding:52px 40px; text-align:center; }
+    .cta__title { font-size:clamp(1.3rem, 2.5vw, 1.8rem); font-weight:800; letter-spacing:-0.03em; margin-bottom:12px; }
+    .cta__desc { font-size:0.9rem; color:rgba(255,255,255,0.55); margin-bottom:28px; line-height:1.8; }
+    .cta__btn { display:inline-block; background:var(--white); color:var(--black); font-size:0.88rem; font-weight:600; padding:13px 32px; border-radius:980px; transition:transform 0.2s, box-shadow 0.2s; }
+    .cta__btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,255,255,0.15); }
+
+    /* ── Footer ── */
+    .footer { background:var(--black); color:var(--white); }
+    .footer__top { display:grid; grid-template-columns:1.2fr 1fr 0.6fr; gap:48px; padding:52px 0 40px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .footer__brand-name { font-size:1.1rem; font-weight:800; margin-bottom:10px; }
+    .footer__brand-name span { color:var(--accent); }
+    .footer__brand-desc { font-size:0.78rem; color:rgba(255,255,255,0.4); line-height:1.75; max-width:240px; }
+    .footer__col-title { font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.3); margin-bottom:16px; }
+    .footer__col-links { display:grid; grid-template-columns:1fr 1fr; gap:4px 28px; }
+    .footer__col-links--single { grid-template-columns:1fr; }
+    .footer__col-links a { font-size:0.8rem; color:rgba(255,255,255,0.55); padding:4px 0; transition:color 0.2s; }
+    .footer__col-links a:hover { color:var(--white); }
+    .footer__bottom { display:flex; align-items:center; justify-content:space-between; padding:20px 0; font-size:0.72rem; color:rgba(255,255,255,0.25); }
+    .footer__bottom-links { display:flex; gap:20px; }
+    .footer__bottom-links a { color:rgba(255,255,255,0.25); transition:color 0.2s; }
+    .footer__bottom-links a:hover { color:rgba(255,255,255,0.5); }
+
+    /* ── Responsive ── */
+    @media (max-width:1024px) {
+      .tools-grid { grid-template-columns:repeat(2, 1fr); }
+      .features__grid { grid-template-columns:repeat(2, 1fr); gap:24px; }
+      .footer__top { grid-template-columns:1fr 1fr; gap:36px; }
+    }
+    @media (max-width:768px) {
+      .container { padding:0 20px; }
+      .nav__links { display:none; }
+      .hero__inner { padding:48px 0 40px; }
+      .hero__title { font-size:1.7rem; }
+      .hero__sub { font-size:0.88rem; margin-bottom:28px; }
+      .hero__search input { font-size:0.88rem; padding:13px 18px 13px 42px; border-radius:12px; }
+      .section { padding:40px 0; }
+      .section__title { font-size:1.1rem; }
+      .tools-grid { gap:12px; }
+      .tool-card { padding:20px 18px; border-radius:14px; }
+      .tool-card__icon { width:38px; height:38px; border-radius:10px; }
+      .tool-card__icon svg { width:18px; height:18px; }
+      .tool-card__title { font-size:0.9rem; }
+      .tool-card__desc { font-size:0.78rem; margin-bottom:12px; }
+      .tool-card__link { font-size:0.76rem; }
+      .features { padding:32px 24px; border-radius:16px; }
+      .features__item-icon { width:40px; height:40px; border-radius:11px; }
+      .features__item-icon svg { width:18px; height:18px; }
+      .features__item-title { font-size:0.82rem; }
+      .features__item-desc { font-size:0.74rem; }
+      .cta__card { padding:36px 24px; border-radius:16px; }
+      .cta__title { font-size:1.15rem; }
+      .cta__desc { font-size:0.82rem; }
+      .footer__top { grid-template-columns:1fr; gap:28px; padding:36px 0 28px; }
+      .footer__col-links { gap:2px 24px; }
+      .footer__col-links a { font-size:0.78rem; }
+      .footer__bottom { flex-direction:column; gap:10px; align-items:flex-start; padding:16px 0 20px; }
+    }
+    @media (max-width:420px) {
+      .container { padding:0 16px; }
+      .hero__inner { padding:36px 0 32px; }
+      .hero__title { font-size:1.45rem; }
+      .tools-grid { grid-template-columns:1fr; max-width:380px; margin:0 auto; }
+      .features__grid { grid-template-columns:1fr 1fr; gap:20px; }
+      .cta__card { padding:32px 20px; }
+    }
+
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity:0; transform:translateY(16px); transition:opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+    .reveal.is-visible { opacity:1; transform:translateY(0); }
+    .reveal-d1 { transition-delay:0.06s; }
+    .reveal-d2 { transition-delay:0.12s; }
+    .reveal-d3 { transition-delay:0.18s; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo">Tool<span>Box</span></a>
+      <div class="nav__links">
+        <a href="#popular" class="nav__link">人気ツール</a>
+        <a href="#all" class="nav__link">すべて</a>
+        <a href="#about" class="nav__link">このサイトについて</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__inner">
+      <span class="hero__label">すべて無料・登録不要</span>
+      <h1 class="hero__title reveal">便利なツールを、<br><em>ブラウザだけで。</em></h1>
+      <p class="hero__sub reveal reveal-d1">画像圧縮、QRコード作成、文字数カウント、請求書作成。<br>インストール不要。データがサーバーに送信されることはありません。</p>
+      <div class="hero__search reveal reveal-d2">
+        <span class="hero__search-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+        <input type="text" id="tool-search" placeholder="ツールを検索...">
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Tools -->
+  <section id="popular" class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <h2 class="section__title">人気のツール</h2>
+        <span class="section__badge">TOP 3</span>
+      </div>
+      <div class="tools-grid" id="popular-tools">
+
+        <a href="tools/text-counter/index.html" class="tool-card reveal">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
+            <div>
+              <div class="tool-card__title">文字数カウント</div>
+              <div class="tool-card__tags"><span class="tool-card__tag">テキスト</span><span class="tool-card__tag tool-card__tag--pop">人気</span></div>
+            </div>
+          </div>
+          <div class="tool-card__desc">リアルタイムで文字数・単語数・行数をカウント。SEOライティングや文章作成に。</div>
+          <span class="tool-card__link">使ってみる →</span>
+        </a>
+
+        <a href="tools/invoice-generator/index.html" class="tool-card reveal reveal-d1">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 10h8"/><path d="M8 14h4"/></svg></div>
+            <div>
+              <div class="tool-card__title">請求書作成</div>
+              <div class="tool-card__tags"><span class="tool-card__tag">ビジネス</span><span class="tool-card__tag tool-card__tag--pop">人気</span></div>
+            </div>
+          </div>
+          <div class="tool-card__desc">フリーランス向け。フォーム入力だけで請求書・見積書を作成。印刷・PDF保存対応。</div>
+          <span class="tool-card__link">使ってみる →</span>
+        </a>
+
+        <a href="tools/image-compressor/index.html" class="tool-card reveal reveal-d2">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+            <div>
+              <div class="tool-card__title">画像圧縮</div>
+              <div class="tool-card__tags"><span class="tool-card__tag">画像</span><span class="tool-card__tag tool-card__tag--pop">人気</span></div>
+            </div>
+          </div>
+          <div class="tool-card__desc">JPEG・PNG・WebPをブラウザ上で圧縮。画質を保ったままファイルサイズを最大80%削減。</div>
+          <span class="tool-card__link">使ってみる →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <div class="container">
+    <div class="features reveal">
+      <div class="features__grid">
+        <div>
+          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <div class="features__item-title">プライバシー安全</div>
+          <div class="features__item-desc">すべての処理はブラウザ内で完結。データは外部に送信されません。</div>
+        </div>
+        <div>
+          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div>
+          <div class="features__item-title">高速処理</div>
+          <div class="features__item-desc">最新のWeb APIを活用し、大きなファイルもストレスなく処理。</div>
+        </div>
+        <div>
+          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 8 0 8"/></svg></div>
+          <div class="features__item-title">完全無料</div>
+          <div class="features__item-desc">すべてのツールを無料で利用可能。アカウント登録も不要。</div>
+        </div>
+        <div>
+          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+          <div class="features__item-title">スマホ対応</div>
+          <div class="features__item-desc">PC・タブレット・スマホ。どのデバイスでも快適に使えます。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Tools -->
+  <section id="all" class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <h2 class="section__title">すべてのツール</h2>
+      </div>
+      <div class="tools-grid" id="all-tools">
+
+        <a href="tools/text-counter/index.html" class="tool-card reveal" data-name="文字数カウント テキスト">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
+            <div class="tool-card__title">文字数カウント</div>
+          </div>
+          <div class="tool-card__desc">文字数・単語数・行数をリアルタイムカウント。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/image-compressor/index.html" class="tool-card reveal reveal-d1" data-name="画像圧縮 画像 JPEG PNG">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+            <div class="tool-card__title">画像圧縮</div>
+          </div>
+          <div class="tool-card__desc">JPEG・PNG・WebPを画質を保って圧縮。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/qr-generator/index.html" class="tool-card reveal reveal-d2" data-name="QRコード 作成 生成">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><path d="M21 14h-3v3"/><path d="M21 19v2h-2"/></svg></div>
+            <div class="tool-card__title">QRコード作成</div>
+          </div>
+          <div class="tool-card__desc">URL・テキストからQRコードを生成。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/invoice-generator/index.html" class="tool-card reveal" data-name="請求書 見積書 作成 ビジネス インボイス">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 10h8"/><path d="M8 14h4"/></svg></div>
+            <div class="tool-card__title">請求書作成</div>
+          </div>
+          <div class="tool-card__desc">請求書・見積書をフォーム入力で作成。印刷/PDF対応。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/color-palette/index.html" class="tool-card reveal reveal-d1" data-name="カラーパレット 色 配色">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12c0 1.8.5 3.5 1.2 5 .7 1.3 2.3 2.5 4.3 1.5a2.5 2.5 0 0 1 3.5 2.3V22Z"/></svg></div>
+            <div class="tool-card__title">カラーパレット生成</div>
+          </div>
+          <div class="tool-card__desc">おしゃれな配色を自動生成。CSSコード出力。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/halfwidth-fullwidth/index.html" class="tool-card reveal reveal-d2" data-name="半角 全角 変換 ひらがな カタカナ">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg></div>
+            <div class="tool-card__title">半角全角変換</div>
+          </div>
+          <div class="tool-card__desc">半角⇔全角、ひらがな⇔カタカナを一括変換。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/json-formatter/index.html" class="tool-card reveal" data-name="JSON 整形 フォーマット バリデーション">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg></div>
+            <div class="tool-card__title">JSON整形</div>
+          </div>
+          <div class="tool-card__desc">JSONの整形・圧縮・検証・キーソート。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/ogp-preview/index.html" class="tool-card reveal reveal-d1" data-name="OGP プレビュー SNS Twitter Facebook LINE">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div class="tool-card__title">OGPプレビュー</div>
+          </div>
+          <div class="tool-card__desc">Twitter・Facebook・LINEでのシェア表示を確認。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/wareki-converter/index.html" class="tool-card reveal reveal-d2" data-name="和暦 西暦 変換 令和 平成 昭和">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></div>
+            <div class="tool-card__title">和暦西暦変換</div>
+          </div>
+          <div class="tool-card__desc">令和・平成・昭和の和暦と西暦を相互変換。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/base64-converter/index.html" class="tool-card reveal" data-name="Base64 エンコード デコード URL変換">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--slate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5v3H7V7a5 5 0 0 1 5-5Z"/><rect x="3" y="10" width="18" height="12" rx="2"/><circle cx="12" cy="16" r="1"/></svg></div>
+            <div class="tool-card__title">Base64 / URL変換</div>
+          </div>
+          <div class="tool-card__desc">Base64・URLエンコード・HTMLエンティティ変換。</div>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta" id="about">
+    <div class="container">
+      <div class="cta__card reveal">
+        <div class="cta__title">すべて無料。すべてブラウザで完結。</div>
+        <div class="cta__desc">ToolBoxは、日常的に使うツールをブラウザだけで使えるようにしたサービスです。<br>あなたのデータがサーバーに送信されることはありません。</div>
+        <a href="#popular" class="cta__btn">ツールを使ってみる</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">Tool<span>Box</span></div>
+          <p class="footer__brand-desc">インストール不要の無料オンラインツール集。すべてブラウザで完結。</p>
+        </div>
+        <div>
+          <div class="footer__col-title">ツール</div>
+          <div class="footer__col-links">
+            <a href="tools/text-counter/index.html">文字数カウント</a>
+            <a href="tools/color-palette/index.html">カラーパレット</a>
+            <a href="tools/image-compressor/index.html">画像圧縮</a>
+            <a href="tools/json-formatter/index.html">JSON整形</a>
+            <a href="tools/qr-generator/index.html">QRコード作成</a>
+            <a href="tools/ogp-preview/index.html">OGPプレビュー</a>
+            <a href="tools/invoice-generator/index.html">請求書作成</a>
+            <a href="tools/wareki-converter/index.html">和暦西暦変換</a>
+            <a href="tools/halfwidth-fullwidth/index.html">半角全角変換</a>
+            <a href="tools/base64-converter/index.html">Base64変換</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__col-title">サイト情報</div>
+          <div class="footer__col-links footer__col-links--single">
+            <a href="pages/about.html">運営者情報</a>
+            <a href="pages/contact.html">お問い合わせ</a>
+            <a href="pages/privacy.html">プライバシーポリシー</a>
+            <a href="pages/terms.html">利用規約</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 ToolBox. All rights reserved.</span>
+        <div class="footer__bottom-links">
+          <a href="pages/privacy.html">プライバシーポリシー</a>
+          <a href="pages/terms.html">利用規約</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+      reveals.forEach(el => observer.observe(el));
+
+      const search = document.getElementById('tool-search');
+      const cards = document.querySelectorAll('#all-tools .tool-card');
+      search.addEventListener('input', () => {
+        const q = search.value.toLowerCase();
+        cards.forEach(card => {
+          const name = card.dataset.name.toLowerCase();
+          const title = card.querySelector('.tool-card__title').textContent.toLowerCase();
+          card.style.display = (name.includes(q) || title.includes(q)) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

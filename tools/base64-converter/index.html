@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】Base64エンコード・デコードツール。テキスト・画像のBase64変換をブラウザ上で。URLエンコード/デコードにも対応。開発者向け。">
+  <meta name="keywords" content="Base64 変換, Base64 エンコード, Base64 デコード, URLエンコード, テキスト変換">
+  <title>Base64変換 — 無料オンラインツール | ToolBox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}.nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}.nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:24px}.tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}.tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}.tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .tabs{display:flex;gap:6px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+    .tab{font-family:var(--font);font-size:0.78rem;font-weight:600;padding:8px 18px;border-radius:980px;border:1.5px solid var(--gray-300);background:var(--white);cursor:pointer;transition:all 0.2s}
+    .tab.is-active{background:var(--black);color:var(--white);border-color:var(--black)}
+
+    .panel{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden}
+    .panel__header{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:var(--gray-100);border-bottom:1px solid var(--gray-200)}
+    .panel__label{font-size:0.72rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em}
+    .panel__action{font-family:var(--font);font-size:0.72rem;font-weight:600;background:var(--accent);color:var(--white);border:none;padding:5px 14px;border-radius:980px;cursor:pointer}
+    .panel textarea{width:100%;min-height:180px;font-family:'SF Mono',Consolas,monospace;font-size:0.85rem;line-height:1.6;padding:16px 20px;border:none;outline:none;resize:vertical}
+    .panel textarea::placeholder{color:var(--gray-300)}
+
+    .arrows{text-align:center;padding:16px;font-size:1.2rem;color:var(--gray-300)}
+    .btn-row{display:flex;gap:10px;justify-content:center;margin:20px 0}
+    .btn{font-family:var(--font);font-size:0.85rem;font-weight:600;padding:12px 28px;border-radius:980px;border:none;cursor:pointer;transition:all 0.2s}
+    .btn--primary{background:var(--accent);color:var(--white)}.btn--primary:hover{background:#0077ed}
+    .btn--outline{background:var(--white);border:1.5px solid var(--gray-300);color:var(--black)}.btn--outline:hover{border-color:var(--black)}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}.seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}.seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}.seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}.seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}.seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../index.html" class="nav__logo">Tool<span>Box</span></a><a href="../../index.html" class="nav__back">← ツール一覧</a></div></nav>
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 1 5 5v3H7V7a5 5 0 0 1 5-5Z"/><rect x="3" y="10" width="18" height="12" rx="2"/><circle cx="12" cy="16" r="1"/></svg></div>
+      <h1 class="tool-header__title">Base64 / URLエンコード変換</h1>
+      <p class="tool-header__desc">テキストのBase64エンコード・デコード、URLエンコード・デコードをブラウザ上で。</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab is-active" onclick="setMode('base64',this)">Base64</button>
+      <button class="tab" onclick="setMode('url',this)">URLエンコード</button>
+      <button class="tab" onclick="setMode('html',this)">HTMLエンティティ</button>
+      <button class="tab" onclick="setMode('unicode',this)">Unicode</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel__header"><span class="panel__label">入力（テキスト）</span><button class="panel__action" onclick="document.getElementById('input').value=''">クリア</button></div>
+      <textarea id="input" placeholder="テキストを入力..."></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn--primary" onclick="encode()">エンコード ↓</button>
+      <button class="btn btn--outline" onclick="decode()">デコード ↑</button>
+    </div>
+
+    <div class="panel">
+      <div class="panel__header"><span class="panel__label">出力（変換結果）</span><button class="panel__action" onclick="navigator.clipboard.writeText(document.getElementById('output').value)">コピー</button></div>
+      <textarea id="output" placeholder="変換結果がここに表示されます" readonly></textarea>
+    </div>
+
+    <div class="seo-section">
+      <h2>Base64変換ツールの使い方</h2>
+      <p>テキストを入力して「エンコード」を押すとBase64形式に変換します。Base64文字列を入力して「デコード」を押すと元のテキストに復元します。</p>
+      <h3>Base64とは</h3>
+      <p>Base64は、バイナリデータをASCII文字列に変換するエンコード方式です。メールの添付ファイル、Data URI（CSSに画像を埋め込む）、APIトークンなど、さまざまな場面で使用されます。</p>
+      <h3>対応する変換方式</h3>
+      <ul>
+        <li><strong>Base64</strong> — もっとも一般的なバイナリ→テキスト変換</li>
+        <li><strong>URLエンコード</strong> — URLに使えない文字を%エンコードに変換</li>
+        <li><strong>HTMLエンティティ</strong> — HTML特殊文字をエスケープ</li>
+        <li><strong>Unicode</strong> — 文字をUnicodeコードポイントに変換</li>
+      </ul>
+    </div>
+  </main>
+  <footer class="footer"><p>&copy; 2026 <a href="../../index.html">ToolBox</a></p></footer>
+  <script>
+    let mode='base64';
+    function setMode(m,el){mode=m;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('is-active'));el.classList.add('is-active');}
+    function encode(){
+      const text=document.getElementById('input').value;
+      let result='';
+      try{
+        switch(mode){
+          case 'base64':result=btoa(unescape(encodeURIComponent(text)));break;
+          case 'url':result=encodeURIComponent(text);break;
+          case 'html':result=text.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));break;
+          case 'unicode':result=[...text].map(c=>'U+'+c.codePointAt(0).toString(16).toUpperCase().padStart(4,'0')).join(' ');break;
+        }
+      }catch(e){result='エラー: '+e.message;}
+      document.getElementById('output').value=result;
+    }
+    function decode(){
+      const text=document.getElementById('output').value||document.getElementById('input').value;
+      let result='';
+      try{
+        switch(mode){
+          case 'base64':result=decodeURIComponent(escape(atob(text)));break;
+          case 'url':result=decodeURIComponent(text);break;
+          case 'html':const d=document.createElement('div');d.innerHTML=text;result=d.textContent;break;
+          case 'unicode':result=text.split(/\s+/).map(u=>String.fromCodePoint(parseInt(u.replace('U+',''),16))).join('');break;
+        }
+      }catch(e){result='エラー: '+e.message;}
+      document.getElementById('input').value=result;
+    }
+  </script>
+</body>
+</html>

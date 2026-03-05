@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>年金受給額シミュレーター｜将来の年金額を計算 - CalcBox</title>
+<meta name="description" content="国民年金・厚生年金の加入期間と平均年収から、将来受け取れる年金額をシミュレーション。老齢基礎年金・老齢厚生年金の概算額を計算。">
+<link rel="canonical" href="https://example.com/calcs/pension/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}:root{--black:#1d1d1f;--accent:#0071e3;--accent-hover:#0077ED;--gray-100:#f2f2f7;--gray-200:#e5e5ea;--gray-300:#d1d1d6;--gray-400:#aeaeb2;--gray-500:#8e8e93;--white:#fff;--radius:16px;--radius-sm:12px;--transition:0.3s cubic-bezier(0.25,0.1,0.25,1)}html{scroll-behavior:smooth}body{font-family:'Inter','Noto Sans JP',sans-serif;background:var(--gray-100);color:var(--black);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(0,0,0,0.06)}.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between}.nav-logo{font-weight:700;font-size:18px;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}.nav-logo svg{width:24px;height:24px;color:var(--accent)}.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--gray-500)}.nav-links a:hover{color:var(--black)}
+.page-header{text-align:center;padding:48px 24px 32px;max-width:640px;margin:0 auto}.page-header .breadcrumb{font-size:13px;color:var(--gray-500);margin-bottom:12px}.page-header .breadcrumb a{color:var(--accent)}.page-header h1{font-size:32px;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}.page-header p{font-size:15px;color:var(--gray-500)}
+.calc-container{max-width:800px;margin:0 auto;padding:0 24px 60px}.calc-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-bottom:24px}.calc-card h2{font-size:18px;font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:8px}.calc-card h2 svg{width:20px;height:20px;color:var(--accent)}
+.form-group{margin-bottom:20px}.form-group label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}.form-group .hint{font-size:12px;color:var(--gray-500);margin-top:4px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+input[type="number"],select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);font-size:16px;font-family:inherit;background:var(--white);outline:none;transition:var(--transition)}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,113,227,0.1)}
+.input-unit{position:relative}.input-unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--gray-400);pointer-events:none}.input-unit input{padding-right:50px}
+.slider-group{display:flex;align-items:center;gap:12px}.slider-group input[type="range"]{flex:1;accent-color:var(--accent)}.slider-group .slider-val{min-width:50px;text-align:right;font-weight:600;font-size:15px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--white);padding:12px 32px;border:none;border-radius:980px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:var(--transition);width:100%}.btn:hover{background:var(--accent-hover)}
+.result-section{display:none}.result-section.active{display:block}
+.result-main{background:linear-gradient(135deg,#ff9500,#ff6b00);border-radius:var(--radius);padding:32px;text-align:center;color:var(--white);margin-bottom:20px}.result-main .label{font-size:14px;opacity:0.85;margin-bottom:4px}.result-main .value{font-size:40px;font-weight:700;letter-spacing:-1px}.result-main .sub{font-size:15px;opacity:0.8;margin-top:8px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}.result-item{background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--gray-200);padding:20px;text-align:center}.result-item .label{font-size:12px;color:var(--gray-500);margin-bottom:4px}.result-item .value{font-size:22px;font-weight:700}
+.seo-content{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray-200);padding:32px;margin-top:40px}.seo-content h2{font-size:20px;font-weight:700;margin-bottom:16px}.seo-content h3{font-size:16px;font-weight:600;margin:20px 0 8px}.seo-content p{font-size:14px;color:#444;line-height:1.8;margin-bottom:12px}.seo-content ul{font-size:14px;color:#444;line-height:1.8;margin-left:20px;margin-bottom:12px}
+.footer{background:var(--white);border-top:1px solid var(--gray-200);padding:32px 24px;text-align:center;margin-top:60px}.footer p{font-size:12px;color:var(--gray-400)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{display:none}.page-header h1{font-size:26px}.form-row{grid-template-columns:1fr}.result-main .value{font-size:30px}.result-grid{grid-template-columns:1fr}.calc-card{padding:24px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="../../index.html" class="nav-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>CalcBox</a><div class="nav-links"><a href="../../index.html#calcs">計算ツール</a><a href="../../pages/about.html">CalcBoxとは</a></div></div></nav>
+
+<div class="page-header">
+  <div class="breadcrumb"><a href="../../index.html">CalcBox</a> / 年金受給額シミュレーション</div>
+  <h1>年金受給額シミュレーション</h1>
+  <p>加入期間と平均年収から将来の年金受給額を試算します</p>
+</div>
+
+<div class="calc-container">
+  <div class="calc-card reveal">
+    <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>年金加入情報を入力</h2>
+    <div class="form-group">
+      <label for="kokuminYears">国民年金の加入月数（第1号被保険者期間）</label>
+      <div class="slider-group">
+        <input type="range" id="kokuminYears" min="0" max="480" value="48" oninput="document.getElementById('kokuminVal').textContent=this.value+'ヶ月'">
+        <span class="slider-val" id="kokuminVal">48ヶ月</span>
+      </div>
+      <div class="hint">自営業・学生・無職の期間。最大480ヶ月（40年）</div>
+    </div>
+    <div class="form-group">
+      <label for="koseiYears">厚生年金の加入月数（第2号被保険者期間）</label>
+      <div class="slider-group">
+        <input type="range" id="koseiYears" min="0" max="480" value="432" oninput="document.getElementById('koseiVal').textContent=this.value+'ヶ月'">
+        <span class="slider-val" id="koseiVal">432ヶ月</span>
+      </div>
+      <div class="hint">会社員・公務員の期間</div>
+    </div>
+    <div class="form-group">
+      <label for="avgSalary">厚生年金加入期間中の平均年収</label>
+      <div class="input-unit"><input type="number" id="avgSalary" value="5000000" min="0" step="10000"><span>円</span></div>
+      <div class="hint">ボーナスを含めた年収の平均（標準報酬月額の算定基礎）</div>
+    </div>
+    <button class="btn" onclick="calculate()">年金額を計算する</button>
+  </div>
+
+  <div class="result-section" id="results">
+    <div class="result-main reveal">
+      <div class="label">年金受給額（年額）</div>
+      <div class="value" id="totalAnnual">--</div>
+      <div class="sub">月額: <strong id="totalMonthly">--</strong></div>
+    </div>
+    <div class="result-grid">
+      <div class="result-item reveal"><div class="label">老齢基礎年金（年額）</div><div class="value" id="basicPension">--</div></div>
+      <div class="result-item reveal"><div class="label">老齢厚生年金（年額）</div><div class="value" id="welfPension">--</div></div>
+      <div class="result-item reveal"><div class="label">基礎年金（月額）</div><div class="value" id="basicMonthly">--</div></div>
+      <div class="result-item reveal"><div class="label">厚生年金（月額）</div><div class="value" id="welfMonthly">--</div></div>
+    </div>
+  </div>
+
+  <div class="seo-content reveal">
+    <h2>公的年金制度の仕組み</h2>
+    <p>日本の公的年金は「2階建て」の構造になっています。1階部分が「国民年金（基礎年金）」で、20歳以上60歳未満のすべての人が加入します。2階部分が「厚生年金」で、会社員や公務員が加入します。</p>
+    <h3>老齢基礎年金</h3>
+    <p>2026年度の満額は年間約816,000円（月額約68,000円）です。40年間（480ヶ月）加入で満額受給でき、加入月数に応じて按分されます。受給開始は原則65歳からですが、60歳から繰上げ受給（減額）、75歳まで繰下げ受給（増額）が可能です。</p>
+    <h3>老齢厚生年金</h3>
+    <p>厚生年金の受給額は、加入期間中の報酬（給与・賞与）に比例します。計算式は「平均標準報酬額 x 5.481/1000 x 加入月数」です。平均年収が高いほど、また加入期間が長いほど受給額は多くなります。</p>
+    <h3>年金を増やすには</h3>
+    <ul>
+      <li>繰下げ受給：1ヶ月繰り下げるごとに0.7%増額（75歳まで最大84%増）</li>
+      <li>付加年金：国民年金に月400円の付加保険料を上乗せ</li>
+      <li>iDeCo：自分で積み立てる私的年金</li>
+      <li>国民年金基金：自営業者向けの上乗せ年金</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="footer"><p>&copy; 2026 CalcBox. All rights reserved. | <a href="../../pages/privacy.html" style="color:var(--gray-400)">プライバシーポリシー</a></p></footer>
+
+<script>
+function fmt(n){return Math.round(n).toLocaleString('ja-JP');}
+
+function calculate(){
+  const kokuminMonths=Number(document.getElementById('kokuminYears').value);
+  const koseiMonths=Number(document.getElementById('koseiYears').value);
+  const avgSalary=Number(document.getElementById('avgSalary').value);
+
+  // 老齢基礎年金: 満額816,000円(2026年度概算) x 加入月数/480
+  const totalPensionMonths=Math.min(480, kokuminMonths+koseiMonths);
+  const basicPension=Math.round(816000*totalPensionMonths/480);
+
+  // 老齢厚生年金: 平均標準報酬額 x 5.481/1000 x 厚生年金加入月数
+  const avgMonthly=avgSalary/12;
+  const welfPension=Math.round(avgMonthly*5.481/1000*koseiMonths);
+
+  const totalAnnual=basicPension+welfPension;
+
+  document.getElementById('totalAnnual').textContent=fmt(totalAnnual)+'円';
+  document.getElementById('totalMonthly').textContent=fmt(Math.round(totalAnnual/12))+'円';
+  document.getElementById('basicPension').textContent=fmt(basicPension)+'円';
+  document.getElementById('welfPension').textContent=fmt(welfPension)+'円';
+  document.getElementById('basicMonthly').textContent=fmt(Math.round(basicPension/12))+'円';
+  document.getElementById('welfMonthly').textContent=fmt(Math.round(welfPension/12))+'円';
+
+  document.getElementById('results').classList.add('active');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  localStorage.setItem('calcbox_pension',JSON.stringify({kokuminMonths,koseiMonths,avgSalary}));
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const s=localStorage.getItem('calcbox_pension');
+  if(s){const d=JSON.parse(s);document.getElementById('kokuminYears').value=d.kokuminMonths;document.getElementById('kokuminVal').textContent=d.kokuminMonths+'ヶ月';document.getElementById('koseiYears').value=d.koseiMonths;document.getElementById('koseiVal').textContent=d.koseiMonths+'ヶ月';document.getElementById('avgSalary').value=d.avgSalary;}
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】カラーパレット生成ツール。スペースキーを押すだけでおしゃれな配色を自動生成。HEX・RGB・HSLコードをワンクリックでコピー。Web制作・デザインに。">
+  <meta name="keywords" content="カラーパレット, 配色 ツール, 色 組み合わせ, HEXコード, カラーコード, 配色ジェネレーター">
+  <title>カラーパレット生成 — 無料オンラインツール | ToolBox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:24px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+    .hint{text-align:center;font-size:0.82rem;color:var(--gray-500);margin-bottom:28px;background:var(--white);padding:12px 20px;border-radius:980px;display:inline-block}
+    .hint-wrap{text-align:center;margin-bottom:28px}
+    .hint kbd{background:var(--gray-100);padding:3px 8px;border-radius:6px;font-family:var(--font);font-size:0.78rem;font-weight:600;border:1px solid var(--gray-300)}
+
+    .palette{display:flex;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);min-height:420px}
+    .palette-color{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:24px 12px;cursor:pointer;transition:flex 0.3s cubic-bezier(0.16,1,0.3,1);position:relative}
+    .palette-color:hover{flex:1.5}
+    .palette-color__lock{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.2);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s;backdrop-filter:blur(8px)}
+    .palette-color__lock:hover{background:rgba(255,255,255,0.4)}
+    .palette-color__lock.is-locked{background:rgba(255,255,255,0.5)}
+    .palette-color__info{background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);padding:12px 16px;border-radius:12px;text-align:center;width:100%;max-width:140px}
+    .palette-color__hex{font-size:0.88rem;font-weight:700;letter-spacing:0.02em;cursor:pointer}
+    .palette-color__rgb{font-size:0.7rem;color:var(--gray-500);margin-top:2px}
+    .palette-color__copied{font-size:0.7rem;color:#34c759;font-weight:600;display:none}
+
+    .actions{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+    .btn{font-family:var(--font);font-size:0.85rem;font-weight:600;padding:12px 28px;border-radius:980px;border:none;cursor:pointer;transition:all 0.2s}
+    .btn--primary{background:var(--black);color:var(--white)}.btn--primary:hover{background:#2c2c2e}
+    .btn--outline{background:var(--white);color:var(--black);border:1.5px solid var(--gray-300)}.btn--outline:hover{border-color:var(--black)}
+
+    .saved-palettes{margin-top:40px}
+    .saved-palettes__title{font-size:1.1rem;font-weight:700;margin-bottom:16px}
+    .saved-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .saved-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);cursor:pointer;transition:transform 0.2s}
+    .saved-card:hover{transform:translateY(-2px)}
+    .saved-card__colors{display:flex;height:60px}
+    .saved-card__color{flex:1}
+    .saved-card__info{padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+    .saved-card__codes{font-size:0.7rem;color:var(--gray-500)}
+    .saved-card__delete{background:none;border:none;color:var(--gray-300);cursor:pointer;font-size:0.85rem;padding:4px}
+    .saved-card__delete:hover{color:#ff3b30}
+
+    .css-output{margin-top:24px;background:var(--white);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .css-output__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px}
+    .css-output pre{font-size:0.82rem;background:var(--gray-100);padding:16px;border-radius:10px;overflow-x:auto;line-height:1.7;font-family:'SF Mono',Consolas,monospace}
+    .css-output__copy{font-family:var(--font);font-size:0.75rem;font-weight:600;background:var(--accent);color:var(--white);border:none;padding:6px 14px;border-radius:980px;cursor:pointer;margin-top:10px}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .palette{flex-direction:column;min-height:auto}
+      .palette-color{min-height:100px;flex-direction:row;justify-content:space-between;padding:16px 20px}
+      .palette-color__lock{position:static}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../index.html" class="nav__logo">Tool<span>Box</span></a><a href="../../index.html" class="nav__back">← ツール一覧</a></div></nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12c0 1.8.5 3.5 1.2 5 .7 1.3 2.3 2.5 4.3 1.5a2.5 2.5 0 0 1 3.5 2.3V22Z"/></svg></div>
+      <h1 class="tool-header__title">カラーパレット生成</h1>
+      <p class="tool-header__desc">スペースキーを押すだけでおしゃれな配色を自動生成。色をクリックでHEXコードをコピー。</p>
+    </div>
+    <div class="hint-wrap"><span class="hint"><kbd>Space</kbd> キーで新しいパレットを生成 ・ 🔒 でロックして色を固定</span></div>
+
+    <div class="palette" id="palette"></div>
+
+    <div class="actions">
+      <button class="btn btn--primary" onclick="generatePalette()">新しいパレット</button>
+      <button class="btn btn--outline" onclick="savePalette()">保存する</button>
+      <button class="btn btn--outline" onclick="exportCSS()">CSSをコピー</button>
+    </div>
+
+    <div class="css-output" id="css-output" style="display:none">
+      <div class="css-output__title">CSS変数</div>
+      <pre id="css-code"></pre>
+      <button class="css-output__copy" onclick="copyCSSCode()">コピー</button>
+    </div>
+
+    <div class="saved-palettes" id="saved-section" style="display:none">
+      <div class="saved-palettes__title">保存したパレット</div>
+      <div class="saved-grid" id="saved-grid"></div>
+    </div>
+
+    <div class="seo-section">
+      <h2>カラーパレット生成ツールの使い方</h2>
+      <p>スペースキーを押すか「新しいパレット」ボタンをクリックするだけで、調和の取れた5色の配色を自動生成します。気に入った色は🔒ボタンでロックすれば、他の色だけが変更されます。</p>
+      <h3>デザインの配色で迷ったら</h3>
+      <ul>
+        <li><strong>60-30-10ルール</strong> — メインカラー60%、サブカラー30%、アクセントカラー10%の比率で使うとバランスが良い</li>
+        <li><strong>類似色</strong> — 色相環で隣り合う色を組み合わせると落ち着いた印象に</li>
+        <li><strong>補色</strong> — 正反対の色を組み合わせるとダイナミックな印象に</li>
+        <li><strong>モノトーン</strong> — 同じ色相の明度・彩度違いで統一感を出す</li>
+      </ul>
+      <h3>WebデザインでのカラーコードI</h3>
+      <p>Webデザインでは主にHEXコード（#FF5733）やRGB（rgb(255, 87, 51)）が使われます。このツールでは両方のコードを表示し、ワンクリックでコピーできます。CSS変数として一括エクスポートも可能です。</p>
+    </div>
+  </main>
+
+  <footer class="footer"><p>&copy; 2026 <a href="../../index.html">ToolBox</a></p></footer>
+
+  <script>
+    let colors = [];
+    let locked = [false,false,false,false,false];
+    let savedPalettes = JSON.parse(localStorage.getItem('toolbox-palettes') || '[]');
+
+    const harmonies = [
+      () => { const h=rand(360); return [h,(h+30)%360,(h+60)%360,(h+180)%360,(h+210)%360]; },
+      () => { const h=rand(360); return [h,(h+72)%360,(h+144)%360,(h+216)%360,(h+288)%360]; },
+      () => { const h=rand(360); return [h,(h+150)%360,(h+210)%360,(h+30)%360,(h+330)%360]; },
+      () => { const h=rand(360); return [h,h,h,h,h]; },
+    ];
+
+    function rand(max){return Math.floor(Math.random()*max)}
+
+    function hslToHex(h,s,l){
+      s/=100;l/=100;
+      const a=s*Math.min(l,1-l);
+      const f=n=>{const k=(n+h/30)%12;const c=l-a*Math.max(Math.min(k-3,9-k,1),-1);return Math.round(255*c).toString(16).padStart(2,'0');};
+      return `#${f(0)}${f(8)}${f(4)}`;
+    }
+
+    function hexToRgb(hex){
+      const r=parseInt(hex.slice(1,3),16);
+      const g=parseInt(hex.slice(3,5),16);
+      const b=parseInt(hex.slice(5,7),16);
+      return {r,g,b};
+    }
+
+    function getContrastColor(hex){
+      const {r,g,b}=hexToRgb(hex);
+      return (r*0.299+g*0.587+b*0.114)>150?'#1d1d1f':'#ffffff';
+    }
+
+    function generatePalette(){
+      const harmony = harmonies[rand(harmonies.length)]();
+      for(let i=0;i<5;i++){
+        if(!locked[i]){
+          const h=harmony[i];
+          const s=40+rand(40);
+          const l=30+rand(45);
+          colors[i]=hslToHex(h,s,l);
+        }
+      }
+      render();
+    }
+
+    function render(){
+      const palette=document.getElementById('palette');
+      palette.innerHTML='';
+      colors.forEach((color,i)=>{
+        const {r,g,b}=hexToRgb(color);
+        const textColor=getContrastColor(color);
+        const div=document.createElement('div');
+        div.className='palette-color';
+        div.style.background=color;
+        div.innerHTML=`
+          <button class="palette-color__lock ${locked[i]?'is-locked':''}" onclick="event.stopPropagation();toggleLock(${i})" style="color:${textColor}">${locked[i]?'🔒':'🔓'}</button>
+          <div class="palette-color__info">
+            <div class="palette-color__hex" onclick="copyColor('${color}',this)">${color.toUpperCase()}</div>
+            <div class="palette-color__rgb">rgb(${r}, ${g}, ${b})</div>
+            <div class="palette-color__copied">コピーしました</div>
+          </div>
+        `;
+        palette.appendChild(div);
+      });
+    }
+
+    function toggleLock(i){locked[i]=!locked[i];render();}
+
+    function copyColor(color,el){
+      navigator.clipboard.writeText(color).then(()=>{
+        const copied=el.parentElement.querySelector('.palette-color__copied');
+        copied.style.display='block';
+        setTimeout(()=>copied.style.display='none',1200);
+      });
+    }
+
+    function savePalette(){
+      savedPalettes.push([...colors]);
+      localStorage.setItem('toolbox-palettes',JSON.stringify(savedPalettes));
+      renderSaved();
+    }
+
+    function renderSaved(){
+      if(savedPalettes.length===0){document.getElementById('saved-section').style.display='none';return;}
+      document.getElementById('saved-section').style.display='block';
+      const grid=document.getElementById('saved-grid');
+      grid.innerHTML='';
+      savedPalettes.forEach((pal,i)=>{
+        const card=document.createElement('div');
+        card.className='saved-card';
+        card.innerHTML=`
+          <div class="saved-card__colors">${pal.map(c=>`<div class="saved-card__color" style="background:${c}"></div>`).join('')}</div>
+          <div class="saved-card__info">
+            <span class="saved-card__codes">${pal.map(c=>c.toUpperCase()).join(' ')}</span>
+            <button class="saved-card__delete" onclick="event.stopPropagation();deleteSaved(${i})">✕</button>
+          </div>
+        `;
+        card.addEventListener('click',()=>{colors=[...pal];render();});
+        grid.appendChild(card);
+      });
+    }
+
+    function deleteSaved(i){
+      savedPalettes.splice(i,1);
+      localStorage.setItem('toolbox-palettes',JSON.stringify(savedPalettes));
+      renderSaved();
+    }
+
+    function exportCSS(){
+      const css=`:root {\n${colors.map((c,i)=>`  --color-${i+1}: ${c};`).join('\n')}\n}`;
+      document.getElementById('css-code').textContent=css;
+      document.getElementById('css-output').style.display='block';
+    }
+
+    function copyCSSCode(){
+      const code=document.getElementById('css-code').textContent;
+      navigator.clipboard.writeText(code).then(()=>{
+        const btn=document.querySelector('.css-output__copy');
+        btn.textContent='コピーしました ✓';
+        setTimeout(()=>btn.textContent='コピー',1500);
+      });
+    }
+
+    document.addEventListener('keydown',e=>{if(e.code==='Space'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();generatePalette();}});
+
+    generatePalette();
+    renderSaved();
+  </script>
+</body>
+</html>

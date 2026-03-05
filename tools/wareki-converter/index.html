@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】和暦西暦変換ツール。令和・平成・昭和・大正・明治の和暦と西暦を相互変換。年齢・干支・学年も自動計算。">
+  <meta name="keywords" content="和暦 西暦 変換, 令和 西暦, 平成 何年, 昭和 西暦, 年齢計算, 干支">
+  <title>和暦西暦変換 — 無料オンラインツール | ToolBox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}.nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}.nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:800px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}.tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}.tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}.tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .converter-card{background:var(--white);border-radius:20px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:20px}
+    .converter-card__title{font-size:1rem;font-weight:700;margin-bottom:20px}
+    .input-grid{display:grid;grid-template-columns:1fr 80px;gap:12px;align-items:end}
+    .field label{display:block;font-size:0.75rem;font-weight:600;color:var(--gray-700);margin-bottom:4px}
+    .field select,.field input{width:100%;font-family:var(--font);font-size:0.92rem;padding:12px;border:1.5px solid var(--gray-300);border-radius:12px;outline:none;transition:border-color 0.2s}
+    .field select:focus,.field input:focus{border-color:var(--accent)}
+    .year-input{display:grid;grid-template-columns:160px 1fr;gap:12px;align-items:end}
+
+    .result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:24px}
+    .result-card{background:var(--gray-100);border-radius:14px;padding:18px;text-align:center}
+    .result-card__label{font-size:0.7rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+    .result-card__value{font-size:1.4rem;font-weight:800;letter-spacing:-0.02em}
+    .result-card__sub{font-size:0.75rem;color:var(--gray-500);margin-top:4px}
+
+    .era-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:0.85rem}
+    .era-table th{text-align:left;font-weight:600;padding:10px 12px;background:var(--gray-100);border-bottom:2px solid var(--gray-200)}
+    .era-table td{padding:10px 12px;border-bottom:1px solid var(--gray-200)}
+    .era-table tr:hover td{background:var(--gray-100)}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}.seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}.seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}.seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}.seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+    @media(max-width:480px){.year-input{grid-template-columns:1fr}.result-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../index.html" class="nav__logo">Tool<span>Box</span></a><a href="../../index.html" class="nav__back">← ツール一覧</a></div></nav>
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></div>
+      <h1 class="tool-header__title">和暦西暦変換</h1>
+      <p class="tool-header__desc">令和・平成・昭和の和暦と西暦を相互変換。年齢・干支・学年も自動計算。</p>
+    </div>
+
+    <div class="converter-card">
+      <div class="converter-card__title">西暦から和暦に変換</div>
+      <div class="field">
+        <label>西暦</label>
+        <input type="number" id="seireki-input" value="2000" min="1868" max="2100" oninput="convertFromSeireki()">
+      </div>
+      <div class="result-grid" id="seireki-results"></div>
+    </div>
+
+    <div class="converter-card">
+      <div class="converter-card__title">和暦から西暦に変換</div>
+      <div class="year-input">
+        <div class="field">
+          <label>元号</label>
+          <select id="era-select" onchange="convertFromWareki()">
+            <option value="reiwa">令和</option>
+            <option value="heisei">平成</option>
+            <option value="showa">昭和</option>
+            <option value="taisho">大正</option>
+            <option value="meiji">明治</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>年</label>
+          <input type="number" id="wareki-year" value="1" min="1" oninput="convertFromWareki()">
+        </div>
+      </div>
+      <div class="result-grid" id="wareki-results"></div>
+    </div>
+
+    <div class="converter-card">
+      <div class="converter-card__title">元号一覧</div>
+      <table class="era-table">
+        <thead><tr><th>元号</th><th>開始</th><th>終了</th><th>期間</th></tr></thead>
+        <tbody>
+          <tr><td><strong>令和</strong></td><td>2019年5月1日</td><td>現在</td><td>${new Date().getFullYear()-2019+1}年目</td></tr>
+          <tr><td><strong>平成</strong></td><td>1989年1月8日</td><td>2019年4月30日</td><td>31年間</td></tr>
+          <tr><td><strong>昭和</strong></td><td>1926年12月25日</td><td>1989年1月7日</td><td>64年間</td></tr>
+          <tr><td><strong>大正</strong></td><td>1912年7月30日</td><td>1926年12月24日</td><td>15年間</td></tr>
+          <tr><td><strong>明治</strong></td><td>1868年1月25日</td><td>1912年7月29日</td><td>45年間</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="seo-section">
+      <h2>和暦西暦変換ツールの使い方</h2>
+      <p>西暦または和暦を入力するだけで、自動的に変換結果を表示します。年齢、干支、学年の情報も合わせて確認できます。</p>
+      <h3>よく使われるシーン</h3>
+      <ul>
+        <li><strong>書類作成</strong> — 履歴書や各種申請書で和暦記入が必要な場面</li>
+        <li><strong>年齢確認</strong> — 「昭和〇〇年生まれは今何歳？」の確認</li>
+        <li><strong>データ入力</strong> — 和暦と西暦が混在するデータの統一</li>
+      </ul>
+    </div>
+  </main>
+  <footer class="footer"><p>&copy; 2026 <a href="../../index.html">ToolBox</a></p></footer>
+
+  <script>
+    const eras={reiwa:{name:'令和',start:2019},heisei:{name:'平成',start:1989},showa:{name:'昭和',start:1926},taisho:{name:'大正',start:1912},meiji:{name:'明治',start:1868}};
+    const zodiac=['子(ねずみ)','丑(うし)','寅(とら)','卯(うさぎ)','辰(たつ)','巳(へび)','午(うま)','未(ひつじ)','申(さる)','酉(とり)','戌(いぬ)','亥(いのしし)'];
+
+    function getEra(year){
+      if(year>=2019)return{name:'令和',y:year-2018};
+      if(year>=1989)return{name:'平成',y:year-1988};
+      if(year>=1926)return{name:'昭和',y:year-1925};
+      if(year>=1912)return{name:'大正',y:year-1911};
+      if(year>=1868)return{name:'明治',y:year-1867};
+      return{name:'—',y:0};
+    }
+
+    function getZodiac(year){return zodiac[(year-4)%12];}
+    function getAge(year){const now=new Date().getFullYear();return now-year;}
+
+    function renderResults(container,year){
+      const era=getEra(year);
+      const age=getAge(year);
+      const z=getZodiac(year);
+      const el=document.getElementById(container);
+      el.innerHTML=`
+        <div class="result-card"><div class="result-card__label">和暦</div><div class="result-card__value">${era.name}${era.y}年</div></div>
+        <div class="result-card"><div class="result-card__label">西暦</div><div class="result-card__value">${year}年</div></div>
+        <div class="result-card"><div class="result-card__label">年齢（今年）</div><div class="result-card__value">${age}歳</div><div class="result-card__sub">${year}年生まれ</div></div>
+        <div class="result-card"><div class="result-card__label">干支</div><div class="result-card__value">${z}</div></div>
+      `;
+    }
+
+    function convertFromSeireki(){
+      const year=parseInt(document.getElementById('seireki-input').value);
+      if(year>=1868&&year<=2100)renderResults('seireki-results',year);
+    }
+
+    function convertFromWareki(){
+      const eraKey=document.getElementById('era-select').value;
+      const y=parseInt(document.getElementById('wareki-year').value);
+      const year=eras[eraKey].start+y-1;
+      renderResults('wareki-results',year);
+    }
+
+    convertFromSeireki();
+    convertFromWareki();
+  </script>
+</body>
+</html>

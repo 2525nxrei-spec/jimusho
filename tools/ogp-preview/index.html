@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】OGP画像プレビューツール。URL入力でTwitter・Facebook・LINEでのシェア時の見え方を即座にプレビュー。OGPタグの確認・デバッグに。">
+  <meta name="keywords" content="OGP確認, OGPプレビュー, OGP画像, Twitterカード確認, SNSシェア プレビュー, メタタグ確認">
+  <title>OGPプレビュー — SNSシェア確認ツール | ToolBox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}.nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}.nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}.tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}.tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}.tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .input-section{background:var(--white);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:28px}
+    .input-section__label{font-size:0.82rem;font-weight:600;color:var(--gray-700);margin-bottom:8px;display:block}
+    .input-section p{font-size:0.82rem;color:var(--gray-500);margin-top:8px}
+    .input-row{display:flex;gap:10px}
+    .input-row input{flex:1;font-family:var(--font);font-size:0.92rem;padding:14px 16px;border:1.5px solid var(--gray-300);border-radius:12px;outline:none;transition:border-color 0.2s}
+    .input-row input:focus{border-color:var(--accent)}
+    .input-row button{font-family:var(--font);font-size:0.85rem;font-weight:600;padding:14px 28px;border-radius:12px;border:none;background:var(--accent);color:var(--white);cursor:pointer;white-space:nowrap;transition:background 0.2s}
+    .input-row button:hover{background:#0077ed}
+
+    .or-divider{text-align:center;margin:20px 0;font-size:0.82rem;color:var(--gray-500)}
+    .manual-section{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .field{margin-bottom:0}
+    .field label{display:block;font-size:0.75rem;font-weight:600;color:var(--gray-500);margin-bottom:4px}
+    .field input,.field textarea{width:100%;font-family:var(--font);font-size:0.88rem;padding:10px 12px;border:1.5px solid var(--gray-300);border-radius:10px;outline:none}
+    .field textarea{resize:vertical;min-height:60px}
+    .field--full{grid-column:1/-1}
+
+    .preview-tabs{display:flex;gap:8px;margin-bottom:20px}
+    .preview-tab{font-family:var(--font);font-size:0.78rem;font-weight:600;padding:8px 18px;border-radius:980px;border:1.5px solid var(--gray-300);background:var(--white);cursor:pointer;transition:all 0.2s}
+    .preview-tab.is-active{background:var(--black);color:var(--white);border-color:var(--black)}
+
+    .preview-card{background:var(--white);border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden;border:1px solid var(--gray-200)}
+    /* Twitter style */
+    .twitter-card{border-radius:16px;overflow:hidden}
+    .twitter-card__img{aspect-ratio:1.91/1;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--gray-300);overflow:hidden}
+    .twitter-card__img img{width:100%;height:100%;object-fit:cover}
+    .twitter-card__body{padding:14px 16px;border-top:1px solid var(--gray-200)}
+    .twitter-card__url{font-size:0.72rem;color:var(--gray-500);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .twitter-card__title{font-size:0.88rem;font-weight:600;line-height:1.3;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+    .twitter-card__desc{font-size:0.78rem;color:var(--gray-500);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+    .facebook-card{border-radius:0;border:1px solid #dddfe2}
+    .facebook-card .twitter-card__body{background:#f2f3f5}
+    .facebook-card .twitter-card__url{text-transform:uppercase;font-size:0.68rem}
+
+    .line-card{border-radius:8px;display:grid;grid-template-columns:100px 1fr;overflow:hidden;border:1px solid var(--gray-200)}
+    .line-card__img{width:100px;height:100px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden}
+    .line-card__img img{width:100%;height:100%;object-fit:cover}
+    .line-card__body{padding:12px;display:flex;flex-direction:column;justify-content:center}
+    .line-card__title{font-size:0.82rem;font-weight:600;line-height:1.3;margin-bottom:4px}
+    .line-card__desc{font-size:0.72rem;color:var(--gray-500);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+    .meta-tags{margin-top:28px;background:var(--white);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .meta-tags__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px}
+    .meta-tags pre{font-size:0.78rem;background:#1d1d1f;color:#a8d8a8;padding:16px;border-radius:10px;overflow-x:auto;line-height:1.7;font-family:'SF Mono',Consolas,monospace}
+    .meta-tags__copy{font-family:var(--font);font-size:0.72rem;font-weight:600;background:var(--accent);color:var(--white);border:none;padding:6px 14px;border-radius:980px;cursor:pointer;margin-top:10px}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}.seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}.seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}.seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}.seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .manual-section{grid-template-columns:1fr}
+      .line-card{grid-template-columns:80px 1fr}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../index.html" class="nav__logo">Tool<span>Box</span></a><a href="../../index.html" class="nav__back">← ツール一覧</a></div></nav>
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <h1 class="tool-header__title">OGPプレビュー</h1>
+      <p class="tool-header__desc">Twitter・Facebook・LINEでシェアしたときの見え方を確認。OGPタグのコード生成も。</p>
+    </div>
+
+    <div class="input-section">
+      <label class="input-section__label">手動で入力してプレビュー</label>
+      <div class="manual-section">
+        <div class="field field--full"><label>ページタイトル</label><input type="text" id="og-title" placeholder="サイトのタイトル" oninput="updatePreview()"></div>
+        <div class="field field--full"><label>説明文</label><textarea id="og-desc" placeholder="ページの説明文（120文字以内推奨）" oninput="updatePreview()"></textarea></div>
+        <div class="field"><label>OGP画像URL</label><input type="url" id="og-image" placeholder="https://example.com/image.jpg" oninput="updatePreview()"></div>
+        <div class="field"><label>サイトURL</label><input type="url" id="og-url" placeholder="https://example.com" oninput="updatePreview()"></div>
+        <div class="field"><label>サイト名</label><input type="text" id="og-site" placeholder="サイト名" oninput="updatePreview()"></div>
+        <div class="field"><label>Twitterカードタイプ</label>
+          <select id="og-twitter-card" style="width:100%;font-family:var(--font);font-size:0.88rem;padding:10px 12px;border:1.5px solid var(--gray-300);border-radius:10px" onchange="updatePreview()">
+            <option value="summary_large_image">summary_large_image（大きい画像）</option>
+            <option value="summary">summary（小さい画像）</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-tabs">
+      <button class="preview-tab is-active" onclick="switchTab('twitter',this)">Twitter / X</button>
+      <button class="preview-tab" onclick="switchTab('facebook',this)">Facebook</button>
+      <button class="preview-tab" onclick="switchTab('line',this)">LINE</button>
+    </div>
+
+    <div id="preview-area"></div>
+
+    <div class="meta-tags">
+      <div class="meta-tags__title">OGPメタタグ（コピーして使えます）</div>
+      <pre id="meta-code"></pre>
+      <button class="meta-tags__copy" onclick="copyMeta()">コピー</button>
+    </div>
+
+    <div class="seo-section">
+      <h2>OGPとは？</h2>
+      <p>OGP（Open Graph Protocol）は、WebページがSNSでシェアされたときに、タイトル・説明文・画像を適切に表示するための仕組みです。OGPを正しく設定すると、SNSでのクリック率が大幅に向上します。</p>
+      <h3>OGP画像の推奨サイズ</h3>
+      <ul>
+        <li><strong>Twitter (summary_large_image)</strong>: 1200×630px（アスペクト比 1.91:1）</li>
+        <li><strong>Facebook</strong>: 1200×630px</li>
+        <li><strong>LINE</strong>: 1200×630px（正方形にクロップされる場合あり）</li>
+      </ul>
+      <h3>設定のポイント</h3>
+      <ul>
+        <li>タイトルは<strong>30文字以内</strong>が理想（長いと途中で切れる）</li>
+        <li>説明文は<strong>80〜120文字</strong>に収める</li>
+        <li>画像は<strong>1200×630px</strong>のJPGまたはPNG</li>
+        <li>各ページで個別のOGPを設定する（全ページ同じはNG）</li>
+      </ul>
+    </div>
+  </main>
+  <footer class="footer"><p>&copy; 2026 <a href="../../index.html">ToolBox</a></p></footer>
+
+  <script>
+    let currentTab='twitter';
+
+    function switchTab(tab,el){
+      currentTab=tab;
+      document.querySelectorAll('.preview-tab').forEach(t=>t.classList.remove('is-active'));
+      el.classList.add('is-active');
+      updatePreview();
+    }
+
+    function updatePreview(){
+      const title=document.getElementById('og-title').value||'ページタイトル';
+      const desc=document.getElementById('og-desc').value||'ページの説明文がここに表示されます。';
+      const image=document.getElementById('og-image').value;
+      const url=document.getElementById('og-url').value||'example.com';
+      const site=document.getElementById('og-site').value;
+      const area=document.getElementById('preview-area');
+
+      const imgHtml=image?`<img src="${image}" alt="" onerror="this.style.display='none'">`:'🖼️';
+      const domain=url.replace(/https?:\/\//,'').split('/')[0];
+
+      if(currentTab==='twitter'){
+        area.innerHTML=`<div class="preview-card twitter-card">
+          <div class="twitter-card__img">${imgHtml}</div>
+          <div class="twitter-card__body">
+            <div class="twitter-card__url">${domain}</div>
+            <div class="twitter-card__title">${escHtml(title)}</div>
+            <div class="twitter-card__desc">${escHtml(desc)}</div>
+          </div></div>`;
+      }else if(currentTab==='facebook'){
+        area.innerHTML=`<div class="preview-card facebook-card">
+          <div class="twitter-card__img">${imgHtml}</div>
+          <div class="twitter-card__body">
+            <div class="twitter-card__url">${domain.toUpperCase()}</div>
+            <div class="twitter-card__title">${escHtml(title)}</div>
+            <div class="twitter-card__desc">${escHtml(desc)}</div>
+          </div></div>`;
+      }else{
+        area.innerHTML=`<div class="preview-card line-card">
+          <div class="line-card__img">${imgHtml}</div>
+          <div class="line-card__body">
+            <div class="line-card__title">${escHtml(title)}</div>
+            <div class="line-card__desc">${escHtml(desc)}</div>
+          </div></div>`;
+      }
+
+      // Update meta tags code
+      const cardType=document.getElementById('og-twitter-card').value;
+      const meta=`<!-- OGP基本タグ -->
+<meta property="og:title" content="${escAttr(title)}">
+<meta property="og:description" content="${escAttr(desc)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="${escAttr(url)}">
+${image?`<meta property="og:image" content="${escAttr(image)}">`:'<!-- <meta property="og:image" content="画像URLを指定"> -->'}
+${site?`<meta property="og:site_name" content="${escAttr(site)}">`:''}
+
+<!-- Twitterカード -->
+<meta name="twitter:card" content="${cardType}">
+<meta name="twitter:title" content="${escAttr(title)}">
+<meta name="twitter:description" content="${escAttr(desc)}">
+${image?`<meta name="twitter:image" content="${escAttr(image)}">`:''}`;
+      document.getElementById('meta-code').textContent=meta;
+    }
+
+    function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+    function escAttr(s){return s.replace(/"/g,'&quot;').replace(/&/g,'&amp;');}
+    function copyMeta(){navigator.clipboard.writeText(document.getElementById('meta-code').textContent).then(()=>{const b=document.querySelector('.meta-tags__copy');b.textContent='コピーしました ✓';setTimeout(()=>b.textContent='コピー',1500);});}
+
+    updatePreview();
+  </script>
+</body>
+</html>

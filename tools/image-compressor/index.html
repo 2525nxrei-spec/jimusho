@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】画像圧縮ツール。JPEG・PNG・WebPをブラウザ上で圧縮。画質を保ったままファイルサイズを最大80%削減。サーバーにアップロード不要で安全。">
+  <meta name="keywords" content="画像圧縮, 画像 軽量化, JPEG圧縮, PNG圧縮, WebP変換, 画像最適化, ファイルサイズ削減">
+  <title>画像圧縮 — 無料オンラインツール | ToolBox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--green:#34c759;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .upload-area{background:var(--white);border:2px dashed var(--gray-300);border-radius:20px;padding:60px 40px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s}
+    .upload-area:hover,.upload-area.is-dragover{border-color:var(--accent);background:#f0f7ff}
+    .upload-area__icon{font-size:3rem;margin-bottom:16px;opacity:0.6}
+    .upload-area__text{font-size:1.05rem;font-weight:600;margin-bottom:8px}
+    .upload-area__sub{font-size:0.82rem;color:var(--gray-500)}
+    .upload-area input{display:none}
+
+    .controls{background:var(--white);border-radius:16px;padding:24px;margin-top:20px;display:none;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .controls.is-visible{display:block}
+    .controls__row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .controls__label{font-size:0.82rem;font-weight:600;color:var(--gray-700);min-width:60px}
+    .controls__slider{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--gray-200);outline:none}
+    .controls__slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);cursor:pointer}
+    .controls__value{font-size:0.88rem;font-weight:700;min-width:40px;text-align:right}
+    .controls__format{display:flex;gap:8px;margin-top:16px}
+    .controls__format-btn{font-family:var(--font);font-size:0.82rem;font-weight:600;padding:8px 18px;border-radius:980px;border:1.5px solid var(--gray-300);background:none;cursor:pointer;transition:all 0.2s}
+    .controls__format-btn.is-active{background:var(--black);color:var(--white);border-color:var(--black)}
+
+    .results{margin-top:20px;display:none}
+    .results.is-visible{display:block}
+    .result-card{background:var(--white);border-radius:16px;padding:20px;margin-bottom:12px;box-shadow:0 2px 12px rgba(0,0,0,0.04);display:grid;grid-template-columns:60px 1fr auto;gap:16px;align-items:center}
+    .result-card__preview{width:60px;height:60px;border-radius:10px;object-fit:cover;background:var(--gray-100)}
+    .result-card__info h3{font-size:0.9rem;font-weight:600;margin-bottom:4px;word-break:break-all}
+    .result-card__sizes{display:flex;gap:8px;font-size:0.78rem;color:var(--gray-500)}
+    .result-card__saved{font-size:0.82rem;font-weight:700;color:var(--green)}
+    .result-card__actions{display:flex;flex-direction:column;gap:6px}
+    .btn-download{font-family:var(--font);font-size:0.78rem;font-weight:600;background:var(--accent);color:var(--white);border:none;padding:8px 18px;border-radius:980px;cursor:pointer;transition:background 0.2s}
+    .btn-download:hover{background:#0077ed}
+
+    .summary{background:var(--white);border-radius:16px;padding:24px;margin-top:20px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.04);display:none}
+    .summary.is-visible{display:block}
+    .summary__value{font-size:2rem;font-weight:800;color:var(--green)}
+    .summary__label{font-size:0.82rem;color:var(--gray-500);margin-top:4px}
+    .btn-all{font-family:var(--font);font-size:0.9rem;font-weight:600;background:var(--black);color:var(--white);border:none;padding:14px 36px;border-radius:980px;cursor:pointer;margin-top:16px;transition:background 0.2s}
+    .btn-all:hover{background:#2c2c2e}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .result-card{grid-template-columns:1fr;text-align:center}
+      .result-card__preview{margin:0 auto}
+      .result-card__actions{flex-direction:row;justify-content:center}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../index.html" class="nav__back">← ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+      <h1 class="tool-header__title">画像圧縮</h1>
+      <p class="tool-header__desc">JPEG・PNG・WebPをブラウザ上で圧縮。画質を保ったままファイルサイズを最大80%削減。データはサーバーに送信されません。</p>
+    </div>
+
+    <div class="upload-area" id="upload-area">
+      <div class="upload-area__icon">📁</div>
+      <div class="upload-area__text">画像をドラッグ＆ドロップ、またはクリックして選択</div>
+      <div class="upload-area__sub">JPEG, PNG, WebP対応 ・ 複数ファイルOK ・ 最大10MB/枚</div>
+      <input type="file" id="file-input" multiple accept="image/jpeg,image/png,image/webp">
+    </div>
+
+    <div class="controls" id="controls">
+      <div class="controls__row">
+        <span class="controls__label">画質</span>
+        <input type="range" class="controls__slider" id="quality" min="10" max="100" value="75">
+        <span class="controls__value" id="quality-value">75%</span>
+      </div>
+      <div class="controls__format">
+        <button class="controls__format-btn is-active" data-format="original">元の形式</button>
+        <button class="controls__format-btn" data-format="jpeg">JPEG</button>
+        <button class="controls__format-btn" data-format="png">PNG</button>
+        <button class="controls__format-btn" data-format="webp">WebP</button>
+      </div>
+    </div>
+
+    <div class="results" id="results"></div>
+
+    <div class="summary" id="summary">
+      <div class="summary__value" id="total-saved">0%</div>
+      <div class="summary__label">合計削減率</div>
+      <button class="btn-all" id="download-all">すべてダウンロード</button>
+    </div>
+
+    <div class="seo-section">
+      <h2>画像圧縮ツールの使い方</h2>
+      <p>画像ファイルをドラッグ＆ドロップするだけで、自動的に最適な圧縮を行います。画質スライダーで圧縮率を調整でき、JPEG・PNG・WebPへのフォーマット変換にも対応しています。</p>
+
+      <h3>なぜ画像圧縮が必要？</h3>
+      <ul>
+        <li><strong>サイト表示速度の改善</strong> — Googleは表示速度をランキング要因にしています。画像は平均してページ容量の50%以上を占めます。</li>
+        <li><strong>ユーザー体験の向上</strong> — 画像が重いとページの読み込みが遅くなり、離脱率が上がります。</li>
+        <li><strong>ストレージの節約</strong> — クラウドストレージやサーバーの容量を節約できます。</li>
+        <li><strong>SNS投稿</strong> — ファイルサイズ制限のあるプラットフォームへのアップロードに。</li>
+      </ul>
+
+      <h3>WebP形式への変換がおすすめ</h3>
+      <p>WebPはGoogleが開発した画像フォーマットで、JPEGと同等の画質を保ちながら25〜35%小さいファイルサイズを実現します。2024年時点で主要ブラウザすべてが対応しており、ブログやWebサイトの画像はWebP形式が最適です。</p>
+
+      <h3>プライバシーについて</h3>
+      <p>このツールはすべての処理をブラウザ内で行います。あなたの画像がサーバーにアップロードされることは一切ありません。安心してお使いください。</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../index.html">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const uploadArea = document.getElementById('upload-area');
+    const fileInput = document.getElementById('file-input');
+    const controls = document.getElementById('controls');
+    const resultsDiv = document.getElementById('results');
+    const summary = document.getElementById('summary');
+    const qualitySlider = document.getElementById('quality');
+    const qualityValue = document.getElementById('quality-value');
+    let outputFormat = 'original';
+    let compressedFiles = [];
+
+    // Upload area events
+    uploadArea.addEventListener('click', () => fileInput.click());
+    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('is-dragover'); });
+    uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('is-dragover'));
+    uploadArea.addEventListener('drop', e => {
+      e.preventDefault();
+      uploadArea.classList.remove('is-dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+    // Quality slider
+    qualitySlider.addEventListener('input', () => {
+      qualityValue.textContent = qualitySlider.value + '%';
+    });
+
+    // Format buttons
+    document.querySelectorAll('.controls__format-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.controls__format-btn').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        outputFormat = btn.dataset.format;
+      });
+    });
+
+    function handleFiles(files) {
+      controls.classList.add('is-visible');
+      resultsDiv.classList.add('is-visible');
+      resultsDiv.innerHTML = '';
+      compressedFiles = [];
+      let totalOriginal = 0;
+      let totalCompressed = 0;
+      let processed = 0;
+
+      Array.from(files).forEach((file, i) => {
+        if (!file.type.startsWith('image/')) return;
+        if (file.size > 10 * 1024 * 1024) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+
+            let mimeType = file.type;
+            if (outputFormat === 'jpeg') mimeType = 'image/jpeg';
+            else if (outputFormat === 'png') mimeType = 'image/png';
+            else if (outputFormat === 'webp') mimeType = 'image/webp';
+
+            const quality = qualitySlider.value / 100;
+            canvas.toBlob((blob) => {
+              const saved = Math.round((1 - blob.size / file.size) * 100);
+              totalOriginal += file.size;
+              totalCompressed += blob.size;
+
+              const url = URL.createObjectURL(blob);
+              const ext = mimeType.split('/')[1].replace('jpeg', 'jpg');
+              const newName = file.name.replace(/\.[^.]+$/, '') + '_compressed.' + ext;
+
+              compressedFiles.push({ url, name: newName, blob });
+
+              const card = document.createElement('div');
+              card.className = 'result-card';
+              card.innerHTML = `
+                <img class="result-card__preview" src="${e.target.result}" alt="">
+                <div class="result-card__info">
+                  <h3>${file.name}</h3>
+                  <div class="result-card__sizes">
+                    <span>元: ${formatSize(file.size)}</span>
+                    <span>→</span>
+                    <span>圧縮後: ${formatSize(blob.size)}</span>
+                  </div>
+                  <div class="result-card__saved">${saved > 0 ? '-' + saved + '% 削減' : 'サイズ増加（元の形式を推奨）'}</div>
+                </div>
+                <div class="result-card__actions">
+                  <a href="${url}" download="${newName}" class="btn-download">ダウンロード</a>
+                </div>
+              `;
+              resultsDiv.appendChild(card);
+
+              processed++;
+              if (processed === files.length) {
+                const totalSaved = Math.round((1 - totalCompressed / totalOriginal) * 100);
+                document.getElementById('total-saved').textContent = (totalSaved > 0 ? '-' : '') + totalSaved + '%';
+                summary.classList.add('is-visible');
+              }
+            }, mimeType, quality);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Download all
+    document.getElementById('download-all').addEventListener('click', () => {
+      compressedFiles.forEach(f => {
+        const a = document.createElement('a');
+        a.href = f.url;
+        a.download = f.name;
+        a.click();
+      });
+    });
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+  </script>
+</body>
+</html>
