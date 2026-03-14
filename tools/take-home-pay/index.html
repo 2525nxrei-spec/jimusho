@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】個人事業主・フリーランス向け手取りシミュレーター。年間売上から所得税・住民税・事業税・国保・年金を自動計算し、手取り額を瞬時に把握。青色申告の節税効果も比較表示。">
+  <meta name="keywords" content="手取り計算, 個人事業主 手取り, フリーランス 手取り, 所得税 計算, 住民税 計算, 青色申告 節税, 国民健康保険 計算">
+  <title>手取りシミュレーター｜個人事業主・フリーランスの手取り額を自動計算【無料】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/take-home-pay/">
+  <meta property="og:title" content="手取りシミュレーター｜個人事業主・フリーランスの手取り額を自動計算【無料】">
+  <meta property="og:description" content="【無料】個人事業主・フリーランス向け手取りシミュレーター。年間売上から所得税・住民税・事業税・国保・年金を自動計算。青色申告の節税効果も比較。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/take-home-pay/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--green:#16a34a;--font:"Plus Jakarta Sans","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}.nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}.nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:20px}.tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}.tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}.tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .calc-container{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+
+    .form-panel{background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .form-panel__section{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--gray-200)}
+    .form-panel__section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .form-panel__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .field{margin-bottom:12px}
+    .field label{display:block;font-size:0.75rem;font-weight:600;color:var(--gray-700);margin-bottom:4px}
+    .field input,.field select{width:100%;font-family:var(--font);font-size:0.88rem;padding:10px 12px;border:1.5px solid var(--gray-300);border-radius:10px;outline:none;transition:border-color 0.2s}
+    .field input:focus,.field select:focus{border-color:var(--accent)}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .field-hint{font-size:0.72rem;color:var(--gray-500);margin-top:4px}
+
+    .toggle-group{display:flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--gray-300);margin-bottom:12px}
+    .toggle-btn{flex:1;font-family:var(--font);font-size:0.82rem;font-weight:600;padding:10px 16px;border:none;background:var(--white);color:var(--gray-700);cursor:pointer;transition:all 0.2s;text-align:center}
+    .toggle-btn.active{background:var(--accent);color:var(--white)}
+
+    .actions-bar{display:flex;gap:10px;margin-top:20px}
+    .action-btn{font-family:var(--font);font-size:0.85rem;font-weight:600;padding:12px 28px;border-radius:980px;border:none;cursor:pointer;flex:1;transition:all 0.2s}
+    .action-btn--primary{background:var(--accent);color:var(--white)}.action-btn--primary:hover{background:#0077ed}
+    .action-btn--outline{background:var(--white);color:var(--black);border:1.5px solid var(--gray-300)}.action-btn--outline:hover{border-color:var(--black)}
+    .action-btn--green{background:var(--green);color:var(--white)}.action-btn--green:hover{background:#15803d}
+
+    .result-panel{background:var(--white);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:32px;position:sticky;top:70px}
+    .result-panel__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:20px}
+    .result-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--gray-200)}
+    .result-row:last-child{border-bottom:none}
+    .result-label{font-size:0.88rem;color:var(--gray-700)}
+    .result-value{font-size:1rem;font-weight:700;text-align:right}
+    .result-row--total{border-top:2px solid var(--black);border-bottom:none;margin-top:8px;padding-top:18px}
+    .result-row--total .result-label{font-weight:700;color:var(--black)}
+    .result-row--total .result-value{font-size:1.3rem;font-weight:800;color:var(--accent)}
+    .result-row--tax .result-value{color:#dc2626}
+    .result-rate{font-size:0.72rem;color:var(--gray-500);margin-top:2px}
+
+    .chart-container{margin:20px 0;display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:wrap}
+    .donut{position:relative;width:180px;height:180px}
+    .donut svg{width:100%;height:100%;transform:rotate(-90deg)}
+    .donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+    .donut-center__label{font-size:0.7rem;color:var(--gray-500)}
+    .donut-center__value{font-size:1.1rem;font-weight:800;color:var(--accent)}
+    .chart-legend{display:flex;flex-direction:column;gap:6px}
+    .legend-item{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--gray-700)}
+    .legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+
+    .compare-box{margin-top:16px;padding:16px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:14px}
+    .compare-box__title{font-size:0.78rem;font-weight:700;color:var(--green);margin-bottom:8px}
+    .compare-box__text{font-size:0.85rem;color:var(--gray-700);line-height:1.6}
+    .compare-box__highlight{font-size:1.1rem;font-weight:800;color:var(--green)}
+
+    .monthly-box{margin-top:12px;padding:14px 16px;background:var(--gray-100);border-radius:12px;display:flex;justify-content:space-between;align-items:center}
+    .monthly-box__label{font-size:0.85rem;color:var(--gray-700)}
+    .monthly-box__value{font-size:1.15rem;font-weight:800;color:var(--accent)}
+
+    .copy-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--black);color:var(--white);padding:12px 24px;border-radius:980px;font-size:0.85rem;font-weight:600;transition:transform 0.3s ease;z-index:200}
+    .copy-toast.show{transform:translateX(-50%) translateY(0)}
+
+    .history-section{margin-top:24px;padding-top:20px;border-top:1px solid var(--gray-200)}
+    .history-title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+    .history-clear{font-size:0.72rem;color:var(--accent);cursor:pointer;background:none;border:none;font-family:var(--font);font-weight:600}
+    .history-clear:hover{text-decoration:underline}
+    .history-list{display:flex;flex-direction:column;gap:8px}
+    .history-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--gray-100);border-radius:10px;font-size:0.8rem;cursor:pointer;transition:background 0.2s}
+    .history-item:hover{background:var(--gray-200)}
+    .history-item__amount{font-weight:600}
+    .history-item__tax{color:var(--accent);font-weight:600}
+    .history-item__date{color:var(--gray-500);font-size:0.7rem}
+    .history-empty{font-size:0.8rem;color:var(--gray-500);text-align:center;padding:12px}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}.seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}.seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}.seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}.seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:1024px){.calc-container{grid-template-columns:1fr}.result-panel{position:static}}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .form-panel{padding:20px}
+      .result-panel{padding:24px}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+      .donut{width:140px;height:140px}
+      .donut-center__value{font-size:0.95rem}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "手取りシミュレーター｜個人事業主・フリーランスの手取り額を自動計算",
+  "url": "https://muryo-tool.com/tools/take-home-pay/",
+  "description": "【無料】個人事業主・フリーランス向け手取りシミュレーター。年間売上から所得税・住民税・事業税・国保・年金を自動計算し、手取り額を瞬時に把握。",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"ToolBox","item":"https://muryo-tool.com/"},
+  {"@type":"ListItem","position":2,"name":"手取りシミュレーター","item":"https://muryo-tool.com/tools/take-home-pay/"}
+]}
+</script>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../" class="nav__logo">Tool<span>Box</span></a><a href="../../" class="nav__back">&larr; ツール一覧</a></div></nav>
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h1 class="tool-header__title">手取りシミュレーター</h1>
+      <p class="tool-header__desc">年間売上を入力するだけで、所得税・住民税・事業税・国保・年金を自動計算。個人事業主・フリーランスの手取り額を瞬時に把握できます。</p>
+    </div>
+    <div style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:14px;padding:20px 24px;margin-bottom:20px">
+      <div style="font-size:0.78rem;font-weight:700;color:#dc2626;margin-bottom:8px">このツールを使わない場合の損失</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#10005;</span><span>手取り額を把握せず案件を受注 &rarr; 想定外の税負担で赤字リスク</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#10005;</span><span>青色申告の控除額を考慮していない &rarr; 年間最大65万円の損失</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#10005;</span><span>国保・年金の負担を見落とし &rarr; 資金繰りショートの原因に</span></div>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid #fecaca;font-size:0.82rem;color:#16a34a;font-weight:700">
+        ToolBoxなら &rarr; 所得税・住民税・事業税・国保・年金を一括計算。青色申告の節税効果も即座に比較。
+      </div>
+    </div>
+    <div style="margin:12px 0"><ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+    <div class="calc-container">
+      <div class="form-panel">
+        <div class="form-panel__section">
+          <div class="form-panel__title">売上・経費</div>
+          <div class="field">
+            <label>年間売上（税込）</label>
+            <input type="text" id="revenue" inputmode="numeric" placeholder="例: 8,000,000" oninput="formatNum(this)">
+            <div class="field-hint">1年間の売上合計額を入力してください</div>
+          </div>
+          <div class="field">
+            <label>経費合計</label>
+            <input type="text" id="expenses" inputmode="numeric" placeholder="例: 1,500,000" oninput="formatNum(this)">
+            <div class="field-hint">仕入・通信費・交通費・家賃按分など</div>
+          </div>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title">控除</div>
+          <div class="field">
+            <label>青色申告特別控除</label>
+            <div class="toggle-group" id="blue-toggle">
+              <button class="toggle-btn active" onclick="setBlue(650000)">65万円</button>
+              <button class="toggle-btn" onclick="setBlue(100000)">10万円</button>
+              <button class="toggle-btn" onclick="setBlue(0)">なし</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>基礎控除</label>
+            <input type="text" id="basic-deduction" value="480,000" disabled style="background:var(--gray-100);color:var(--gray-500)">
+            <div class="field-hint">2020年以降は一律48万円</div>
+          </div>
+          <div class="field">
+            <label>その他控除（社会保険料控除・小規模企業共済・iDeCo等）</label>
+            <input type="text" id="other-deductions" inputmode="numeric" placeholder="例: 300,000" oninput="formatNum(this)">
+            <div class="field-hint">任意入力。控除証明書の合計額</div>
+          </div>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title">扶養・地域</div>
+          <div class="field-row">
+            <div class="field">
+              <label>扶養家族の人数</label>
+              <select id="dependents">
+                <option value="0">0人</option>
+                <option value="1">1人</option>
+                <option value="2">2人</option>
+                <option value="3">3人</option>
+                <option value="4">4人</option>
+                <option value="5">5人以上</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>都道府県（国保料率用）</label>
+              <select id="prefecture">
+                <option value="tokyo">東京都（特別区）</option>
+                <option value="osaka">大阪府（大阪市）</option>
+                <option value="kanagawa">神奈川県（横浜市）</option>
+                <option value="aichi">愛知県（名古屋市）</option>
+                <option value="fukuoka">福岡県（福岡市）</option>
+                <option value="hokkaido">北海道（札幌市）</option>
+                <option value="saitama">埼玉県（さいたま市）</option>
+                <option value="chiba">千葉県（千葉市）</option>
+                <option value="hyogo">兵庫県（神戸市）</option>
+                <option value="kyoto">京都府（京都市）</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions-bar">
+          <button class="action-btn action-btn--primary" onclick="calculate()">計算する</button>
+          <button class="action-btn action-btn--outline" onclick="clearForm()">クリア</button>
+        </div>
+      </div>
+
+      <div class="result-panel" id="result-panel">
+        <div class="result-panel__title">計算結果</div>
+        <div id="result-content">
+          <div style="text-align:center;padding:40px 0;color:var(--gray-500);font-size:0.88rem">
+            左側のフォームに年間売上を入力して<br>「計算する」をクリックしてください
+          </div>
+        </div>
+
+        <div class="history-section">
+          <div class="history-title">
+            <span>計算履歴</span>
+            <button class="history-clear" onclick="clearHistory()">すべて削除</button>
+          </div>
+          <div class="history-list" id="history-list">
+            <div class="history-empty">履歴はまだありません</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:20px 0"><ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="seo-section">
+      <h2>所得税の累進課税制度について</h2>
+      <h3>所得税の税率（2026年度）</h3>
+      <p>日本の所得税は、課税所得金額に応じて段階的に税率が上がる「超過累進課税」方式を採用しています。各段階の税率と控除額は以下の通りです。</p>
+      <ul>
+        <li><strong>195万円以下</strong>: 税率5%（控除額0円）</li>
+        <li><strong>195万円超〜330万円以下</strong>: 税率10%（控除額97,500円）</li>
+        <li><strong>330万円超〜695万円以下</strong>: 税率20%（控除額427,500円）</li>
+        <li><strong>695万円超〜900万円以下</strong>: 税率23%（控除額636,000円）</li>
+        <li><strong>900万円超〜1,800万円以下</strong>: 税率33%（控除額1,536,000円）</li>
+        <li><strong>1,800万円超〜4,000万円以下</strong>: 税率40%（控除額2,796,000円）</li>
+        <li><strong>4,000万円超</strong>: 税率45%（控除額4,796,000円）</li>
+      </ul>
+
+      <h3>復興特別所得税</h3>
+      <p>2013年から2037年までの間、所得税額に対して2.1%の復興特別所得税が追加で課されます。本シミュレーターでは、この復興特別所得税を含めた金額で計算しています。</p>
+
+      <h3>住民税・個人事業税</h3>
+      <p>住民税は課税所得の10%（所得割）に均等割5,000円を加算して計算します。個人事業税は、事業所得から事業主控除290万円を差し引いた金額の5%（多くの業種）が課税されます。事業所得が290万円以下の場合、個人事業税は発生しません。</p>
+
+      <h2>個人事業主・フリーランスの活用シーン</h2>
+      <h3>1. 年間の手取り額を事前に把握</h3>
+      <p>フリーランスとして独立する前に、想定年収から実際の手取り額をシミュレーション。会社員時代との手取り比較や、必要な売上目標の設定に活用できます。所得税・住民税だけでなく、国保・年金の負担も含めた「本当の手取り額」を把握しましょう。</p>
+
+      <h3>2. 青色申告の節税効果を確認</h3>
+      <p>青色申告特別控除（65万円・10万円）の有無で手取り額がどれだけ変わるかを比較表示。確定申告の方法を検討する際の判断材料として活用できます。65万円控除を受けるには複式簿記での記帳とe-Taxでの申告が必要です。</p>
+
+      <h3>3. 案件の受注判断</h3>
+      <p>新規案件を受注する際、追加売上に対する税負担増を事前に計算。累進課税の影響で、売上が増えるほど税率が上がるため、手取りベースでの採算性を確認することが重要です。</p>
+
+      <h3>4. 資金繰り計画の策定</h3>
+      <p>年間の税金・社会保険料の総額を把握し、毎月の積立額を計算。確定申告時期の納税資金を確保するための計画立案に役立ちます。月額手取り表示で、毎月の生活費との比較も簡単です。</p>
+
+      <p style="font-size:0.82rem;color:#dc2626;font-weight:600;margin-top:12px">※ 本ツールは手取り額の概算を計算するものです。実際の税額は個別の状況により異なります。正確な税務判断については税理士にご相談ください。</p>
+    </div>
+  </main>
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px 0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../withholding-tax/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">源泉徴収税計算</a></li>
+        <li><a href="../invoice-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">請求書作成</a></li>
+        <li><a href="../pdf-converter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">画像→PDF変換</a></li>
+        <li><a href="../text-counter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">文字数カウント</a></li>
+      </ul>
+    </div>
+  </div>
+  <footer class="footer"><p>&copy; 2026 <a href="../../">ToolBox</a></p></footer>
+
+  <div class="copy-toast" id="copy-toast">クリップボードにコピーしました</div>
+
+  <script>
+    let blueDeduction = 650000;
+    let history = [];
+
+    try {
+      const saved = localStorage.getItem('toolbox-takehome-history');
+      if (saved) history = JSON.parse(saved);
+    } catch(e) {}
+    renderHistory();
+
+    function formatNum(el) {
+      let val = el.value.replace(/[^\d]/g, '');
+      if (val) val = Number(val).toLocaleString();
+      el.value = val;
+    }
+
+    function parseNum(str) {
+      return Number(String(str).replace(/[^\d]/g, '')) || 0;
+    }
+
+    function setBlue(val) {
+      blueDeduction = val;
+      const btns = document.querySelectorAll('#blue-toggle .toggle-btn');
+      btns.forEach(b => {
+        const map = {'65万円': 650000, '10万円': 100000, 'なし': 0};
+        b.classList.toggle('active', map[b.textContent] === val);
+      });
+    }
+
+    // National health insurance rates by prefecture (approximate 2026)
+    // { incomeRate, perCapita (均等割), perHousehold (平等割), cap }
+    const nhiRates = {
+      tokyo:     { rate: 0.0789, perCapita: 52000, perHousehold: 0, cap: 1060000 },
+      osaka:     { rate: 0.0886, perCapita: 54000, perHousehold: 29000, cap: 1060000 },
+      kanagawa:  { rate: 0.0815, perCapita: 47000, perHousehold: 0, cap: 1060000 },
+      aichi:     { rate: 0.0772, perCapita: 48000, perHousehold: 25000, cap: 1060000 },
+      fukuoka:   { rate: 0.0921, perCapita: 55000, perHousehold: 30000, cap: 1060000 },
+      hokkaido:  { rate: 0.0948, perCapita: 52000, perHousehold: 28000, cap: 1060000 },
+      saitama:   { rate: 0.0768, perCapita: 42000, perHousehold: 22000, cap: 1060000 },
+      chiba:     { rate: 0.0792, perCapita: 44000, perHousehold: 20000, cap: 1060000 },
+      hyogo:     { rate: 0.0874, perCapita: 51000, perHousehold: 27000, cap: 1060000 },
+      kyoto:     { rate: 0.0856, perCapita: 50000, perHousehold: 26000, cap: 1060000 }
+    };
+
+    // Income tax brackets (progressive)
+    function calcIncomeTax(taxableIncome) {
+      if (taxableIncome <= 0) return 0;
+      let tax = 0;
+      const brackets = [
+        { limit: 1950000, rate: 0.05, deduction: 0 },
+        { limit: 3300000, rate: 0.10, deduction: 97500 },
+        { limit: 6950000, rate: 0.20, deduction: 427500 },
+        { limit: 9000000, rate: 0.23, deduction: 636000 },
+        { limit: 18000000, rate: 0.33, deduction: 1536000 },
+        { limit: 40000000, rate: 0.40, deduction: 2796000 },
+        { limit: Infinity, rate: 0.45, deduction: 4796000 }
+      ];
+      for (const b of brackets) {
+        if (taxableIncome <= b.limit) {
+          tax = taxableIncome * b.rate - b.deduction;
+          break;
+        }
+      }
+      // Reconstruction tax 2.1%
+      tax = Math.floor(tax * 1.021);
+      return Math.max(0, tax);
+    }
+
+    // Resident tax
+    function calcResidentTax(taxableIncome) {
+      if (taxableIncome <= 0) return 0;
+      return Math.floor(taxableIncome * 0.10) + 5000;
+    }
+
+    // Business tax
+    function calcBusinessTax(businessIncome) {
+      const base = businessIncome - 2900000;
+      if (base <= 0) return 0;
+      return Math.floor(base * 0.05);
+    }
+
+    // National health insurance
+    function calcNHI(businessIncome, prefecture, dependents) {
+      const r = nhiRates[prefecture] || nhiRates.tokyo;
+      const members = 1 + parseInt(dependents);
+      // Income base for NHI = business income - 430,000 (基礎控除 for NHI)
+      const nhiBase = Math.max(0, businessIncome - 430000);
+      let total = Math.floor(nhiBase * r.rate) + r.perCapita * members + r.perHousehold;
+      return Math.min(total, r.cap);
+    }
+
+    // National pension (2026)
+    const NENKIN_ANNUAL = 203760; // 16,980 * 12
+
+    function calculate() {
+      const revenue = parseNum(document.getElementById('revenue').value);
+      const expenses = parseNum(document.getElementById('expenses').value);
+      const otherDeductions = parseNum(document.getElementById('other-deductions').value);
+      const dependents = parseInt(document.getElementById('dependents').value);
+      const prefecture = document.getElementById('prefecture').value;
+
+      if (revenue <= 0) return;
+
+      const businessIncome = Math.max(0, revenue - expenses);
+      const dependentDeduction = dependents * 380000;
+      const taxableIncome = Math.max(0, businessIncome - blueDeduction - 480000 - otherDeductions - dependentDeduction);
+
+      const incomeTax = calcIncomeTax(taxableIncome);
+      const residentTax = calcResidentTax(taxableIncome);
+      const businessTax = calcBusinessTax(businessIncome);
+      const nhi = calcNHI(businessIncome, prefecture, dependents);
+      const nenkin = NENKIN_ANNUAL;
+
+      const totalDeductions = incomeTax + residentTax + businessTax + nhi + nenkin;
+      const takeHome = businessIncome - totalDeductions;
+      const monthlyTakeHome = Math.floor(takeHome / 12);
+
+      // Blue filing comparison
+      let blueCompareHtml = '';
+      if (blueDeduction > 0) {
+        const taxableNoBlue = Math.max(0, businessIncome - 480000 - otherDeductions - dependentDeduction);
+        const incomeTaxNoBlue = calcIncomeTax(taxableNoBlue);
+        const residentTaxNoBlue = calcResidentTax(taxableNoBlue);
+        const totalNoBlue = incomeTaxNoBlue + residentTaxNoBlue + businessTax + nhi + nenkin;
+        const saving = totalNoBlue - totalDeductions;
+        if (saving > 0) {
+          blueCompareHtml = `
+            <div class="compare-box">
+              <div class="compare-box__title">青色申告の節税効果</div>
+              <div class="compare-box__text">
+                青色申告特別控除（${(blueDeduction/10000).toFixed(0)}万円）を適用することで、<br>
+                年間 <span class="compare-box__highlight">&yen;${saving.toLocaleString()}</span> お得になっています
+              </div>
+            </div>`;
+        }
+      } else {
+        const taxable65 = Math.max(0, businessIncome - 650000 - 480000 - otherDeductions - dependentDeduction);
+        const incomeTax65 = calcIncomeTax(taxable65);
+        const residentTax65 = calcResidentTax(taxable65);
+        const total65 = incomeTax65 + residentTax65 + businessTax + nhi + nenkin;
+        const potentialSaving = totalDeductions - total65;
+        if (potentialSaving > 0) {
+          blueCompareHtml = `
+            <div class="compare-box">
+              <div class="compare-box__title">青色申告にすると...</div>
+              <div class="compare-box__text">
+                青色申告特別控除（65万円）を適用すると、<br>
+                年間 <span class="compare-box__highlight">&yen;${potentialSaving.toLocaleString()}</span> の節税が可能です
+              </div>
+            </div>`;
+        }
+      }
+
+      // Donut chart data
+      const chartItems = [
+        { label: '手取り', value: Math.max(0, takeHome), color: '#0071e3' },
+        { label: '所得税', value: incomeTax, color: '#dc2626' },
+        { label: '住民税', value: residentTax, color: '#f97316' },
+        { label: '事業税', value: businessTax, color: '#eab308' },
+        { label: '国民健康保険', value: nhi, color: '#8b5cf6' },
+        { label: '国民年金', value: nenkin, color: '#06b6d4' }
+      ];
+      const total = chartItems.reduce((s, i) => s + i.value, 0);
+      let chartSvg = '';
+      let legendHtml = '';
+      if (total > 0) {
+        const R = 70, CX = 90, CY = 90, STROKE = 28;
+        const C = 2 * Math.PI * R;
+        let offset = 0;
+        let circles = '';
+        chartItems.forEach(item => {
+          if (item.value <= 0) return;
+          const pct = item.value / total;
+          const dash = C * pct;
+          circles += `<circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="${item.color}" stroke-width="${STROKE}" stroke-dasharray="${dash} ${C - dash}" stroke-dashoffset="${-offset}" />`;
+          offset += dash;
+          const pctStr = (pct * 100).toFixed(1);
+          legendHtml += `<div class="legend-item"><span class="legend-dot" style="background:${item.color}"></span>${item.label}: &yen;${item.value.toLocaleString()}（${pctStr}%）</div>`;
+        });
+        chartSvg = `<svg viewBox="0 0 180 180">${circles}</svg>`;
+      }
+
+      const resultHtml = `
+        <div class="chart-container">
+          <div class="donut">
+            ${chartSvg}
+            <div class="donut-center">
+              <div class="donut-center__label">手取り</div>
+              <div class="donut-center__value">&yen;${Math.max(0, takeHome).toLocaleString()}</div>
+            </div>
+          </div>
+          <div class="chart-legend">${legendHtml}</div>
+        </div>
+        <div class="result-row">
+          <span class="result-label">事業所得</span>
+          <span class="result-value">&yen;${businessIncome.toLocaleString()}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">課税所得</span>
+          <span class="result-value">&yen;${taxableIncome.toLocaleString()}</span>
+        </div>
+        <div class="result-row result-row--tax">
+          <div>
+            <span class="result-label">所得税（復興税込）</span>
+            <div class="result-rate">累進課税 5%〜45% + 復興特別所得税2.1%</div>
+          </div>
+          <span class="result-value">&minus;&yen;${incomeTax.toLocaleString()}</span>
+        </div>
+        <div class="result-row result-row--tax">
+          <div>
+            <span class="result-label">住民税</span>
+            <div class="result-rate">所得割10% + 均等割5,000円</div>
+          </div>
+          <span class="result-value">&minus;&yen;${residentTax.toLocaleString()}</span>
+        </div>
+        <div class="result-row result-row--tax">
+          <div>
+            <span class="result-label">個人事業税</span>
+            <div class="result-rate">${businessIncome > 2900000 ? '（事業所得 - 290万）&times; 5%' : '290万円以下のため非課税'}</div>
+          </div>
+          <span class="result-value">&minus;&yen;${businessTax.toLocaleString()}</span>
+        </div>
+        <div class="result-row result-row--tax">
+          <div>
+            <span class="result-label">国民健康保険料</span>
+            <div class="result-rate">概算（所得割 + 均等割 + 平等割）</div>
+          </div>
+          <span class="result-value">&minus;&yen;${nhi.toLocaleString()}</span>
+        </div>
+        <div class="result-row result-row--tax">
+          <div>
+            <span class="result-label">国民年金</span>
+            <div class="result-rate">月額16,980円 &times; 12ヶ月</div>
+          </div>
+          <span class="result-value">&minus;&yen;${nenkin.toLocaleString()}</span>
+        </div>
+        <div class="result-row result-row--total">
+          <span class="result-label">年間手取り</span>
+          <span class="result-value">&yen;${Math.max(0, takeHome).toLocaleString()}</span>
+        </div>
+        <div class="monthly-box">
+          <span class="monthly-box__label">月額手取り（概算）</span>
+          <span class="monthly-box__value">&yen;${Math.max(0, monthlyTakeHome).toLocaleString()}</span>
+        </div>
+        ${blueCompareHtml}
+        <div class="actions-bar" style="margin-top:16px">
+          <button class="action-btn action-btn--green" onclick="copyResult()">結果をコピー</button>
+        </div>
+      `;
+      document.getElementById('result-content').innerHTML = resultHtml;
+
+      // Save to history
+      const entry = {
+        date: new Date().toLocaleString('ja-JP'),
+        revenue: revenue,
+        takeHome: Math.max(0, takeHome),
+        monthlyTakeHome: Math.max(0, monthlyTakeHome)
+      };
+      history.unshift(entry);
+      if (history.length > 10) history.pop();
+      localStorage.setItem('toolbox-takehome-history', JSON.stringify(history));
+      renderHistory();
+    }
+
+    function copyResult() {
+      const resultDiv = document.getElementById('result-content');
+      const rows = resultDiv.querySelectorAll('.result-row');
+      let text = '【手取りシミュレーション結果】\n';
+      rows.forEach(row => {
+        const label = row.querySelector('.result-label');
+        const value = row.querySelector('.result-value');
+        if (label && value) {
+          text += label.textContent + ': ' + value.textContent + '\n';
+        }
+      });
+      const monthly = resultDiv.querySelector('.monthly-box__value');
+      if (monthly) text += '月額手取り: ' + monthly.textContent + '\n';
+      text += '\n計算: ToolBox (https://muryo-tool.com/tools/take-home-pay/)';
+      navigator.clipboard.writeText(text).then(() => {
+        showToast();
+      });
+    }
+
+    function showToast() {
+      const toast = document.getElementById('copy-toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    function clearForm() {
+      document.getElementById('revenue').value = '';
+      document.getElementById('expenses').value = '';
+      document.getElementById('other-deductions').value = '';
+      document.getElementById('dependents').value = '0';
+      document.getElementById('prefecture').value = 'tokyo';
+      setBlue(650000);
+      document.getElementById('result-content').innerHTML = `
+        <div style="text-align:center;padding:40px 0;color:var(--gray-500);font-size:0.88rem">
+          左側のフォームに年間売上を入力して<br>「計算する」をクリックしてください
+        </div>`;
+    }
+
+    function renderHistory() {
+      const list = document.getElementById('history-list');
+      if (history.length === 0) {
+        list.innerHTML = '<div class="history-empty">履歴はまだありません</div>';
+        return;
+      }
+      list.innerHTML = history.map((h, i) => `
+        <div class="history-item" onclick="loadHistory(${i})">
+          <div>
+            <div class="history-item__amount">売上 &yen;${h.revenue.toLocaleString()}</div>
+            <div class="history-item__date">${h.date}</div>
+          </div>
+          <div class="history-item__tax">手取り &yen;${h.takeHome.toLocaleString()}</div>
+        </div>
+      `).join('');
+    }
+
+    function loadHistory(index) {
+      const h = history[index];
+      if (!h) return;
+      document.getElementById('revenue').value = h.revenue.toLocaleString();
+      calculate();
+    }
+
+    function clearHistory() {
+      history = [];
+      localStorage.removeItem('toolbox-takehome-history');
+      renderHistory();
+    }
+  </script>
+</body>
+</html>
