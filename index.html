@@ -678,6 +678,36 @@
           <span class="tool-card__link">使う →</span>
         </a>
 
+        <a href="tools/expense-memo/" class="tool-card reveal" data-name="経費メモ 経費 確定申告 帳簿 レシート" data-category="ビジネス" data-need="経費を記録したい 確定申告の準備をしたい 経費管理">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="tool-card__title">経費メモ</div>
+          </div>
+          <div class="tool-card__desc">日々の経費をブラウザで記録。カテゴリ別集計・CSV出力で確定申告準備を効率化。</div>
+          <span class="tool-card__roi">月間¥3,000相当の時短</span>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/sales-email/" class="tool-card reveal reveal-d1" data-name="営業メール 営業 メール テンプレート お礼 フォローアップ" data-category="ビジネス" data-need="営業メールを書きたい お礼メールを送りたい メールテンプレート">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+            <div class="tool-card__title">営業メール生成</div>
+          </div>
+          <div class="tool-card__desc">新規営業・お礼・フォローアップメールをテンプレートから即生成。成約率を高める文面に。</div>
+          <span class="tool-card__roi">1通10分の短縮</span>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
+        <a href="tools/work-log/" class="tool-card reveal reveal-d2" data-name="作業ログ 作業時間 タイムトラッキング 時給 売上" data-category="ビジネス" data-need="作業時間を記録したい 時給を計算したい タイムトラッキング">
+          <div class="tool-card__top">
+            <div class="tool-card__icon tool-card__icon--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <div class="tool-card__title">作業ログ</div>
+          </div>
+          <div class="tool-card__desc">クライアントワークの作業時間を記録。時給換算で売上を可視化し、請求漏れを防止。</div>
+          <span class="tool-card__roi">月間¥5,000相当の効果</span>
+          <span class="tool-card__link">使う →</span>
+        </a>
+
       </div>
     </div>
   </section>
@@ -755,6 +785,9 @@
             <a href="tools/timer/">タイマー</a>
             <a href="tools/hankaku-zenkaku/">半角全角変換</a>
             <a href="tools/warikan/">割り勘計算</a>
+            <a href="tools/expense-memo/">経費メモ</a>
+            <a href="tools/sales-email/">営業メール生成</a>
+            <a href="tools/work-log/">作業ログ</a>
           </div>
         </div>
         <div>
@@ -903,6 +936,9 @@
         { name: '年齢計算', desc: '生年月日から年齢・干支を表示', saving: '1回1分短縮', href: 'tools/age-calculator/', icon: '🎂', bg: '#e2e8f0', category: 'ユーティリティ', need: '年齢を計算したい 生年月日' },
         { name: '半角全角変換', desc: '英数字・カタカナの一括変換', saving: '1回3分短縮', href: 'tools/hankaku-zenkaku/', icon: '🔤', bg: '#ccfbf1', category: 'テキスト', need: '半角を全角に テキスト統一' },
         { name: '割り勘計算', desc: '飲み会の精算を端数処理で', saving: '1回2分短縮', href: 'tools/warikan/', icon: '💴', bg: '#e0e7ff', category: 'ユーティリティ', need: '割り勘 飲み会 精算' },
+        { name: '経費メモ', desc: '日々の経費を記録・CSV出力', saving: '月¥3,000短縮', href: 'tools/expense-memo/', icon: '💰', bg: '#dcfce7', category: 'ビジネス', need: '経費を記録したい 確定申告 帳簿' },
+        { name: '営業メール生成', desc: '営業・お礼メールをテンプレで即作成', saving: '1通10分短縮', href: 'tools/sales-email/', icon: '📧', bg: '#ede9fe', category: 'ビジネス', need: '営業メールを書きたい お礼メール' },
+        { name: '作業ログ', desc: '作業時間を記録・時給換算で売上可視化', saving: '月¥5,000効果', href: 'tools/work-log/', icon: '⏱️', bg: '#ffedd5', category: 'ビジネス', need: '作業時間を記録 タイムトラッキング' },
       ];
 
       const qfFab = document.getElementById('quick-finder-fab');

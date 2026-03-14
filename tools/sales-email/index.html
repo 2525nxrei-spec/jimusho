@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="営業メール・お礼メール・フォローアップメールのテンプレートを瞬時に生成。個人事業主・フリーランスの成約率アップに。">
+  <meta name="keywords" content="営業メール, メールテンプレート, ビジネスメール, お礼メール, フォローアップ, 見積送付, 納品報告">
+  <title>営業メール生成｜テンプレートで素早くメール作成【無料】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/sales-email/">
+  <meta property="og:title" content="営業メール生成｜テンプレートで素早くメール作成【無料】">
+  <meta property="og:description" content="営業メール・お礼メール・フォローアップメールのテンプレートを瞬時に生成。個人事業主・フリーランスの成約率アップに。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/sales-email/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-900:#3a3a3c;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:20px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:500px;margin:0 auto}
+
+    .tool-main{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden;padding:28px}
+
+    .form-group{margin-bottom:16px}
+    .form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    input[type="text"],select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:10px;font-family:var(--font);font-size:0.92rem;color:var(--black);background:var(--white);outline:none;transition:border 0.2s}
+    input:focus,select:focus{border-color:var(--accent)}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 24px;border:none;border-radius:980px;font-family:var(--font);font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+    .btn--primary{background:var(--accent);color:var(--white)}
+    .btn--primary:hover{background:#005bb5}
+    .btn--secondary{background:var(--gray-100);color:var(--gray-700)}
+    .btn--secondary:hover{background:var(--gray-200)}
+    .btn--success{background:#30d158;color:var(--white)}
+    .btn--success:hover{background:#28b84c}
+    .btn-group{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+
+    .preview-area{margin-top:24px;background:var(--white);border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden}
+    .preview-header{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--gray-200);flex-wrap:wrap;gap:8px}
+    .preview-header__title{font-size:0.85rem;font-weight:700;color:var(--gray-700)}
+    .preview-subject{padding:16px 24px;border-bottom:1px solid var(--gray-100);font-size:0.92rem}
+    .preview-subject span{font-weight:600;color:var(--gray-500);margin-right:8px}
+    .preview-body{padding:24px;white-space:pre-wrap;font-size:0.92rem;line-height:1.9;color:var(--gray-900);min-height:200px;background:var(--gray-100);margin:16px;border-radius:12px}
+
+    .type-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+    .type-card{padding:14px 16px;border:2px solid var(--gray-200);border-radius:12px;text-align:center;cursor:pointer;font-size:0.85rem;font-weight:600;transition:all 0.2s}
+    .type-card:hover{border-color:var(--accent);color:var(--accent)}
+    .type-card.active{border-color:var(--accent);background:rgba(0,113,227,0.06);color:var(--accent)}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    .copied-toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--black);color:var(--white);padding:12px 28px;border-radius:980px;font-size:0.85rem;font-weight:600;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:200}
+    .copied-toast.show{opacity:1}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .form-row{grid-template-columns:1fr}
+      .type-cards{grid-template-columns:repeat(2,1fr)}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "営業メール生成｜テンプレートで素早くメール作成",
+  "url": "https://muryo-tool.com/tools/sales-email/",
+  "description": "営業メール・お礼メール・フォローアップメールのテンプレートを瞬時に生成。個人事業主・フリーランスの成約率アップに。",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"ToolBox","item":"https://muryo-tool.com/"},
+  {"@type":"ListItem","position":2,"name":"営業メール生成","item":"https://muryo-tool.com/tools/sales-email/"}
+]}
+</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../" class="nav__back">&larr; ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+      <h1 class="tool-header__title">営業メール生成</h1>
+      <p class="tool-header__desc">営業メール・お礼メール・フォローアップメールのテンプレートを瞬時に生成。ワンクリックでコピー。</p>
+    </div>
+    <div style="background:linear-gradient(135deg,#e8f2fc 0%,#dcfce7 100%);border-radius:14px;padding:20px 24px;margin-bottom:20px;text-align:center">
+      <div style="font-size:0.78rem;font-weight:600;color:#636366;margin-bottom:4px">このツールで削減できるコスト</div>
+      <div style="font-size:1.8rem;font-weight:800;color:#0071e3;letter-spacing:-0.03em">月間 &yen;3,000 相当</div>
+      <div style="font-size:0.78rem;color:#636366;margin-top:6px;line-height:1.6">1通10分の短縮 &times; 月6通 = 月60分の節約（時給3,000円換算）</div>
+    </div>
+    <div style="margin:12px 0"><ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="tool-main">
+      <div class="form-group">
+        <label>メール種類を選択</label>
+        <div class="type-cards">
+          <div class="type-card active" onclick="selectType('new')" id="type-new">新規営業</div>
+          <div class="type-card" onclick="selectType('thanks')" id="type-thanks">お礼</div>
+          <div class="type-card" onclick="selectType('followup')" id="type-followup">フォローアップ</div>
+          <div class="type-card" onclick="selectType('quote')" id="type-quote">見積送付</div>
+          <div class="type-card" onclick="selectType('delivery')" id="type-delivery">納品報告</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="to-company">宛先会社名</label>
+          <input type="text" id="to-company" placeholder="例: 株式会社ABC">
+        </div>
+        <div class="form-group">
+          <label for="to-name">宛先担当者名</label>
+          <input type="text" id="to-name" placeholder="例: 山田太郎">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="my-company">自社名 / 屋号</label>
+          <input type="text" id="my-company" placeholder="例: フリーランス田中">
+        </div>
+        <div class="form-group">
+          <label for="my-name">あなたの氏名</label>
+          <input type="text" id="my-name" placeholder="例: 田中花子">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="project-name">案件名 / サービス名</label>
+          <input type="text" id="project-name" placeholder="例: Webサイト制作">
+        </div>
+        <div class="form-group">
+          <label for="extra-info">補足情報（任意）</label>
+          <input type="text" id="extra-info" placeholder="例: 3月中の納品希望">
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn--primary" onclick="generateEmail()">メールを生成</button>
+      </div>
+    </div>
+
+    <div class="preview-area" id="preview-area" style="display:none">
+      <div class="preview-header">
+        <span class="preview-header__title">生成結果</span>
+        <div class="btn-group" style="margin:0">
+          <button class="btn btn--success" onclick="copyEmail()">コピー</button>
+        </div>
+      </div>
+      <div class="preview-subject" id="preview-subject"></div>
+      <div class="preview-body" id="preview-body"></div>
+    </div>
+
+    <div style="margin:20px 0"><ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="seo-section">
+      <h2>個人事業主が成約率を上げるメール術</h2>
+      <p>フリーランスや個人事業主にとって、営業メールは新規案件獲得の生命線です。しかし、毎回ゼロからメールを書くのは時間がかかります。テンプレートを活用して効率化しつつ、ポイントを押さえたメールで成約率を高めましょう。</p>
+
+      <h3>営業メールの基本構成</h3>
+      <ul>
+        <li><strong>件名</strong> &mdash; 開封率を左右する最重要要素。具体的かつ簡潔に。</li>
+        <li><strong>挨拶・自己紹介</strong> &mdash; 相手との接点や紹介元を明記すると信頼感アップ。</li>
+        <li><strong>提案内容</strong> &mdash; 相手のメリットを先に伝える。自分語りは最小限に。</li>
+        <li><strong>実績・根拠</strong> &mdash; ポートフォリオや具体的な数字で裏付ける。</li>
+        <li><strong>行動喚起（CTA）</strong> &mdash; 「15分のお打ち合わせ」など、次のステップを明確に。</li>
+      </ul>
+
+      <h3>返信率を上げるコツ</h3>
+      <ul>
+        <li><strong>相手企業のリサーチ</strong> &mdash; 公式サイトやSNSを確認し、具体的な課題に言及する。</li>
+        <li><strong>短く簡潔に</strong> &mdash; 300文字以内が理想。長文は読まれません。</li>
+        <li><strong>送信タイミング</strong> &mdash; 火曜〜木曜の午前中が開封率が高い傾向。</li>
+        <li><strong>フォローアップ</strong> &mdash; 3日後に1回、1週間後に1回が目安。しつこくならない程度に。</li>
+      </ul>
+
+      <h3>このツールの特徴</h3>
+      <ul>
+        <li><strong>完全無料</strong> &mdash; 登録不要、制限なし。何度でも使えます。</li>
+        <li><strong>プライバシー安全</strong> &mdash; データはブラウザ内で処理され、サーバーには送信されません。</li>
+        <li><strong>5種類のテンプレート</strong> &mdash; 新規営業からお礼・フォローアップ・見積送付・納品報告まで対応。</li>
+        <li><strong>ワンクリックコピー</strong> &mdash; 生成したメールをそのままメーラーに貼り付けられます。</li>
+      </ul>
+    </div>
+  </main>
+
+  <div class="tool-page" style="padding-top:0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../text-counter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">文字数カウント</a></li>
+        <li><a href="../expense-memo/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">経費メモ</a></li>
+        <li><a href="../work-log/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">作業ログ</a></li>
+        <li><a href="../password-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">パスワード生成</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <div class="copied-toast" id="toast">コピーしました</div>
+
+  <script>
+    let selectedType = 'new';
+
+    const templates = {
+      new: {
+        subject: '【ご提案】{{project}} のご案内 - {{myCompany}}',
+        body: `{{toCompany}}
+{{toName}} 様
+
+突然のご連絡失礼いたします。
+{{myCompany}} の {{myName}} と申します。
+
+貴社のご事業を拝見し、{{project}} の分野でお力になれるのではないかと思い、ご連絡いたしました。
+
+私は {{project}} を専門としており、これまで多くの企業様・個人様のサポートをしてまいりました。{{extra}}
+
+もしご興味をお持ちいただけましたら、15分ほどのオンラインミーティングでご説明させていただければ幸いです。
+
+ご多忙のところ恐れ入りますが、ご検討いただけますと幸いです。
+
+何卒よろしくお願いいたします。
+
+――――――――――――――――
+{{myName}}
+{{myCompany}}
+――――――――――――――――`
+      },
+      thanks: {
+        subject: '【御礼】本日はありがとうございました - {{myCompany}}',
+        body: `{{toCompany}}
+{{toName}} 様
+
+お世話になっております。
+{{myCompany}} の {{myName}} です。
+
+本日はお忙しい中、{{project}} についてお時間をいただき、誠にありがとうございました。
+
+お打ち合わせでお伺いしたご要望をもとに、具体的なご提案をまとめさせていただきます。{{extra}}
+
+ご不明点やご要望がございましたら、お気軽にお申し付けください。
+
+引き続きよろしくお願いいたします。
+
+――――――――――――――――
+{{myName}}
+{{myCompany}}
+――――――――――――――――`
+      },
+      followup: {
+        subject: '【ご確認】{{project}} の件 - {{myCompany}}',
+        body: `{{toCompany}}
+{{toName}} 様
+
+お世話になっております。
+{{myCompany}} の {{myName}} です。
+
+先日ご案内いたしました {{project}} の件について、その後いかがでしょうか。
+
+ご検討の状況や、追加でご確認されたい点などがございましたら、お気軽にお知らせください。{{extra}}
+
+ご多忙のところ恐れ入りますが、ご返信いただけますと幸いです。
+
+何卒よろしくお願いいたします。
+
+――――――――――――――――
+{{myName}}
+{{myCompany}}
+――――――――――――――――`
+      },
+      quote: {
+        subject: '【お見積書送付】{{project}} - {{myCompany}}',
+        body: `{{toCompany}}
+{{toName}} 様
+
+お世話になっております。
+{{myCompany}} の {{myName}} です。
+
+先日ご相談いただきました {{project}} について、お見積書を作成いたしましたのでお送りいたします。{{extra}}
+
+内容をご確認いただき、ご不明点やご要望がございましたらお気軽にお申し付けください。
+
+ご予算やスケジュールに応じて調整も可能ですので、お気軽にご相談いただければ幸いです。
+
+何卒よろしくお願いいたします。
+
+――――――――――――――――
+{{myName}}
+{{myCompany}}
+――――――――――――――――`
+      },
+      delivery: {
+        subject: '【納品のご報告】{{project}} - {{myCompany}}',
+        body: `{{toCompany}}
+{{toName}} 様
+
+お世話になっております。
+{{myCompany}} の {{myName}} です。
+
+{{project}} について、納品物が完成いたしましたのでご報告いたします。{{extra}}
+
+お手数ですが、内容をご確認いただき、修正点やご要望がございましたらお知らせください。
+
+納品後のサポートについても対応しておりますので、お気軽にご相談ください。
+
+今後ともどうぞよろしくお願いいたします。
+
+――――――――――――――――
+{{myName}}
+{{myCompany}}
+――――――――――――――――`
+      }
+    };
+
+    function selectType(type) {
+      selectedType = type;
+      document.querySelectorAll('.type-card').forEach(el => el.classList.remove('active'));
+      document.getElementById('type-' + type).classList.add('active');
+    }
+
+    function generateEmail() {
+      const toCompany = document.getElementById('to-company').value.trim() || '○○株式会社';
+      const toName = document.getElementById('to-name').value.trim() || '○○';
+      const myCompany = document.getElementById('my-company').value.trim() || '○○';
+      const myName = document.getElementById('my-name').value.trim() || '○○';
+      const project = document.getElementById('project-name').value.trim() || '○○';
+      const extra = document.getElementById('extra-info').value.trim();
+
+      const tpl = templates[selectedType];
+
+      const replacements = {
+        '{{toCompany}}': toCompany,
+        '{{toName}}': toName,
+        '{{myCompany}}': myCompany,
+        '{{myName}}': myName,
+        '{{project}}': project,
+        '{{extra}}': extra ? '\n\n' + extra : ''
+      };
+
+      let subject = tpl.subject;
+      let body = tpl.body;
+
+      for (const [key, val] of Object.entries(replacements)) {
+        subject = subject.split(key).join(val);
+        body = body.split(key).join(val);
+      }
+
+      document.getElementById('preview-subject').innerHTML = '<span>件名:</span>' + escapeHtml(subject);
+      document.getElementById('preview-body').textContent = body;
+      document.getElementById('preview-area').style.display = 'block';
+      document.getElementById('preview-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function copyEmail() {
+      const subject = document.getElementById('preview-subject').textContent.replace('件名:', '');
+      const body = document.getElementById('preview-body').textContent;
+      const text = '件名: ' + subject + '\n\n' + body;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+  </script>
+</body>
+</html>

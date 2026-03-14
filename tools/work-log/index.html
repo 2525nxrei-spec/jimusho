@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="クライアントワークの作業時間を記録。時給換算で売上を可視化。フリーランス・個人事業主の請求漏れ防止に。">
+  <meta name="keywords" content="作業ログ, タイムトラッキング, 時間管理, フリーランス, 個人事業主, 作業時間記録, 時給計算">
+  <title>作業ログ｜作業時間を記録して時給換算で売上を可視化【無料】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/work-log/">
+  <meta property="og:title" content="作業ログ｜作業時間を記録して時給換算で売上を可視化【無料】">
+  <meta property="og:description" content="クライアントワークの作業時間を記録。時給換算で売上を可視化。フリーランス・個人事業主の請求漏れ防止に。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/work-log/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-900:#3a3a3c;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:20px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:500px;margin:0 auto}
+
+    .tool-main{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden;padding:28px}
+
+    .form-group{margin-bottom:16px}
+    .form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    input[type="date"],input[type="number"],input[type="text"],input[type="time"],select{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:10px;font-family:var(--font);font-size:0.92rem;color:var(--black);background:var(--white);outline:none;transition:border 0.2s}
+    input:focus,select:focus{border-color:var(--accent)}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 24px;border:none;border-radius:980px;font-family:var(--font);font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+    .btn--primary{background:var(--accent);color:var(--white)}
+    .btn--primary:hover{background:#005bb5}
+    .btn--secondary{background:var(--gray-100);color:var(--gray-700)}
+    .btn--secondary:hover{background:var(--gray-200)}
+    .btn--danger{background:#fee;color:#d00}
+    .btn--danger:hover{background:#fdd}
+    .btn--timer{background:#30d158;color:var(--white);font-size:1rem;padding:14px 32px}
+    .btn--timer:hover{background:#28b84c}
+    .btn--timer-stop{background:#ff3b30;color:var(--white);font-size:1rem;padding:14px 32px}
+    .btn--timer-stop:hover{background:#d63027}
+    .btn-group{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+
+    .timer-section{text-align:center;background:var(--white);border-radius:20px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-top:20px}
+    .timer-display{font-size:3rem;font-weight:800;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;margin:16px 0}
+    .timer-project{font-size:0.92rem;color:var(--gray-700);margin-bottom:8px}
+
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px}
+    .stat{background:var(--white);border-radius:16px;padding:20px 24px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .stat__value{font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;color:var(--black)}
+    .stat__label{font-size:0.72rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+
+    .detail-card{background:var(--white);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-top:20px}
+    .detail-card__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:0.88rem}
+    .detail-row:last-child{border-bottom:none}
+    .detail-row__label{color:var(--gray-700)}
+    .detail-row__value{font-weight:600}
+
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--gray-100);font-size:0.85rem}
+    th{font-size:0.72rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em}
+    td{color:var(--gray-900)}
+    tr:hover td{background:var(--gray-100)}
+    .table-wrap{overflow-x:auto;margin-top:20px;background:var(--white);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .td-actions{white-space:nowrap}
+    .td-actions button{background:none;border:none;color:#d00;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:var(--font)}
+
+    .tabs{display:flex;gap:4px;margin-top:24px;background:var(--gray-200);border-radius:12px;padding:4px}
+    .tab{flex:1;padding:10px;text-align:center;border:none;background:transparent;border-radius:10px;font-family:var(--font);font-size:0.85rem;font-weight:600;color:var(--gray-700);cursor:pointer;transition:all 0.2s}
+    .tab.active{background:var(--white);color:var(--black);box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .form-row,.form-row-3{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .timer-display{font-size:2.2rem}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "作業ログ｜作業時間を記録して時給換算で売上を可視化",
+  "url": "https://muryo-tool.com/tools/work-log/",
+  "description": "クライアントワークの作業時間を記録。時給換算で売上を可視化。フリーランス・個人事業主の請求漏れ防止に。",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"ToolBox","item":"https://muryo-tool.com/"},
+  {"@type":"ListItem","position":2,"name":"作業ログ","item":"https://muryo-tool.com/tools/work-log/"}
+]}
+</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../" class="nav__back">&larr; ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h1 class="tool-header__title">作業ログ</h1>
+      <p class="tool-header__desc">クライアントワークの作業時間を記録。時給換算で売上を可視化。請求漏れ防止に。</p>
+    </div>
+    <div style="background:linear-gradient(135deg,#e8f2fc 0%,#dcfce7 100%);border-radius:14px;padding:20px 24px;margin-bottom:20px;text-align:center">
+      <div style="font-size:0.78rem;font-weight:600;color:#636366;margin-bottom:4px">このツールで削減できるコスト</div>
+      <div style="font-size:1.8rem;font-weight:800;color:#0071e3;letter-spacing:-0.03em">月間 &yen;5,000 相当</div>
+      <div style="font-size:0.78rem;color:#636366;margin-top:6px;line-height:1.6">請求漏れ防止 + 低採算案件の可視化で月間5,000円以上の損失を回避</div>
+    </div>
+    <div style="margin:12px 0"><ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <!-- Timer Section -->
+    <div class="timer-section" id="timer-section">
+      <div class="timer-project" id="timer-project-label">プロジェクトを選択してタイマー開始</div>
+      <div class="timer-display" id="timer-display">00:00:00</div>
+      <div class="form-row" style="max-width:500px;margin:0 auto 16px">
+        <div class="form-group">
+          <label for="timer-project">プロジェクト名</label>
+          <input type="text" id="timer-project" placeholder="例: Webサイト制作">
+        </div>
+        <div class="form-group">
+          <label for="timer-memo">メモ（任意）</label>
+          <input type="text" id="timer-memo" placeholder="例: デザイン作業">
+        </div>
+      </div>
+      <button class="btn btn--timer" id="timer-btn" onclick="toggleTimer()">タイマー開始</button>
+    </div>
+
+    <!-- Manual Entry -->
+    <div class="tool-main" style="margin-top:20px">
+      <div class="detail-card__title" style="margin-bottom:16px">手動で記録を追加</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="log-date">日付</label>
+          <input type="date" id="log-date">
+        </div>
+        <div class="form-group">
+          <label for="log-project">プロジェクト名</label>
+          <input type="text" id="log-project" placeholder="例: LP制作">
+        </div>
+      </div>
+      <div class="form-row-3">
+        <div class="form-group">
+          <label for="log-start">開始時間</label>
+          <input type="time" id="log-start" value="09:00">
+        </div>
+        <div class="form-group">
+          <label for="log-end">終了時間</label>
+          <input type="time" id="log-end" value="10:00">
+        </div>
+        <div class="form-group">
+          <label for="log-memo">メモ</label>
+          <input type="text" id="log-memo" placeholder="作業内容">
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:4px">
+        <div class="form-group">
+          <label for="hourly-rate">時給設定（円）</label>
+          <input type="number" id="hourly-rate" placeholder="3000" min="0">
+        </div>
+        <div style="display:flex;align-items:flex-end">
+          <button class="btn btn--primary" onclick="addLog()">記録を追加</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchView('date')" id="tab-date">日別集計</button>
+      <button class="tab" onclick="switchView('project')" id="tab-project">プロジェクト別</button>
+    </div>
+
+    <div class="stats" id="summary-stats">
+      <div class="stat"><div class="stat__value" id="total-hours">0h</div><div class="stat__label">合計時間</div></div>
+      <div class="stat"><div class="stat__value" id="total-revenue">&yen;0</div><div class="stat__label">合計売上</div></div>
+      <div class="stat"><div class="stat__value" id="total-entries">0</div><div class="stat__label">記録数</div></div>
+      <div class="stat"><div class="stat__value" id="avg-hourly">&yen;0</div><div class="stat__label">平均時給</div></div>
+    </div>
+
+    <div class="detail-card" id="group-summary">
+      <div class="detail-card__title" id="group-title">日別集計</div>
+      <div id="group-rows"></div>
+    </div>
+
+    <div class="table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div class="detail-card__title" style="margin:0">作業記録一覧</div>
+        <div class="btn-group" style="margin:0">
+          <button class="btn btn--secondary" onclick="exportCSV()">CSV出力</button>
+          <button class="btn btn--danger" onclick="clearAll()">全件削除</button>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>日付</th><th>プロジェクト</th><th>開始</th><th>終了</th><th>時間</th><th>売上</th><th>メモ</th><th></th></tr></thead>
+        <tbody id="log-table"></tbody>
+      </table>
+      <p id="no-data" style="text-align:center;color:var(--gray-500);padding:24px;font-size:0.88rem">作業記録がありません</p>
+    </div>
+
+    <div style="margin:20px 0"><ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="seo-section">
+      <h2>フリーランスの時間管理術</h2>
+      <p>フリーランスにとって「時間」は最大の資産です。作業時間を正確に把握することで、適正な価格設定や業務改善が可能になります。このツールで日々の作業を記録する習慣をつけましょう。</p>
+
+      <h3>時間管理が重要な理由</h3>
+      <ul>
+        <li><strong>請求漏れの防止</strong> &mdash; 記録がないと「あの作業は何時間やったっけ？」と曖昧になりがち。正確な記録が適正な請求につながります。</li>
+        <li><strong>低採算案件の発見</strong> &mdash; 時給換算すると想定より低い案件が見えてきます。案件の取捨選択に活用しましょう。</li>
+        <li><strong>生産性の可視化</strong> &mdash; 日別・プロジェクト別の作業時間を把握することで、効率改善のヒントが得られます。</li>
+        <li><strong>見積精度の向上</strong> &mdash; 過去の実績データがあれば、新規案件の見積もりがより正確になります。</li>
+      </ul>
+
+      <h3>時間管理のコツ</h3>
+      <ul>
+        <li><strong>タイマーを活用する</strong> &mdash; 作業開始と同時にタイマーをスタート。リアルタイムで記録できます。</li>
+        <li><strong>こまめに記録する</strong> &mdash; 後からまとめて入力すると不正確になります。作業が終わったらすぐ記録。</li>
+        <li><strong>プロジェクト名を統一する</strong> &mdash; 同じ案件は同じ名前で記録。集計が正確になります。</li>
+        <li><strong>週次でレビューする</strong> &mdash; 週に一度、時間の使い方を振り返りましょう。</li>
+      </ul>
+
+      <h3>このツールの特徴</h3>
+      <ul>
+        <li><strong>完全無料</strong> &mdash; 登録不要、制限なし。何度でも使えます。</li>
+        <li><strong>タイマー機能</strong> &mdash; ワンクリックでリアルタイム計測。手動入力にも対応。</li>
+        <li><strong>時給換算</strong> &mdash; 設定した時給から自動で売上金額を算出します。</li>
+        <li><strong>プライバシー安全</strong> &mdash; データはブラウザ内に保存され、サーバーには送信されません。</li>
+        <li><strong>CSV出力対応</strong> &mdash; 請求書作成やクライアントへの報告に便利です。</li>
+      </ul>
+    </div>
+  </main>
+
+  <div class="tool-page" style="padding-top:0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../expense-memo/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">経費メモ</a></li>
+        <li><a href="../sales-email/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">営業メール生成</a></li>
+        <li><a href="../text-counter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">文字数カウント</a></li>
+        <li><a href="../unit-converter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">単位変換</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const STORAGE_KEY = 'toolbox_worklogs';
+    const RATE_KEY = 'toolbox_hourlyrate';
+    let timerInterval = null;
+    let timerStart = null;
+    let currentView = 'date';
+
+    function init() {
+      const now = new Date();
+      document.getElementById('log-date').value = now.toISOString().slice(0, 10);
+      const savedRate = localStorage.getItem(RATE_KEY);
+      if (savedRate) document.getElementById('hourly-rate').value = savedRate;
+      render();
+    }
+
+    function getLogs() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch { return []; }
+    }
+
+    function saveLogs(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function getRate() {
+      const rate = parseInt(document.getElementById('hourly-rate').value, 10);
+      if (rate > 0) localStorage.setItem(RATE_KEY, rate);
+      return rate || 0;
+    }
+
+    function calcHours(start, end) {
+      const [sh, sm] = start.split(':').map(Number);
+      const [eh, em] = end.split(':').map(Number);
+      let mins = (eh * 60 + em) - (sh * 60 + sm);
+      if (mins < 0) mins += 24 * 60;
+      return mins / 60;
+    }
+
+    function formatHours(h) {
+      const hrs = Math.floor(h);
+      const mins = Math.round((h - hrs) * 60);
+      return hrs + 'h ' + (mins > 0 ? mins + 'm' : '');
+    }
+
+    // Timer
+    function toggleTimer() {
+      if (timerInterval) {
+        stopTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    function startTimer() {
+      const project = document.getElementById('timer-project').value.trim();
+      if (!project) { alert('プロジェクト名を入力してください。'); return; }
+
+      timerStart = new Date();
+      document.getElementById('timer-project-label').textContent = project + ' - 計測中';
+      document.getElementById('timer-btn').textContent = 'タイマー停止';
+      document.getElementById('timer-btn').className = 'btn btn--timer-stop';
+
+      timerInterval = setInterval(() => {
+        const elapsed = Math.floor((new Date() - timerStart) / 1000);
+        const h = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+        const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+        const s = String(elapsed % 60).padStart(2, '0');
+        document.getElementById('timer-display').textContent = h + ':' + m + ':' + s;
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+
+      const end = new Date();
+      const project = document.getElementById('timer-project').value.trim();
+      const memo = document.getElementById('timer-memo').value.trim();
+      const rate = getRate();
+
+      const startStr = timerStart.toTimeString().slice(0, 5);
+      const endStr = end.toTimeString().slice(0, 5);
+      const dateStr = timerStart.toISOString().slice(0, 10);
+      const hours = (end - timerStart) / 3600000;
+      const revenue = Math.round(hours * rate);
+
+      const logs = getLogs();
+      logs.push({ id: Date.now(), date: dateStr, project, start: startStr, end: endStr, hours: Math.round(hours * 100) / 100, revenue, memo, rate });
+      saveLogs(logs);
+
+      document.getElementById('timer-display').textContent = '00:00:00';
+      document.getElementById('timer-project-label').textContent = 'プロジェクトを選択してタイマー開始';
+      document.getElementById('timer-btn').textContent = 'タイマー開始';
+      document.getElementById('timer-btn').className = 'btn btn--timer';
+      document.getElementById('timer-memo').value = '';
+      timerStart = null;
+
+      render();
+    }
+
+    function addLog() {
+      const date = document.getElementById('log-date').value;
+      const project = document.getElementById('log-project').value.trim();
+      const start = document.getElementById('log-start').value;
+      const end = document.getElementById('log-end').value;
+      const memo = document.getElementById('log-memo').value.trim();
+      const rate = getRate();
+
+      if (!date || !project || !start || !end) {
+        alert('日付、プロジェクト名、開始時間、終了時間を入力してください。');
+        return;
+      }
+
+      const hours = Math.round(calcHours(start, end) * 100) / 100;
+      const revenue = Math.round(hours * rate);
+
+      const logs = getLogs();
+      logs.push({ id: Date.now(), date, project, start, end, hours, revenue, memo, rate });
+      saveLogs(logs);
+
+      document.getElementById('log-project').value = '';
+      document.getElementById('log-memo').value = '';
+      render();
+    }
+
+    function deleteLog(id) {
+      const logs = getLogs().filter(l => l.id !== id);
+      saveLogs(logs);
+      render();
+    }
+
+    function clearAll() {
+      if (!confirm('全件削除してよろしいですか？この操作は取り消せません。')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      render();
+    }
+
+    function switchView(view) {
+      currentView = view;
+      document.getElementById('tab-date').classList.toggle('active', view === 'date');
+      document.getElementById('tab-project').classList.toggle('active', view === 'project');
+      render();
+    }
+
+    function render() {
+      const logs = getLogs().sort((a, b) => (b.date + b.start).localeCompare(a.date + a.start));
+
+      const totalHours = logs.reduce((s, l) => s + l.hours, 0);
+      const totalRevenue = logs.reduce((s, l) => s + l.revenue, 0);
+      document.getElementById('total-hours').textContent = formatHours(totalHours);
+      document.getElementById('total-revenue').textContent = '\u00a5' + totalRevenue.toLocaleString();
+      document.getElementById('total-entries').textContent = logs.length;
+      document.getElementById('avg-hourly').textContent = totalHours > 0 ? '\u00a5' + Math.round(totalRevenue / totalHours).toLocaleString() : '\u00a50';
+
+      // Group summary
+      const groupRows = document.getElementById('group-rows');
+      groupRows.innerHTML = '';
+      const groups = {};
+
+      if (currentView === 'date') {
+        document.getElementById('group-title').textContent = '日別集計';
+        logs.forEach(l => {
+          if (!groups[l.date]) groups[l.date] = { hours: 0, revenue: 0 };
+          groups[l.date].hours += l.hours;
+          groups[l.date].revenue += l.revenue;
+        });
+      } else {
+        document.getElementById('group-title').textContent = 'プロジェクト別集計';
+        logs.forEach(l => {
+          if (!groups[l.project]) groups[l.project] = { hours: 0, revenue: 0 };
+          groups[l.project].hours += l.hours;
+          groups[l.project].revenue += l.revenue;
+        });
+      }
+
+      const sortedKeys = Object.keys(groups).sort((a, b) => currentView === 'date' ? b.localeCompare(a) : groups[b].hours - groups[a].hours);
+      sortedKeys.forEach(key => {
+        const row = document.createElement('div');
+        row.className = 'detail-row';
+        row.innerHTML = `<span class="detail-row__label">${key}</span><span class="detail-row__value">${formatHours(groups[key].hours)} / \u00a5${groups[key].revenue.toLocaleString()}</span>`;
+        groupRows.appendChild(row);
+      });
+
+      if (sortedKeys.length === 0) {
+        groupRows.innerHTML = '<div style="text-align:center;color:var(--gray-500);padding:16px;font-size:0.88rem">データがありません</div>';
+      }
+
+      // Table
+      const tbody = document.getElementById('log-table');
+      const noData = document.getElementById('no-data');
+      tbody.innerHTML = '';
+      if (logs.length === 0) {
+        noData.style.display = 'block';
+      } else {
+        noData.style.display = 'none';
+        logs.forEach(l => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${l.date}</td><td>${l.project}</td><td>${l.start}</td><td>${l.end}</td><td>${formatHours(l.hours)}</td><td>\u00a5${l.revenue.toLocaleString()}</td><td>${l.memo || ''}</td><td class="td-actions"><button onclick="deleteLog(${l.id})">削除</button></td>`;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    function exportCSV() {
+      const logs = getLogs().sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
+      if (logs.length === 0) { alert('データがありません。'); return; }
+
+      const bom = '\uFEFF';
+      let csv = bom + '日付,プロジェクト,開始,終了,時間(h),時給,売上,メモ\n';
+      logs.forEach(l => {
+        csv += `${l.date},"${l.project}",${l.start},${l.end},${l.hours},${l.rate || 0},${l.revenue},"${(l.memo || '').replace(/"/g, '""')}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '作業ログ.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    init();
+  </script>
+</body>
+</html>

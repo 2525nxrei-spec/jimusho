@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="日々の経費をブラウザでメモ。カテゴリ別に分類、月間合計を表示。確定申告の準備に最適な個人事業主・フリーランス向け無料ツール。">
+  <meta name="keywords" content="経費メモ, 経費管理, 確定申告, 個人事業主, フリーランス, 経費記録, 経費計算">
+  <title>経費メモ｜カテゴリ別に経費を記録・集計【無料】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/expense-memo/">
+  <meta property="og:title" content="経費メモ｜カテゴリ別に経費を記録・集計【無料】">
+  <meta property="og:description" content="日々の経費をブラウザでメモ。カテゴリ別に分類、月間合計を表示。確定申告の準備に最適な個人事業主・フリーランス向け無料ツール。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/expense-memo/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-900:#3a3a3c;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:20px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:500px;margin:0 auto}
+
+    .tool-main{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden;padding:28px}
+
+    .form-group{margin-bottom:16px}
+    .form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    input[type="date"],input[type="number"],input[type="text"],select,textarea{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:10px;font-family:var(--font);font-size:0.92rem;color:var(--black);background:var(--white);outline:none;transition:border 0.2s}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+    textarea{resize:vertical;min-height:60px}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 24px;border:none;border-radius:980px;font-family:var(--font);font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+    .btn--primary{background:var(--accent);color:var(--white)}
+    .btn--primary:hover{background:#005bb5}
+    .btn--secondary{background:var(--gray-100);color:var(--gray-700)}
+    .btn--secondary:hover{background:var(--gray-200)}
+    .btn--danger{background:#fee;color:#d00}
+    .btn--danger:hover{background:#fdd}
+    .btn-group{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px}
+    .stat{background:var(--white);border-radius:16px;padding:20px 24px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .stat__value{font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;color:var(--black)}
+    .stat__label{font-size:0.72rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+
+    .detail-card{background:var(--white);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-top:20px}
+    .detail-card__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:0.88rem}
+    .detail-row:last-child{border-bottom:none}
+    .detail-row__label{color:var(--gray-700)}
+    .detail-row__value{font-weight:600}
+
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--gray-100);font-size:0.88rem}
+    th{font-size:0.75rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em}
+    td{color:var(--gray-900)}
+    tr:hover td{background:var(--gray-100)}
+    .table-wrap{overflow-x:auto;margin-top:20px;background:var(--white);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .td-actions{white-space:nowrap}
+    .td-actions button{background:none;border:none;color:#d00;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:var(--font)}
+
+    .month-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px}
+    .month-nav button{background:var(--gray-100);border:none;padding:8px 16px;border-radius:980px;font-family:var(--font);font-size:0.85rem;font-weight:600;cursor:pointer}
+    .month-nav button:hover{background:var(--gray-200)}
+    .month-nav span{font-size:1.1rem;font-weight:700;min-width:140px;text-align:center}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .form-row,.form-row-3{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "経費メモ｜カテゴリ別に経費を記録・集計",
+  "url": "https://muryo-tool.com/tools/expense-memo/",
+  "description": "日々の経費をブラウザでメモ。カテゴリ別に分類、月間合計を表示。確定申告の準備に最適な個人事業主・フリーランス向け無料ツール。",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"ToolBox","item":"https://muryo-tool.com/"},
+  {"@type":"ListItem","position":2,"name":"経費メモ","item":"https://muryo-tool.com/tools/expense-memo/"}
+]}
+</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../" class="nav__back">&larr; ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <h1 class="tool-header__title">経費メモ</h1>
+      <p class="tool-header__desc">日々の経費をブラウザでメモ。カテゴリ別に分類、月間合計を表示。確定申告の準備に。データは端末内で保存。</p>
+    </div>
+    <div style="background:linear-gradient(135deg,#e8f2fc 0%,#dcfce7 100%);border-radius:14px;padding:20px 24px;margin-bottom:20px;text-align:center">
+      <div style="font-size:0.78rem;font-weight:600;color:#636366;margin-bottom:4px">このツールで削減できるコスト</div>
+      <div style="font-size:1.8rem;font-weight:800;color:#0071e3;letter-spacing:-0.03em">月間 &yen;3,000 相当</div>
+      <div style="font-size:0.78rem;color:#636366;margin-top:6px;line-height:1.6">確定申告前の経費整理を大幅短縮（時給3,000円換算）</div>
+    </div>
+    <div style="margin:12px 0"><ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="tool-main">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="exp-date">日付</label>
+          <input type="date" id="exp-date">
+        </div>
+        <div class="form-group">
+          <label for="exp-category">カテゴリ</label>
+          <select id="exp-category">
+            <option value="交通費">交通費</option>
+            <option value="通信費">通信費</option>
+            <option value="消耗品費">消耗品費</option>
+            <option value="接待交際費">接待交際費</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="exp-amount">金額（円）</label>
+          <input type="number" id="exp-amount" placeholder="1000" min="0">
+        </div>
+        <div class="form-group">
+          <label for="exp-note">メモ</label>
+          <input type="text" id="exp-note" placeholder="例: タクシー代 渋谷→新宿">
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn--primary" onclick="addExpense()">経費を追加</button>
+      </div>
+    </div>
+
+    <div class="month-nav" style="margin-top:24px">
+      <button onclick="changeMonth(-1)">&larr; 前月</button>
+      <span id="current-month"></span>
+      <button onclick="changeMonth(1)">翌月 &rarr;</button>
+    </div>
+
+    <div class="stats" id="summary-stats">
+      <div class="stat"><div class="stat__value" id="total-amount">&yen;0</div><div class="stat__label">月間合計</div></div>
+      <div class="stat"><div class="stat__value" id="total-count">0</div><div class="stat__label">件数</div></div>
+    </div>
+
+    <div class="detail-card" id="category-summary">
+      <div class="detail-card__title">カテゴリ別集計</div>
+      <div id="category-rows"></div>
+    </div>
+
+    <div class="table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div class="detail-card__title" style="margin:0">経費一覧</div>
+        <div class="btn-group" style="margin:0">
+          <button class="btn btn--secondary" onclick="exportCSV()">CSV出力</button>
+          <button class="btn btn--danger" onclick="clearAll()">全件削除</button>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>日付</th><th>カテゴリ</th><th>金額</th><th>メモ</th><th></th></tr></thead>
+        <tbody id="expense-table"></tbody>
+      </table>
+      <p id="no-data" style="text-align:center;color:var(--gray-500);padding:24px;font-size:0.88rem">この月の経費データはありません</p>
+    </div>
+
+    <div style="margin:20px 0"><ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="seo-section">
+      <h2>個人事業主の経費管理のコツ</h2>
+      <p>確定申告をスムーズに進めるためには、日頃からの経費記録が欠かせません。このツールを使って、発生した経費をその場でメモする習慣をつけましょう。</p>
+
+      <h3>経費管理の基本ルール</h3>
+      <ul>
+        <li><strong>発生したらすぐ記録</strong> &mdash; 後回しにすると忘れます。レシートをもらったその日に入力しましょう。</li>
+        <li><strong>カテゴリを統一する</strong> &mdash; 勘定科目ごとに分類しておくと、確定申告時の仕訳が楽になります。</li>
+        <li><strong>レシートは写真で保存</strong> &mdash; 紙のレシートは劣化するため、スマホで撮影してバックアップを。</li>
+        <li><strong>月ごとに集計を確認</strong> &mdash; 想定外の出費がないか、毎月チェックする習慣を。</li>
+      </ul>
+
+      <h3>確定申告で使える主な経費カテゴリ</h3>
+      <ul>
+        <li><strong>交通費</strong> &mdash; 電車、バス、タクシー、高速道路料金など</li>
+        <li><strong>通信費</strong> &mdash; インターネット回線、スマホ代、サーバー費用など</li>
+        <li><strong>消耗品費</strong> &mdash; 文房具、プリンターインク、10万円未満の備品など</li>
+        <li><strong>接待交際費</strong> &mdash; クライアントとの打ち合わせでの飲食代など</li>
+        <li><strong>その他</strong> &mdash; 研修費、書籍代、サブスクリプション費用など</li>
+      </ul>
+
+      <h3>このツールの特徴</h3>
+      <ul>
+        <li><strong>完全無料</strong> &mdash; 登録不要、制限なし。何度でも使えます。</li>
+        <li><strong>プライバシー安全</strong> &mdash; データはブラウザ内に保存され、サーバーには送信されません。</li>
+        <li><strong>CSV出力対応</strong> &mdash; 会計ソフトへの取り込みや、税理士への提出に便利です。</li>
+      </ul>
+    </div>
+  </main>
+
+  <div class="tool-page" style="padding-top:0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../work-log/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">作業ログ</a></li>
+        <li><a href="../sales-email/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">営業メール生成</a></li>
+        <li><a href="../text-counter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">文字数カウント</a></li>
+        <li><a href="../unit-converter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">単位変換</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const STORAGE_KEY = 'toolbox_expenses';
+    let currentYear, currentMonth;
+
+    function init() {
+      const now = new Date();
+      currentYear = now.getFullYear();
+      currentMonth = now.getMonth();
+      document.getElementById('exp-date').value = now.toISOString().slice(0, 10);
+      render();
+    }
+
+    function getExpenses() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch { return []; }
+    }
+
+    function saveExpenses(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function addExpense() {
+      const date = document.getElementById('exp-date').value;
+      const category = document.getElementById('exp-category').value;
+      const amount = parseInt(document.getElementById('exp-amount').value, 10);
+      const note = document.getElementById('exp-note').value.trim();
+
+      if (!date || !amount || amount <= 0) {
+        alert('日付と金額を正しく入力してください。');
+        return;
+      }
+
+      const expenses = getExpenses();
+      expenses.push({ id: Date.now(), date, category, amount, note });
+      saveExpenses(expenses);
+
+      document.getElementById('exp-amount').value = '';
+      document.getElementById('exp-note').value = '';
+
+      const d = new Date(date);
+      currentYear = d.getFullYear();
+      currentMonth = d.getMonth();
+      render();
+    }
+
+    function deleteExpense(id) {
+      const expenses = getExpenses().filter(e => e.id !== id);
+      saveExpenses(expenses);
+      render();
+    }
+
+    function clearAll() {
+      if (!confirm('全件削除してよろしいですか？この操作は取り消せません。')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      render();
+    }
+
+    function changeMonth(delta) {
+      currentMonth += delta;
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      render();
+    }
+
+    function render() {
+      const label = `${currentYear}年${currentMonth + 1}月`;
+      document.getElementById('current-month').textContent = label;
+
+      const expenses = getExpenses().filter(e => {
+        const d = new Date(e.date);
+        return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
+      }).sort((a, b) => a.date.localeCompare(b.date));
+
+      const total = expenses.reduce((s, e) => s + e.amount, 0);
+      document.getElementById('total-amount').textContent = '\u00a5' + total.toLocaleString();
+      document.getElementById('total-count').textContent = expenses.length;
+
+      const categories = ['交通費', '通信費', '消耗品費', '接待交際費', 'その他'];
+      const catRows = document.getElementById('category-rows');
+      catRows.innerHTML = '';
+      categories.forEach(cat => {
+        const catTotal = expenses.filter(e => e.category === cat).reduce((s, e) => s + e.amount, 0);
+        const row = document.createElement('div');
+        row.className = 'detail-row';
+        row.innerHTML = `<span class="detail-row__label">${cat}</span><span class="detail-row__value">\u00a5${catTotal.toLocaleString()}</span>`;
+        catRows.appendChild(row);
+      });
+
+      const tbody = document.getElementById('expense-table');
+      const noData = document.getElementById('no-data');
+      tbody.innerHTML = '';
+      if (expenses.length === 0) {
+        noData.style.display = 'block';
+      } else {
+        noData.style.display = 'none';
+        expenses.forEach(e => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${e.date}</td><td>${e.category}</td><td>\u00a5${e.amount.toLocaleString()}</td><td>${e.note || ''}</td><td class="td-actions"><button onclick="deleteExpense(${e.id})">削除</button></td>`;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    function exportCSV() {
+      const expenses = getExpenses().filter(e => {
+        const d = new Date(e.date);
+        return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
+      }).sort((a, b) => a.date.localeCompare(b.date));
+
+      if (expenses.length === 0) { alert('この月のデータがありません。'); return; }
+
+      const bom = '\uFEFF';
+      let csv = bom + '日付,カテゴリ,金額,メモ\n';
+      expenses.forEach(e => {
+        csv += `${e.date},${e.category},${e.amount},"${(e.note || '').replace(/"/g, '""')}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `経費メモ_${currentYear}年${currentMonth + 1}月.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    init();
+  </script>
+</body>
+</html>
