@@ -3,19 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ToolBox — 無料で使えるオンラインツール集。画像圧縮、QRコード作成、文字数カウント、パスワード生成、PDF変換、単位変換、年齢計算、タイマーなど。ブラウザだけで完結する便利ツール。インストール不要・データ送信なし。">
-  <meta name="keywords" content="画像圧縮, QRコード作成, 文字数カウント, パスワード生成, PDF変換, 単位変換, 年齢計算, タイマー, 和暦西暦変換, 無料ツール, オンラインツール">
-  <meta property="og:title" content="ToolBox｜画像圧縮・QRコード・文字数カウントなど無料オンラインツール集">
-  <meta property="og:description" content="画像圧縮、QRコード、文字数カウント、パスワード生成、PDF変換、単位変換など。ブラウザで完結する便利ツール。">
+  <meta name="description" content="ToolBox — 個人事業主・フリーランスの業務効率化ツール集。画像圧縮、QRコード作成、請求書作成、文字数カウントなど12種類。年間48,000円相当の作業時間を削減。ブラウザ完結・データ送信なし。">
+  <meta name="keywords" content="業務効率化, フリーランス ツール, 個人事業主 ツール, 画像圧縮, QRコード作成, 文字数カウント, 請求書作成, パスワード生成, PDF変換, 単位変換, 無料ツール">
+  <meta property="og:title" content="ToolBox｜個人事業主・フリーランスの業務を加速する無料ツール集">
+  <meta property="og:description" content="年間48,000円相当の作業時間を削減。画像圧縮、請求書作成、QRコード、文字数カウントなど。ブラウザで完結する業務効率化ツール。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://muryo-tool.com/">
   <meta property="og:image" content="https://muryo-tool.com/ogp.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://muryo-tool.com/">
-  <title>ToolBox｜画像圧縮・QRコード・文字数カウントなど無料オンラインツール集</title>
+  <title>ToolBox｜個人事業主・フリーランスの業務を加速する無料ツール集</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     :root {
@@ -30,11 +38,13 @@
       --white: #fff;
       --accent: #0071e3;
       --accent-light: #e8f2fc;
+      --green: #16a34a;
+      --green-light: #dcfce7;
       --font: "Inter", "Noto Sans JP", -apple-system, sans-serif;
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
     html { font-size:16px; scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
-    body { font-family:var(--font); color:var(--black); background:var(--gray-100); line-height:1.7; }
+    body { font-family:var(--font); color:var(--black); background:var(--gray-100); line-height:1.7; padding-bottom:0; }
     a { color:inherit; text-decoration:none; }
     .container { max-width:1080px; margin:0 auto; padding:0 24px; }
 
@@ -49,15 +59,45 @@
 
     /* ── Hero ── */
     .hero { background:var(--white); border-bottom:1px solid var(--gray-200); }
-    .hero__inner { text-align:center; padding:72px 24px 56px; max-width:640px; margin:0 auto; }
-    .hero__label { display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.06em; color:var(--accent); background:var(--accent-light); padding:5px 14px; border-radius:980px; margin-bottom:24px; }
+    .hero__inner { text-align:center; padding:72px 24px 56px; max-width:680px; margin:0 auto; }
+    .hero__label { display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.06em; color:var(--green); background:var(--green-light); padding:5px 14px; border-radius:980px; margin-bottom:24px; }
     .hero__title { font-size:clamp(1.8rem, 4.5vw, 3rem); font-weight:800; letter-spacing:-0.04em; line-height:1.2; margin-bottom:16px; }
     .hero__title em { font-style:normal; color:var(--accent); }
     .hero__sub { font-size:0.95rem; color:var(--gray-700); line-height:1.85; margin-bottom:36px; }
+    .hero__sub strong { color:var(--black); font-weight:700; }
     .hero__search { max-width:440px; margin:0 auto; position:relative; }
     .hero__search input { width:100%; font-family:var(--font); font-size:0.92rem; padding:14px 20px 14px 46px; border:1.5px solid var(--gray-200); border-radius:14px; outline:none; background:var(--gray-50); transition:border-color 0.2s, box-shadow 0.2s, background 0.2s; }
     .hero__search input:focus { border-color:var(--accent); box-shadow:0 0 0 4px rgba(0,113,227,0.08); background:var(--white); }
     .hero__search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--gray-500); display:flex; }
+
+    /* ── ROI Simulator ── */
+    .roi { background:var(--white); border-radius:20px; padding:36px 40px; margin-top:-20px; position:relative; z-index:2; box-shadow:0 4px 24px rgba(0,0,0,0.06); }
+    .roi__title { font-size:1.1rem; font-weight:800; text-align:center; margin-bottom:8px; letter-spacing:-0.02em; }
+    .roi__subtitle { font-size:0.8rem; color:var(--gray-500); text-align:center; margin-bottom:24px; }
+    .roi__form { display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap; justify-content:center; }
+    .roi__field { display:flex; flex-direction:column; gap:6px; }
+    .roi__field label { font-size:0.75rem; font-weight:600; color:var(--gray-700); }
+    .roi__field input, .roi__field select { font-family:var(--font); font-size:0.92rem; padding:10px 14px; border:1.5px solid var(--gray-200); border-radius:10px; outline:none; background:var(--gray-50); width:160px; }
+    .roi__field input:focus, .roi__field select:focus { border-color:var(--accent); }
+    .roi__btn { background:var(--accent); color:var(--white); border:none; font-family:var(--font); font-size:0.88rem; font-weight:600; padding:11px 24px; border-radius:10px; cursor:pointer; transition:background 0.2s; }
+    .roi__btn:hover { background:#005bb5; }
+    .roi__result { display:none; margin-top:24px; text-align:center; padding:24px; background:linear-gradient(135deg, #e8f2fc 0%, #dcfce7 100%); border-radius:14px; }
+    .roi__result.is-visible { display:block; }
+    .roi__result-amount { font-size:2.2rem; font-weight:800; color:var(--accent); letter-spacing:-0.03em; }
+    .roi__result-label { font-size:0.82rem; color:var(--gray-700); margin-top:4px; }
+    .roi__result-detail { font-size:0.78rem; color:var(--gray-500); margin-top:8px; line-height:1.7; }
+    .roi__result-bar { margin-top:16px; background:var(--gray-200); border-radius:8px; height:12px; overflow:hidden; }
+    .roi__result-bar-fill { height:100%; background:linear-gradient(90deg, var(--accent), var(--green)); border-radius:8px; transition:width 0.8s var(--ease); }
+
+    /* ── 3-Step Guide ── */
+    .steps { padding:56px 0 40px; }
+    .steps__grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; }
+    .step-card { background:var(--white); border-radius:16px; padding:32px 24px; text-align:center; position:relative; }
+    .step-card__num { width:36px; height:36px; border-radius:50%; background:var(--accent); color:var(--white); font-size:0.88rem; font-weight:800; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
+    .step-card__title { font-size:0.95rem; font-weight:700; margin-bottom:8px; }
+    .step-card__desc { font-size:0.8rem; color:var(--gray-700); line-height:1.7; }
+    .step-card__arrow { display:none; position:absolute; right:-16px; top:50%; transform:translateY(-50%); color:var(--gray-300); }
+    @media(min-width:769px) { .step-card__arrow { display:block; } }
 
     /* ── Section ── */
     .section { padding:56px 0; }
@@ -83,7 +123,8 @@
     .tool-card__icon--indigo { background:#e0e7ff; color:#4f46e5; }
     .tool-card__icon--slate { background:#e2e8f0; color:#475569; }
     .tool-card__title { font-size:1rem; font-weight:700; letter-spacing:-0.01em; }
-    .tool-card__desc { font-size:0.82rem; color:var(--gray-700); line-height:1.65; margin-bottom:18px; flex:1; }
+    .tool-card__desc { font-size:0.82rem; color:var(--gray-700); line-height:1.65; margin-bottom:8px; flex:1; }
+    .tool-card__roi { font-size:0.72rem; font-weight:700; color:var(--green); background:var(--green-light); display:inline-block; padding:2px 10px; border-radius:980px; margin-bottom:12px; }
     .tool-card__link { font-size:0.8rem; font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:4px; transition:gap 0.2s; }
     .tool-card:hover .tool-card__link { gap:8px; }
     .tool-card__tags { display:flex; gap:6px; flex-wrap:wrap; }
@@ -97,6 +138,39 @@
     .features__item-icon svg { width:22px; height:22px; color:var(--black); }
     .features__item-title { font-size:0.88rem; font-weight:700; margin-bottom:6px; }
     .features__item-desc { font-size:0.78rem; color:var(--gray-500); line-height:1.65; }
+
+    /* ── Trust Bar ── */
+    .trust { padding:32px 0; }
+    .trust__inner { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
+    .trust__item { display:flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--gray-700); }
+    .trust__item svg { width:18px; height:18px; color:var(--green); flex-shrink:0; }
+
+    /* ── Mobile Quick Finder ── */
+    .quick-finder-fab { display:none; position:fixed; bottom:20px; right:20px; z-index:250; width:56px; height:56px; border-radius:50%; background:var(--accent); color:var(--white); border:none; box-shadow:0 4px 20px rgba(0,113,227,0.4); cursor:pointer; align-items:center; justify-content:center; transition:transform 0.2s; }
+    .quick-finder-fab:active { transform:scale(0.92); }
+    .quick-finder-fab svg { width:24px; height:24px; }
+    .quick-finder-overlay { display:none; position:fixed; inset:0; z-index:260; background:rgba(0,0,0,0.5); }
+    .quick-finder-overlay.is-open { display:block; }
+    .quick-finder-panel { position:fixed; bottom:0; left:0; right:0; z-index:270; background:var(--white); border-radius:20px 20px 0 0; max-height:85vh; overflow-y:auto; transform:translateY(100%); transition:transform 0.3s var(--ease); padding:20px 20px calc(20px + env(safe-area-inset-bottom)); }
+    .quick-finder-panel.is-open { transform:translateY(0); }
+    .quick-finder-panel__header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+    .quick-finder-panel__title { font-size:1rem; font-weight:800; }
+    .quick-finder-panel__close { background:none; border:none; cursor:pointer; color:var(--gray-500); padding:4px; }
+    .quick-finder-panel__close svg { width:24px; height:24px; }
+    .quick-finder-panel__search { width:100%; font-family:var(--font); font-size:0.92rem; padding:12px 16px; border:1.5px solid var(--gray-200); border-radius:12px; outline:none; background:var(--gray-50); margin-bottom:12px; }
+    .quick-finder-panel__search:focus { border-color:var(--accent); }
+    .quick-finder-panel__tags { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+    .quick-finder-panel__tag { font-size:0.78rem; font-weight:600; padding:6px 14px; border-radius:980px; border:1.5px solid var(--gray-200); background:var(--white); cursor:pointer; transition:all 0.15s; color:var(--gray-700); }
+    .quick-finder-panel__tag:hover, .quick-finder-panel__tag.is-active { background:var(--accent); color:var(--white); border-color:var(--accent); }
+    .quick-finder-panel__list { display:flex; flex-direction:column; gap:4px; }
+    .quick-finder-panel__item { display:flex; align-items:center; gap:12px; padding:14px 12px; border-radius:12px; transition:background 0.15s; text-decoration:none; color:var(--black); }
+    .quick-finder-panel__item:hover { background:var(--gray-100); }
+    .quick-finder-panel__item-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px; }
+    .quick-finder-panel__item-text { flex:1; }
+    .quick-finder-panel__item-name { font-size:0.88rem; font-weight:600; }
+    .quick-finder-panel__item-desc { font-size:0.72rem; color:var(--gray-500); }
+    .quick-finder-panel__item-saving { font-size:0.7rem; font-weight:700; color:var(--green); }
+    @media(max-width:768px){ .quick-finder-fab { display:flex; } body { padding-bottom:80px; } }
 
     /* ── CTA ── */
     .cta { padding:16px 0 64px; }
@@ -143,7 +217,7 @@
       .tool-card__icon { width:38px; height:38px; border-radius:10px; }
       .tool-card__icon svg { width:18px; height:18px; }
       .tool-card__title { font-size:0.9rem; }
-      .tool-card__desc { font-size:0.78rem; margin-bottom:12px; }
+      .tool-card__desc { font-size:0.78rem; margin-bottom:8px; }
       .tool-card__link { font-size:0.76rem; }
       .features { padding:32px 24px; border-radius:16px; }
       .features__item-icon { width:40px; height:40px; border-radius:11px; }
@@ -157,6 +231,10 @@
       .footer__col-links { gap:2px 24px; }
       .footer__col-links a { font-size:0.78rem; }
       .footer__bottom { flex-direction:column; gap:10px; align-items:flex-start; padding:16px 0 20px; }
+      .roi { margin:0 20px; padding:28px 20px; margin-top:-20px; }
+      .roi__form { flex-direction:column; align-items:stretch; }
+      .roi__field input, .roi__field select { width:100%; }
+      .steps__grid { grid-template-columns:1fr; gap:12px; }
     }
     @media (max-width:420px) {
       .container { padding:0 16px; }
@@ -165,17 +243,17 @@
       .tools-grid { grid-template-columns:1fr; max-width:380px; margin:0 auto; }
       .features__grid { grid-template-columns:1fr 1fr; gap:20px; }
       .cta__card { padding:32px 20px; }
+      .roi { margin:0 16px; }
     }
-
 
     /* ── Scroll reveal ── */
     .reveal { opacity:0; transform:translateY(16px); transition:opacity 0.5s var(--ease), transform 0.5s var(--ease); }
     .reveal.is-visible { opacity:1; transform:translateY(0); }
-    /* Fallback: if JS fails or observer doesn't fire, show content after 2s */
     @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; } }
     .reveal-d1 { transition-delay:0.06s; }
     .reveal-d2 { transition-delay:0.12s; }
     .reveal-d3 { transition-delay:0.18s; }
+
     /* ── Sites Dropdown ── */
     .nav__dropdown { position:relative; }
     .nav__dropdown-toggle { font-size:0.8rem; font-weight:500; color:var(--gray-700); cursor:pointer; display:flex; align-items:center; gap:4px; transition:color 0.2s; }
@@ -188,7 +266,6 @@
     .nav__dropdown-item:hover { background:var(--gray-100); }
     .nav__dropdown-item span.icon { width:28px; height:28px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
     .nav__dropdown-item.active { color:var(--accent); background:var(--accent-light); }
-  
     .nav__dropdown-item .dd-text { display:flex; flex-direction:column; }
     .nav__dropdown-item .dd-name { font-size:0.82rem; font-weight:600; }
     .nav__dropdown-item .dd-desc { font-size:0.68rem; font-weight:400; color:var(--gray-500); margin-top:1px; }
@@ -214,10 +291,10 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "ToolBox - 無料オンラインツール集",
+  "name": "ToolBox - 個人事業主・フリーランスの業務効率化ツール",
   "url": "https://muryo-tool.com/",
-  "description": "画像圧縮、QRコード作成、文字数カウント、パスワード生成、PDF変換、単位変換、年齢計算、タイマーなど。ブラウザだけで完結する便利ツール。インストール不要・データ送信なし。",
-  "applicationCategory": "UtilitiesApplication",
+  "description": "個人事業主・フリーランスの業務を加速する無料オンラインツール集。画像圧縮、QRコード作成、請求書作成、文字数カウントなど12種類。年間48,000円相当の作業時間を削減。",
+  "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
   "offers": {
     "@type": "Offer",
@@ -234,8 +311,8 @@
   "mainEntity": [
     {"@type": "Question", "name": "ToolBoxは本当に無料ですか？", "acceptedAnswer": {"@type": "Answer", "text": "はい、ToolBoxのすべてのツールは完全無料で利用できます。アカウント登録も不要です。"}},
     {"@type": "Question", "name": "データはサーバーに送信されますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。すべての処理はブラウザ内で完結し、データが外部サーバーに送信されることはありません。"}},
-    {"@type": "Question", "name": "スマートフォンでも使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。PC・タブレット・スマートフォンなど、すべてのデバイスに対応したレスポンシブデザインです。"}},
-    {"@type": "Question", "name": "どのようなツールがありますか？", "acceptedAnswer": {"@type": "Answer", "text": "画像圧縮、QRコード作成、文字数カウント、請求書作成、パスワード生成、PDF変換、単位変換、和暦西暦変換、年齢計算、タイマー、半角全角変換、割り勘計算など、12種類以上のツールを提供しています。"}}
+    {"@type": "Question", "name": "個人事業主・フリーランスに特化しているのですか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。請求書作成、画像圧縮、QRコード生成など、個人事業主やフリーランスが日常業務で頻繁に使うツールを厳選して提供しています。"}},
+    {"@type": "Question", "name": "どれくらいの作業時間が短縮できますか？", "acceptedAnswer": {"@type": "Answer", "text": "ツールの利用頻度にもよりますが、月間約20件の請求書作成だけでも月4,000円相当（時給換算）の効率化が見込めます。画像圧縮やQRコード作成なども合わせると、年間48,000円以上の時間価値を生み出せます。"}}
   ]
 }
 </script>
@@ -247,7 +324,7 @@
       <a href="/" class="nav__logo">Tool<span>Box</span></a>
       <div class="nav__links">
         <a href="#popular" class="nav__link">人気ツール</a>
-        <a href="#all" class="nav__link">すべて</a>
+        <a href="#all" class="nav__link">全ツール</a>
         <div class="nav__dropdown">
           <span class="nav__dropdown-toggle">サービス一覧 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8L9.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="nav__dropdown-menu">
@@ -276,7 +353,8 @@
       <div class="mobile-menu__section">
         <div class="mobile-menu__title">ページ内</div>
         <a href="#popular" class="mobile-menu__link">人気ツール</a>
-        <a href="#all" class="mobile-menu__link">すべてのツール</a>
+        <a href="#all" class="mobile-menu__link">全ツール</a>
+        <a href="#roi-simulator" class="mobile-menu__link">削減額シミュレーター</a>
         <a href="#faq" class="mobile-menu__link">よくある質問</a>
       </div>
       <div class="mobile-menu__section">
@@ -292,24 +370,111 @@
     </div>
   </div>
 
-  <!-- Hero -->
+  <!-- Hero — 信条③ ターゲット明確化 -->
   <section class="hero">
     <div class="hero__inner">
-      <span class="hero__label">すべて無料・登録不要</span>
-      <h1 class="hero__title reveal">便利なツールを、<br><em>ブラウザだけで。</em></h1>
-      <p class="hero__sub reveal reveal-d1">画像圧縮、QRコード作成、文字数カウント、パスワード生成、PDF変換など。<br>インストール不要。データがサーバーに送信されることはありません。</p>
+      <span class="hero__label">年間48,000円相当の時短を実現</span>
+      <h1 class="hero__title reveal">個人事業主の業務を、<br><em>10倍速にする。</em></h1>
+      <p class="hero__sub reveal reveal-d1">請求書作成、画像圧縮、QRコード生成、文字数チェック。<br><strong>あなたのクライアントワークを加速する12のツール</strong>を、<br>ブラウザだけで。データ送信なし・登録不要。</p>
       <div class="hero__search reveal reveal-d2">
         <span class="hero__search-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
-        <input type="text" id="tool-search" placeholder="ツールを検索...">
+        <input type="text" id="tool-search" placeholder="何をしたいですか？（例：画像を軽くしたい）">
       </div>
     </div>
   </section>
 
-  <!-- Popular Tools -->
+  <!-- ROI Simulator — 信条① 成果の金額換算 -->
+  <div class="container" id="roi-simulator">
+    <div class="roi reveal">
+      <div class="roi__title">あなたの「時間コスト」を可視化する</div>
+      <div class="roi__subtitle">ToolBoxを使うと、毎月いくら分の時間を取り戻せるか計算してみましょう</div>
+      <div class="roi__form">
+        <div class="roi__field">
+          <label for="roi-hourly">あなたの時給（円）</label>
+          <input type="number" id="roi-hourly" value="3000" min="500" step="100">
+        </div>
+        <div class="roi__field">
+          <label for="roi-tasks">月間のツール利用回数</label>
+          <input type="number" id="roi-tasks" value="30" min="1" step="1">
+        </div>
+        <div class="roi__field">
+          <label for="roi-saved">1回あたりの短縮時間</label>
+          <select id="roi-saved">
+            <option value="5" selected>5分</option>
+            <option value="10">10分</option>
+            <option value="15">15分</option>
+            <option value="20">20分</option>
+            <option value="30">30分</option>
+          </select>
+        </div>
+        <button class="roi__btn" id="roi-calc-btn">計算する</button>
+      </div>
+      <div class="roi__result" id="roi-result">
+        <div class="roi__result-amount" id="roi-amount">¥0</div>
+        <div class="roi__result-label">月間の削減コスト（時給換算）</div>
+        <div class="roi__result-detail" id="roi-detail"></div>
+        <div class="roi__result-bar"><div class="roi__result-bar-fill" id="roi-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3-Step Guide — 信条② リスクの最小化 -->
+  <div class="container">
+    <div class="steps">
+      <div class="section__header reveal" style="justify-content:center">
+        <h2 class="section__title">3ステップで業務を効率化</h2>
+      </div>
+      <div class="steps__grid">
+        <div class="step-card reveal">
+          <div class="step-card__num">1</div>
+          <div class="step-card__title">ツールを選ぶ</div>
+          <div class="step-card__desc">下の一覧から、今必要なツールをタップ。アカウント登録は不要です。</div>
+          <span class="step-card__arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+        <div class="step-card reveal reveal-d1">
+          <div class="step-card__num">2</div>
+          <div class="step-card__title">ブラウザで処理</div>
+          <div class="step-card__desc">ファイルを選択 or テキストを入力するだけ。データは端末内で処理され、外部に送信されません。</div>
+          <span class="step-card__arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+        <div class="step-card reveal reveal-d2">
+          <div class="step-card__num">3</div>
+          <div class="step-card__title">即ダウンロード</div>
+          <div class="step-card__desc">処理結果をワンクリックで保存。次のクライアントワークにすぐ活用できます。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust Bar — 信条② リスク最小化 -->
+  <div class="trust">
+    <div class="container">
+      <div class="trust__inner reveal">
+        <div class="trust__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+          データ送信なし
+        </div>
+        <div class="trust__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          登録不要
+        </div>
+        <div class="trust__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>
+          即時利用可能
+        </div>
+        <div class="trust__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          スマホ完全対応
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular Tools — 信条①③ 金額換算 + ターゲット訴求コピー -->
   <section id="popular" class="section">
     <div class="container">
       <div class="section__header reveal">
-        <h2 class="section__title">人気のツール</h2>
+        <h2 class="section__title">個人事業主に選ばれるツール</h2>
         <span class="section__badge">TOP 3</span>
       </div>
       <div class="tools-grid" id="popular-tools">
@@ -322,8 +487,9 @@
               <div class="tool-card__tags"><span class="tool-card__tag">テキスト</span><span class="tool-card__tag tool-card__tag--pop">人気</span></div>
             </div>
           </div>
-          <div class="tool-card__desc">リアルタイムで文字数・単語数・行数をカウント。SEOライティングや文章作成に。</div>
-          <span class="tool-card__link">使ってみる →</span>
+          <div class="tool-card__desc">SEO記事・提案書の文字数を即座に確認。納品前のチェックにかかる時間を1回3分短縮。</div>
+          <span class="tool-card__roi">月12回利用で約1,800円/月の時短</span>
+          <span class="tool-card__link">今すぐ使う →</span>
         </a>
 
         <a href="tools/invoice-generator/" class="tool-card reveal reveal-d1">
@@ -334,8 +500,9 @@
               <div class="tool-card__tags"><span class="tool-card__tag">ビジネス</span><span class="tool-card__tag tool-card__tag--pop">人気</span></div>
             </div>
           </div>
-          <div class="tool-card__desc">フリーランス向け。フォーム入力だけで請求書・見積書を作成。印刷・PDF保存対応。</div>
-          <span class="tool-card__link">使ってみる →</span>
+          <div class="tool-card__desc">クライアントへの請求書・見積書をフォーム入力で即作成。有料ソフト不要で印刷・PDF保存に対応。</div>
+          <span class="tool-card__roi">月20件作成で約4,000円/月の時短</span>
+          <span class="tool-card__link">今すぐ使う →</span>
         </a>
 
         <a href="tools/image-compressor/" class="tool-card reveal reveal-d2">
@@ -346,155 +513,168 @@
               <div class="tool-card__tags"><span class="tool-card__tag">画像</span><span class="tool-card__tag tool-card__tag--pop">人気</span></div>
             </div>
           </div>
-          <div class="tool-card__desc">JPEG・PNG・WebPをブラウザ上で圧縮。画質を保ったままファイルサイズを最大80%削減。</div>
-          <span class="tool-card__link">使ってみる →</span>
+          <div class="tool-card__desc">ブログ・LP用の画像を最大80%軽量化。表示速度改善でクライアントサイトのSEO評価を底上げ。</div>
+          <span class="tool-card__roi">月30枚処理で約2,500円/月の時短</span>
+          <span class="tool-card__link">今すぐ使う →</span>
         </a>
 
       </div>
     </div>
   </section>
 
-  <!-- Features -->
+  <!-- Features — 信条② リスク最小化（安心訴求） -->
   <div class="container">
     <div class="features reveal">
       <div class="features__grid">
         <div>
           <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
-          <div class="features__item-title">プライバシー安全</div>
-          <div class="features__item-desc">すべての処理はブラウザ内で完結。データは外部に送信されません。</div>
+          <div class="features__item-title">クライアント情報も安全</div>
+          <div class="features__item-desc">請求書の顧客情報もブラウザ内完結。外部サーバーへの送信は一切ありません。</div>
         </div>
         <div>
           <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div>
-          <div class="features__item-title">高速処理</div>
-          <div class="features__item-desc">最新のWeb APIを活用し、大きなファイルもストレスなく処理。</div>
+          <div class="features__item-title">待ち時間ゼロ</div>
+          <div class="features__item-desc">クラウド処理ではないため、回線速度に依存しない高速処理を実現。</div>
         </div>
         <div>
           <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 8 0 8"/></svg></div>
-          <div class="features__item-title">完全無料</div>
-          <div class="features__item-desc">すべてのツールを無料で利用可能。アカウント登録も不要。</div>
+          <div class="features__item-title">有料ソフト代を削減</div>
+          <div class="features__item-desc">月額課金のツールを使わなくても、同等の機能をブラウザで。経費削減に直結。</div>
         </div>
         <div>
           <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
-          <div class="features__item-title">スマホ対応</div>
-          <div class="features__item-desc">PC・タブレット・スマホ。どのデバイスでも快適に使えます。</div>
+          <div class="features__item-title">外出先でも即対応</div>
+          <div class="features__item-desc">スマホ対応なので、移動中や商談前の急な修正にも対応可能。</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- All Tools -->
+  <!-- All Tools — 信条①③ 金額訴求 + ターゲットコピー -->
   <section id="all" class="section">
     <div class="container">
       <div class="section__header reveal">
-        <h2 class="section__title">すべてのツール</h2>
+        <h2 class="section__title">業務効率化ツール一覧</h2>
       </div>
       <div class="tools-grid" id="all-tools">
 
-        <a href="tools/text-counter/" class="tool-card reveal" data-name="文字数カウント テキスト">
+        <a href="tools/text-counter/" class="tool-card reveal" data-name="文字数カウント テキスト 記事 SEO ライティング" data-category="テキスト" data-need="文字数を数えたい 文章をチェックしたい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
             <div class="tool-card__title">文字数カウント</div>
           </div>
-          <div class="tool-card__desc">文字数・単語数・行数をリアルタイムカウント。</div>
+          <div class="tool-card__desc">SEO記事・提案書の文字数を即確認。納品物の品質管理に。</div>
+          <span class="tool-card__roi">1回3分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/image-compressor/" class="tool-card reveal reveal-d1" data-name="画像圧縮 画像 JPEG PNG">
+        <a href="tools/image-compressor/" class="tool-card reveal reveal-d1" data-name="画像圧縮 画像 JPEG PNG WebP 軽量化" data-category="画像" data-need="画像を軽くしたい 画像を圧縮したい ファイルサイズを減らしたい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
             <div class="tool-card__title">画像圧縮</div>
           </div>
-          <div class="tool-card__desc">JPEG・PNG・WebPを画質を保って圧縮。</div>
+          <div class="tool-card__desc">クライアント納品前に画像を最大80%軽量化。サイト表示速度を改善。</div>
+          <span class="tool-card__roi">1回5分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/qr-generator/" class="tool-card reveal reveal-d2" data-name="QRコード 作成 生成">
+        <a href="tools/qr-generator/" class="tool-card reveal reveal-d2" data-name="QRコード 作成 生成 URL" data-category="ビジネス" data-need="QRコードを作りたい URLをQRにしたい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><path d="M21 14h-3v3"/><path d="M21 19v2h-2"/></svg></div>
             <div class="tool-card__title">QRコード作成</div>
           </div>
-          <div class="tool-card__desc">URL・テキストからQRコードを生成。</div>
+          <div class="tool-card__desc">名刺・チラシ・ポップ用のQRコードを即生成。販促物の制作を加速。</div>
+          <span class="tool-card__roi">1回2分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/invoice-generator/" class="tool-card reveal" data-name="請求書 見積書 作成 ビジネス インボイス">
+        <a href="tools/invoice-generator/" class="tool-card reveal" data-name="請求書 見積書 作成 ビジネス インボイス フリーランス" data-category="ビジネス" data-need="請求書を作りたい 見積書を作りたい インボイスを発行したい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 10h8"/><path d="M8 14h4"/></svg></div>
             <div class="tool-card__title">請求書作成</div>
           </div>
-          <div class="tool-card__desc">請求書・見積書をフォーム入力で作成。印刷/PDF対応。</div>
+          <div class="tool-card__desc">クライアントへの請求書をフォーム入力で作成。有料会計ソフト不要。</div>
+          <span class="tool-card__roi">1回12分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/password-generator/" class="tool-card reveal reveal-d1" data-name="パスワード生成 パスワード セキュリティ">
+        <a href="tools/password-generator/" class="tool-card reveal reveal-d1" data-name="パスワード生成 パスワード セキュリティ 安全" data-category="セキュリティ" data-need="パスワードを作りたい 安全なパスワードがほしい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg></div>
             <div class="tool-card__title">パスワード生成</div>
           </div>
-          <div class="tool-card__desc">安全なパスワードをワンクリックで自動生成。</div>
+          <div class="tool-card__desc">クライアント用アカウント作成に。高強度パスワードをワンクリック生成。</div>
+          <span class="tool-card__roi">1回1分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/timer/" class="tool-card reveal reveal-d2" data-name="タイマー ストップウォッチ カウントダウン">
+        <a href="tools/timer/" class="tool-card reveal reveal-d2" data-name="タイマー ストップウォッチ カウントダウン 作業時間" data-category="ユーティリティ" data-need="時間を計りたい タイマーを使いたい 作業時間を測りたい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M12 5V3"/><path d="M10 3h4"/></svg></div>
             <div class="tool-card__title">タイマー</div>
           </div>
-          <div class="tool-card__desc">ストップウォッチ＆カウントダウンタイマー。</div>
+          <div class="tool-card__desc">ポモドーロ作業法や打ち合わせの時間管理に。集中力を可視化。</div>
+          <span class="tool-card__roi">集中力UP=生産性向上</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/pdf-converter/" class="tool-card reveal" data-name="PDF変換 画像 JPG PNG PDF作成">
+        <a href="tools/pdf-converter/" class="tool-card reveal" data-name="PDF変換 画像 JPG PNG PDF作成 書類" data-category="ビジネス" data-need="画像をPDFにしたい PDFを作りたい 書類をPDFにしたい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M10 13v4"/><path d="M14 13v4"/><path d="M10 13h2a2 2 0 0 1 0 4h-2"/></svg></div>
             <div class="tool-card__title">画像→PDF変換</div>
           </div>
-          <div class="tool-card__desc">JPG・PNGをPDFに変換。複数画像の結合も。</div>
+          <div class="tool-card__desc">領収書や資料画像をPDFに一括変換。クライアントへの納品に最適。</div>
+          <span class="tool-card__roi">1回5分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/unit-converter/" class="tool-card reveal reveal-d1" data-name="単位変換 cm inch kg lb 坪 平米">
+        <a href="tools/unit-converter/" class="tool-card reveal reveal-d1" data-name="単位変換 cm inch kg lb 坪 平米 面積" data-category="ユーティリティ" data-need="単位を変換したい cmをインチに メートルをフィートに">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg></div>
             <div class="tool-card__title">単位変換</div>
           </div>
-          <div class="tool-card__desc">長さ・重さ・面積・温度など あらゆる単位を即変換。</div>
+          <div class="tool-card__desc">海外クライアントとの資料作成時に。長さ・重さ・面積・温度を即変換。</div>
+          <span class="tool-card__roi">1回2分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/wareki-converter/" class="tool-card reveal reveal-d2" data-name="和暦 西暦 変換 令和 平成 昭和">
+        <a href="tools/wareki-converter/" class="tool-card reveal reveal-d2" data-name="和暦 西暦 変換 令和 平成 昭和 契約書" data-category="ビジネス" data-need="和暦を西暦に変えたい 令和を西暦に 契約書の日付">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></div>
             <div class="tool-card__title">和暦西暦変換</div>
           </div>
-          <div class="tool-card__desc">令和・平成・昭和の和暦と西暦を相互変換。</div>
+          <div class="tool-card__desc">契約書・公的書類の作成時に。令和・平成・昭和をミスなく変換。</div>
+          <span class="tool-card__roi">1回1分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/age-calculator/" class="tool-card reveal" data-name="年齢計算 生年月日 干支 星座 和暦">
+        <a href="tools/age-calculator/" class="tool-card reveal" data-name="年齢計算 生年月日 干支 星座 和暦" data-category="ユーティリティ" data-need="年齢を計算したい 生年月日から年齢を知りたい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--slate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2v4"/><path d="M8 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></div>
             <div class="tool-card__title">年齢計算</div>
           </div>
-          <div class="tool-card__desc">生年月日から年齢・干支・星座・和暦を一発表示。</div>
+          <div class="tool-card__desc">顧客管理や書類作成時に。生年月日から年齢・干支・星座を一発表示。</div>
+          <span class="tool-card__roi">1回1分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/hankaku-zenkaku/" class="tool-card reveal reveal-d1" data-name="半角全角変換 半角 全角 テキスト カタカナ">
+        <a href="tools/hankaku-zenkaku/" class="tool-card reveal reveal-d1" data-name="半角全角変換 半角 全角 テキスト カタカナ 統一" data-category="テキスト" data-need="半角を全角にしたい 全角を半角にしたい テキストを統一したい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2h4v4"/><path d="M21 2l-7 7"/><path d="M7 22H3v-4"/><path d="M3 22l7-7"/></svg></div>
             <div class="tool-card__title">半角全角変換</div>
           </div>
-          <div class="tool-card__desc">英数字・カタカナを全角⇔半角に一括変換。</div>
+          <div class="tool-card__desc">納品テキストの表記統一に。英数字・カタカナの半角/全角を一括変換。</div>
+          <span class="tool-card__roi">1回3分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/warikan/" class="tool-card reveal reveal-d2" data-name="割り勘計算 割り勘 飲み会 食事 計算">
+        <a href="tools/warikan/" class="tool-card reveal reveal-d2" data-name="割り勘計算 割り勘 飲み会 食事 計算 経費" data-category="ユーティリティ" data-need="割り勘を計算したい 飲み会の精算をしたい">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></div>
             <div class="tool-card__title">割り勘計算</div>
           </div>
-          <div class="tool-card__desc">飲み会・食事の割り勘を端数処理つきで計算。</div>
+          <div class="tool-card__desc">チームの会食・打ち上げの精算を端数処理つきで即計算。</div>
+          <span class="tool-card__roi">1回2分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
 
@@ -502,13 +682,13 @@
     </div>
   </section>
 
-  <!-- Ad placement: between tools and FAQ -->
+  <!-- Ad placement -->
   <div class="container" style="margin:0 auto;max-width:1080px;padding:0 24px">
     <ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <!-- FAQ -->
+  <!-- FAQ — 信条③ ターゲット特化のQ&A -->
   <section class="section" id="faq">
     <div class="container">
       <div class="section__header reveal" style="justify-content:center">
@@ -517,35 +697,40 @@
       <div style="max-width:720px;margin:0 auto" class="reveal">
         <details style="background:var(--white);border:1px solid var(--gray-200);border-radius:14px;margin-bottom:10px;overflow:hidden" open>
           <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">ToolBoxは本当に無料ですか？</summary>
-          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">はい、ToolBoxのすべてのツールは完全無料で利用できます。アカウント登録も不要です。広告収入でサイトを運営しているため、利用者の方に費用が発生することはありません。</p>
+          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">はい、ToolBoxのすべてのツールは完全無料で利用できます。アカウント登録も不要です。有料プランへの誘導も一切ありません。</p>
         </details>
         <details style="background:var(--white);border:1px solid var(--gray-200);border-radius:14px;margin-bottom:10px;overflow:hidden">
-          <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">データはサーバーに送信されますか？</summary>
-          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">いいえ。画像圧縮やPDF変換を含むすべての処理はブラウザ内のJavaScriptで完結します。データが外部サーバーに送信されることは一切ありません。</p>
+          <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">クライアントの機密データは安全ですか？</summary>
+          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">はい。請求書の顧客情報や画像データを含め、すべての処理はブラウザ内のJavaScriptで完結します。データが外部サーバーに送信されることは一切ありません。安心してクライアントワークにご利用ください。</p>
         </details>
         <details style="background:var(--white);border:1px solid var(--gray-200);border-radius:14px;margin-bottom:10px;overflow:hidden">
-          <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">スマートフォンでも使えますか？</summary>
-          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">はい。PC・タブレット・スマートフォンなど、すべてのデバイスに対応したレスポンシブデザインを採用しています。アプリのインストールは不要です。</p>
+          <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">個人事業主・フリーランスに特化しているのですか？</summary>
+          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">はい。請求書作成、画像圧縮、QRコード生成など、個人事業主やフリーランスがクライアントワークで頻繁に使うツールを厳選しています。月額課金の有料ソフトを使わずに、同等の作業をブラウザで完結できます。</p>
         </details>
         <details style="background:var(--white);border:1px solid var(--gray-200);border-radius:14px;margin-bottom:10px;overflow:hidden">
-          <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">どのようなツールがありますか？</summary>
-          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">画像圧縮、QRコード作成、文字数カウント、請求書作成、パスワード生成、PDF変換、単位変換、和暦西暦変換、年齢計算、タイマー、半角全角変換、割り勘計算など、12種類以上の実用ツールを提供しています。</p>
+          <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">どれくらいの作業時間を短縮できますか？</summary>
+          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">ツールの利用頻度にもよりますが、月間約20件の請求書作成だけでも月4,000円相当（時給換算）の効率化が見込めます。画像圧縮やQRコード作成なども合わせると、年間48,000円以上の時間価値を生み出せます。ページ上部のシミュレーターで、あなたのケースを具体的に計算できます。</p>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- CTA — 信条①③ 金額訴求 + ターゲット明確 -->
   <div class="cta" id="about">
     <div class="container">
       <div class="cta__card reveal">
-        <div class="cta__title">すべて無料。すべてブラウザで完結。</div>
-        <div class="cta__desc">ToolBoxは、日常的に使うツールをブラウザだけで使えるようにしたサービスです。<br>あなたのデータがサーバーに送信されることはありません。</div>
+        <div class="cta__title">あなたのクライアントワークを、今日から加速する。</div>
+        <div class="cta__desc">ToolBoxは、個人事業主・フリーランスが本業に集中するための業務効率化ツールです。<br>有料ソフト不要。データ送信なし。年間48,000円相当の時間を取り戻しましょう。</div>
         <a href="#popular" class="cta__btn">ツールを使ってみる</a>
       </div>
     </div>
   </div>
 
+  <!-- Ad placement -->
+  <div class="container" style="margin:20px auto;max-width:1080px;padding:0 24px">
+    <ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -553,7 +738,7 @@
       <div class="footer__top">
         <div>
           <div class="footer__brand-name">Tool<span>Box</span></div>
-          <p class="footer__brand-desc">インストール不要の無料オンラインツール集。すべてブラウザで完結。</p>
+          <p class="footer__brand-desc">個人事業主・フリーランスの業務を加速する無料オンラインツール集。有料ソフト不要、ブラウザで完結。</p>
         </div>
         <div>
           <div class="footer__col-title">ツール</div>
@@ -603,50 +788,196 @@
     </div>
   </footer>
 
+  <!-- Mobile Quick Finder FAB — 信条② モバイルUXのリスク最小化 -->
+  <button class="quick-finder-fab" id="quick-finder-fab" aria-label="ツールを探す">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+  </button>
+  <div class="quick-finder-overlay" id="quick-finder-overlay"></div>
+  <div class="quick-finder-panel" id="quick-finder-panel">
+    <div class="quick-finder-panel__header">
+      <div class="quick-finder-panel__title">ツール早見表</div>
+      <button class="quick-finder-panel__close" id="quick-finder-close" aria-label="閉じる">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <input type="text" class="quick-finder-panel__search" id="quick-finder-search" placeholder="何がしたいですか？（例：画像を軽くしたい）">
+    <div class="quick-finder-panel__tags" id="quick-finder-tags">
+      <button class="quick-finder-panel__tag is-active" data-filter="all">すべて</button>
+      <button class="quick-finder-panel__tag" data-filter="ビジネス">ビジネス</button>
+      <button class="quick-finder-panel__tag" data-filter="テキスト">テキスト</button>
+      <button class="quick-finder-panel__tag" data-filter="画像">画像</button>
+      <button class="quick-finder-panel__tag" data-filter="セキュリティ">セキュリティ</button>
+      <button class="quick-finder-panel__tag" data-filter="ユーティリティ">その他</button>
+    </div>
+    <div class="quick-finder-panel__list" id="quick-finder-list">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // ── Scroll Reveal ──
       const reveals = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver(entries => {
           entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } });
         }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
         reveals.forEach(el => observer.observe(el));
-        // Fallback: force show all after 3 seconds in case observer fails
         setTimeout(() => { reveals.forEach(el => el.classList.add('is-visible')); }, 3000);
       } else {
-        // No IntersectionObserver support: show everything immediately
         reveals.forEach(el => el.classList.add('is-visible'));
       }
 
-      // Dropdown click toggle (for touch devices and accessibility)
+      // ── Dropdown ──
       const ddToggle = document.querySelector('.nav__dropdown-toggle');
       const ddParent = document.querySelector('.nav__dropdown');
       if (ddToggle) {
-        ddToggle.addEventListener('click', (e) => {
-          e.stopPropagation();
-          ddParent.classList.toggle('is-open');
-        });
-        document.addEventListener('click', (e) => {
-          if (!ddParent.contains(e.target)) ddParent.classList.remove('is-open');
-        });
+        ddToggle.addEventListener('click', (e) => { e.stopPropagation(); ddParent.classList.toggle('is-open'); });
+        document.addEventListener('click', (e) => { if (!ddParent.contains(e.target)) ddParent.classList.remove('is-open'); });
       }
 
-      // Mobile menu
+      // ── Mobile Menu ──
       const mobileMenu = document.getElementById('mobile-menu');
       document.getElementById('menu-open').addEventListener('click', () => mobileMenu.classList.add('is-open'));
       document.getElementById('menu-close').addEventListener('click', () => mobileMenu.classList.remove('is-open'));
       mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) mobileMenu.classList.remove('is-open'); });
       mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('is-open')));
 
+      // ── Search (Hero + Quick Finder dual search) ──
       const search = document.getElementById('tool-search');
       const cards = document.querySelectorAll('#all-tools .tool-card');
       search.addEventListener('input', () => {
         const q = search.value.toLowerCase();
         cards.forEach(card => {
-          const name = card.dataset.name.toLowerCase();
+          const name = (card.dataset.name || '').toLowerCase();
+          const need = (card.dataset.need || '').toLowerCase();
           const title = card.querySelector('.tool-card__title').textContent.toLowerCase();
-          card.style.display = (name.includes(q) || title.includes(q)) ? '' : 'none';
+          card.style.display = (name.includes(q) || title.includes(q) || need.includes(q)) ? '' : 'none';
         });
+      });
+
+      // ── ROI Simulator — 信条① 成果の金額換算 ──
+      const roiBtn = document.getElementById('roi-calc-btn');
+      const roiResult = document.getElementById('roi-result');
+      roiBtn.addEventListener('click', () => {
+        const hourly = parseInt(document.getElementById('roi-hourly').value) || 3000;
+        const tasks = parseInt(document.getElementById('roi-tasks').value) || 30;
+        const saved = parseInt(document.getElementById('roi-saved').value) || 5;
+        const monthlySavedMin = tasks * saved;
+        const monthlySavedYen = Math.round(hourly * (monthlySavedMin / 60));
+        const yearlySavedYen = monthlySavedYen * 12;
+        const roiPercent = Math.min(Math.round((yearlySavedYen / 1) * 100), 100); // normalize to 100%
+
+        document.getElementById('roi-amount').textContent = '¥' + monthlySavedYen.toLocaleString();
+        document.getElementById('roi-detail').innerHTML =
+          '月間 ' + monthlySavedMin + '分（' + (monthlySavedMin / 60).toFixed(1) + '時間）の短縮<br>' +
+          '年間換算: <strong>¥' + yearlySavedYen.toLocaleString() + '</strong> 相当の時間価値';
+        document.getElementById('roi-bar').style.width = Math.min(Math.round(monthlySavedYen / 100), 100) + '%';
+        roiResult.classList.add('is-visible');
+
+        // GA4 event: ROI simulator used
+        if (typeof gtag === 'function') {
+          gtag('event', 'roi_simulation', {
+            event_category: 'engagement',
+            event_label: 'roi_calculator',
+            hourly_rate: hourly,
+            monthly_tasks: tasks,
+            saved_minutes: saved,
+            monthly_saving_yen: monthlySavedYen,
+            yearly_saving_yen: yearlySavedYen
+          });
+        }
+      });
+
+      // ── Mobile Quick Finder ──
+      const toolsData = [
+        { name: '文字数カウント', desc: 'SEO記事・提案書の文字数確認', saving: '1回3分短縮', href: 'tools/text-counter/', icon: '📝', bg: '#dbeafe', category: 'テキスト', need: '文字数を数えたい 文章をチェック' },
+        { name: '画像圧縮', desc: '画像を最大80%軽量化', saving: '1回5分短縮', href: 'tools/image-compressor/', icon: '🖼️', bg: '#dcfce7', category: '画像', need: '画像を軽くしたい 圧縮したい' },
+        { name: 'QRコード作成', desc: '名刺・チラシ用QRを即生成', saving: '1回2分短縮', href: 'tools/qr-generator/', icon: '📱', bg: '#ede9fe', category: 'ビジネス', need: 'QRコードを作りたい' },
+        { name: '請求書作成', desc: '請求書・見積書をフォーム入力で', saving: '1回12分短縮', href: 'tools/invoice-generator/', icon: '📄', bg: '#ffedd5', category: 'ビジネス', need: '請求書を作りたい 見積書' },
+        { name: 'パスワード生成', desc: '高強度パスワードをワンクリック', saving: '1回1分短縮', href: 'tools/password-generator/', icon: '🔒', bg: '#fce7f3', category: 'セキュリティ', need: 'パスワードを作りたい 安全な' },
+        { name: 'タイマー', desc: 'ポモドーロ・打ち合わせ管理', saving: '集中力UP', href: 'tools/timer/', icon: '⏱️', bg: '#ccfbf1', category: 'ユーティリティ', need: 'タイマー 時間を計りたい' },
+        { name: '画像→PDF変換', desc: '画像をPDFに一括変換', saving: '1回5分短縮', href: 'tools/pdf-converter/', icon: '📋', bg: '#fef3c7', category: 'ビジネス', need: 'PDFを作りたい 画像をPDFに' },
+        { name: '単位変換', desc: '長さ・重さ・面積など即変換', saving: '1回2分短縮', href: 'tools/unit-converter/', icon: '🔄', bg: '#e0e7ff', category: 'ユーティリティ', need: '単位を変換したい cm インチ' },
+        { name: '和暦西暦変換', desc: '令和・平成・昭和の変換', saving: '1回1分短縮', href: 'tools/wareki-converter/', icon: '📅', bg: '#fee2e2', category: 'ビジネス', need: '和暦を西暦に 令和 平成' },
+        { name: '年齢計算', desc: '生年月日から年齢・干支を表示', saving: '1回1分短縮', href: 'tools/age-calculator/', icon: '🎂', bg: '#e2e8f0', category: 'ユーティリティ', need: '年齢を計算したい 生年月日' },
+        { name: '半角全角変換', desc: '英数字・カタカナの一括変換', saving: '1回3分短縮', href: 'tools/hankaku-zenkaku/', icon: '🔤', bg: '#ccfbf1', category: 'テキスト', need: '半角を全角に テキスト統一' },
+        { name: '割り勘計算', desc: '飲み会の精算を端数処理で', saving: '1回2分短縮', href: 'tools/warikan/', icon: '💴', bg: '#e0e7ff', category: 'ユーティリティ', need: '割り勘 飲み会 精算' },
+      ];
+
+      const qfFab = document.getElementById('quick-finder-fab');
+      const qfOverlay = document.getElementById('quick-finder-overlay');
+      const qfPanel = document.getElementById('quick-finder-panel');
+      const qfClose = document.getElementById('quick-finder-close');
+      const qfSearch = document.getElementById('quick-finder-search');
+      const qfList = document.getElementById('quick-finder-list');
+      const qfTags = document.getElementById('quick-finder-tags');
+
+      function renderQFList(filter, query) {
+        let items = toolsData;
+        if (filter && filter !== 'all') items = items.filter(t => t.category === filter);
+        if (query) {
+          const q = query.toLowerCase();
+          items = items.filter(t => t.name.toLowerCase().includes(q) || t.need.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q));
+        }
+        qfList.innerHTML = items.map(t =>
+          '<a href="' + t.href + '" class="quick-finder-panel__item">' +
+            '<div class="quick-finder-panel__item-icon" style="background:' + t.bg + '">' + t.icon + '</div>' +
+            '<div class="quick-finder-panel__item-text">' +
+              '<div class="quick-finder-panel__item-name">' + t.name + '</div>' +
+              '<div class="quick-finder-panel__item-desc">' + t.desc + '</div>' +
+            '</div>' +
+            '<div class="quick-finder-panel__item-saving">' + t.saving + '</div>' +
+          '</a>'
+        ).join('');
+      }
+
+      function openQF() {
+        qfOverlay.classList.add('is-open');
+        qfPanel.classList.add('is-open');
+        renderQFList('all', '');
+        setTimeout(() => qfSearch.focus(), 300);
+      }
+      function closeQF() {
+        qfOverlay.classList.remove('is-open');
+        qfPanel.classList.remove('is-open');
+      }
+
+      qfFab.addEventListener('click', openQF);
+      qfOverlay.addEventListener('click', closeQF);
+      qfClose.addEventListener('click', closeQF);
+
+      let activeFilter = 'all';
+      qfTags.addEventListener('click', (e) => {
+        const btn = e.target.closest('.quick-finder-panel__tag');
+        if (!btn) return;
+        qfTags.querySelectorAll('.quick-finder-panel__tag').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        activeFilter = btn.dataset.filter;
+        renderQFList(activeFilter, qfSearch.value);
+      });
+      qfSearch.addEventListener('input', () => {
+        renderQFList(activeFilter, qfSearch.value);
+      });
+
+      // ── GA4: Track tool clicks ──
+      document.querySelectorAll('.tool-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const toolName = card.querySelector('.tool-card__title')?.textContent || 'unknown';
+          if (typeof gtag === 'function') {
+            gtag('event', 'tool_click', {
+              event_category: 'navigation',
+              event_label: toolName
+            });
+          }
+        });
+      });
+
+      // ── GA4: Track Quick Finder usage ──
+      qfFab.addEventListener('click', () => {
+        if (typeof gtag === 'function') {
+          gtag('event', 'quick_finder_open', { event_category: 'engagement' });
+        }
       });
     });
   </script>
