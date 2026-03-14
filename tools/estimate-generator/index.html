@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】個人事業主・フリーランス向け工数見積書作成ツール。タスク別の工数×単価で自動計算。IT・デザイン・ライター業務に最適。備考テンプレ付きで修正回数・著作権も明記。">
+  <meta name="keywords" content="工数見積書, 見積書 作成, フリーランス 見積書, 工数計算, 無料 見積書, 個人事業主 見積">
+  <title>工数見積書作成｜フリーランス・個人事業主向け無料ツール【工数×単価で自動計算】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/estimate-generator/">
+  <meta property="og:title" content="工数見積書作成｜フリーランス・個人事業主向け無料ツール【工数×単価で自動計算】">
+  <meta property="og:description" content="【無料】個人事業主・フリーランス向け工数見積書作成ツール。タスク別の工数×単価で自動計算。IT・デザイン・ライター業務に最適。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/estimate-generator/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--green:#16a34a;--font:"Plus Jakarta Sans","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}.nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}.nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:20px}.tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}.tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}.tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+
+    .form-panel{background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .form-panel__section{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--gray-200)}
+    .form-panel__section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .form-panel__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .field{margin-bottom:12px}
+    .field label{display:block;font-size:0.75rem;font-weight:600;color:var(--gray-700);margin-bottom:4px}
+    .field input,.field textarea,.field select{width:100%;font-family:var(--font);font-size:0.88rem;padding:10px 12px;border:1.5px solid var(--gray-300);border-radius:10px;outline:none;transition:border-color 0.2s}
+    .field input:focus,.field textarea:focus{border-color:var(--accent)}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+
+    .unit-toggle{display:flex;gap:0;margin-bottom:14px;border:1.5px solid var(--gray-300);border-radius:10px;overflow:hidden}
+    .unit-toggle button{flex:1;font-family:var(--font);font-size:0.82rem;font-weight:600;padding:8px 12px;border:none;background:var(--white);color:var(--gray-700);cursor:pointer;transition:all 0.2s}
+    .unit-toggle button.active{background:var(--accent);color:var(--white)}
+
+    .items-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-bottom:12px}
+    .items-table th{text-align:left;font-weight:600;padding:8px 6px;border-bottom:2px solid var(--gray-200);font-size:0.72rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.06em}
+    .items-table td{padding:6px;border-bottom:1px solid var(--gray-200)}
+    .items-table input{width:100%;font-family:var(--font);font-size:0.82rem;padding:8px;border:1px solid var(--gray-300);border-radius:8px;outline:none}
+    .items-table input[type="number"]{text-align:right}
+    .items-table .item-total{text-align:right;font-weight:600;padding-right:8px;min-width:80px}
+    .items-table .remove-btn{background:none;border:none;color:var(--gray-300);cursor:pointer;font-size:1rem;padding:4px}.remove-btn:hover{color:#ff3b30}
+    .add-btn{font-family:var(--font);font-size:0.78rem;font-weight:600;background:var(--gray-100);color:var(--gray-700);border:1px dashed var(--gray-300);padding:8px 18px;border-radius:980px;cursor:pointer;transition:all 0.2s}
+    .add-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+    .preset-btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+    .preset-btn{font-family:var(--font);font-size:0.75rem;font-weight:600;background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-300);padding:6px 14px;border-radius:980px;cursor:pointer;transition:all 0.2s}
+    .preset-btn:hover{border-color:var(--accent);color:var(--accent);background:#f0f7ff}
+
+    .actions-bar{display:flex;gap:10px;margin-top:20px}
+    .action-btn{font-family:var(--font);font-size:0.85rem;font-weight:600;padding:12px 28px;border-radius:980px;border:none;cursor:pointer;flex:1;transition:all 0.2s}
+    .action-btn--primary{background:var(--accent);color:var(--white)}.action-btn--primary:hover{background:#0077ed}
+    .action-btn--outline{background:var(--white);color:var(--black);border:1.5px solid var(--gray-300)}.action-btn--outline:hover{border-color:var(--black)}
+
+    /* Estimate Preview */
+    .invoice-preview{background:var(--white);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:48px;min-height:700px;position:sticky;top:70px}
+    .inv-header{display:flex;justify-content:space-between;margin-bottom:40px}
+    .inv-type{font-size:1.6rem;font-weight:800;letter-spacing:0.05em}
+    .inv-number{font-size:0.82rem;color:var(--gray-500);margin-top:4px}
+    .inv-from{text-align:right;font-size:0.82rem;color:var(--gray-700);line-height:1.7}
+    .inv-from strong{display:block;font-size:1rem;color:var(--black)}
+    .inv-to{margin-bottom:32px}
+    .inv-to__label{font-size:0.7rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+    .inv-to__name{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+    .inv-to__name::after{content:' 御中';font-weight:400;font-size:0.9rem;color:var(--gray-500)}
+    .inv-project{font-size:0.95rem;font-weight:600;color:var(--black);margin-bottom:24px;padding:12px 16px;background:var(--gray-100);border-radius:10px}
+    .inv-project__label{font-size:0.7rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px}
+    .inv-dates{display:flex;gap:24px;margin-bottom:32px;font-size:0.82rem;color:var(--gray-700)}
+    .inv-dates span strong{color:var(--black)}
+    .inv-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-bottom:24px}
+    .inv-table th{text-align:left;font-weight:600;padding:10px 8px;border-bottom:2px solid var(--black);font-size:0.72rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.06em}
+    .inv-table td{padding:10px 8px;border-bottom:1px solid var(--gray-200)}
+    .inv-table .text-right{text-align:right}
+    .inv-summary{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:0.88rem}
+    .inv-summary__row{display:flex;gap:40px;padding:6px 0}
+    .inv-summary__label{color:var(--gray-700);min-width:120px}
+    .inv-summary__value{font-weight:600;min-width:100px;text-align:right}
+    .inv-summary__total{font-size:1.2rem;border-top:2px solid var(--black);padding-top:10px;margin-top:6px}
+    .inv-summary__total .inv-summary__value{font-size:1.2rem;font-weight:800}
+    .inv-summary__hours{color:var(--accent);font-size:0.85rem;margin-top:4px}
+    .inv-notes{margin-top:32px;padding-top:20px;border-top:1px solid var(--gray-200);font-size:0.78rem;color:var(--gray-500);line-height:1.7;white-space:pre-wrap}
+    .inv-notes strong{color:var(--gray-700);display:block;margin-bottom:4px}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}.seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}.seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}.seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}.seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:1024px){.layout{grid-template-columns:1fr}.invoice-preview{position:static}}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+      .field-row,.field-row-3{grid-template-columns:1fr}
+    }
+    @media print{.nav,.form-panel,.tool-header,.seo-section,.footer,.actions-bar,.loss-banner,.ad-slot{display:none!important}.layout{grid-template-columns:1fr}.invoice-preview{box-shadow:none;padding:24px;border-radius:0}}
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "工数見積書作成｜フリーランス・個人事業主向け無料ツール",
+  "url": "https://muryo-tool.com/tools/estimate-generator/",
+  "description": "【無料】個人事業主・フリーランス向け工数見積書作成ツール。タスク別の工数×単価で自動計算。IT・デザイン・ライター業務に最適。備考テンプレ付き。",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"ToolBox","item":"https://muryo-tool.com/"},
+  {"@type":"ListItem","position":2,"name":"工数見積書作成","item":"https://muryo-tool.com/tools/estimate-generator/"}
+]}
+</script>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../" class="nav__logo">Tool<span>Box</span></a><a href="../../" class="nav__back">&larr; ツール一覧</a></div></nav>
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/><path d="M3 15h6"/><path d="M13 13l2 2 4-4"/></svg></div>
+      <h1 class="tool-header__title">工数見積書作成</h1>
+      <p class="tool-header__desc">タスク別の工数と単価から見積書を自動作成。IT・デザイン・ライター系フリーランス・個人事業主に最適。</p>
+    </div>
+
+    <div class="loss-banner" style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:14px;padding:20px 24px;margin-bottom:20px">
+      <div style="font-size:0.78rem;font-weight:700;color:#dc2626;margin-bottom:8px">このツールを使わない場合の損失</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&times;</span><span>工数を甘く見積もり &rarr; 時給換算500円以下の案件に</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&times;</span><span>修正回数の上限を記載なし &rarr; 無限修正地獄で時間を搾取</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&times;</span><span>備考欄の不備 &rarr; 著作権トラブル・支払い遅延のリスク</span></div>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid #fecaca;font-size:0.82rem;color:#16a34a;font-weight:700">
+        ToolBoxなら &rarr; 工数&times;単価の自動計算＋備考テンプレートで契約トラブルを防止
+      </div>
+    </div>
+
+    <div class="ad-slot" style="margin:12px 0"><ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="layout">
+      <div class="form-panel">
+        <!-- Basic Info -->
+        <div class="form-panel__section">
+          <div class="form-panel__title">見積情報</div>
+          <div class="field-row-3">
+            <div class="field"><label>見積番号</label><input type="text" id="est-number" value="EST-2026-001" oninput="update()"></div>
+            <div class="field"><label>見積日</label><input type="date" id="est-date" oninput="update()"></div>
+            <div class="field"><label>有効期限</label><input type="date" id="est-expiry" oninput="update()"></div>
+          </div>
+          <div class="field"><label>件名（プロジェクト名）</label><input type="text" id="project-name" placeholder="例: コーポレートサイトリニューアル" oninput="update()"></div>
+        </div>
+
+        <!-- Client Info -->
+        <div class="form-panel__section">
+          <div class="form-panel__title">宛先</div>
+          <div class="field"><label>会社名</label><input type="text" id="to-company" placeholder="株式会社〇〇" oninput="update()"></div>
+          <div class="field"><label>担当者名</label><input type="text" id="to-person" placeholder="山田 太郎" oninput="update()"></div>
+        </div>
+
+        <!-- From Info -->
+        <div class="form-panel__section">
+          <div class="form-panel__title">自社情報 <span style="font-size:0.68rem;color:var(--green);font-weight:500;text-transform:none;letter-spacing:0">（自動保存）</span></div>
+          <div class="field"><label>名前 / 屋号</label><input type="text" id="from-name" placeholder="あなたの名前 / 屋号" oninput="update();saveMyInfo()"></div>
+          <div class="field"><label>住所</label><input type="text" id="from-address" placeholder="東京都渋谷区..." oninput="update();saveMyInfo()"></div>
+          <div class="field-row">
+            <div class="field"><label>電話番号</label><input type="tel" id="from-tel" placeholder="03-1234-5678" oninput="update();saveMyInfo()"></div>
+            <div class="field"><label>メール</label><input type="email" id="from-email" placeholder="info@example.com" oninput="update();saveMyInfo()"></div>
+          </div>
+        </div>
+
+        <!-- Task Table -->
+        <div class="form-panel__section">
+          <div class="form-panel__title">工数テーブル</div>
+          <div class="unit-toggle">
+            <button id="unit-hour" class="active" onclick="setUnit('hour')">時間単価（時給）</button>
+            <button id="unit-day" onclick="setUnit('day')">日単価（日給）</button>
+          </div>
+          <table class="items-table">
+            <thead><tr><th>タスク名</th><th style="width:70px" id="th-hours">工数(h)</th><th style="width:100px" id="th-rate">時給</th><th style="width:90px">金額</th><th style="width:30px"></th></tr></thead>
+            <tbody id="items-body"></tbody>
+          </table>
+          <button class="add-btn" onclick="addTask()">+ タスクを追加</button>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-panel__section">
+          <div class="form-panel__title">備考</div>
+          <div class="preset-btns">
+            <button class="preset-btn" onclick="applyPreset('web')">Web制作の標準備考</button>
+            <button class="preset-btn" onclick="applyPreset('design')">デザインの標準備考</button>
+            <button class="preset-btn" onclick="applyPreset('writing')">ライティングの標準備考</button>
+          </div>
+          <div class="field"><textarea id="notes" rows="6" placeholder="納期、修正回数、著作権帰属、支払条件など" oninput="update()"></textarea></div>
+        </div>
+
+        <div class="actions-bar">
+          <button class="action-btn action-btn--primary" onclick="window.print()">印刷 / PDF保存</button>
+          <button class="action-btn action-btn--outline" onclick="saveData()">データ保存</button>
+        </div>
+      </div>
+
+      <div class="invoice-preview" id="preview">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <div class="ad-slot" style="margin:20px 0"><ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="seo-section">
+      <h2>工数見積書作成ツールの使い方</h2>
+      <p>左側のフォームにタスク名・工数・単価を入力すると、右側にリアルタイムで見積書プレビューが表示されます。完成したら「印刷 / PDF保存」ボタンでダウンロードできます。自社情報はlocalStorageに自動保存されるので、次回以降は入力不要です。</p>
+
+      <h3>Web制作（デザイン＋コーディング）の見積例</h3>
+      <p>コーポレートサイトのリニューアルを例にすると、ワイヤーフレーム作成（8時間）、デザインカンプ（16時間）、HTML/CSSコーディング（24時間）、WordPress実装（16時間）、テスト・修正（8時間）のように工程を分解します。時給3,000〜5,000円が個人事業主の相場です。工数を明示することでクライアントに作業量を理解してもらい、追加作業の際の根拠にもなります。</p>
+
+      <h3>ライティング（記事・翻訳）の見積例</h3>
+      <p>SEO記事の執筆であれば、リサーチ・構成作成（2時間）、本文執筆（4時間）、校正・リライト（1時間）と工程を分けて見積もります。翻訳の場合は原稿のワード数に基づく見積もりも一般的ですが、工数ベースで提示するとプロジェクト管理型の案件に対応しやすくなります。</p>
+
+      <h3>コンサルティング（時間ベース）の見積例</h3>
+      <p>ITコンサルティングやマーケティング支援では、ヒアリング（2時間）、調査・分析（8時間）、報告書作成（4時間）、プレゼン・フィードバック（2時間）のように分解します。時給5,000〜15,000円が目安で、専門性に応じて単価を設定しましょう。</p>
+
+      <h3>動画制作・イラストの見積例</h3>
+      <p>動画制作では企画・構成（4時間）、撮影/素材準備（8時間）、編集（12時間）、テロップ・効果音（4時間）、修正対応（4時間）と工程ごとに見積もります。イラスト制作もラフ・線画・着色・修正と工程を分けることで、クライアントに納得感のある見積書を提示できます。</p>
+
+      <h3>見積書に備考欄を書くべき理由</h3>
+      <ul>
+        <li><strong>修正回数の上限を明記する</strong> — 「修正は2回まで。以降は1回あたり○○円」と記載することで、無限修正を防止。</li>
+        <li><strong>著作権の帰属を明記する</strong> — 「納品物の著作権は対価の全額支払い完了後に譲渡」が一般的。未払い時のリスクヘッジになります。</li>
+        <li><strong>納品形式・納期を明記する</strong> — 認識の齟齬を防ぎ、スケジュール管理の根拠になります。</li>
+        <li><strong>支払条件を明記する</strong> — 「納品後30日以内に銀行振込」など、キャッシュフローを確保するために重要。</li>
+      </ul>
+
+      <p style="font-size:0.82rem;color:#dc2626;font-weight:600;margin-top:12px">※ 本ツールで作成した見積書は参考用です。重要な契約については専門家にご相談ください。</p>
+    </div>
+  </main>
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px 0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../invoice-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">請求書作成</a></li>
+        <li><a href="../receipt-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">領収書作成</a></li>
+        <li><a href="../consumption-tax/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">消費税計算</a></li>
+        <li><a href="../withholding-tax/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">源泉徴収計算</a></li>
+      </ul>
+    </div>
+  </div>
+  <footer class="footer"><p>&copy; 2026 <a href="../../">ToolBox</a></p></footer>
+
+  <script>
+    let unit='hour'; // 'hour' or 'day'
+    let tasks=[
+      {name:'ワイヤーフレーム作成',hours:8,rate:3000},
+      {name:'デザインカンプ',hours:16,rate:3000},
+      {name:'コーディング',hours:24,rate:3000}
+    ];
+
+    // Preset notes
+    const presets={
+      web:`【納期】ご発注確定後 約4週間
+【修正回数】デザイン修正2回、コーディング修正2回まで含む。以降は1回あたり工数×単価で別途お見積り。
+【納品形式】HTML/CSS/JSファイル一式（サーバーアップロード込み）
+【著作権】対価の全額お支払い完了後、著作権（著作財産権）をクライアントに譲渡いたします。
+【支払条件】納品後30日以内に銀行振込（振込手数料はご負担願います）
+【キャンセル】着手後のキャンセルは、作業進捗に応じた費用をご請求いたします。`,
+      design:`【納期】ご発注確定後 約2〜3週間
+【修正回数】初稿提出後、修正2回まで含む。3回目以降は1回あたり工数×単価で別途お見積り。
+【納品形式】Figmaファイル、PNG/SVG書き出しデータ
+【著作権】対価の全額お支払い完了後、著作権（著作財産権）をクライアントに譲渡いたします。ポートフォリオ掲載権は制作者に帰属します。
+【支払条件】納品後30日以内に銀行振込
+【素材について】有料素材（写真・フォント等）の購入費用は別途実費をご請求いたします。`,
+      writing:`【納期】ご発注確定後 約1〜2週間
+【修正回数】初稿提出後、修正2回まで含む。3回目以降は1回あたり工数×単価で別途お見積り。
+【納品形式】Googleドキュメントまたは Word(.docx)
+【著作権】対価の全額お支払い完了後、著作権（著作財産権）をクライアントに譲渡いたします。
+【支払条件】納品後30日以内に銀行振込
+【クレジット表記】署名記事の場合、ライター名の表記をお願いいたします。
+【参考資料】執筆に必要な資料・情報のご提供をお願いいたします。`
+    };
+
+    // Set today and expiry (30 days later)
+    const today=new Date();
+    document.getElementById('est-date').value=today.toISOString().split('T')[0];
+    const expiry=new Date(today);expiry.setDate(expiry.getDate()+30);
+    document.getElementById('est-expiry').value=expiry.toISOString().split('T')[0];
+
+    function setUnit(u){
+      unit=u;
+      document.getElementById('unit-hour').classList.toggle('active',u==='hour');
+      document.getElementById('unit-day').classList.toggle('active',u==='day');
+      document.getElementById('th-hours').textContent=u==='hour'?'工数(h)':'工数(日)';
+      document.getElementById('th-rate').textContent=u==='hour'?'時給':'日給';
+      renderTasks();
+    }
+
+    function addTask(){tasks.push({name:'',hours:0,rate:0});renderTasks();}
+    function removeTask(i){if(tasks.length>1){tasks.splice(i,1);renderTasks();}}
+
+    function renderTasks(){
+      const tbody=document.getElementById('items-body');
+      tbody.innerHTML='';
+      tasks.forEach((task,i)=>{
+        const total=task.hours*task.rate;
+        const tr=document.createElement('tr');
+        tr.innerHTML=`
+          <td><input type="text" value="${escAttr(task.name)}" onchange="tasks[${i}].name=this.value;update()" placeholder="タスク名"></td>
+          <td><input type="number" value="${task.hours}" min="0" step="0.5" onchange="tasks[${i}].hours=Number(this.value);update()"></td>
+          <td><input type="number" value="${task.rate}" min="0" step="100" onchange="tasks[${i}].rate=Number(this.value);update()"></td>
+          <td class="item-total">&yen;${total.toLocaleString()}</td>
+          <td><button class="remove-btn" onclick="removeTask(${i})">&times;</button></td>`;
+        tbody.appendChild(tr);
+      });
+      update();
+    }
+
+    function applyPreset(type){
+      document.getElementById('notes').value=presets[type]||'';
+      update();
+    }
+
+    function update(){
+      const number=document.getElementById('est-number').value;
+      const date=document.getElementById('est-date').value;
+      const expiryDate=document.getElementById('est-expiry').value;
+      const projectName=document.getElementById('project-name').value;
+      const toCompany=document.getElementById('to-company').value||'（宛先）';
+      const toPerson=document.getElementById('to-person').value;
+      const fromName=document.getElementById('from-name').value||'（自社名）';
+      const fromAddress=document.getElementById('from-address').value;
+      const fromTel=document.getElementById('from-tel').value;
+      const fromEmail=document.getElementById('from-email').value;
+      const notes=document.getElementById('notes').value;
+
+      const subtotal=tasks.reduce((s,t)=>s+t.hours*t.rate,0);
+      const tax=Math.floor(subtotal*0.1);
+      const total=subtotal+tax;
+      const totalHours=tasks.reduce((s,t)=>s+t.hours,0);
+      const unitLabel=unit==='hour'?'時間':'人日';
+      const rateLabel=unit==='hour'?'時給':'日給';
+      const hoursLabel=unit==='hour'?'工数(h)':'工数(日)';
+
+      const preview=document.getElementById('preview');
+      preview.innerHTML=`
+        <div class="inv-header">
+          <div>
+            <div class="inv-type">御見積書</div>
+            <div class="inv-number">No. ${escH(number)}</div>
+          </div>
+          <div class="inv-from">
+            <strong>${escH(fromName)}</strong>
+            ${fromAddress?escH(fromAddress)+'<br>':''}
+            ${fromTel?'TEL: '+escH(fromTel)+'<br>':''}
+            ${fromEmail?escH(fromEmail):''}
+          </div>
+        </div>
+        <div class="inv-to">
+          <div class="inv-to__label">宛先</div>
+          <div class="inv-to__name">${escH(toCompany)}</div>
+          ${toPerson?'<div style="font-size:0.85rem;color:var(--gray-700)">'+escH(toPerson)+' 様</div>':''}
+        </div>
+        ${projectName?'<div class="inv-project"><div class="inv-project__label">件名</div>'+escH(projectName)+'</div>':''}
+        <div class="inv-dates">
+          <span><strong>見積日:</strong> ${formatDate(date)}</span>
+          <span><strong>有効期限:</strong> ${formatDate(expiryDate)}</span>
+        </div>
+        <table class="inv-table">
+          <thead><tr><th>タスク名</th><th class="text-right" style="width:60px">${hoursLabel}</th><th class="text-right" style="width:90px">${rateLabel}</th><th class="text-right" style="width:100px">金額</th></tr></thead>
+          <tbody>
+            ${tasks.map(t=>`<tr><td>${escH(t.name)||'&mdash;'}</td><td class="text-right">${t.hours}</td><td class="text-right">&yen;${t.rate.toLocaleString()}</td><td class="text-right">&yen;${(t.hours*t.rate).toLocaleString()}</td></tr>`).join('')}
+          </tbody>
+        </table>
+        <div class="inv-summary">
+          <div class="inv-summary__row"><span class="inv-summary__label">合計工数</span><span class="inv-summary__value">${totalHours} ${unitLabel}</span></div>
+          <div class="inv-summary__row"><span class="inv-summary__label">小計</span><span class="inv-summary__value">&yen;${subtotal.toLocaleString()}</span></div>
+          <div class="inv-summary__row"><span class="inv-summary__label">消費税 (10%)</span><span class="inv-summary__value">&yen;${tax.toLocaleString()}</span></div>
+          <div class="inv-summary__row inv-summary__total"><span class="inv-summary__label">合計金額（税込）</span><span class="inv-summary__value">&yen;${total.toLocaleString()}</span></div>
+        </div>
+        ${notes?`<div class="inv-notes"><strong>備考</strong>${escH(notes)}</div>`:''}
+      `;
+    }
+
+    function formatDate(d){if(!d)return '&mdash;';const[y,m,day]=d.split('-');return `${y}年${parseInt(m)}月${parseInt(day)}日`;}
+    function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+    function escAttr(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+    // Save/load my info (自社情報) to localStorage
+    function saveMyInfo(){
+      const info={
+        name:document.getElementById('from-name').value,
+        address:document.getElementById('from-address').value,
+        tel:document.getElementById('from-tel').value,
+        email:document.getElementById('from-email').value
+      };
+      localStorage.setItem('toolbox-estimate-myinfo',JSON.stringify(info));
+    }
+
+    function loadMyInfo(){
+      const saved=localStorage.getItem('toolbox-estimate-myinfo');
+      if(saved){
+        try{
+          const d=JSON.parse(saved);
+          if(d.name)document.getElementById('from-name').value=d.name;
+          if(d.address)document.getElementById('from-address').value=d.address;
+          if(d.tel)document.getElementById('from-tel').value=d.tel;
+          if(d.email)document.getElementById('from-email').value=d.email;
+        }catch(e){}
+      }
+    }
+
+    // Save/load full estimate data
+    function saveData(){
+      const data={
+        tasks,unit,
+        number:document.getElementById('est-number').value,
+        date:document.getElementById('est-date').value,
+        expiry:document.getElementById('est-expiry').value,
+        projectName:document.getElementById('project-name').value,
+        toCompany:document.getElementById('to-company').value,
+        toPerson:document.getElementById('to-person').value,
+        notes:document.getElementById('notes').value
+      };
+      localStorage.setItem('toolbox-estimate-data',JSON.stringify(data));
+      alert('データを保存しました。次回アクセス時に自動復元されます。');
+    }
+
+    function loadData(){
+      const saved=localStorage.getItem('toolbox-estimate-data');
+      if(saved){
+        try{
+          const d=JSON.parse(saved);
+          if(d.tasks)tasks=d.tasks;
+          if(d.unit){unit=d.unit;setUnit(unit);}
+          if(d.number)document.getElementById('est-number').value=d.number;
+          if(d.date)document.getElementById('est-date').value=d.date;
+          if(d.expiry)document.getElementById('est-expiry').value=d.expiry;
+          if(d.projectName)document.getElementById('project-name').value=d.projectName;
+          if(d.toCompany)document.getElementById('to-company').value=d.toCompany;
+          if(d.toPerson)document.getElementById('to-person').value=d.toPerson;
+          if(d.notes)document.getElementById('notes').value=d.notes;
+        }catch(e){}
+      }
+    }
+
+    // Initialize
+    loadMyInfo();
+    loadData();
+    renderTasks();
+  </script>
+</body>
+</html>
