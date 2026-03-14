@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="個人事業主・フリーランスの開業届・届出チェックリスト。開業届、青色申告、インボイス登録など必要な届出を一覧化。進捗をブラウザに自動保存。">
+  <meta name="keywords" content="開業届, フリーランス, 個人事業主, 青色申告, インボイス, 届出, チェックリスト, 無料">
+  <title>開業届・届出チェックリスト｜フリーランス独立時の届出一覧【無料】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/startup-checklist/">
+  <meta property="og:title" content="開業届・届出チェックリスト｜フリーランス独立時の届出一覧【無料】">
+  <meta property="og:description" content="個人事業主・フリーランスの開業届・届出チェックリスト。開業届、青色申告、インボイス登録など必要な届出を一覧化。進捗をブラウザに自動保存。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/startup-checklist/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-900:#3a3a3c;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--green:#16a34a;--font:"Plus Jakarta Sans","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:20px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:500px;margin:0 auto}
+
+    /* Progress bar */
+    .progress-area{background:var(--white);border-radius:16px;padding:24px 28px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:20px}
+    .progress-stats{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .progress-label{font-size:0.88rem;font-weight:600;color:var(--black)}
+    .progress-count{font-size:0.82rem;font-weight:600;color:var(--accent)}
+    .progress-bar{width:100%;height:8px;background:var(--gray-200);border-radius:8px;overflow:hidden}
+    .progress-bar__fill{height:100%;background:linear-gradient(90deg,var(--accent),#34d399);border-radius:8px;transition:width 0.4s ease}
+
+    /* Filter buttons */
+    .filter-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+    .filter-btn{font-family:var(--font);font-size:0.82rem;font-weight:600;padding:8px 18px;border:2px solid var(--gray-200);border-radius:980px;background:var(--white);color:var(--gray-700);cursor:pointer;transition:all 0.2s}
+    .filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .filter-btn.active{background:var(--accent);color:var(--white);border-color:var(--accent)}
+
+    /* Category */
+    .category{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:16px;overflow:hidden}
+    .category__header{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;cursor:pointer;user-select:none;transition:background 0.15s}
+    .category__header:hover{background:var(--gray-100)}
+    .category__title{font-size:1rem;font-weight:700;display:flex;align-items:center;gap:10px}
+    .category__badge{font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:980px;background:var(--gray-100);color:var(--gray-500)}
+    .category__chevron{width:20px;height:20px;color:var(--gray-500);transition:transform 0.3s ease;flex-shrink:0}
+    .category.collapsed .category__chevron{transform:rotate(-90deg)}
+    .category__body{border-top:1px solid var(--gray-200)}
+    .category.collapsed .category__body{display:none}
+
+    /* Checklist item */
+    .item{border-bottom:1px solid var(--gray-100);transition:background 0.15s}
+    .item:last-child{border-bottom:none}
+    .item.checked{background:rgba(22,163,74,0.03)}
+    .item__main{display:flex;align-items:flex-start;gap:14px;padding:18px 28px;cursor:pointer}
+    .item__checkbox{width:22px;height:22px;border:2px solid var(--gray-300);border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all 0.2s;background:var(--white)}
+    .item.checked .item__checkbox{background:var(--green);border-color:var(--green)}
+    .item__checkbox svg{opacity:0;transition:opacity 0.2s}
+    .item.checked .item__checkbox svg{opacity:1}
+    .item__content{flex:1;min-width:0}
+    .item__title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+    .item__name{font-size:0.92rem;font-weight:600;color:var(--black);transition:color 0.2s}
+    .item.checked .item__name{color:var(--gray-500);text-decoration:line-through}
+    .badge{font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:980px;white-space:nowrap}
+    .badge--required{background:#fef2f2;color:#dc2626}
+    .badge--recommended{background:#eff6ff;color:#1d4ed8}
+    .badge--optional{background:var(--gray-100);color:var(--gray-500)}
+    .item__meta{display:flex;gap:16px;flex-wrap:wrap;font-size:0.78rem;color:var(--gray-500);line-height:1.6}
+    .item__meta-tag{display:flex;align-items:center;gap:4px}
+    .item__expand{width:20px;height:20px;color:var(--gray-400);flex-shrink:0;margin-top:4px;transition:transform 0.3s;cursor:pointer}
+    .item.expanded .item__expand{transform:rotate(180deg)}
+    .item__detail{padding:0 28px 18px 64px;font-size:0.85rem;color:var(--gray-700);line-height:1.75;display:none}
+    .item.expanded .item__detail{display:block}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .progress-area{padding:18px 20px}
+      .category__header{padding:16px 20px}
+      .item__main{padding:14px 20px}
+      .item__detail{padding:0 20px 14px 54px}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+      .filter-bar{gap:6px}
+      .filter-btn{padding:6px 14px;font-size:0.78rem}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "開業届・届出チェックリスト｜フリーランス独立時の届出一覧",
+  "url": "https://muryo-tool.com/tools/startup-checklist/",
+  "description": "個人事業主・フリーランスの開業届・届出チェックリスト。開業届、青色申告、インボイス登録など必要な届出を一覧化。進捗をブラウザに自動保存。",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"ToolBox","item":"https://muryo-tool.com/"},
+  {"@type":"ListItem","position":2,"name":"開業届・届出チェックリスト","item":"https://muryo-tool.com/tools/startup-checklist/"}
+]}
+</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../" class="nav__back">&larr; ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+      <h1 class="tool-header__title">開業届・届出チェックリスト</h1>
+      <p class="tool-header__desc">フリーランスとして独立する際に必要な届出を一覧化。チェックで進捗管理、提出先・期限も確認できます。</p>
+    </div>
+
+    <div style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:14px;padding:20px 24px;margin-bottom:20px">
+      <div style="font-size:0.78rem;font-weight:700;color:#1d4ed8;margin-bottom:10px">このツールについて</div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:0.82rem;color:#636366;line-height:1.65">
+        <div><span style="font-weight:600;color:#1d1d1f">概要:</span> フリーランスとして独立する際に必要な届出を一覧化。チェックボックスで進捗を管理でき、提出先・期限も確認できます。</div>
+        <div><span style="font-weight:600;color:#1d1d1f">根拠法令:</span> 所得税法第229条（開業届出義務）、所得税法第144条（青色申告承認申請）、消費税法（インボイス登録）等に基づく届出一覧です。</div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-weight:600;color:#1d1d1f">使い方のポイント:</span>
+          <span>• 開業届と青色申告承認申請書は同時に提出するのがおすすめです</span>
+          <span>• チェック状態はブラウザに自動保存されるので、何日かに分けて進められます</span>
+          <span>• 不要な項目はスキップしてOK。自分の状況に合った届出だけ対応しましょう</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:12px 0"><ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <!-- Progress -->
+    <div class="progress-area">
+      <div class="progress-stats">
+        <span class="progress-label" id="progressLabel">完了済み 0 / 全 14 件</span>
+        <span class="progress-count" id="progressPercent">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-bar__fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">すべて</button>
+      <button class="filter-btn" data-filter="unchecked" onclick="setFilter('unchecked')">未完了</button>
+      <button class="filter-btn" data-filter="checked" onclick="setFilter('checked')">完了済み</button>
+    </div>
+
+    <!-- Checklist -->
+    <div id="checklistContainer"></div>
+
+    <div style="margin:20px 0"><ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <!-- SEO Content -->
+    <div class="seo-section">
+      <h2>開業届・届出チェックリストの使い方</h2>
+      <p>個人事業主・フリーランスとして独立する際に必要な届出書類を一覧化したチェックリストツールです。各届出の提出先・期限・重要度を確認しながら、チェックボックスで進捗を管理できます。データはブラウザに自動保存されるため、何日かに分けて対応を進められます。</p>
+
+      <h3>開業届の基礎知識</h3>
+      <p>個人事業の開業届出書は、所得税法第229条に基づき、事業開始から1か月以内に納税地の所轄税務署へ提出が必要な書類です。届出自体に費用はかかりません。開業届を提出することで、屋号での銀行口座開設や、青色申告の申請が可能になります。</p>
+
+      <h3>青色申告のメリット</h3>
+      <ul>
+        <li><strong>最大65万円の特別控除</strong> — 複式簿記 + e-Tax申告で65万円控除。節税効果が大きい。</li>
+        <li><strong>赤字の繰越し</strong> — 純損失を3年間繰り越して翌年以降の所得と相殺可能。</li>
+        <li><strong>家族への給与</strong> — 青色事業専従者給与として、家族への給与を経費に算入可能。</li>
+        <li><strong>少額減価償却</strong> — 30万円未満の減価償却資産を一括で経費に計上可能。</li>
+      </ul>
+
+      <h3>届出のスケジュール目安</h3>
+      <p>開業届と青色申告承認申請書は同時に提出するのが最も効率的です。開業届は事業開始から1か月以内、青色申告承認申請書は開業日から2か月以内が期限です。インボイス登録が必要な場合は、取引先との関係を考慮して早めに対応しましょう。</p>
+
+      <h3>このツールの特徴</h3>
+      <ul>
+        <li><strong>完全無料</strong> — 登録不要、回数制限なし。何度でも利用できます。</li>
+        <li><strong>プライバシー安全</strong> — データはブラウザ内に保存され、サーバーには一切送信されません。</li>
+        <li><strong>進捗管理</strong> — チェック状態が自動保存されるので、複数日にわたって対応を進められます。</li>
+        <li><strong>フィルター機能</strong> — 未完了・完了済みで絞り込み、残りの対応事項を把握できます。</li>
+      </ul>
+    </div>
+  </main>
+
+  <div class="tool-page" style="padding-top:0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../invoice-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem;transition:background 0.2s">請求書作成</a></li>
+        <li><a href="../receipt-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem;transition:background 0.2s">領収書作成</a></li>
+        <li><a href="../take-home-pay/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem;transition:background 0.2s">手取り計算</a></li>
+        <li><a href="../consumption-tax/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem;transition:background 0.2s">消費税計算</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    var STORAGE_KEY = 'toolbox_startup_checklist';
+    var currentFilter = 'all';
+
+    var categories = [
+      {
+        id: 'required',
+        title: '必須届出（開業時）',
+        icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+        items: [
+          {
+            id: 'kaigyou',
+            name: '個人事業の開業届出書',
+            submit: '税務署',
+            deadline: '事業開始から1か月以内',
+            badge: 'required',
+            badgeText: '必須',
+            detail: '所得税法第229条に基づき、個人事業を開始した際に所轄税務署へ提出する届出書です。届出費用は無料。マイナンバーカードがあればe-Taxでオンライン提出も可能です。屋号の記載欄があり、届出をすることで屋号付き銀行口座の開設が可能になります。'
+          },
+          {
+            id: 'jigyou_kaishi',
+            name: '事業開始届出書',
+            submit: '都道府県税事務所',
+            deadline: '事業開始後すみやかに',
+            badge: 'required',
+            badgeText: '必須（自治体による）',
+            detail: '個人事業税に関する届出で、都道府県税事務所に提出します。提出期限や届出の名称は自治体により異なります（例：東京都は「事業開始等届出書」で開始日から15日以内）。開業届の控えを持参すると手続きがスムーズです。'
+          }
+        ]
+      },
+      {
+        id: 'tax',
+        title: '節税のための届出',
+        icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+        items: [
+          {
+            id: 'aoiro',
+            name: '青色申告承認申請書',
+            submit: '税務署',
+            deadline: '開業日から2か月以内（1月1〜15日開業は3月15日まで）',
+            badge: 'recommended',
+            badgeText: '強く推奨（65万円控除）',
+            detail: '所得税法第144条に基づく申請書。青色申告を選択することで最大65万円の特別控除（複式簿記+e-Tax）が受けられます。開業届と同時に提出するのが最も効率的です。期限を過ぎると翌年分からの適用になるため要注意。'
+          },
+          {
+            id: 'senjuusha',
+            name: '青色事業専従者給与に関する届出書',
+            submit: '税務署',
+            deadline: '経費算入したい年の3月15日まで',
+            badge: 'optional',
+            badgeText: '家族に給与を払う場合',
+            detail: '生計を一にする配偶者や親族に事業の手伝いをしてもらい、給与を支払う場合に必要な届出です。届出に記載した金額の範囲内で、支払った給与を必要経費に算入できます。届出が受理されると、その親族は配偶者控除・扶養控除の対象外になります。'
+          },
+          {
+            id: 'kazei_jigyousha',
+            name: '消費税課税事業者選択届出書',
+            submit: '税務署',
+            deadline: '適用したい課税期間の前日まで',
+            badge: 'optional',
+            badgeText: 'インボイス登録する場合',
+            detail: '免税事業者が自ら課税事業者を選択する際に提出する届出書です。インボイス制度への登録には課税事業者であることが前提となります。なお、インボイス登録申請書を提出すれば自動的に課税事業者となるため、この届出が不要なケースもあります。'
+          },
+          {
+            id: 'invoice',
+            name: '適格請求書発行事業者の登録申請書',
+            submit: '税務署（e-Tax）',
+            deadline: '随時',
+            badge: 'optional',
+            badgeText: 'インボイス番号取得',
+            detail: 'インボイス（適格請求書）を発行するための登録申請書です。e-Taxでの申請が推奨されています。登録されるとT+13桁の登録番号が付与され、国税庁の公表サイトで確認できるようになります。取引先が仕入税額控除を受けるために必要です。'
+          }
+        ]
+      },
+      {
+        id: 'employee',
+        title: '従業員を雇う場合',
+        icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+        items: [
+          {
+            id: 'kyuuyo_jimusho',
+            name: '給与支払事務所等の開設届出書',
+            submit: '税務署',
+            deadline: '開設日から1か月以内',
+            badge: 'optional',
+            badgeText: '従業員を雇う場合',
+            detail: '従業員を雇用して給与を支払う場合に、所轄税務署へ提出する届出書です。源泉徴収義務者としての届出となり、給与から源泉所得税を天引きして納付する義務が生じます。個人事業主が自分一人で事業を行う場合は不要です。'
+          },
+          {
+            id: 'nouki_tokurei',
+            name: '源泉所得税の納期の特例の承認申請書',
+            submit: '税務署',
+            deadline: '随時（従業員10人未満の場合）',
+            badge: 'recommended',
+            badgeText: '推奨（事務負担軽減）',
+            detail: '通常は毎月納付が必要な源泉所得税を、年2回（7月と1月）にまとめて納付できる特例の申請です。給与の支給人員が常時10人未満の事業者が対象。事務負担が大幅に軽減されるため、従業員を雇う場合はぜひ申請しましょう。'
+          },
+          {
+            id: 'roudou_hoken',
+            name: '労働保険の保険関係成立届',
+            submit: '労働基準監督署',
+            deadline: '雇用日から10日以内',
+            badge: 'optional',
+            badgeText: '従業員を雇う場合',
+            detail: '労災保険の適用事業所となった日（従業員を雇用した日）から10日以内に、所轄の労働基準監督署へ提出します。同時に、保険料の概算保険料申告書も提出して保険料を納付します。パート・アルバイトを含むすべての労働者が対象です。'
+          },
+          {
+            id: 'koyou_hoken',
+            name: '雇用保険適用事業所設置届',
+            submit: 'ハローワーク',
+            deadline: '雇用日から10日以内',
+            badge: 'optional',
+            badgeText: '従業員を雇う場合',
+            detail: '従業員を雇用した場合に、所轄のハローワーク（公共職業安定所）に提出する届出です。週20時間以上かつ31日以上の雇用見込みがある労働者を雇った場合に必要。資格取得届も併せて提出します。労働保険の保険関係成立届の控えが必要です。'
+          }
+        ]
+      },
+      {
+        id: 'other',
+        title: 'その他（任意だが推奨）',
+        icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+        items: [
+          {
+            id: 'shokibo_kyosai',
+            name: '小規模企業共済への加入',
+            submit: '中小機構',
+            deadline: '随時',
+            badge: 'recommended',
+            badgeText: '退職金代わり＋全額所得控除',
+            detail: '個人事業主の退職金制度として活用できる共済制度です。月額1,000円〜70,000円の範囲で掛金を設定でき、掛金の全額が所得控除の対象になります。廃業時や65歳以上の場合に共済金を受け取れます。節税効果が高く、多くのフリーランスが加入しています。'
+          },
+          {
+            id: 'nenkin_ideco',
+            name: '国民年金基金/iDeCoへの加入',
+            submit: '各窓口',
+            deadline: '随時',
+            badge: 'recommended',
+            badgeText: '老後資金＋所得控除',
+            detail: '国民年金の上乗せとなる制度です。国民年金基金は終身年金が特徴、iDeCo（個人型確定拠出年金）は自分で運用先を選べるのが特徴。どちらも掛金が全額所得控除の対象です。両方に加入する場合は合算で月額68,000円が上限となります。'
+          },
+          {
+            id: 'ginkou_koza',
+            name: '事業用銀行口座の開設',
+            submit: '銀行',
+            deadline: '随時',
+            badge: 'optional',
+            badgeText: '帳簿管理の簡素化',
+            detail: 'プライベートと事業の資金を分けるために、事業専用の銀行口座を開設しましょう。帳簿管理が格段に楽になり、確定申告時の作業効率が上がります。開業届の控えがあれば屋号付き口座の開設が可能です。ネット銀行は振込手数料が安く、明細のCSV出力にも対応していて便利です。'
+          },
+          {
+            id: 'kaikei_soft',
+            name: '会計ソフトの導入/準備',
+            submit: '—',
+            deadline: '随時',
+            badge: 'recommended',
+            badgeText: '帳簿義務の履行',
+            detail: '青色申告で65万円控除を受けるには複式簿記での帳簿付けが必要です。freee、マネーフォワード、弥生などのクラウド会計ソフトを使えば、簿記の知識がなくても帳簿作成が可能。銀行口座やクレジットカードとの連携で入力の手間も大幅に削減できます。確定申告書の作成機能も搭載されています。'
+          }
+        ]
+      }
+    ];
+
+    var checkedItems = {};
+
+    function loadState() {
+      try {
+        var data = localStorage.getItem(STORAGE_KEY);
+        if (data) checkedItems = JSON.parse(data);
+      } catch(e) {}
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedItems));
+      } catch(e) {}
+    }
+
+    function getTotalCount() {
+      var total = 0;
+      for (var i = 0; i < categories.length; i++) {
+        total += categories[i].items.length;
+      }
+      return total;
+    }
+
+    function getCheckedCount() {
+      var count = 0;
+      for (var key in checkedItems) {
+        if (checkedItems[key]) count++;
+      }
+      return count;
+    }
+
+    function updateProgress() {
+      var total = getTotalCount();
+      var checked = getCheckedCount();
+      var pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+      document.getElementById('progressLabel').textContent = '完了済み ' + checked + ' / 全 ' + total + ' 件';
+      document.getElementById('progressPercent').textContent = pct + '%';
+      document.getElementById('progressFill').style.width = pct + '%';
+    }
+
+    function toggleCheck(itemId) {
+      checkedItems[itemId] = !checkedItems[itemId];
+      saveState();
+      renderAll();
+    }
+
+    function toggleExpand(itemId, e) {
+      e.stopPropagation();
+      var el = document.getElementById('item-' + itemId);
+      if (el) el.classList.toggle('expanded');
+    }
+
+    function toggleCategory(catId) {
+      var el = document.getElementById('cat-' + catId);
+      if (el) el.classList.toggle('collapsed');
+    }
+
+    function setFilter(f) {
+      currentFilter = f;
+      var btns = document.querySelectorAll('.filter-btn');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].classList.toggle('active', btns[i].getAttribute('data-filter') === f);
+      }
+      renderAll();
+    }
+
+    function badgeClass(badge) {
+      if (badge === 'required') return 'badge badge--required';
+      if (badge === 'recommended') return 'badge badge--recommended';
+      return 'badge badge--optional';
+    }
+
+    function renderAll() {
+      var container = document.getElementById('checklistContainer');
+      var html = '';
+
+      for (var c = 0; c < categories.length; c++) {
+        var cat = categories[c];
+        var visibleItems = [];
+        var catChecked = 0;
+
+        for (var i = 0; i < cat.items.length; i++) {
+          var item = cat.items[i];
+          var isChecked = !!checkedItems[item.id];
+          if (isChecked) catChecked++;
+
+          if (currentFilter === 'all' ||
+              (currentFilter === 'checked' && isChecked) ||
+              (currentFilter === 'unchecked' && !isChecked)) {
+            visibleItems.push(item);
+          }
+        }
+
+        if (visibleItems.length === 0) continue;
+
+        html += '<div class="category" id="cat-' + cat.id + '">';
+        html += '<div class="category__header" onclick="toggleCategory(\'' + cat.id + '\')">';
+        html += '<div class="category__title">' + cat.icon + ' ' + cat.title + ' <span class="category__badge">' + catChecked + '/' + cat.items.length + '</span></div>';
+        html += '<svg class="category__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+        html += '</div>';
+        html += '<div class="category__body">';
+
+        for (var j = 0; j < visibleItems.length; j++) {
+          var it = visibleItems[j];
+          var checked = !!checkedItems[it.id];
+          var cls = 'item' + (checked ? ' checked' : '');
+
+          html += '<div class="' + cls + '" id="item-' + it.id + '">';
+          html += '<div class="item__main">';
+          html += '<div class="item__checkbox" onclick="toggleCheck(\'' + it.id + '\')">';
+          html += '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+          html += '</div>';
+          html += '<div class="item__content" onclick="toggleCheck(\'' + it.id + '\')">';
+          html += '<div class="item__title-row">';
+          html += '<span class="item__name">' + it.name + '</span>';
+          html += '<span class="' + badgeClass(it.badge) + '">' + it.badgeText + '</span>';
+          html += '</div>';
+          html += '<div class="item__meta">';
+          if (it.submit !== '—') {
+            html += '<span class="item__meta-tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ' + it.submit + '</span>';
+          }
+          html += '<span class="item__meta-tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + it.deadline + '</span>';
+          html += '</div>';
+          html += '</div>';
+          html += '<svg class="item__expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" onclick="toggleExpand(\'' + it.id + '\', event)"><polyline points="6 9 12 15 18 9"/></svg>';
+          html += '</div>';
+          html += '<div class="item__detail">' + it.detail + '</div>';
+          html += '</div>';
+        }
+
+        html += '</div></div>';
+      }
+
+      container.innerHTML = html;
+      updateProgress();
+    }
+
+    // Init
+    loadState();
+    renderAll();
+  </script>
+</body>
+</html>
