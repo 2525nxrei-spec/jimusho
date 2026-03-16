@@ -54,7 +54,11 @@
 
   <div class="page-content">
     <div class="contact-form">
-      <form id="contactForm" action="https://formspree.io/f/2525nxrei@gmail.com" method="POST">
+      <form id="contactForm" action="https://formsubmit.co/2525nxrei@gmail.com" method="POST">
+        <input type="hidden" name="_next" value="https://muryo-tool.com/keiyaku/">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_subject" value="【契約書メーカー】お問い合わせ">
+        <input type="text" name="_honey" style="display:none">
         <div class="form-group">
           <label class="form-label">お名前<span class="required">*</span></label>
           <input type="text" class="form-input" name="name" placeholder="例：山田 太郎" required>
@@ -122,13 +126,6 @@
   <script>
     document.getElementById('menuToggle').addEventListener('click', function() {
       document.getElementById('nav').classList.toggle('active');
-    });
-
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      // In production, this would send to a backend API or service like Formspree
-      this.style.display = 'none';
-      document.getElementById('contactSuccess').style.display = 'block';
     });
   </script>
 </body>

@@ -48,7 +48,11 @@ body{font-family:'Inter','Noto Sans JP',sans-serif;color:var(--black);background
   <h1>お問い合わせ</h1>
   <p>CheckNoteに関するご意見・ご要望・掲載内容の誤りのご指摘など、お気軽にお寄せください。</p>
 
-  <form action="https://formspree.io/f/2525nxrei@gmail.com" method="POST">
+  <form action="https://formsubmit.co/2525nxrei@gmail.com" method="POST">
+    <input type="hidden" name="_next" value="https://muryo-tool.com/check/pages/thanks.html">
+    <input type="hidden" name="_captcha" value="true">
+    <input type="hidden" name="_subject" value="【チェックノート】お問い合わせ">
+    <input type="text" name="_honey" style="display:none">
     <div class="form-group">
       <label for="contact-type">お問い合わせ種別</label>
       <select id="contact-type" name="type" required>

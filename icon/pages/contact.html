@@ -178,7 +178,11 @@
     <h1>お問い合わせ</h1>
     <p class="subtitle">ご質問、アイコンリクエスト、バグ報告など</p>
 
-    <form id="contactForm" action="https://formspree.io/f/2525nxrei@gmail.com" method="POST">
+    <form id="contactForm" action="https://formsubmit.co/2525nxrei@gmail.com" method="POST">
+      <input type="hidden" name="_next" value="https://muryo-tool.com/icon/pages/thanks.html">
+      <input type="hidden" name="_captcha" value="true">
+      <input type="hidden" name="_subject" value="【IconJP】お問い合わせ">
+      <input type="text" name="_honey" style="display:none">
       <div class="form-group">
         <label for="name">お名前</label>
         <input type="text" id="name" name="name" required placeholder="山田 太郎">

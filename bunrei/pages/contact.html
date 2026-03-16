@@ -60,7 +60,11 @@ html{scroll-behavior:smooth}body{font-family:var(--font-sans);color:var(--black)
     <h1>お問い合わせ</h1>
     <p>文例メーカーに関するご意見・ご要望・不具合のご報告など、下記フォームよりお気軽にお問い合わせください。</p>
 
-    <form id="contactForm" action="https://formspree.io/f/2525nxrei@gmail.com" method="POST">
+    <form id="contactForm" action="https://formsubmit.co/2525nxrei@gmail.com" method="POST">
+      <input type="hidden" name="_next" value="https://muryo-tool.com/bunrei/pages/thanks.html">
+      <input type="hidden" name="_captcha" value="true">
+      <input type="hidden" name="_subject" value="【文例メーカー】お問い合わせ">
+      <input type="text" name="_honey" style="display:none">
       <div class="form-group">
         <label>お名前</label>
         <input type="text" name="name" required placeholder="例：山田太郎">

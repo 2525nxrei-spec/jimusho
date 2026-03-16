@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>送信完了 - IconJP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --black: #1d1d1f;
+      --accent: #0071e3;
+      --gray-100: #f2f2f7;
+      --gray-200: #e5e5ea;
+      --gray-400: #aeaeb2;
+      --gray-600: #636366;
+      --white: #ffffff;
+    }
+    body {
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, sans-serif;
+      background: var(--gray-100);
+      color: var(--black);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--black);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .thanks {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+      text-align: center;
+    }
+    .thanks-icon { width: 56px; height: 56px; margin: 0 auto 20px; }
+    .thanks h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .thanks p {
+      font-size: 15px;
+      color: var(--gray-600);
+      margin-bottom: 4px;
+    }
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 36px;
+      padding: 12px 32px;
+      font-size: 15px;
+      font-weight: 500;
+      font-family: inherit;
+      color: var(--white);
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-submit:hover { opacity: 0.85; }
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 40px 24px;
+      margin-top: 80px;
+    }
+    .footer-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+    @media (max-width: 768px) {
+      .thanks h1 { font-size: 28px; }
+      .thanks { padding: 80px 20px 60px; }
+    }
+    @media (max-width: 420px) {
+      .nav-links { display: none; }
+    }
+  </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+       crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="../" class="nav-brand">IconJP</a>
+      <ul class="nav-links">
+        <li><a href="../">アイコン</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="thanks">
+    <svg class="thanks-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="30" stroke="#34c759" stroke-width="3" fill="#f0fdf4"/>
+      <path d="M20 33l8 8 16-16" stroke="#34c759" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h1>送信完了</h1>
+    <p>お問い合わせありがとうございます。</p>
+    <p>内容を確認の上、3営業日以内にご連絡いたします。</p>
+    <a href="../" class="btn-submit">トップページに戻る</a>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>&copy; 2026 IconJP. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
