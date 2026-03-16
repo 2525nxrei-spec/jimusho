@@ -6,13 +6,13 @@
   <url><loc>https://muryo-tool.com/tools/delivery-note/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/estimate-generator/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/expense-memo/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://muryo-tool.com/tools/hankaku-zenkaku/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muryo-tool.com/tools/hankaku-zenkaku/</loc><lastmod>2026-03-17</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/image-compressor/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/incorporation-sim/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/invoice-generator/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/password-generator/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/pdf-converter/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://muryo-tool.com/tools/qr-generator/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muryo-tool.com/tools/qr-generator/</loc><lastmod>2026-03-17</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/rate-calculator/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/receipt-generator/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/retirement-sim/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -23,8 +23,8 @@
   <url><loc>https://muryo-tool.com/tools/text-counter/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/timer/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/unit-converter/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://muryo-tool.com/tools/wareki-converter/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://muryo-tool.com/tools/warikan/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muryo-tool.com/tools/wareki-converter/</loc><lastmod>2026-03-17</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://muryo-tool.com/tools/warikan/</loc><lastmod>2026-03-17</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/withholding-tax/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/tools/work-log/</loc><lastmod>2026-03-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://muryo-tool.com/calc/</loc><lastmod>2026-03-16</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
@@ -34,7 +34,8 @@
   <url><loc>https://muryo-tool.com/icon/</loc><lastmod>2026-03-16</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://muryo-tool.com/keiyaku/</loc><lastmod>2026-03-16</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://muryo-tool.com/pages/about.html</loc><lastmod>2026-03-14</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://muryo-tool.com/pages/contact.html</loc><lastmod>2026-03-14</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://muryo-tool.com/pages/contact.html</loc><lastmod>2026-03-17</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://muryo-tool.com/pages/privacy.html</loc><lastmod>2026-03-14</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://muryo-tool.com/pages/terms.html</loc><lastmod>2026-03-14</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://muryo-tool.com/pages/thanks.html</loc><lastmod>2026-03-17</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
