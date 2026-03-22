@@ -54,28 +54,4 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://muryo-tool.com/check/pages/about.html</loc>
-    <lastmod>2026-03-06</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://muryo-tool.com/check/pages/contact.html</loc>
-    <lastmod>2026-03-06</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://muryo-tool.com/check/pages/privacy.html</loc>
-    <lastmod>2026-03-06</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://muryo-tool.com/check/pages/terms.html</loc>
-    <lastmod>2026-03-06</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
 </urlset>
