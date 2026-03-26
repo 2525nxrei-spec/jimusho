@@ -113,6 +113,13 @@
           <label for="input-password">パスワード（8文字以上）</label>
           <input type="password" id="input-password" placeholder="8文字以上" minlength="8" required aria-label="パスワード" aria-required="true" autocomplete="current-password">
         </div>
+        <div class="auth-field" id="field-terms" style="display:none;">
+          <label style="display:flex;align-items:flex-start;gap:8px;font-size:.78rem;cursor:pointer;">
+            <input type="checkbox" id="input-terms" style="margin-top:3px;flex-shrink:0;">
+            <span><a href="/pages/terms.html" target="_blank" style="color:var(--accent);text-decoration:underline;">利用規約</a>と<a href="/pages/privacy.html" target="_blank" style="color:var(--accent);text-decoration:underline;">プライバシーポリシー</a>に同意する</span>
+          </label>
+        </div>
+        <div id="pw-strength-reg" style="font-size:.72rem;color:var(--gray-500);margin-bottom:8px;display:none;"></div>
         <button type="submit" class="auth-submit" id="auth-submit-btn" aria-label="ログイン">ログイン</button>
         <div class="auth-error" id="auth-error"></div>
         <p style="text-align:center;margin-top:10px;font-size:0.78rem;color:var(--gray-500);">パスワードをお忘れの方は <a href="/pages/contact.html" style="color:var(--accent);text-decoration:underline;">こちら</a></p>
@@ -158,12 +165,28 @@
       let mode = params.get('mode') === 'register' ? 'register' : 'login';
       const returnUrl = params.get('return') || '/';
 
+      var fieldTerms = document.getElementById('field-terms');
+      var pwStrengthReg = document.getElementById('pw-strength-reg');
+
+      // パスワード強度チェック
+      document.getElementById('input-password').addEventListener('input', function() {
+        if (mode !== 'register') return;
+        var pw = this.value;
+        var el = pwStrengthReg;
+        if (pw.length === 0) { el.textContent = ''; }
+        else if (pw.length < 8) { el.textContent = 'あと' + (8 - pw.length) + '文字必要です'; el.style.color = '#dc2626'; }
+        else if (!/[a-zA-Z]/.test(pw) || !/[0-9]/.test(pw)) { el.textContent = '英字と数字の両方を含めてください'; el.style.color = '#d97706'; }
+        else { el.textContent = 'OK'; el.style.color = '#16a34a'; }
+      });
+
       function setMode(m) {
         mode = m;
         if (mode === 'register') {
           tabRegister.classList.add('is-active');
           tabLogin.classList.remove('is-active');
           fieldName.style.display = '';
+          fieldTerms.style.display = '';
+          pwStrengthReg.style.display = 'block';
           authTitle.textContent = '新規登録';
           authSub.textContent = 'アカウントを作成して始めましょう';
           authSubmitBtn.textContent = '新規登録';
@@ -172,6 +195,8 @@
           tabLogin.classList.add('is-active');
           tabRegister.classList.remove('is-active');
           fieldName.style.display = 'none';
+          fieldTerms.style.display = 'none';
+          pwStrengthReg.style.display = 'none';
           authTitle.textContent = 'ログイン';
           authSub.textContent = 'メールアドレスとパスワードを入力';
           authSubmitBtn.textContent = 'ログイン';
@@ -202,6 +227,10 @@
           const password = document.getElementById('input-password').value;
 
           if (mode === 'register') {
+            if (password.length < 8) { throw new Error('パスワードは8文字以上で入力してください'); }
+            if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) { throw new Error('パスワードは英字と数字の両方を含めてください'); }
+            var termsCheck = document.getElementById('input-terms');
+            if (termsCheck && !termsCheck.checked) { throw new Error('利用規約への同意が必要です'); }
             const name = document.getElementById('input-name').value;
             await TOOLBOX_AUTH.register(email, password, name);
           } else {
