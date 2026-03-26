@@ -135,6 +135,7 @@
     .tool-card__tags { display:flex; gap:6px; flex-wrap:wrap; }
     .tool-card__tag { font-size:0.62rem; font-weight:600; background:var(--gray-100); color:var(--gray-500); padding:2px 8px; border-radius:980px; }
     .tool-card__tag--pop { background:#dbeafe; color:#2563eb; }
+    .tool-card__tag--pro { background:#0071e3; color:#fff; font-weight:700; letter-spacing:0.02em; }
     .tool-card__legal { display:inline-flex; align-items:center; gap:4px; font-size:0.62rem; font-weight:600; color:#16a34a; background:#dcfce7; padding:3px 10px; border-radius:980px; margin-top:4px; }
     .tool-card__legal svg { width:12px; height:12px; flex-shrink:0; }
 
@@ -301,11 +302,21 @@
   "description": "個人事業主・フリーランスの業務を加速する無料オンラインツール集。画像圧縮、QRコード作成、請求書作成、文字数カウントなど26種類。年間48,000円相当の作業時間を削減。",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "JPY"
-  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Free",
+      "price": "0",
+      "priceCurrency": "JPY"
+    },
+    {
+      "@type": "Offer",
+      "name": "ジムショ Pro",
+      "price": "100",
+      "priceCurrency": "JPY",
+      "billingDuration": "P1M"
+    }
+  ],
   "inLanguage": "ja"
 }
 </script>
@@ -318,6 +329,7 @@
       <a href="/" class="nav__logo">Tool<span>Box</span></a>
       <div class="nav__links">
         <a href="#all" class="nav__link">ツール一覧</a>
+        <a href="pages/pricing.html" class="nav__link">料金</a>
         <div class="nav__dropdown">
           <span class="nav__dropdown-toggle">関連サービス <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8L9.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="nav__dropdown-menu">
@@ -347,6 +359,7 @@
       <div class="mobile-menu__section">
         <div class="mobile-menu__title">ページ内</div>
         <a href="#all" class="mobile-menu__link">ツール一覧</a>
+        <a href="pages/pricing.html" class="mobile-menu__link">料金プラン</a>
         <a href="#loss-comparison" class="mobile-menu__link">損失比較</a>
         <a href="#faq" class="mobile-menu__link">よくある質問</a>
       </div>
@@ -409,7 +422,7 @@
       <div class="tools-grid" id="all-tools">
 
         <!-- 書類作成 -->
-        <a href="tools/invoice-generator/" class="tool-card reveal" data-name="請求書 見積書 作成 ビジネス インボイス フリーランス" data-category="書類作成" data-need="請求書を作りたい 見積書を作りたい インボイスを発行したい">
+        <a href="tools/invoice-generator/" class="tool-card reveal" data-name="請求書 見積書 作成 ビジネス インボイス フリーランス" data-category="書類作成" data-need="請求書を作りたい 見積書を作りたい インボイスを発行したい" data-plan="pro">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 10h8"/><path d="M8 14h4"/></svg></div>
             <div class="tool-card__title">請求書作成</div>
@@ -420,7 +433,7 @@
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/delivery-note/" class="tool-card reveal reveal-d1" data-name="納品書 作成 納品 ビジネス フリーランス" data-category="書類作成" data-need="納品書を作りたい 納品書を発行したい 納品確認">
+        <a href="tools/delivery-note/" class="tool-card reveal reveal-d1" data-name="納品書 作成 納品 ビジネス フリーランス" data-category="書類作成" data-need="納品書を作りたい 納品書を発行したい 納品確認" data-plan="pro">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></div>
             <div class="tool-card__title">納品書作成</div>
@@ -431,7 +444,7 @@
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/receipt-generator/" class="tool-card reveal reveal-d2" data-name="領収書 作成 発行 印紙税 ビジネス" data-category="書類作成" data-need="領収書を作りたい 領収書を発行したい 印紙税">
+        <a href="tools/receipt-generator/" class="tool-card reveal reveal-d2" data-name="領収書 作成 発行 印紙税 ビジネス" data-category="書類作成" data-need="領収書を作りたい 領収書を発行したい 印紙税" data-plan="pro">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg></div>
             <div class="tool-card__title">領収書作成</div>
@@ -454,7 +467,7 @@
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/expense-memo/" class="tool-card reveal reveal-d1" data-name="経費メモ 経費 確定申告 帳簿 レシート" data-category="お金の管理" data-need="経費を記録したい 確定申告の準備をしたい 経費管理">
+        <a href="tools/expense-memo/" class="tool-card reveal reveal-d1" data-name="経費メモ 経費 確定申告 帳簿 レシート" data-category="お金の管理" data-need="経費を記録したい 確定申告の準備をしたい 経費管理" data-plan="pro">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
             <div class="tool-card__title">経費メモ</div>
@@ -465,7 +478,7 @@
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/revenue-tracker/" class="tool-card reveal reveal-d2" data-name="売上管理 収支 入金 クライアント 月次 確定申告" data-category="お金の管理" data-need="売上を管理したい 入金を確認したい 収支を把握したい">
+        <a href="tools/revenue-tracker/" class="tool-card reveal reveal-d2" data-name="売上管理 収支 入金 クライアント 月次 確定申告" data-category="お金の管理" data-need="売上を管理したい 入金を確認したい 収支を把握したい" data-plan="pro">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--indigo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 5-5"/></svg></div>
             <div class="tool-card__title">売上管理</div>
@@ -476,7 +489,7 @@
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/estimate-generator/" class="tool-card reveal" data-name="見積書 工数 作成 時給 日給 プロジェクト" data-category="書類作成" data-need="見積書を作りたい 工数で見積もりたい プロジェクト見積もり">
+        <a href="tools/estimate-generator/" class="tool-card reveal" data-name="見積書 工数 作成 時給 日給 プロジェクト" data-category="書類作成" data-need="見積書を作りたい 工数で見積もりたい プロジェクト見積もり" data-plan="pro">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--slate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h2"/><path d="M8 17h2"/><path d="M14 13h2"/><path d="M14 17h2"/></svg></div>
             <div class="tool-card__title">工数見積書作成</div>
@@ -487,7 +500,7 @@
         </a>
 
         <!-- 税金・シミュレーション -->
-        <a href="tools/take-home-pay/" class="tool-card reveal" data-name="手取り シミュレーション 所得税 住民税 国保 年金 フリーランス" data-category="税金・シミュレーション" data-need="手取りを知りたい 税金がいくらか 年収から手取りを計算">
+        <a href="tools/take-home-pay/" class="tool-card reveal" data-name="手取り シミュレーション 所得税 住民税 国保 年金 フリーランス" data-category="税金・シミュレーション" data-need="手取りを知りたい 税金がいくらか 年収から手取りを計算" data-plan="pro">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h5l3-9 4 18 3-9h5"/></svg></div>
             <div class="tool-card__title">手取りシミュレーター</div>
@@ -519,7 +532,7 @@
         </a>
 
         <!-- 営業・業務効率化 -->
-        <a href="tools/sales-email/" class="tool-card reveal" data-name="営業メール 営業 メール テンプレート お礼 フォローアップ" data-category="営業・業務" data-need="営業メールを書きたい お礼メールを送りたい メールテンプレート">
+        <a href="tools/sales-email/" class="tool-card reveal" data-name="営業メール 営業 メール テンプレート お礼 フォローアップ" data-category="営業・業務" data-need="営業メールを書きたい お礼メールを送りたい メールテンプレート" data-plan="pro">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
             <div class="tool-card__title">営業メール生成</div>
@@ -530,7 +543,7 @@
           <span class="tool-card__link">使う →</span>
         </a>
 
-        <a href="tools/work-log/" class="tool-card reveal reveal-d1" data-name="作業ログ 作業時間 タイムトラッキング 時給 売上" data-category="営業・業務" data-need="作業時間を記録したい 時給を計算したい タイムトラッキング">
+        <a href="tools/work-log/" class="tool-card reveal reveal-d1" data-name="作業ログ 作業時間 タイムトラッキング 時給 売上" data-category="営業・業務" data-need="作業時間を記録したい 時給を計算したい タイムトラッキング" data-plan="pro">
           <div class="tool-card__top">
             <div class="tool-card__icon tool-card__icon--yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
             <div class="tool-card__title">作業ログ</div>
@@ -755,8 +768,8 @@
       </div>
       <div style="max-width:720px;margin:0 auto" class="reveal">
         <details style="background:var(--white);border:1px solid var(--gray-200);border-radius:14px;margin-bottom:10px;overflow:hidden" open>
-          <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">ToolBoxは本当に無料ですか？</summary>
-          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">はい、ToolBoxのすべてのツールは完全無料で利用できます。アカウント登録も不要です。有料プランへの誘導も一切ありません。</p>
+          <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">ToolBoxの料金体系は？</summary>
+          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">基本ツール（17種類）は完全無料・登録不要で利用できます。請求書・納品書・経費管理などの業務コアツールは、ジムショ Proプラン（月額100円）でご利用いただけます。<a href="pages/pricing.html" style="color:#0071e3;font-weight:600">料金プランの詳細はこちら</a></p>
         </details>
         <details style="background:var(--white);border:1px solid var(--gray-200);border-radius:14px;margin-bottom:10px;overflow:hidden">
           <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">クライアントの機密データは安全ですか？</summary>
@@ -779,8 +792,9 @@
     <div class="container">
       <div class="cta__card reveal">
         <div class="cta__title">事務作業に費やす時間を、本業に取り戻す。</div>
-        <div class="cta__desc">ToolBoxは、個人事業主・フリーランスの「お金まわり」を完結させる専用ツール集です。<br>請求書・納品書・領収書・源泉徴収計算・経費管理・売上管理。有料ソフト不要。</div>
-        <a href="#all" class="cta__btn">ツールを使ってみる</a>
+        <div class="cta__desc">ToolBoxは、個人事業主・フリーランスの「お金まわり」を完結させる専用ツール集です。<br>基本ツールは無料。請求書・納品書・経費管理はジムショ Pro（月額100円）で。</div>
+        <a href="#all" class="cta__btn" style="margin-right:12px">無料ツールを使う</a>
+        <a href="pages/pricing.html" class="cta__btn" style="background:var(--accent);color:var(--white)">Proを見る</a>
       </div>
     </div>
   </div>
@@ -836,6 +850,7 @@
         <div>
           <div class="footer__col-title">サイト情報</div>
           <div class="footer__col-links footer__col-links--single">
+            <a href="pages/pricing.html">料金プラン</a>
             <a href="pages/about.html">運営者情報</a>
             <a href="pages/contact.html">お問い合わせ</a>
             <a href="pages/privacy.html">プライバシーポリシー</a>
@@ -1240,12 +1255,38 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {"@type":"Question","name":"ToolBoxは本当に無料ですか？","acceptedAnswer":{"@type":"Answer","text":"はい、ToolBoxのすべてのツールは完全無料で利用できます。アカウント登録も不要です。有料プランへの誘導も一切ありません。"}},
+      {"@type":"Question","name":"ToolBoxは本当に無料ですか？","acceptedAnswer":{"@type":"Answer","text":"基本ツール（17種類）は完全無料・登録不要で利用できます。請求書・納品書・経費管理などの業務コアツールは、ジムショ Proプラン（月額100円）でご利用いただけます。"}},
       {"@type":"Question","name":"クライアントの機密データは安全ですか？","acceptedAnswer":{"@type":"Answer","text":"はい。請求書の顧客情報を含め、すべての処理はブラウザ内のJavaScriptで完結します。データが外部サーバーに送信されることは一切ありません。"}},
       {"@type":"Question","name":"個人事業主・フリーランスに特化しているのですか？","acceptedAnswer":{"@type":"Answer","text":"はい。請求書・納品書・領収書の作成、源泉徴収税計算、経費管理、売上管理など、個人事業主の「お金まわり」に特化した26のツールを揃えています。インボイス制度・所得税法・印紙税法に準拠。"}},
       {"@type":"Question","name":"どれくらいの作業時間を短縮できますか？","acceptedAnswer":{"@type":"Answer","text":"月間約20件の請求書作成で月4,000円相当の時短、源泉徴収の計算ミス防止、入金管理による請求漏れ防止を含め、年間18万円以上の損失リスクを回避できます。"}}
     ]
   }
+  </script>
+
+  <!-- 認証・Pro/Freeバッジ表示 -->
+  <script src="assets/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Proツールカードに「Pro」バッジを挿入
+      document.querySelectorAll('.tool-card[data-plan="pro"]').forEach(card => {
+        const tags = card.querySelector('.tool-card__tags');
+        const badge = document.createElement('span');
+        badge.className = 'tool-card__tag tool-card__tag--pro';
+        badge.textContent = 'Pro';
+        if (tags) {
+          tags.prepend(badge);
+        } else {
+          // tagsコンテナが無い場合、tool-card__linkの前に挿入
+          const link = card.querySelector('.tool-card__link');
+          if (link) link.before(badge);
+        }
+      });
+
+      // ナビバーにログイン状態を反映
+      if (typeof TOOLBOX_AUTH !== 'undefined') {
+        TOOLBOX_AUTH.updateNavUI();
+      }
+    });
   </script>
 </body>
 </html>

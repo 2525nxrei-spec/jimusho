@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q5PXT07YCP');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ToolBox ジムショ Pro — 月額100円で請求書・納品書・経費管理など業務コアツールが使い放題。個人事業主・フリーランス向け。">
+  <title>料金プラン｜ToolBox ジムショ Pro</title>
+  <link rel="canonical" href="https://muryo-tool.com/pages/pricing.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --black: #1d1d1f;
+      --gray-900: #3a3a3c;
+      --gray-700: #636366;
+      --gray-500: #8e8e93;
+      --gray-300: #d1d1d6;
+      --gray-200: #e5e5ea;
+      --gray-100: #f2f2f7;
+      --gray-50: #f9f9fb;
+      --white: #fff;
+      --accent: #0071e3;
+      --accent-light: #e8f2fc;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --font: "Plus Jakarta Sans", "Noto Sans JP", -apple-system, sans-serif;
+    }
+    html { font-size:16px; -webkit-font-smoothing:antialiased; }
+    body { font-family:var(--font); color:var(--black); background:var(--gray-100); line-height:1.7; }
+    a { color:inherit; text-decoration:none; }
+    .container { max-width:1080px; margin:0 auto; padding:0 24px; }
+
+    /* Nav */
+    .nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.72); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid rgba(0,0,0,0.06); }
+    .nav__inner { display:flex; align-items:center; justify-content:space-between; height:48px; }
+    .nav__logo { font-size:1.15rem; font-weight:800; letter-spacing:-0.04em; }
+    .nav__logo span { color:var(--accent); }
+    .nav__links { display:flex; gap:24px; align-items:center; }
+    .nav__link { font-size:0.8rem; font-weight:500; color:var(--gray-700); transition:color 0.2s; }
+    .nav__link:hover { color:var(--black); }
+
+    /* Pricing Section */
+    .pricing { padding:64px 0 80px; }
+    .pricing__header { text-align:center; margin-bottom:48px; }
+    .pricing__title { font-size:clamp(1.5rem, 3vw, 2.2rem); font-weight:700; letter-spacing:-0.02em; margin-bottom:12px; }
+    .pricing__sub { font-size:0.92rem; color:var(--gray-700); }
+    .pricing__grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:780px; margin:0 auto; }
+
+    .plan-card { background:var(--white); border:2px solid var(--gray-200); border-radius:16px; padding:36px 32px; position:relative; }
+    .plan-card--pro { border-color:var(--accent); }
+    .plan-card__badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent); color:var(--white); font-size:0.7rem; font-weight:700; padding:4px 16px; border-radius:980px; white-space:nowrap; }
+    .plan-card__name { font-size:1.1rem; font-weight:700; margin-bottom:4px; }
+    .plan-card__price { font-size:2.2rem; font-weight:800; letter-spacing:-0.03em; }
+    .plan-card__price small { font-size:0.8rem; font-weight:500; color:var(--gray-500); }
+    .plan-card__desc { font-size:0.82rem; color:var(--gray-500); margin:8px 0 20px; }
+    .plan-card__features { list-style:none; margin-bottom:28px; }
+    .plan-card__features li { font-size:0.84rem; color:var(--gray-700); padding:6px 0; display:flex; align-items:flex-start; gap:8px; }
+    .plan-card__features li svg { width:16px; height:16px; flex-shrink:0; margin-top:2px; }
+    .plan-card__features li svg.check { color:var(--green); }
+    .plan-card__features li svg.cross { color:var(--gray-300); }
+    .plan-card__features li.disabled { color:var(--gray-300); }
+
+    .plan-card__btn { display:block; width:100%; text-align:center; font-family:var(--font); font-size:0.88rem; font-weight:600; padding:12px 0; border-radius:980px; border:none; cursor:pointer; transition:opacity 0.2s; }
+    .plan-card__btn:hover { opacity:0.85; }
+    .plan-card__btn--free { background:var(--gray-100); color:var(--black); }
+    .plan-card__btn--pro { background:var(--accent); color:var(--white); }
+
+    /* Auth Section */
+    .auth-section { background:var(--white); border-radius:16px; max-width:440px; margin:0 auto; padding:36px 32px; display:none; }
+    .auth-section.is-visible { display:block; }
+    .auth-section__title { font-size:1.1rem; font-weight:700; margin-bottom:4px; text-align:center; }
+    .auth-section__sub { font-size:0.82rem; color:var(--gray-500); text-align:center; margin-bottom:24px; }
+    .auth-section__tabs { display:flex; gap:0; margin-bottom:24px; border:1.5px solid var(--gray-200); border-radius:10px; overflow:hidden; }
+    .auth-section__tab { flex:1; text-align:center; font-size:0.84rem; font-weight:600; padding:10px 0; cursor:pointer; background:var(--white); color:var(--gray-500); border:none; font-family:var(--font); transition:all 0.15s; }
+    .auth-section__tab.is-active { background:var(--accent); color:var(--white); }
+    .auth-field { margin-bottom:16px; }
+    .auth-field label { display:block; font-size:0.78rem; font-weight:600; color:var(--gray-700); margin-bottom:6px; }
+    .auth-field input { width:100%; font-family:var(--font); font-size:0.88rem; padding:11px 14px; border:1.5px solid var(--gray-200); border-radius:10px; outline:none; background:var(--gray-50); transition:border-color 0.2s; }
+    .auth-field input:focus { border-color:var(--accent); }
+    .auth-submit { width:100%; font-family:var(--font); font-size:0.88rem; font-weight:600; padding:12px 0; border:none; border-radius:980px; background:var(--accent); color:var(--white); cursor:pointer; transition:opacity 0.2s; }
+    .auth-submit:hover { opacity:0.85; }
+    .auth-submit:disabled { opacity:0.5; cursor:not-allowed; }
+    .auth-error { font-size:0.78rem; color:#dc2626; text-align:center; margin-top:12px; display:none; }
+    .auth-toggle { font-size:0.8rem; color:var(--gray-500); text-align:center; margin-top:16px; }
+    .auth-toggle a { color:var(--accent); font-weight:600; cursor:pointer; }
+
+    /* Footer */
+    .footer { background:var(--black); color:var(--white); padding:24px 0; text-align:center; }
+    .footer__text { font-size:0.72rem; color:rgba(255,255,255,0.3); }
+    .footer__links { display:flex; justify-content:center; gap:20px; margin-top:8px; }
+    .footer__links a { font-size:0.72rem; color:rgba(255,255,255,0.3); transition:color 0.2s; }
+    .footer__links a:hover { color:rgba(255,255,255,0.6); }
+
+    @media (max-width:640px) {
+      .pricing__grid { grid-template-columns:1fr; max-width:400px; }
+      .plan-card { padding:28px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/" class="nav__logo">Tool<span>Box</span></a>
+      <div class="nav__links">
+        <a href="/" class="nav__link">ツール一覧</a>
+        <a href="/pages/pricing.html" class="nav__link" style="color:var(--accent);font-weight:600">料金</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="pricing">
+    <div class="container">
+      <div class="pricing__header">
+        <h1 class="pricing__title">シンプルな料金体系</h1>
+        <p class="pricing__sub">基本ツールは無料。業務コアツールはProで月額100円。</p>
+      </div>
+
+      <div class="pricing__grid" id="pricing-grid">
+        <!-- Free -->
+        <div class="plan-card">
+          <div class="plan-card__name">Free</div>
+          <div class="plan-card__price">0<small>円</small></div>
+          <div class="plan-card__desc">登録不要。基本ツールを今すぐ利用。</div>
+          <ul class="plan-card__features">
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>源泉徴収税計算</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>消費税シミュレーター</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>単価・料金逆算</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>画像圧縮 / PDF変換</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>QRコード / 半角全角変換</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>パスワード生成 / タイマーなど</li>
+            <li class="disabled"><svg class="cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>請求書・納品書・領収書作成</li>
+            <li class="disabled"><svg class="cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>経費メモ・売上管理</li>
+          </ul>
+          <a href="/" class="plan-card__btn plan-card__btn--free">無料で使う</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="plan-card plan-card--pro">
+          <div class="plan-card__badge">おすすめ</div>
+          <div class="plan-card__name">ジムショ Pro</div>
+          <div class="plan-card__price">100<small>円/月</small></div>
+          <div class="plan-card__desc">書類作成・経費管理など、業務のコアツールが全て解放。</div>
+          <ul class="plan-card__features">
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>Freeプランの全機能</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>請求書作成（インボイス対応）</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>納品書・領収書作成</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>工数見積書作成</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>経費メモ（CSV出力）</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>売上管理（入金追跡）</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>手取りシミュレーター</li>
+            <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>営業メール生成 / 作業ログ</li>
+          </ul>
+          <button class="plan-card__btn plan-card__btn--pro" id="btn-pro-upgrade">Proにアップグレード</button>
+        </div>
+      </div>
+
+      <!-- 認証フォーム -->
+      <div class="auth-section" id="auth-section" style="margin-top:40px">
+        <div class="auth-section__title" id="auth-title">アカウント登録</div>
+        <div class="auth-section__sub" id="auth-sub">Pro契約にはアカウントが必要です</div>
+        <div class="auth-section__tabs">
+          <button class="auth-section__tab is-active" id="tab-register">新規登録</button>
+          <button class="auth-section__tab" id="tab-login">ログイン</button>
+        </div>
+        <form id="auth-form">
+          <div class="auth-field" id="field-name">
+            <label for="input-name">お名前（任意）</label>
+            <input type="text" id="input-name" placeholder="表示名">
+          </div>
+          <div class="auth-field">
+            <label for="input-email">メールアドレス</label>
+            <input type="email" id="input-email" placeholder="you@example.com" required>
+          </div>
+          <div class="auth-field">
+            <label for="input-password">パスワード（8文字以上）</label>
+            <input type="password" id="input-password" placeholder="8文字以上" minlength="8" required>
+          </div>
+          <button type="submit" class="auth-submit" id="auth-submit-btn">登録してProを始める</button>
+          <div class="auth-error" id="auth-error"></div>
+        </form>
+        <div class="auth-toggle" id="auth-toggle">
+          既にアカウントをお持ちの方は<a id="toggle-link">ログイン</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__text">&copy; 2026 ToolBox. All rights reserved.</div>
+      <div class="footer__links">
+        <a href="/pages/privacy.html">プライバシーポリシー</a>
+        <a href="/pages/terms.html">利用規約</a>
+        <a href="/">ツール一覧</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const authSection = document.getElementById('auth-section');
+      const authForm = document.getElementById('auth-form');
+      const authError = document.getElementById('auth-error');
+      const authTitle = document.getElementById('auth-title');
+      const authSub = document.getElementById('auth-sub');
+      const authSubmitBtn = document.getElementById('auth-submit-btn');
+      const fieldName = document.getElementById('field-name');
+      const tabRegister = document.getElementById('tab-register');
+      const tabLogin = document.getElementById('tab-login');
+      const toggleLink = document.getElementById('toggle-link');
+      const authToggle = document.getElementById('auth-toggle');
+      const btnProUpgrade = document.getElementById('btn-pro-upgrade');
+
+      let mode = 'register'; // 'register' | 'login'
+
+      // 既にログイン済みの場合
+      if (TOOLBOX_AUTH.isLoggedIn()) {
+        if (TOOLBOX_AUTH.isPro()) {
+          // Proユーザーはアカウントページへ
+          window.location.href = '/pages/account.html';
+          return;
+        }
+        // Freeユーザー → Checkout直行
+        btnProUpgrade.textContent = 'Proにアップグレード';
+        btnProUpgrade.addEventListener('click', async () => {
+          btnProUpgrade.disabled = true;
+          btnProUpgrade.textContent = '処理中...';
+          try {
+            await TOOLBOX_AUTH.startCheckout();
+          } catch (err) {
+            alert(err.message);
+            btnProUpgrade.disabled = false;
+            btnProUpgrade.textContent = 'Proにアップグレード';
+          }
+        });
+        return;
+      }
+
+      // 未ログイン時の処理
+      btnProUpgrade.addEventListener('click', () => {
+        authSection.classList.add('is-visible');
+        authSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+
+      function setMode(m) {
+        mode = m;
+        if (mode === 'register') {
+          tabRegister.classList.add('is-active');
+          tabLogin.classList.remove('is-active');
+          fieldName.style.display = '';
+          authTitle.textContent = 'アカウント登録';
+          authSub.textContent = 'Pro契約にはアカウントが必要です';
+          authSubmitBtn.textContent = '登録してProを始める';
+          authToggle.innerHTML = '既にアカウントをお持ちの方は<a id="toggle-link">ログイン</a>';
+        } else {
+          tabLogin.classList.add('is-active');
+          tabRegister.classList.remove('is-active');
+          fieldName.style.display = 'none';
+          authTitle.textContent = 'ログイン';
+          authSub.textContent = 'メールアドレスとパスワードを入力';
+          authSubmitBtn.textContent = 'ログインしてProを始める';
+          authToggle.innerHTML = 'アカウントをお持ちでない方は<a id="toggle-link">新規登録</a>';
+        }
+        // toggle-linkのイベント再設定
+        document.getElementById('toggle-link').addEventListener('click', () => {
+          setMode(mode === 'register' ? 'login' : 'register');
+        });
+        authError.style.display = 'none';
+      }
+
+      tabRegister.addEventListener('click', () => setMode('register'));
+      tabLogin.addEventListener('click', () => setMode('login'));
+      toggleLink.addEventListener('click', () => setMode('login'));
+
+      authForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        authError.style.display = 'none';
+        authSubmitBtn.disabled = true;
+        const origText = authSubmitBtn.textContent;
+        authSubmitBtn.textContent = '処理中...';
+
+        try {
+          const email = document.getElementById('input-email').value;
+          const password = document.getElementById('input-password').value;
+
+          if (mode === 'register') {
+            const name = document.getElementById('input-name').value;
+            await TOOLBOX_AUTH.register(email, password, name);
+          } else {
+            await TOOLBOX_AUTH.login(email, password);
+          }
+          // 登録/ログイン成功 → Checkout開始
+          await TOOLBOX_AUTH.startCheckout();
+        } catch (err) {
+          authError.textContent = err.message;
+          authError.style.display = 'block';
+          authSubmitBtn.disabled = false;
+          authSubmitBtn.textContent = origText;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
