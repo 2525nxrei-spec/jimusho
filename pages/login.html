@@ -79,6 +79,7 @@
       .login-section { padding:40px 16px 60px; }
     }
   </style>
+<link rel="stylesheet" href="/assets/css/ux-enhance.css">
 </head>
 <body>
   <nav class="nav">
@@ -99,20 +100,20 @@
         <button class="auth-card__tab" id="tab-register">新規登録</button>
         <button class="auth-card__tab is-active" id="tab-login">ログイン</button>
       </div>
-      <form id="auth-form">
+      <form id="auth-form" aria-label="ログインフォーム">
         <div class="auth-field" id="field-name" style="display:none">
           <label for="input-name">お名前</label>
-          <input type="text" id="input-name" placeholder="表示名">
+          <input type="text" id="input-name" placeholder="表示名" aria-label="お名前" autocomplete="name">
         </div>
         <div class="auth-field">
           <label for="input-email">メールアドレス</label>
-          <input type="email" id="input-email" placeholder="you@example.com" required>
+          <input type="email" id="input-email" placeholder="you@example.com" required aria-label="メールアドレス" aria-required="true" autocomplete="email">
         </div>
         <div class="auth-field">
           <label for="input-password">パスワード（8文字以上）</label>
-          <input type="password" id="input-password" placeholder="8文字以上" minlength="8" required>
+          <input type="password" id="input-password" placeholder="8文字以上" minlength="8" required aria-label="パスワード" aria-required="true" autocomplete="current-password">
         </div>
-        <button type="submit" class="auth-submit" id="auth-submit-btn">ログイン</button>
+        <button type="submit" class="auth-submit" id="auth-submit-btn" aria-label="ログイン">ログイン</button>
         <div class="auth-error" id="auth-error"></div>
       </form>
       <div class="auth-toggle" id="auth-toggle">
@@ -216,5 +217,6 @@
       });
     });
   </script>
+<script src="/assets/js/ux-enhance.js"></script>
 </body>
 </html>
