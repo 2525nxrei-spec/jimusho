@@ -32,11 +32,12 @@ export async function onRequestPost(context) {
     }
 
     // Checkout Session作成
+    // payment_method_types を指定しない → Stripeダッシュボードで有効化した決済方法が全て自動表示
+    // （card=クレカ/Apple Pay/Google Pay、paypay、konbini 等）
     const frontendUrl = env.FRONTEND_URL || 'https://jimusho-tool.com';
     const session = await stripeRequest('checkout/sessions', 'POST', {
       mode: 'subscription',
       customer: stripeCustomerId,
-      'payment_method_types[0]': 'card',
       locale: 'ja',
       'line_items[0][price]': priceId,
       'line_items[0][quantity]': '1',

@@ -1,0 +1,16 @@
+{
+  "name": "ジムショ",
+  "short_name": "ジムショ",
+  "description": "個人事業主・フリーランスの事務作業をゼロに近づける無料ツール集",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0071e3",
+  "icons": [
+    {
+      "src": "/icon/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

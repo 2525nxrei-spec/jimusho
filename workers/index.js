@@ -553,4 +553,10 @@ export default {
         response = errorResponse('Not Found', 404);
       }
     } catch (err) {
-      console.error('予期しないエラー:', err
+      console.error('予期しないエラー:', err.message, err.stack);
+      response = errorResponse('Internal Server Error', 500);
+    }
+
+    return withCORS(response, request.headers.get('Origin'));
+  },
+};

@@ -20,6 +20,9 @@
   <meta property="og:image" content="https://jimusho-tool.com/ogp.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://jimusho-tool.com/">
+  <link rel="icon" href="/icon/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
   <title>ジムショ｜個人事業主・フリーランスの事務作業をゼロに近づける無料ツール集</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1267,7 +1270,7 @@
   </script>
 
   <!-- 認証・Pro/Freeバッジ表示 -->
-  <script src="assets/js/auth.js"></script>
+  <script src="/assets/js/auth.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Proツールカードに「Pro」バッジを挿入
@@ -1288,6 +1291,10 @@
       // ナビバーにログイン状態を反映
       if (typeof TOOLBOX_AUTH !== 'undefined') {
         TOOLBOX_AUTH.updateNavUI();
+        // ログイン済みならサーバーから最新のユーザー情報を取得してナビを再更新
+        if (TOOLBOX_AUTH.isLoggedIn()) {
+          TOOLBOX_AUTH.fetchMe().then(() => TOOLBOX_AUTH.updateNavUI());
+        }
       }
     });
   </script>

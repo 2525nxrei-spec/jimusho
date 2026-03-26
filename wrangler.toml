@@ -1,10 +1,10 @@
 # ============================================================
-# ジムショ API — Cloudflare Workers 設定
+# ジムショ — Cloudflare Pages 設定
 # ============================================================
 
-name = "jimusho-api"
-main = "workers/index.js"
+name = "jimusho"
 compatibility_date = "2024-12-01"
+pages_build_output_dir = "."
 
 # ============================================================
 # D1 データベースバインディング
@@ -15,26 +15,20 @@ database_name = "toolbox-db"
 database_id = "851cecb1-000f-48b8-953c-fbf353143f4a"
 
 # ============================================================
-# 環境変数
+# 環境変数（本番）
 # ============================================================
 [vars]
 FRONTEND_URL = "https://jimusho-tool.com"
 STRIPE_PRICE_PRO = "price_1TF9k19Fc8HnuaokFuM61zbo"
 
-# 以下はシークレットとして設定（wrangler secret put コマンド使用）
-# wrangler secret put STRIPE_SECRET_KEY
-# wrangler secret put STRIPE_WEBHOOK_SECRET
-# wrangler secret put JWT_SECRET
+# 以下はシークレットとして設定（wrangler pages secret put コマンド使用）
+# wrangler pages secret put JWT_SECRET --project-name jimusho
+# wrangler pages secret put STRIPE_SECRET_KEY --project-name jimusho
+# wrangler pages secret put STRIPE_WEBHOOK_SECRET --project-name jimusho
 
 # ============================================================
-# 開発環境
+# プレビュー環境
 # ============================================================
-[dev]
-port = 8790
-
-[env.dev]
-name = "jimusho-api-dev"
-
-[env.dev.vars]
-FRONTEND_URL = "http://localhost:8790"
+[env.preview.vars]
+FRONTEND_URL = "https://preview.jimusho.pages.dev"
 STRIPE_PRICE_PRO = "price_1TF9k19Fc8HnuaokFuM61zbo"

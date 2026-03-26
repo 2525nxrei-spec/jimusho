@@ -122,10 +122,22 @@
       });
 
       // ユーザー情報取得
-      const user = await TOOLBOX_AUTH.fetchMe();
+      let user = await TOOLBOX_AUTH.fetchMe();
       if (!user) {
         window.location.href = '/pages/pricing.html';
         return;
+      }
+
+      // Stripe Checkout成功後のリダイレクト: Webhookがまだ処理されていない場合に備えてリトライ
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('session_id') && user.plan !== 'pro') {
+        for (let i = 0; i < 5; i++) {
+          await new Promise(r => setTimeout(r, 2000));
+          user = await TOOLBOX_AUTH.fetchMe();
+          if (user && user.plan === 'pro') break;
+        }
+        // URLからsession_idを除去
+        window.history.replaceState({}, '', '/pages/account.html');
       }
 
       // 表示更新
