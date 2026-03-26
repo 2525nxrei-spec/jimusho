@@ -44,7 +44,7 @@
   - 「本テンプレートは一般的な雛形です。法的効力は保証しません。重要な契約は弁護士にご確認ください」
   - 対象: keiyaku/app.html
 
-- [ ] Cookie同意バナー実装（GA4 + AdSense用）
+- [ ] Cookie同意バナー実装（GA4用）
   - 改正電気通信事業法の外部送信規律で必須
   - 対象: 全ページ共通JS
 
@@ -57,7 +57,6 @@
 
 - [ ] プライバシーポリシー更新
   - GA4（Google Analytics）の使用
-  - AdSense（Cookie広告）の使用
   - Formspree（お問い合わせフォーム）でのメールアドレス取得
   - LocalStorage使用の記載
   - 対象: pages/privacy.html

@@ -1,6 +1,7 @@
 /**
  * ジムショ UX向上 共通CSS
- * ボタンフィードバック、フォーカス、アクセシビリティ、印刷
+ * ボタンフィードバック、チェックマーク遷移、フォーカス、アクセシビリティ、
+ * オフラインバー、印刷最適化
  */
 
 /* ── ボタンクリックフィードバック ── */
@@ -16,7 +17,7 @@
   transform: scale(0.97);
 }
 
-/* transition を付与（既存のtransitionを壊さないようにtransform追加） */
+/* transition を付与 */
 .btn,
 .action-btn,
 .btn-gen,
@@ -33,7 +34,6 @@
   outline-offset: 2px;
 }
 
-/* input/textareaはborder-colorで十分なのでoutlineを消す */
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
@@ -46,6 +46,7 @@ select:focus-visible {
 .btn--loading,
 .action-btn--loading,
 .btn-gen--loading,
+.btn-dl--loading,
 .auth-submit--loading {
   position: relative;
   color: transparent !important;
@@ -55,6 +56,7 @@ select:focus-visible {
 .btn--loading::after,
 .action-btn--loading::after,
 .btn-gen--loading::after,
+.btn-dl--loading::after,
 .auth-submit--loading::after {
   content: '';
   position: absolute;
@@ -78,6 +80,38 @@ select:focus-visible {
 
 @keyframes ux-spin {
   to { transform: rotate(360deg); }
+}
+
+/* ── チェックマーク成功表示 ── */
+.btn--success,
+.action-btn--primary.btn--success,
+.btn-gen.btn--success,
+.btn-dl.btn--success {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+  background: #16a34a !important;
+  border-color: #16a34a !important;
+}
+
+.btn--success::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 16px;
+  margin: -10px 0 0 -5px;
+  border: solid #fff;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+  animation: ux-checkPop 0.3s ease;
+}
+
+@keyframes ux-checkPop {
+  0% { opacity: 0; transform: rotate(45deg) scale(0.5); }
+  60% { transform: rotate(45deg) scale(1.1); }
+  100% { opacity: 1; transform: rotate(45deg) scale(1); }
 }
 
 /* ── 二重送信防止：disabled状態 ── */
@@ -163,22 +197,44 @@ select:focus-visible {
   transform: scale(0.97);
 }
 
-/* ── 印刷アクセシビリティ ── */
+/* ── オフライン通知バー ── */
+.ux-offline-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10001;
+  background: #dc2626;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+.ux-offline-bar.is-visible {
+  transform: translateY(0);
+}
+
+/* ── 印刷最適化 ── */
 @media print {
-  /* ナビ、フッター、ボタン類、広告を非表示 */
   .nav,
   .footer,
   .actions-bar,
   .seo-section,
   .tool-header,
   .ux-pro-banner,
-  #toolbox-pro-gate,
-  ins.adsbygoogle,
-  [class*="adsbygoogle"] {
+  .ux-offline-bar,
+  .ux-toast,
+  #toolbox-pro-gate {
     display: none !important;
   }
 
-  /* プレビュー部分を印刷用に最適化 */
   body {
     background: #fff !important;
     color: #000 !important;
@@ -192,7 +248,6 @@ select:focus-visible {
     padding: 0 !important;
   }
 
-  /* リンクのURLを表示しない（見た目をきれいに） */
   a[href]::after {
     content: none !important;
   }
@@ -215,6 +270,13 @@ select:focus-visible {
 .ux-input-error {
   border-color: #dc2626 !important;
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  animation: ux-shake 0.3s ease;
+}
+
+@keyframes ux-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
 }
 
 /* ── トーストメッセージ（操作完了の通知） ── */
@@ -232,6 +294,8 @@ select:focus-visible {
   z-index: 9999;
   transition: transform 0.3s ease;
   pointer-events: none;
+  max-width: 90vw;
+  text-align: center;
 }
 
 .ux-toast.is-visible {
