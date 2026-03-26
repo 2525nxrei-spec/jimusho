@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://muryo-tool.com/calc/sitemap.xml
+Sitemap: https://jimusho-tool.com/calc/sitemap.xml

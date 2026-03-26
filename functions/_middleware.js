@@ -3,9 +3,16 @@
  * Webhook以外の全APIレスポンスにCORSヘッダーを付与
  */
 
+// 許可するオリジン（本番 + ローカル開発）
+const ALLOWED_ORIGINS = [
+  'https://jimusho-tool.com',
+  'http://localhost:8788',
+];
+
 function addCORSHeaders(response, origin) {
   const headers = new Headers(response.headers);
-  headers.set('Access-Control-Allow-Origin', origin || '*');
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  headers.set('Access-Control-Allow-Origin', allowedOrigin);
   headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   headers.set('Access-Control-Max-Age', '86400');

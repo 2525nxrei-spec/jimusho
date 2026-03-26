@@ -1,8 +1,8 @@
 # ============================================================
-# ToolBox API — Cloudflare Workers 設定
+# ジムショ API — Cloudflare Workers 設定
 # ============================================================
 
-name = "toolbox-api"
+name = "jimusho-api"
 main = "workers/index.js"
 compatibility_date = "2024-12-01"
 
@@ -12,13 +12,13 @@ compatibility_date = "2024-12-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "toolbox-db"
-database_id = ""  # wrangler d1 create toolbox-db で取得したIDを設定
+database_id = "851cecb1-000f-48b8-953c-fbf353143f4a"
 
 # ============================================================
 # 環境変数
 # ============================================================
 [vars]
-FRONTEND_URL = "https://muryo-tool.com"
+FRONTEND_URL = "https://jimusho-tool.com"
 STRIPE_PRICE_PRO = "price_1TF9k19Fc8HnuaokFuM61zbo"
 
 # 以下はシークレットとして設定（wrangler secret put コマンド使用）
@@ -33,7 +33,7 @@ STRIPE_PRICE_PRO = "price_1TF9k19Fc8HnuaokFuM61zbo"
 port = 8790
 
 [env.dev]
-name = "toolbox-api-dev"
+name = "jimusho-api-dev"
 
 [env.dev.vars]
 FRONTEND_URL = "http://localhost:8790"

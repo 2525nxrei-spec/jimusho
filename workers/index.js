@@ -1,5 +1,5 @@
 /**
- * ToolBox — Cloudflare Workers APIハンドラー
+ * ジムショ — Cloudflare Workers APIハンドラー
  * 個人事業主向けツール集のフリーミアム決済・認証API
  *
  * エンドポイント一覧:
@@ -17,6 +17,12 @@
 // ============================================================
 
 const STRIPE_API_BASE = 'https://api.stripe.com/v1';
+
+// 許可するオリジン（本番 + ローカル開発）
+const ALLOWED_ORIGINS = [
+  'https://jimusho-tool.com',
+  'http://localhost:8790',
+];
 
 // ============================================================
 // ユーティリティ: レスポンス生成
@@ -38,7 +44,8 @@ function jsonResponse(data, status = 200) {
 
 function withCORS(response, origin) {
   const headers = new Headers(response.headers);
-  headers.set('Access-Control-Allow-Origin', origin || '*');
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  headers.set('Access-Control-Allow-Origin', allowedOrigin);
   headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   headers.set('Access-Control-Max-Age', '86400');
@@ -334,11 +341,12 @@ async function handleCheckout(request, env) {
     }
 
     // Checkout Session作成
-    const frontendUrl = env.FRONTEND_URL || 'https://muryo-tool.com';
+    // payment_method_types を指定しない → Stripeダッシュボードで有効化した決済方法が全て自動表示
+    // （card=クレカ/Apple Pay/Google Pay、paypay、konbini 等）
+    const frontendUrl = env.FRONTEND_URL || 'https://jimusho-tool.com';
     const session = await stripeRequest('checkout/sessions', 'POST', {
       mode: 'subscription',
       customer: stripeCustomerId,
-      'payment_method_types[0]': 'card',
       locale: 'ja',
       'line_items[0][price]': priceId,
       'line_items[0][quantity]': '1',
@@ -461,7 +469,7 @@ async function handlePortal(request, env) {
   if (!user.stripe_customer_id) return errorResponse('サブスクリプション情報がありません', 400);
 
   try {
-    const frontendUrl = env.FRONTEND_URL || 'https://muryo-tool.com';
+    const frontendUrl = env.FRONTEND_URL || 'https://jimusho-tool.com';
     const session = await stripeRequest('billing_portal/sessions', 'POST', {
       customer: user.stripe_customer_id,
       return_url: `${frontendUrl}/pages/account.html`,
@@ -545,10 +553,4 @@ export default {
         response = errorResponse('Not Found', 404);
       }
     } catch (err) {
-      console.error('予期しないエラー:', err.message, err.stack);
-      response = errorResponse('Internal Server Error', 500);
-    }
-
-    return withCORS(response, request.headers.get('Origin'));
-  },
-};
+      console.error('予期しないエラー:', err

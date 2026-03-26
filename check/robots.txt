@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow:
 
-Sitemap: https://muryo-tool.com/check/sitemap.xml
+Sitemap: https://jimusho-tool.com/check/sitemap.xml

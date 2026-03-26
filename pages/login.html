@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q5PXT07YCP');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ジムショ ジムショ Pro — ログイン・新規登録ページ。個人事業主・フリーランス向け業務ツール。">
+  <title>ログイン｜ジムショ ジムショ Pro</title>
+  <link rel="canonical" href="https://jimusho-tool.com/pages/login.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --black: #1d1d1f;
+      --gray-900: #3a3a3c;
+      --gray-700: #636366;
+      --gray-500: #8e8e93;
+      --gray-300: #d1d1d6;
+      --gray-200: #e5e5ea;
+      --gray-100: #f2f2f7;
+      --gray-50: #f9f9fb;
+      --white: #fff;
+      --accent: #0071e3;
+      --accent-light: #e8f2fc;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --font: "Plus Jakarta Sans", "Noto Sans JP", -apple-system, sans-serif;
+    }
+    html { font-size:16px; -webkit-font-smoothing:antialiased; }
+    body { font-family:var(--font); color:var(--black); background:var(--gray-100); line-height:1.7; min-height:100vh; display:flex; flex-direction:column; }
+    a { color:inherit; text-decoration:none; }
+    .container { max-width:1080px; margin:0 auto; padding:0 24px; }
+
+    /* Nav */
+    .nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.72); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid rgba(0,0,0,0.06); }
+    .nav__inner { display:flex; align-items:center; justify-content:space-between; height:48px; }
+    .nav__logo { font-size:1.15rem; font-weight:800; letter-spacing:-0.04em; }
+    .nav__logo span { color:var(--accent); }
+    .nav__links { display:flex; gap:24px; align-items:center; }
+    .nav__link { font-size:0.8rem; font-weight:500; color:var(--gray-700); transition:color 0.2s; }
+    .nav__link:hover { color:var(--black); }
+
+    /* Login Section */
+    .login-section { flex:1; display:flex; align-items:center; justify-content:center; padding:64px 24px 80px; }
+    .auth-card { background:var(--white); border-radius:16px; max-width:440px; width:100%; padding:36px 32px; }
+    .auth-card__title { font-size:1.1rem; font-weight:700; margin-bottom:4px; text-align:center; }
+    .auth-card__sub { font-size:0.82rem; color:var(--gray-500); text-align:center; margin-bottom:24px; }
+    .auth-card__tabs { display:flex; gap:0; margin-bottom:24px; border:1.5px solid var(--gray-200); border-radius:10px; overflow:hidden; }
+    .auth-card__tab { flex:1; text-align:center; font-size:0.84rem; font-weight:600; padding:10px 0; cursor:pointer; background:var(--white); color:var(--gray-500); border:none; font-family:var(--font); transition:all 0.15s; }
+    .auth-card__tab.is-active { background:var(--accent); color:var(--white); }
+    .auth-field { margin-bottom:16px; }
+    .auth-field label { display:block; font-size:0.78rem; font-weight:600; color:var(--gray-700); margin-bottom:6px; }
+    .auth-field input { width:100%; font-family:var(--font); font-size:0.88rem; padding:11px 14px; border:1.5px solid var(--gray-200); border-radius:10px; outline:none; background:var(--gray-50); transition:border-color 0.2s; }
+    .auth-field input:focus { border-color:var(--accent); }
+    .auth-submit { width:100%; font-family:var(--font); font-size:0.88rem; font-weight:600; padding:12px 0; border:none; border-radius:980px; background:var(--accent); color:var(--white); cursor:pointer; transition:opacity 0.2s; }
+    .auth-submit:hover { opacity:0.85; }
+    .auth-submit:disabled { opacity:0.5; cursor:not-allowed; }
+    .auth-error { font-size:0.78rem; color:#dc2626; text-align:center; margin-top:12px; display:none; }
+    .auth-toggle { font-size:0.8rem; color:var(--gray-500); text-align:center; margin-top:16px; }
+    .auth-toggle a { color:var(--accent); font-weight:600; cursor:pointer; }
+
+    /* Footer */
+    .footer { background:var(--black); color:var(--white); padding:24px 0; text-align:center; }
+    .footer__text { font-size:0.72rem; color:rgba(255,255,255,0.3); }
+    .footer__links { display:flex; justify-content:center; gap:20px; margin-top:8px; }
+    .footer__links a { font-size:0.72rem; color:rgba(255,255,255,0.3); transition:color 0.2s; }
+    .footer__links a:hover { color:rgba(255,255,255,0.6); }
+
+    @media (max-width:640px) {
+      .auth-card { padding:28px 24px; }
+      .login-section { padding:40px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/" class="nav__logo">ジムショ</a>
+      <div class="nav__links">
+        <a href="/" class="nav__link">ツール一覧</a>
+        <a href="/pages/pricing.html" class="nav__link">料金</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="login-section">
+    <div class="auth-card">
+      <div class="auth-card__title" id="auth-title">ログイン</div>
+      <div class="auth-card__sub" id="auth-sub">メールアドレスとパスワードを入力</div>
+      <div class="auth-card__tabs">
+        <button class="auth-card__tab" id="tab-register">新規登録</button>
+        <button class="auth-card__tab is-active" id="tab-login">ログイン</button>
+      </div>
+      <form id="auth-form">
+        <div class="auth-field" id="field-name" style="display:none">
+          <label for="input-name">お名前</label>
+          <input type="text" id="input-name" placeholder="表示名">
+        </div>
+        <div class="auth-field">
+          <label for="input-email">メールアドレス</label>
+          <input type="email" id="input-email" placeholder="you@example.com" required>
+        </div>
+        <div class="auth-field">
+          <label for="input-password">パスワード（8文字以上）</label>
+          <input type="password" id="input-password" placeholder="8文字以上" minlength="8" required>
+        </div>
+        <button type="submit" class="auth-submit" id="auth-submit-btn">ログイン</button>
+        <div class="auth-error" id="auth-error"></div>
+      </form>
+      <div class="auth-toggle" id="auth-toggle">
+        アカウントをお持ちでない方は<a id="toggle-link">新規登録</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__text">&copy; 2026 ジムショ. All rights reserved.</div>
+      <div class="footer__links">
+        <a href="/pages/privacy.html">プライバシーポリシー</a>
+        <a href="/pages/terms.html">利用規約</a>
+        <a href="/">ツール一覧</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 既にログイン済みならアカウントページへリダイレクト
+      if (TOOLBOX_AUTH.isLoggedIn()) {
+        window.location.href = '/pages/account.html';
+        return;
+      }
+
+      const authForm = document.getElementById('auth-form');
+      const authError = document.getElementById('auth-error');
+      const authTitle = document.getElementById('auth-title');
+      const authSub = document.getElementById('auth-sub');
+      const authSubmitBtn = document.getElementById('auth-submit-btn');
+      const fieldName = document.getElementById('field-name');
+      const tabRegister = document.getElementById('tab-register');
+      const tabLogin = document.getElementById('tab-login');
+      const authToggle = document.getElementById('auth-toggle');
+
+      // URLパラメータ解析
+      const params = new URLSearchParams(location.search);
+      let mode = params.get('mode') === 'register' ? 'register' : 'login';
+      const returnUrl = params.get('return') || '/';
+
+      function setMode(m) {
+        mode = m;
+        if (mode === 'register') {
+          tabRegister.classList.add('is-active');
+          tabLogin.classList.remove('is-active');
+          fieldName.style.display = '';
+          authTitle.textContent = '新規登録';
+          authSub.textContent = 'アカウントを作成して始めましょう';
+          authSubmitBtn.textContent = '新規登録';
+          authToggle.innerHTML = '既にアカウントをお持ちの方は<a id="toggle-link">ログイン</a>';
+        } else {
+          tabLogin.classList.add('is-active');
+          tabRegister.classList.remove('is-active');
+          fieldName.style.display = 'none';
+          authTitle.textContent = 'ログイン';
+          authSub.textContent = 'メールアドレスとパスワードを入力';
+          authSubmitBtn.textContent = 'ログイン';
+          authToggle.innerHTML = 'アカウントをお持ちでない方は<a id="toggle-link">新規登録</a>';
+        }
+        // toggle-linkのイベント再設定
+        document.getElementById('toggle-link').addEventListener('click', () => {
+          setMode(mode === 'register' ? 'login' : 'register');
+        });
+        authError.style.display = 'none';
+      }
+
+      // 初期モード設定
+      setMode(mode);
+
+      tabRegister.addEventListener('click', () => setMode('register'));
+      tabLogin.addEventListener('click', () => setMode('login'));
+
+      authForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        authError.style.display = 'none';
+        authSubmitBtn.disabled = true;
+        const origText = authSubmitBtn.textContent;
+        authSubmitBtn.textContent = '処理中...';
+
+        try {
+          const email = document.getElementById('input-email').value;
+          const password = document.getElementById('input-password').value;
+
+          if (mode === 'register') {
+            const name = document.getElementById('input-name').value;
+            await TOOLBOX_AUTH.register(email, password, name);
+          } else {
+            await TOOLBOX_AUTH.login(email, password);
+          }
+          // 成功時: returnUrlに遷移
+          window.location.href = returnUrl;
+        } catch (err) {
+          authError.textContent = err.message;
+          authError.style.display = 'block';
+          authSubmitBtn.disabled = false;
+          authSubmitBtn.textContent = origText;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

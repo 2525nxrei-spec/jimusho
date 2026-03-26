@@ -14,7 +14,7 @@ export async function onRequestPost(context) {
   if (!user.stripe_customer_id) return errorResponse('サブスクリプション情報がありません', 400);
 
   try {
-    const frontendUrl = env.FRONTEND_URL || 'https://muryo-tool.com';
+    const frontendUrl = env.FRONTEND_URL || 'https://jimusho-tool.com';
     const session = await stripeRequest('billing_portal/sessions', 'POST', {
       customer: user.stripe_customer_id,
       return_url: `${frontendUrl}/pages/account.html`,

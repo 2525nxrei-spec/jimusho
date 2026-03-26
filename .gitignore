@@ -7,6 +7,12 @@ desktop.ini
 .vscode/
 .idea/
 
+# Cloudflare / Node
+.wrangler/
+node_modules/
+.env
+.env.*
+
 # Google Drive
 *.gdoc
 *.gsheet

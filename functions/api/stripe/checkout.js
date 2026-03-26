@@ -32,7 +32,7 @@ export async function onRequestPost(context) {
     }
 
     // Checkout Session作成
-    const frontendUrl = env.FRONTEND_URL || 'https://muryo-tool.com';
+    const frontendUrl = env.FRONTEND_URL || 'https://jimusho-tool.com';
     const session = await stripeRequest('checkout/sessions', 'POST', {
       mode: 'subscription',
       customer: stripeCustomerId,
