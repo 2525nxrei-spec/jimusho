@@ -1,0 +1,15 @@
+{
+  "name": "jimusho",
+  "version": "1.0.0",
+  "private": true,
+  "description": "個人事業主向けツール集 — Cloudflare Pages + Workers",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^3.1.1",
+    "miniflare": "^4.0.0"
+  }
+}
