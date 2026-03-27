@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: テスト実行 (Node.js 20)
+    name: test (20)
 
     steps:
       - name: リポジトリをチェックアウト
