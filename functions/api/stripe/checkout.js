@@ -13,8 +13,22 @@ export async function onRequestPost(context) {
   if (!user) return errorResponse('認証が必要です', 401);
 
   try {
+    // 環境変数の事前検証（502 Bad Gateway防止）
+    if (!env.STRIPE_SECRET_KEY) {
+      console.error('Checkoutエラー: STRIPE_SECRET_KEYが未設定');
+      return errorResponse('決済サービスの設定が完了していません', 500);
+    }
     const priceId = env.STRIPE_PRICE_PRO;
-    if (!priceId) return errorResponse('Price IDが設定されていません', 500);
+    if (!priceId) {
+      console.error('Checkoutエラー: STRIPE_PRICE_PROが未設定');
+      return errorResponse('Price IDが設定されていません', 500);
+    }
+
+    // D1テーブル存在確認（subscriptions/usersテーブルのDB接続テスト）
+    if (!env.DB) {
+      console.error('Checkoutエラー: D1データベースが未バインド');
+      return errorResponse('データベース接続エラー', 500);
+    }
 
     // Stripe顧客の確認/作成
     let stripeCustomerId = user.stripe_customer_id;
@@ -48,7 +62,7 @@ export async function onRequestPost(context) {
     console.log(`Checkout作成: session=${session.id}, user=${user.id}`);
     return jsonResponse({ clientSecret: session.client_secret });
   } catch (err) {
-    console.error('Checkoutエラー:', err.message);
+    console.error('Checkoutエラー:', err.message, err.stack);
     return errorResponse('決済セッションの作成に失敗しました', 500);
   }
 }

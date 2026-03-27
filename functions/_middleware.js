@@ -1,12 +1,28 @@
 /**
- * グローバルミドルウェア — CORS処理 + セキュリティヘッダー + レート制限
+ * グローバルミドルウェア — CORS処理 + セキュリティヘッダー + レート制限 + Proツールガード
  * Webhook以外の全APIレスポンスにCORSヘッダーを付与
+ * Proツールページへの直接アクセスをサーバーサイドでブロック
  */
+
+import { verifyJWT } from './lib/crypto.js';
 
 // 許可するオリジン（本番 + ローカル開発）
 const ALLOWED_ORIGINS = [
   'https://jimusho-tool.com',
   'http://localhost:8788',
+];
+
+// Proツール一覧（auth.jsのPRO_TOOLSと同期）
+const PRO_TOOL_PATHS = [
+  '/tools/invoice-generator/',
+  '/tools/delivery-note/',
+  '/tools/receipt-generator/',
+  '/tools/estimate-generator/',
+  '/tools/expense-memo/',
+  '/tools/revenue-tracker/',
+  '/tools/take-home-pay/',
+  '/tools/sales-email/',
+  '/tools/work-log/',
 ];
 
 function addCORSHeaders(response, origin) {
@@ -70,13 +86,69 @@ function cleanupRateLimit() {
 }
 
 export async function onRequest(context) {
-  const { request } = context;
+  const { request, env } = context;
   const origin = request.headers.get('Origin');
   const url = new URL(request.url);
 
   // CORS preflight
   if (request.method === 'OPTIONS') {
     return addCORSHeaders(new Response(null, { status: 204 }), origin);
+  }
+
+  // Proツールガード: サーバーサイドでプラン検証（localStorageバイパス防止）
+  const isProToolPath = PRO_TOOL_PATHS.some(p => url.pathname.startsWith(p));
+  if (isProToolPath) {
+    let authorized = false;
+    try {
+      const cookieHeader = request.headers.get('Cookie') || '';
+      const authHeader = request.headers.get('Authorization') || '';
+      let token = null;
+
+      // Authorizationヘッダーから取得
+      if (authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+      // Cookieからtoolbox_tokenを取得（フォールバック）
+      if (!token) {
+        const match = cookieHeader.match(/toolbox_token=([^;]+)/);
+        if (match) token = match[1];
+      }
+
+      if (token && env.JWT_SECRET) {
+        const payload = await verifyJWT(token, env.JWT_SECRET);
+        if (payload && payload.sub) {
+          // DBからプランを直接確認（localStorageに依存しない）
+          const user = await env.DB
+            .prepare('SELECT plan FROM users WHERE id = ?')
+            .bind(payload.sub)
+            .first();
+          if (user && user.plan === 'pro') {
+            authorized = true;
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Proツールガード検証エラー:', e.message);
+    }
+
+    if (!authorized) {
+      // HTMLリクエスト（ブラウザ直接アクセス）はリダイレクト
+      const acceptHeader = request.headers.get('Accept') || '';
+      if (acceptHeader.includes('text/html')) {
+        return new Response(null, {
+          status: 302,
+          headers: { 'Location': '/pages/pricing.html?upgrade=1' },
+        });
+      }
+      // APIリクエストは403 JSON
+      return addSecurityHeaders(addCORSHeaders(
+        new Response(JSON.stringify({ ok: false, error: 'Proプランが必要です' }), {
+          status: 403,
+          headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        }),
+        origin
+      ));
+    }
   }
 
   // レート制限チェック（Webhookは除外）
