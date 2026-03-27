@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ジムショへの機能リクエスト・バグ報告。「こんなツールがほしい」「ここが使いにくい」など、お気軽にお寄せください。">
+  <title>ご要望・バグ報告 — ジムショ</title>
+  <link rel="canonical" href="https://jimusho-tool.com/pages/request.html">
+  <meta property="og:title" content="ご要望・バグ報告 — ジムショ">
+  <meta property="og:description" content="ジムショへの機能リクエスト・バグ報告。「こんなツールがほしい」「ここが使いにくい」など、お気軽にお寄せください。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jimusho-tool.com/pages/request.html">
+  <meta property="og:image" content="https://jimusho-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--accent-light:#e8f2fc;--green:#16a34a;--green-light:#dcfce7;--font:"Plus Jakarta Sans","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--white);line-height:1.7}
+    a{color:inherit;text-decoration:none}
+
+    /* Nav */
+    .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05)}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    /* Page */
+    .page{max-width:640px;margin:0 auto;padding:64px 24px 80px}
+    .page__title{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}
+    .page__lead{font-size:0.95rem;color:var(--gray-700);line-height:1.8;margin-bottom:48px}
+
+    /* カテゴリカード */
+    .request-cards{display:flex;flex-direction:column;gap:20px}
+    .request-card{background:var(--white);border:1.5px solid var(--gray-200);border-radius:16px;padding:32px;transition:border-color 0.2s,box-shadow 0.2s}
+    .request-card:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(0,113,227,0.08)}
+    .request-card__icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+    .request-card__icon--feature{background:var(--accent-light);color:var(--accent)}
+    .request-card__icon--bug{background:#fef2f2;color:#dc2626}
+    .request-card__icon--other{background:var(--green-light);color:var(--green)}
+    .request-card__icon svg{width:22px;height:22px}
+    .request-card__title{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+    .request-card__desc{font-size:0.85rem;color:var(--gray-500);line-height:1.7;margin-bottom:20px}
+    .request-card__link{display:inline-flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:600;color:var(--accent);padding:10px 20px;border:1.5px solid var(--accent);border-radius:10px;transition:background 0.2s,color 0.2s}
+    .request-card__link:hover{background:var(--accent);color:var(--white)}
+    .request-card__link svg{width:16px;height:16px}
+
+    /* メール代替 */
+    .alt-contact{margin-top:40px;padding:28px 32px;background:var(--gray-100);border-radius:14px;text-align:center}
+    .alt-contact__text{font-size:0.88rem;color:var(--gray-700);line-height:1.8;margin-bottom:14px}
+    .alt-contact__mail{display:inline-flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:600;color:var(--accent)}
+    .alt-contact__mail:hover{text-decoration:underline}
+
+    /* Footer */
+    .footer{background:var(--black);color:var(--white);padding:48px 0 28px}
+    .footer__inner{display:flex;justify-content:space-between;align-items:start;max-width:1100px;margin:0 auto;padding:0 24px;margin-bottom:40px}
+    .footer__brand-name{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+    .footer__brand-name span{color:var(--accent)}
+    .footer__brand-desc{font-size:0.78rem;color:rgba(255,255,255,0.4);max-width:260px;line-height:1.7}
+    .footer__cols{display:flex;gap:56px}
+    .footer__col-title{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.35);margin-bottom:14px}
+    .footer__col a{display:block;font-size:0.82rem;color:rgba(255,255,255,0.6);margin-bottom:8px;transition:color 0.2s}
+    .footer__col a:hover{color:var(--white)}
+    .footer__bottom{padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:0.72rem;color:rgba(255,255,255,0.3);display:flex;justify-content:space-between;max-width:1100px;margin:0 auto;padding:20px 24px 0}
+    .footer__bottom a{color:rgba(255,255,255,0.3);margin-left:20px;transition:color 0.2s}
+    .footer__bottom a:hover{color:rgba(255,255,255,0.6)}
+
+    @media(max-width:640px){
+      .page{padding:40px 16px 60px}
+      .request-card{padding:24px 20px}
+      .alt-contact{padding:20px 16px}
+      .footer__inner{flex-direction:column;gap:32px}
+      .footer__cols{gap:32px}
+      .footer__bottom{flex-direction:column;gap:8px}
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "ご要望・バグ報告 — ジムショ",
+  "url": "https://jimusho-tool.com/pages/request.html",
+  "description": "ジムショへの機能リクエスト・バグ報告ページ。",
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ジムショ", "url": "https://jimusho-tool.com/"}
+}
+</script>
+<link rel="stylesheet" href="/assets/css/ux-enhance.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../" class="nav__logo">ジムショ</a>
+      <a href="../" class="nav__back">&larr; ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <h1 class="page__title">ご要望・バグ報告</h1>
+    <p class="page__lead">「こんなツールがほしい」「ここが使いにくい」「不具合を見つけた」など、どんな声でもお気軽にお寄せください。いただいたご要望は開発の参考にさせていただきます。</p>
+
+    <div class="request-cards">
+
+      <!-- 機能リクエスト -->
+      <div class="request-card">
+        <div class="request-card__icon request-card__icon--feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m6.34 6.34 2.83 2.83"/><path d="M2 12h4"/><path d="m17.66 6.34-2.83 2.83"/><path d="M22 12h-4"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <h2 class="request-card__title">機能リクエスト</h2>
+        <p class="request-card__desc">新しいツールの追加や、既存ツールへの機能追加のご要望はこちらからどうぞ。</p>
+        <a href="https://github.com/2525nxrei-spec/jimusho/issues/new?labels=feature-request&title=%E3%80%90%E6%A9%9F%E8%83%BD%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%80%91&body=%23%23%20%E3%81%BB%E3%81%97%E3%81%84%E6%A9%9F%E8%83%BD%0A%0A%23%23%20%E7%90%86%E7%94%B1%E3%83%BB%E8%83%8C%E6%99%AF%0A%0A%23%23%20%E3%81%9D%E3%81%AE%E4%BB%96" class="request-card__link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          リクエストを送る
+        </a>
+      </div>
+
+      <!-- バグ報告 -->
+      <div class="request-card">
+        <div class="request-card__icon request-card__icon--bug">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h2 class="request-card__title">バグ報告</h2>
+        <p class="request-card__desc">ツールの表示崩れ・計算ミス・動作しないなどの不具合はこちらからご報告ください。</p>
+        <a href="https://github.com/2525nxrei-spec/jimusho/issues/new?labels=bug&title=%E3%80%90%E3%83%90%E3%82%B0%E5%A0%B1%E5%91%8A%E3%80%91&body=%23%23%20%E7%8F%BE%E8%B1%A1%0A%0A%23%23%20%E5%86%8D%E7%8F%BE%E6%89%8B%E9%A0%86%0A1.%20%0A2.%20%0A3.%20%0A%0A%23%23%20%E6%9C%9F%E5%BE%85%E3%81%95%E3%82%8C%E3%82%8B%E5%8B%95%E4%BD%9C%0A%0A%23%23%20%E7%92%B0%E5%A2%83%EF%BC%88%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%83%BB%E7%AB%AF%E6%9C%AB%EF%BC%89" class="request-card__link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          バグを報告する
+        </a>
+      </div>
+
+      <!-- その他 -->
+      <div class="request-card">
+        <div class="request-card__icon request-card__icon--other">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h2 class="request-card__title">その他のご意見</h2>
+        <p class="request-card__desc">使い勝手の改善提案や、上記に当てはまらないご意見はこちらからお寄せください。</p>
+        <a href="https://github.com/2525nxrei-spec/jimusho/issues/new?labels=feedback&title=%E3%80%90%E3%81%94%E6%84%8F%E8%A6%8B%E3%80%91&body=%23%23%20%E5%86%85%E5%AE%B9%0A%0A" class="request-card__link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          意見を送る
+        </a>
+      </div>
+
+    </div>
+
+    <!-- メールでの代替手段 -->
+    <div class="alt-contact">
+      <p class="alt-contact__text">GitHubアカウントをお持ちでない方は、メールでもお寄せいただけます。</p>
+      <a href="mailto:2525nxrei@gmail.com?subject=%E3%80%90%E3%82%B8%E3%83%A0%E3%82%B7%E3%83%A7%E3%80%91%E3%81%94%E8%A6%81%E6%9C%9B" class="alt-contact__mail">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        メールで送る
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand-name">ジムショ</div>
+        <p class="footer__brand-desc">個人事業主・フリーランスのための無料業務効率化ツール集。すべてブラウザで完結。</p>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <div class="footer__col-title">ジムショ</div>
+          <a href="../">トップページ</a>
+          <a href="../#popular">人気ツール</a>
+          <a href="../#all">すべてのツール</a>
+        </div>
+        <div>
+          <div class="footer__col-title">サイト情報</div>
+          <a href="about.html">運営者情報</a>
+          <a href="contact.html">お問い合わせ</a>
+          <a href="request.html">ご要望・バグ報告</a>
+          <a href="privacy.html">プライバシーポリシー</a>
+          <a href="terms.html">利用規約</a>
+          <a href="tokushoho.html">特定商取引法に基づく表記</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2026 ジムショ. All rights reserved.</span>
+      <div>
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="terms.html">利用規約</a>
+        <a href="tokushoho.html">特商法表記</a>
+      </div>
+    </div>
+  </footer>
+
+<script src="/assets/js/ux-enhance.js"></script>
+</body>
+</html>
