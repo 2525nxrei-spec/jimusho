@@ -14,6 +14,10 @@ export async function onRequestPost(context) {
   if (!user.stripe_customer_id) return errorResponse('サブスクリプション情報がありません', 400);
 
   try {
+    if (!env.STRIPE_SECRET_KEY) {
+      console.error('Portalエラー: STRIPE_SECRET_KEYが未設定');
+      return errorResponse('決済サービスの設定が完了していません', 500);
+    }
     const frontendUrl = env.FRONTEND_URL || 'https://jimusho-tool.com';
     const session = await stripeRequest('billing_portal/sessions', 'POST', {
       customer: user.stripe_customer_id,
