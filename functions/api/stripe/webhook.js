@@ -46,7 +46,7 @@ export async function onRequestPost(context) {
         const customerId = session.customer;
         if (userId) {
           await env.DB.prepare(
-            `UPDATE users SET plan = 'pro', stripe_customer_id = COALESCE(stripe_customer_id, ?),
+            `UPDATE users SET plan = 'pro', cancel_at_period_end = 0, stripe_customer_id = COALESCE(stripe_customer_id, ?),
              stripe_subscription_id = ?, updated_at = datetime('now') WHERE id = ?`
           ).bind(customerId, subscriptionId, userId).run();
           console.log(`Pro開始: user=${userId}`);
@@ -57,9 +57,9 @@ export async function onRequestPost(context) {
         const sub = event.data.object;
         if (sub.status === 'active' || sub.status === 'trialing') {
           await env.DB.prepare(
-            `UPDATE users SET plan = 'pro', stripe_subscription_id = ?, updated_at = datetime('now')
+            `UPDATE users SET plan = 'pro', cancel_at_period_end = ?, stripe_subscription_id = ?, updated_at = datetime('now')
              WHERE stripe_customer_id = ?`
-          ).bind(sub.id, sub.customer).run();
+          ).bind(sub.cancel_at_period_end ? 1 : 0, sub.id, sub.customer).run();
         }
         break;
       }
@@ -70,6 +70,19 @@ export async function onRequestPost(context) {
            WHERE stripe_customer_id = ?`
         ).bind(sub.customer).run();
         console.log(`解約: customer=${sub.customer}`);
+        break;
+      }
+      case 'invoice.payment_succeeded': {
+        const invoice = event.data.object;
+        const customerId = invoice.customer;
+        const subscriptionId = invoice.subscription;
+        const amountPaid = invoice.amount_paid;
+
+        await env.DB.prepare(
+          `UPDATE users SET updated_at = datetime('now') WHERE stripe_customer_id = ?`
+        ).bind(customerId).run();
+
+        console.log(`支払い成功: customer=${customerId}, subscription=${subscriptionId}, amount=${amountPaid}円`);
         break;
       }
       case 'invoice.payment_failed': {
