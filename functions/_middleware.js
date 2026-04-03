@@ -26,9 +26,12 @@ const PRO_TOOL_PATHS = [
 ];
 
 function addCORSHeaders(response, origin) {
+  // 不明なオリジンにはCORSヘッダーを付与しない
+  if (!origin || !ALLOWED_ORIGINS.includes(origin)) {
+    return response;
+  }
   const headers = new Headers(response.headers);
-  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
-  headers.set('Access-Control-Allow-Origin', allowedOrigin);
+  headers.set('Access-Control-Allow-Origin', origin);
   headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   headers.set('Access-Control-Max-Age', '86400');

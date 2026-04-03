@@ -14,13 +14,10 @@ export async function onRequestPost(context) {
   if (!user) return errorResponse('認証が必要です', 401);
 
   try {
-    // モックモード（STRIPE_SECRET_KEY未設定時）
+    // STRIPE_SECRET_KEY未設定時はエラーを返す
     if (!env.STRIPE_SECRET_KEY) {
-      return jsonResponse({
-        canceled: true,
-        mock: true,
-        message: 'モックモード: 解約処理が完了しました',
-      });
+      console.error('STRIPE_SECRET_KEYが設定されていません');
+      return errorResponse('決済システムの設定エラーです', 500);
     }
 
     if (!user.stripe_customer_id) {

@@ -60,6 +60,13 @@ export async function onRequestPost(context) {
             `UPDATE users SET plan = 'pro', cancel_at_period_end = ?, stripe_subscription_id = ?, updated_at = datetime('now')
              WHERE stripe_customer_id = ?`
           ).bind(sub.cancel_at_period_end ? 1 : 0, sub.id, sub.customer).run();
+        } else if (sub.status === 'past_due' || sub.status === 'unpaid' || sub.status === 'canceled') {
+          // 支払い遅延・未払い・キャンセル: Proプランをfreeにダウングレード
+          await env.DB.prepare(
+            `UPDATE users SET plan = 'free', updated_at = datetime('now')
+             WHERE stripe_customer_id = ?`
+          ).bind(sub.customer).run();
+          console.log(`ダウングレード(${sub.status}): customer=${sub.customer}`);
         }
         break;
       }
@@ -87,7 +94,15 @@ export async function onRequestPost(context) {
       }
       case 'invoice.payment_failed': {
         const invoice = event.data.object;
-        console.error(`支払い失敗: customer=${invoice.customer}, 試行=${invoice.attempt_count}`);
+        const customerId = invoice.customer;
+        const attemptCount = invoice.attempt_count;
+
+        // 支払い失敗をログ記録し、updated_atを更新（ダウングレードはsubscription.updatedで処理）
+        await env.DB.prepare(
+          `UPDATE users SET updated_at = datetime('now') WHERE stripe_customer_id = ?`
+        ).bind(customerId).run();
+
+        console.error(`支払い失敗: customer=${customerId}, 試行=${attemptCount}`);
         break;
       }
       default:
@@ -102,6 +117,17 @@ export async function onRequestPost(context) {
       ).bind(generateId(), event.type, event.id, JSON.stringify(event)).run();
     } catch (logErr) {
       if (!logErr.message?.includes('UNIQUE')) console.error('ログ記録エラー:', logErr.message);
+    }
+
+    // 古いWebhookログを削除（90日以上前、確率的に実行してDB負荷を分散）
+    if (Math.random() < 0.05) {
+      try {
+        await env.DB.prepare(
+          "DELETE FROM webhooks_log WHERE processed_at < datetime('now', '-90 days')"
+        ).run();
+      } catch (cleanupErr) {
+        console.error('Webhookログクリーンアップエラー:', cleanupErr.message);
+      }
     }
 
     return jsonResponse({ received: true });

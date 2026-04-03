@@ -21,8 +21,7 @@ database_id = "851cecb1-000f-48b8-953c-fbf353143f4a"
 [vars]
 FRONTEND_URL = "https://jimusho-tool.com"
 STRIPE_PRICE_PRO = "price_1TF9k19Fc8HnuaokFuM61zbo"
-# Stripe公開鍵（Embedded Checkout用）— Cloudflareダッシュボードで本番値を設定
-STRIPE_PUBLISHABLE_KEY = ""
+# STRIPE_PUBLISHABLE_KEY はシークレットとして設定済み（wrangler pages secret put）
 
 # 以下はシークレットとして設定（wrangler pages secret put コマンド使用）
 # wrangler pages secret put JWT_SECRET --project-name jimusho
@@ -35,4 +34,4 @@ STRIPE_PUBLISHABLE_KEY = ""
 [env.preview.vars]
 FRONTEND_URL = "https://preview.jimusho.pages.dev"
 STRIPE_PRICE_PRO = "price_1TF9k19Fc8HnuaokFuM61zbo"
-STRIPE_PUBLISHABLE_KEY = ""
+# STRIPE_PUBLISHABLE_KEY はシークレットとして設定済み

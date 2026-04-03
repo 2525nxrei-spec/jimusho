@@ -14,9 +14,10 @@ export async function onRequestGet(context) {
   if (!user) return errorResponse('認証が必要です', 401);
 
   try {
-    // モックモード（STRIPE_SECRET_KEY未設定時）
+    // STRIPE_SECRET_KEY未設定時はエラー返却
     if (!env.STRIPE_SECRET_KEY) {
-      return jsonResponse({ payments: [], mock: true });
+      console.error('支払い履歴取得: STRIPE_SECRET_KEYが未設定');
+      return errorResponse('決済サービスの設定が完了していません', 500);
     }
 
     // DBからstripe_customer_idを取得

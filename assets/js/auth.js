@@ -37,8 +37,36 @@ const TOOLBOX_AUTH = (() => {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
+  // JWTペイロードをデコード（Base64URL → JSON）
+  function decodeJWTPayload(token) {
+    try {
+      const parts = token.split('.');
+      if (parts.length !== 3) return null;
+      const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+      const json = decodeURIComponent(
+        atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')
+      );
+      return JSON.parse(json);
+    } catch {
+      return null;
+    }
+  }
+
   function isLoggedIn() {
-    return !!getToken();
+    const token = getToken();
+    if (!token) return false;
+    // JWTのexp（有効期限）を検証
+    const payload = decodeJWTPayload(token);
+    if (!payload || !payload.exp) {
+      removeToken();
+      return false;
+    }
+    if (payload.exp < Math.floor(Date.now() / 1000)) {
+      // 期限切れ → トークン削除
+      removeToken();
+      return false;
+    }
+    return true;
   }
 
   function isPro() {
@@ -122,45 +150,11 @@ const TOOLBOX_AUTH = (() => {
 
   async function startCheckout() {
     const data = await apiRequest('/api/stripe/checkout', 'POST');
-    if (data.clientSecret) {
-      // Stripe公開鍵を取得
-      const keyRes = await fetch('/api/stripe/stripe-key');
-      const keyData = await keyRes.json();
-      if (!keyData.publishableKey) throw new Error('Stripe公開鍵が取得できませんでした');
-
-      // Stripe.js読み込み確認
-      if (typeof Stripe === 'undefined') throw new Error('Stripe.jsが読み込まれていません');
-      const stripe = Stripe(keyData.publishableKey);
-
-      // 既存モーダルがあれば削除
-      const existing = document.getElementById('jimusho-checkout-modal');
-      if (existing) existing.remove();
-
-      // モーダルを作成
-      const modal = document.createElement('div');
-      modal.id = 'jimusho-checkout-modal';
-      modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px;';
-      modal.innerHTML = '<div style="background:#fff;border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow:auto;position:relative;">' +
-        '<button id="jimusho-checkout-close" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:24px;cursor:pointer;color:#666;z-index:1;">&times;</button>' +
-        '<div id="jimusho-checkout-container" style="padding:16px;"></div>' +
-      '</div>';
-      document.body.appendChild(modal);
-
-      // 閉じるイベント
-      const closeModal = () => {
-        if (window._jimusho_embedded_checkout) {
-          window._jimusho_embedded_checkout.destroy();
-          window._jimusho_embedded_checkout = null;
-        }
-        modal.remove();
-      };
-      document.getElementById('jimusho-checkout-close').addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-      // Embedded Checkoutをマウント
-      const checkout = await stripe.initEmbeddedCheckout({ clientSecret: data.clientSecret });
-      window._jimusho_embedded_checkout = checkout;
-      checkout.mount('#jimusho-checkout-container');
+    // リダイレクト型: サーバーから返されたStripe Checkout URLに遷移
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error('決済セッションの作成に失敗しました。しばらく待ってからお試しください');
     }
   }
 
@@ -195,11 +189,23 @@ const TOOLBOX_AUTH = (() => {
   }
 
   // ツールページで呼び出し: Proツールに非Pro userがアクセスした場合にゲート表示
-  function checkToolAccess() {
+  // プラン情報はDBから最新を取得（JWTのplanフィールドに依存しない）
+  async function checkToolAccess() {
     const path = window.location.pathname;
     if (!isProTool(path)) return true; // Freeツールはアクセス可
 
-    if (isPro()) return true; // ProユーザーはOK
+    // ローカルキャッシュで即時判定（UX向上）
+    if (isPro()) return true;
+
+    // DBから最新のプラン情報を取得して再判定
+    if (isLoggedIn()) {
+      try {
+        const user = await fetchMe();
+        if (user && user.plan === 'pro') return true;
+      } catch {
+        // fetchMe失敗時はローカルの判定を使う
+      }
+    }
 
     // 未ログインまたはFreeユーザー → アップグレード案内を表示
     showUpgradeGate();

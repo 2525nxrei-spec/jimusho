@@ -137,7 +137,6 @@
     </div>
   </footer>
 
-  <script src="https://js.stripe.com/v3/" defer></script>
   <script src="/assets/js/auth.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
@@ -248,10 +247,12 @@
       }
 
       // Stripe Checkout成功後のリダイレクト: Webhookがまだ処理されていない場合に備えてリトライ
+      // exponential backoff: 1s, 2s, 4s, 8s, 15s（合計約30秒）
       const params = new URLSearchParams(window.location.search);
       if (params.get('session_id') && user.plan !== 'pro') {
-        for (let i = 0; i < 5; i++) {
-          await new Promise(r => setTimeout(r, 2000));
+        const delays = [1000, 2000, 4000, 8000, 15000];
+        for (let i = 0; i < delays.length; i++) {
+          await new Promise(r => setTimeout(r, delays[i]));
           user = await TOOLBOX_AUTH.fetchMe();
           if (user && user.plan === 'pro') break;
         }

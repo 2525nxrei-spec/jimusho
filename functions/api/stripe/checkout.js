@@ -45,24 +45,29 @@ export async function onRequestPost(context) {
         .run();
     }
 
-    // Embedded Checkout: ページ内埋め込み決済（リダイレクトなし）
+    // リダイレクト型 Stripe Checkout
     const frontendUrl = env.FRONTEND_URL || 'https://jimusho-tool.com';
     const session = await stripeRequest('checkout/sessions', 'POST', {
       mode: 'subscription',
-      ui_mode: 'embedded',
       customer: stripeCustomerId,
       locale: 'ja',
       'line_items[0][price]': priceId,
       'line_items[0][quantity]': '1',
-      return_url: `${frontendUrl}/pages/account.html?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${frontendUrl}/pages/account.html?payment=success&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${frontendUrl}/pages/pricing.html?payment=cancel`,
       metadata: { user_id: user.id },
       subscription_data: { metadata: { user_id: user.id } },
     }, env.STRIPE_SECRET_KEY);
 
     console.log(`Checkout作成: session=${session.id}, user=${user.id}`);
-    return jsonResponse({ clientSecret: session.client_secret });
+    return jsonResponse({ url: session.url });
   } catch (err) {
     console.error('Checkoutエラー:', err.message, err.stack);
-    return errorResponse('決済セッションの作成に失敗しました', 500);
+
+    // Stripeの具体的なエラーをユーザーに伝える（カード拒否等）
+    const userMessage = err.message && err.message.includes('カード')
+      ? err.message
+      : '決済セッションの作成に失敗しました。しばらく待ってからお試しください';
+    return errorResponse(userMessage, 500);
   }
 }

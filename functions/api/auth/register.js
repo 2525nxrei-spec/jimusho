@@ -12,8 +12,10 @@ export async function onRequestPost(context) {
     const body = await request.json();
     const { email, password, display_name } = body;
     if (!email || !password) return errorResponse('メールアドレスとパスワードは必須です');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errorResponse('メールアドレスの形式が正しくありません');
+    if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/.test(email)) return errorResponse('メールアドレスの形式が正しくありません');
+    if (email.length > 254) return errorResponse('メールアドレスが長すぎます');
     if (password.length < 8) return errorResponse('パスワードは8文字以上で設定してください');
+    if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) return errorResponse('パスワードは英字と数字の両方を含めてください');
     if (display_name && display_name.length > 50) return errorResponse('表示名は50文字以内にしてください');
 
     const emailLower = email.toLowerCase().trim();
@@ -30,7 +32,7 @@ export async function onRequestPost(context) {
     ).bind(id, emailLower, hash, salt, display_name || null).run();
 
     const token = await createJWT(
-      { sub: id, email: emailLower, plan: 'free', exp: Math.floor(Date.now() / 1000) + 86400 },
+      { sub: id, email: emailLower, plan: 'free', exp: Math.floor(Date.now() / 1000) + 30 * 86400 },
       env.JWT_SECRET
     );
 
