@@ -4,6 +4,7 @@
 
 name = "jimusho"
 compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "."
 
 # ============================================================
@@ -35,4 +36,3 @@ STRIPE_PUBLISHABLE_KEY = ""
 FRONTEND_URL = "https://preview.jimusho.pages.dev"
 STRIPE_PRICE_PRO = "price_1TF9k19Fc8HnuaokFuM61zbo"
 STRIPE_PUBLISHABLE_KEY = ""
-
