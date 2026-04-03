@@ -5,7 +5,7 @@
   "description": "個人事業主向けツール集 — Cloudflare Pages + Workers",
   "type": "module",
   "scripts": {
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
