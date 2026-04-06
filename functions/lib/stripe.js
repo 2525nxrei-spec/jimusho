@@ -4,7 +4,7 @@
 
 const STRIPE_API_BASE = 'https://api.stripe.com/v1';
 
-function buildFormBody(obj, prefix = '') {
+function buildFormBody(obj) {
   const params = new URLSearchParams();
   function flatten(o, p) {
     for (const [key, value] of Object.entries(o)) {

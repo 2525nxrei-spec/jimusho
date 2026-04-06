@@ -9,7 +9,6 @@
  * - オフライン検知→通知バー表示
  * - セッションタイムアウト（24時間）
  * - キーボード操作（Escでモーダル閉じ、Enterで送信）
- * - ログアウト確認ダイアログ
  */
 
 (function() {
@@ -501,21 +500,6 @@
   }
 
   // ========================================
-  // 13. ログアウト確認ダイアログ強化
-  // ========================================
-  function enhanceLogout() {
-    // auth.jsのlogout関数をラップして確認ダイアログを追加
-    if (typeof TOOLBOX_AUTH !== 'undefined' && TOOLBOX_AUTH.logout) {
-      var origLogout = TOOLBOX_AUTH.logout;
-      TOOLBOX_AUTH.logout = function() {
-        // account.htmlは既にconfirm付きなので二重にならないようチェック
-        // このラップは直接TOOLBOX_AUTH.logout()を呼ぶケース用
-        origLogout.call(TOOLBOX_AUTH);
-      };
-    }
-  }
-
-  // ========================================
   // 初期化
   // ========================================
   function init() {
@@ -529,7 +513,6 @@
     setupOfflineDetection();
     setupSessionTimeout();
     setupKeyboardHandlers();
-    enhanceLogout();
   }
 
   if (document.readyState === 'loading') {
