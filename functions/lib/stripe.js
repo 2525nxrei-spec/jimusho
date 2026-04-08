@@ -24,7 +24,7 @@ function buildFormBody(obj) {
       }
     }
   }
-  flatten(obj, prefix);
+  flatten(obj, '');
   return params.toString();
 }
 
@@ -55,7 +55,8 @@ export async function verifyStripeSignature(payload, signatureHeader, secret) {
   let timestamp = null;
   const signatures = [];
   for (const element of elements) {
-    const [key, value] = element.split('=', 2);
+    const trimmed = element.trim();
+    const [key, value] = trimmed.split('=', 2);
     if (key === 't') timestamp = parseInt(value, 10);
     else if (key === 'v1') signatures.push(value);
   }

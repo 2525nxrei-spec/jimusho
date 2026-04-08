@@ -571,8 +571,9 @@
   </script>
 <script src="/assets/js/auth.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (!TOOLBOX_AUTH.checkToolAccess()) {
+  document.addEventListener('DOMContentLoaded', async function() {
+    var allowed = await TOOLBOX_AUTH.checkToolAccess();
+    if (!allowed) {
       // ツール本体を非表示にして操作不能にする
       var main = document.querySelector('main') || document.querySelector('.tool-container') || document.querySelector('.container');
       if (main) main.style.display = 'none';

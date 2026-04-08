@@ -163,7 +163,9 @@
       // URLパラメータ解析
       const params = new URLSearchParams(location.search);
       let mode = params.get('mode') === 'register' ? 'register' : 'login';
-      const returnUrl = params.get('return') || '/';
+      // オープンリダイレクト防止: 同一オリジンのパスのみ許可
+      const rawReturn = params.get('return') || '/';
+      const returnUrl = (rawReturn.startsWith('/') && !rawReturn.startsWith('//')) ? rawReturn : '/';
 
       var fieldTerms = document.getElementById('field-terms');
       var pwStrengthReg = document.getElementById('pw-strength-reg');

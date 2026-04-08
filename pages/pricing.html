@@ -223,6 +223,23 @@
   <script src="/assets/js/auth.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // URLパラメータによるフィードバック
+      const urlParams = new URLSearchParams(window.location.search);
+      // Stripeキャンセルで戻ってきた場合
+      if (urlParams.get('payment') === 'cancel') {
+        window.history.replaceState({}, '', '/pages/pricing.html');
+        if (typeof uxShowToast === 'function') {
+          uxShowToast('お支払いがキャンセルされました。いつでもアップグレードできます。', 4000);
+        }
+      }
+      // Proツールからリダイレクトされた場合（サーバーサイドガード）
+      if (urlParams.get('upgrade') === '1') {
+        window.history.replaceState({}, '', '/pages/pricing.html');
+        if (typeof uxShowToast === 'function') {
+          uxShowToast('このツールはProプランで利用できます。月額100円でアップグレードできます。', 5000);
+        }
+      }
+
       const authSection = document.getElementById('auth-section');
       const authForm = document.getElementById('auth-form');
       const authError = document.getElementById('auth-error');

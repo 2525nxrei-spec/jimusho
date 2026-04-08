@@ -334,7 +334,7 @@
         <a href="#all" class="nav__link">ツール一覧</a>
         <a href="pages/pricing.html" class="nav__link">料金</a>
         <a href="pages/request.html" class="nav__link">ご要望</a>
-        <a href="/pages/login.html" class="nav__link" id="nav-login-link">ログイン</a>
+        <a href="/pages/login.html" class="nav__link nav__auth-link" id="nav-login-link">ログイン</a>
         <div class="nav__dropdown">
           <span class="nav__dropdown-toggle">関連サービス <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8L9.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div class="nav__dropdown-menu">
@@ -362,9 +362,13 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
       <div class="mobile-menu__section">
+        <div class="mobile-menu__title">アカウント</div>
+        <a href="/pages/login.html" class="mobile-menu__link" id="mobile-auth-link">ログイン</a>
+        <a href="/pages/pricing.html" class="mobile-menu__link">料金プラン</a>
+      </div>
+      <div class="mobile-menu__section">
         <div class="mobile-menu__title">ページ内</div>
         <a href="#all" class="mobile-menu__link">ツール一覧</a>
-        <a href="pages/pricing.html" class="mobile-menu__link">料金プラン</a>
         <a href="#loss-comparison" class="mobile-menu__link">損失比較</a>
         <a href="#faq" class="mobile-menu__link">よくある質問</a>
       </div>
@@ -1290,12 +1294,28 @@
         }
       });
 
-      // ナビバーにログイン状態を反映
+      // ナビバー・モバイルメニューにログイン状態を反映
       if (typeof TOOLBOX_AUTH !== 'undefined') {
+        function updateMobileAuthLink() {
+          var mobileLink = document.getElementById('mobile-auth-link');
+          if (!mobileLink) return;
+          var user = TOOLBOX_AUTH.getUser();
+          if (user) {
+            mobileLink.href = '/pages/account.html';
+            mobileLink.textContent = user.plan === 'pro' ? 'Pro アカウント' : 'アカウント';
+          } else {
+            mobileLink.href = '/pages/login.html';
+            mobileLink.textContent = 'ログイン';
+          }
+        }
         TOOLBOX_AUTH.updateNavUI();
+        updateMobileAuthLink();
         // ログイン済みならサーバーから最新のユーザー情報を取得してナビを再更新
         if (TOOLBOX_AUTH.isLoggedIn()) {
-          TOOLBOX_AUTH.fetchMe().then(() => TOOLBOX_AUTH.updateNavUI());
+          TOOLBOX_AUTH.fetchMe().then(function() {
+            TOOLBOX_AUTH.updateNavUI();
+            updateMobileAuthLink();
+          });
         }
       }
     });

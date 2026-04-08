@@ -140,9 +140,9 @@
   <script src="/assets/js/auth.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      // 未ログインならリダイレクト
+      // 未ログインならログインページにリダイレクト
       if (!TOOLBOX_AUTH.isLoggedIn()) {
-        window.location.href = '/pages/pricing.html';
+        window.location.replace('/pages/login.html?return=/pages/account.html');
         return;
       }
 
@@ -213,10 +213,9 @@
           });
           const data = await res.json();
           if (res.ok) {
-            localStorage.removeItem('toolbox_token');
-            localStorage.removeItem('toolbox_user');
             alert('アカウントを削除しました。ご利用ありがとうございました。');
-            window.location.href = '/';
+            TOOLBOX_AUTH.logout();
+            return;
           } else { alert(data.error || 'アカウント削除に失敗しました'); }
         } catch { alert('通信エラーが発生しました'); }
         finally { btn.disabled = false; btn.textContent = 'アカウントを削除'; }
@@ -225,22 +224,37 @@
       // ユーザー情報取得（セッションタイムアウトはux-enhance.jsで共通処理）
       let user = await TOOLBOX_AUTH.fetchMe();
       if (!user) {
-        window.location.href = '/pages/pricing.html';
+        // トークンが無効（期限切れ・改ざん等）の場合はログインページへ
+        window.location.replace('/pages/login.html?return=/pages/account.html');
         return;
       }
 
       // Stripe Checkout成功後のリダイレクト: Webhookがまだ処理されていない場合に備えてリトライ
       // exponential backoff: 1s, 2s, 4s, 8s, 15s（合計約30秒）
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('session_id') && user.plan !== 'pro') {
+      const pageParams = new URLSearchParams(window.location.search);
+      if (pageParams.get('session_id') && user.plan !== 'pro') {
+        // ユーザーに待機状態であることを伝える
+        var waitMsg = document.createElement('div');
+        waitMsg.style.cssText = 'text-align:center;padding:24px;font-size:0.88rem;color:var(--gray-700);';
+        waitMsg.innerHTML = '<div style="margin-bottom:12px;font-weight:600;color:var(--accent)">お支払いを確認しています...</div><div style="font-size:0.78rem;color:var(--gray-500)">数秒お���ちください。自動的に反映されます。</div>';
+        document.querySelector('.account').insertBefore(waitMsg, document.querySelector('.account__title').nextSibling);
+
         const delays = [1000, 2000, 4000, 8000, 15000];
         for (let i = 0; i < delays.length; i++) {
           await new Promise(r => setTimeout(r, delays[i]));
           user = await TOOLBOX_AUTH.fetchMe();
           if (user && user.plan === 'pro') break;
         }
+        // 待機メッセージを削除
+        waitMsg.remove();
         // URLからsession_idを除去
         window.history.replaceState({}, '', '/pages/account.html');
+        // 30秒待ってもPro反映されなかった場合のフォールバック
+        if (!user || user.plan !== 'pro') {
+          if (typeof uxShowToast === 'function') {
+            uxShowToast('お支払いの反映に時間がかかっています。数分後にページを再読み込みしてください。', 8000);
+          }
+        }
       }
 
       // 表示更新
@@ -259,14 +273,16 @@
           if (billing.subscription) {
             const subCard = document.getElementById('subscription-card');
             subCard.style.display = '';
+            // 解��予定の判定をstatusより先にチェック（statusがactiveでもcancel_at_period_endがtrueの場合あり）
             document.getElementById('sub-status').textContent =
+              billing.subscription.cancel_at_period_end ? '解��予定（期間終了まで利用可能）' :
               billing.subscription.status === 'active' ? '有効' :
-              billing.subscription.cancel_at_period_end ? '解約予定' :
               billing.subscription.status;
             if (billing.subscription.next_billing_date) {
               const date = new Date(billing.subscription.next_billing_date);
+              const label = billing.subscription.cancel_at_period_end ? '利用期限' : '次回���求日';
               document.getElementById('sub-next-billing').textContent =
-                `次回請求日: ${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+                `${label}: ${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
             }
           }
         } catch (err) {
