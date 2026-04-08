@@ -17,11 +17,17 @@ const TOOLBOX_AUTH = (() => {
 
   function setToken(token) {
     localStorage.setItem(TOKEN_KEY, token);
+    // サーバーサイドのProツールガード用にCookieにも保存
+    // Secure: HTTPS環境でのみCookie送信（HTTP経由での漏洩防止）
+    // SameSite=Lax: クロスサイトリクエストでのCookie送信を制限
+    document.cookie = TOKEN_KEY + '=' + token + '; path=/; max-age=' + (30 * 86400) + '; SameSite=Lax; Secure';
   }
 
   function removeToken() {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
+    // Cookieも削除
+    document.cookie = TOKEN_KEY + '=; path=/; max-age=0; SameSite=Lax; Secure';
   }
 
   function getUser() {
@@ -134,7 +140,8 @@ const TOOLBOX_AUTH = (() => {
 
   function logout() {
     removeToken();
-    window.location.href = '/';
+    // bfcache(ブラウザバックキャッシュ)を無効化してログアウト後に戻れないようにする
+    window.location.replace('/');
   }
 
   async function fetchMe() {
@@ -190,18 +197,29 @@ const TOOLBOX_AUTH = (() => {
 
   // ツールページで呼び出し: Proツールに非Pro userがアクセスした場合にゲート表示
   // プラン情報はDBから最新を取得（JWTのplanフィールドに依存しない）
+  // 重要: この関数はasyncなので、呼び出し側で必ずawaitすること
   async function checkToolAccess() {
     const path = window.location.pathname;
     if (!isProTool(path)) return true; // Freeツールはアクセス可
 
+    // チェック中はツール本体を非表示にする（無認証コンテンツの一瞬表示を防止）
+    const mainEl = document.querySelector('main') || document.querySelector('.tool-container') || document.querySelector('.container');
+    if (mainEl) mainEl.style.visibility = 'hidden';
+
     // ローカルキャッシュで即時判定（UX向上）
-    if (isPro()) return true;
+    if (isPro()) {
+      if (mainEl) mainEl.style.visibility = '';
+      return true;
+    }
 
     // DBから最新のプラン情報を取得して再判定
     if (isLoggedIn()) {
       try {
         const user = await fetchMe();
-        if (user && user.plan === 'pro') return true;
+        if (user && user.plan === 'pro') {
+          if (mainEl) mainEl.style.visibility = '';
+          return true;
+        }
       } catch {
         // fetchMe失敗時はローカルの判定を使う
       }

@@ -430,6 +430,8 @@
         localStorage.removeItem(TOKEN_KEY);
         localStorage.removeItem('toolbox_user');
         localStorage.removeItem(ACTIVITY_KEY);
+        // サーバーサイドProツールガード用のCookieも削除（残るとミドルウェアがProアクセスを許可してしまう）
+        document.cookie = TOKEN_KEY + '=; path=/; max-age=0; SameSite=Lax; Secure';
         showToast('長時間操作がなかったため、セキュリティのためログアウトしました。');
         // アカウントページにいる場合はリダイレクト
         if (window.location.pathname.includes('/pages/account')) {
@@ -442,6 +444,24 @@
     resetTimer();
     ['click', 'keydown', 'scroll', 'touchstart'].forEach(function(evt) {
       document.addEventListener(evt, resetTimer, { passive: true });
+    });
+
+    // ブラウザバック(bfcache)でページに戻った時の認証チェック
+    // ログアウト後にブラウザバックでアカウントページやProツールに戻れないようにする
+    window.addEventListener('pageshow', function(e) {
+      if (e.persisted) {
+        // bfcacheから復帰した場合、トークンが消えていたらリダイレクト
+        if (!localStorage.getItem(TOKEN_KEY)) {
+          var path = window.location.pathname;
+          if (path.includes('/pages/account')) {
+            window.location.replace('/pages/login.html');
+          }
+          // Proツールページの場合もリダイレクト
+          if (typeof TOOLBOX_AUTH !== 'undefined' && TOOLBOX_AUTH.isProTool && TOOLBOX_AUTH.isProTool(path)) {
+            window.location.replace('/pages/pricing.html');
+          }
+        }
+      }
     });
   }
 
