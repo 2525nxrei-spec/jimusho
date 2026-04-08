@@ -222,24 +222,7 @@
         finally { btn.disabled = false; btn.textContent = 'アカウントを削除'; }
       });
 
-      // セッションタイムアウト（24時間操作なしでログアウト）
-      (function() {
-        const TIMEOUT = 24 * 60 * 60 * 1000;
-        function resetTimer() { localStorage.setItem('toolbox_last_activity', Date.now()); }
-        function checkTimeout() {
-          const last = parseInt(localStorage.getItem('toolbox_last_activity') || '0', 10);
-          if (last && Date.now() - last > TIMEOUT && localStorage.getItem('toolbox_token')) {
-            localStorage.removeItem('toolbox_token');
-            localStorage.removeItem('toolbox_user');
-            alert('長時間操作がなかったため、セキュリティのためログアウトしました。');
-            window.location.href = '/pages/pricing.html';
-          }
-        }
-        checkTimeout(); resetTimer();
-        ['click', 'keydown', 'scroll', 'touchstart'].forEach(e => document.addEventListener(e, resetTimer, { passive: true }));
-      })();
-
-      // ユーザー情報取得
+      // ユーザー情報取得（セッションタイムアウトはux-enhance.jsで共通処理）
       let user = await TOOLBOX_AUTH.fetchMe();
       if (!user) {
         window.location.href = '/pages/pricing.html';
